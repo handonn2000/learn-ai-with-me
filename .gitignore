@@ -1,0 +1,12 @@
+node_modules
+dist
+*.local
+.DS_Store
+
+# slide/homework gốc của trường — không đẩy lên repo public
+public/materials/
+tsconfig.tsbuildinfo
+
+# quy trình làm việc nội bộ — giữ ở máy, không đẩy lên repo public
+.claude/
+CLAUDE.md

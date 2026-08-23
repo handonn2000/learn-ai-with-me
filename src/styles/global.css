@@ -1,0 +1,275 @@
+/* ============ Design tokens ============ */
+:root {
+  --font-sans: 'Be Vietnam Pro', system-ui, sans-serif;
+  --font-serif: 'Spectral', serif;
+  --font-mono: 'JetBrains Mono', monospace;
+}
+[data-theme='dark'] {
+  color-scheme: dark;
+  --bg: #0b0d12;
+  --bg-glow: rgba(88, 196, 221, 0.07);
+  --panel: #12151a;
+  --panel-2: #0e1117;
+  --code-bg: #0b0e14;
+  --border: #232836;
+  --border-2: #1e2430;
+  --border-3: #2a3242;
+  --text: #e8ecf4;
+  --text-hi: #eceff4;
+  --text-2: #b8c0d2;
+  --muted: #97a0b5;
+  --muted-2: #7a8399;
+  --faint: #5c6579;
+  --faint-2: #3e4557;
+  --cyan: #58c4dd;
+  --cyan-hi: #8fd8ea;
+  --cyan-soft: #9fddee;
+  --yellow: #f4d345;
+  --green: #83c167;
+  --green-soft: #a9d896;
+  --red: #fc6255;
+  --red-soft: #f09088;
+  --purple: #c792ea;
+  --orange: #ffa657;
+  --pink: #e38cc1;
+  --num: #ff9580;
+  --on-accent: #0b0d12;
+  --header-bg: rgba(11, 13, 18, 0.85);
+}
+[data-theme='light'] {
+  color-scheme: light;
+  --bg: #f4f5f8;
+  --bg-glow: rgba(20, 127, 156, 0.06);
+  --panel: #ffffff;
+  --panel-2: #eef1f5;
+  --code-bg: #f0f2f6;
+  --border: #d9dee7;
+  --border-2: #e3e7ee;
+  --border-3: #cdd4e0;
+  --text: #1a2029;
+  --text-hi: #10151d;
+  --text-2: #3d4657;
+  --muted: #566072;
+  --muted-2: #677082;
+  --faint: #8a92a3;
+  --faint-2: #a7aec0;
+  --cyan: #147f9c;
+  --cyan-hi: #0f6a83;
+  --cyan-soft: #126e88;
+  --yellow: #9c7a06;
+  --green: #3e7d2c;
+  --green-soft: #35691f;
+  --red: #c43d32;
+  --red-soft: #a83a30;
+  --purple: #7d43b3;
+  --orange: #b26206;
+  --pink: #b0568f;
+  --num: #b05230;
+  --on-accent: #ffffff;
+  --header-bg: rgba(244, 245, 248, 0.85);
+}
+
+/* ============ Reset & base ============ */
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+body {
+  margin: 0;
+  background-color: var(--bg);
+  background-image: radial-gradient(700px 340px at 78% 4%, var(--bg-glow), transparent);
+  color: var(--text);
+  font-family: var(--font-sans);
+  -webkit-font-smoothing: antialiased;
+}
+a { color: var(--cyan); text-decoration: none; }
+a:hover { color: var(--cyan-hi); text-decoration: underline; }
+::selection { background: color-mix(in srgb, var(--cyan) 30%, transparent); }
+button, textarea, input { font-family: var(--font-sans); }
+pre { font-family: var(--font-mono); }
+
+@keyframes mnFloat { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-7px); } }
+@keyframes mnFlow { to { stroke-dashoffset: -27; } }
+
+/* ============ Layout helpers ============ */
+.container { max-width: 1120px; margin: 0 auto; padding: 0 24px; }
+.container--narrow { max-width: 880px; }
+.container--mid { max-width: 1060px; }
+
+/* ============ Shared components ============ */
+.card { background: var(--panel); border: 1px solid var(--border); border-radius: 14px; padding: 20px 22px; }
+.card--flat { padding: 0; overflow: hidden; }
+.panel-inner { background: var(--panel-2); border: 1px solid var(--border-2); border-radius: 10px; padding: 14px 16px; }
+
+.mono { font-family: var(--font-mono); }
+.kicker { font-family: var(--font-mono); font-size: 10.5px; color: var(--faint); letter-spacing: 0.8px; }
+.chip { font-size: 12px; color: var(--text-2); border: 1px solid var(--border-3); border-radius: 7px; padding: 4px 9px; }
+.chip--mono { font-family: var(--font-mono); font-size: 11.5px; }
+
+/* Màu chữ nhấn dùng trong nội dung bài học (Html strings) */
+.hl { color: var(--text-hi); font-weight: 600; }
+.hl-cyan { color: var(--cyan); }
+.hl-yellow { color: var(--yellow); }
+.hl-green { color: var(--green); }
+.hl-red { color: var(--red); }
+.hl-red-soft { color: var(--red-soft); }
+.hl-purple { color: var(--purple); }
+.hl-text { color: var(--text-hi); }
+.hl-mid { color: #d9dfec; }
+[data-theme='light'] .hl-mid { color: #2a3345; }
+.code-inline { font-family: var(--font-mono); font-size: 0.9em; color: var(--text-hi); }
+
+/* Section heading của bài học */
+.sec-head { display: flex; align-items: baseline; gap: 14px; flex-wrap: wrap; }
+.sec-head__no { font-family: var(--font-mono); color: var(--yellow); font-size: 15px; font-weight: 700; }
+.sec-head__title { font-family: var(--font-serif); font-size: 31px; margin: 0; font-weight: 700; }
+.sec-head__en { color: var(--faint); font-style: italic; font-family: var(--font-serif); font-size: 16px; }
+.sec-rule { width: 110px; height: 3px; border-radius: 2px; margin-top: 10px; background: linear-gradient(90deg, var(--rule-color, var(--cyan)), transparent); }
+.sec-lead { color: var(--text-2); font-size: 15px; line-height: 1.75; max-width: 840px; margin: 18px 0 0; text-wrap: pretty; }
+
+/* Reveal on scroll — JS ghi opacity/transform trực tiếp khi vào viewport */
+.mn { opacity: 0; transform: translateY(20px); transition: opacity 0.7s ease, transform 0.7s ease; }
+@media (prefers-reduced-motion: reduce) {
+  .mn { opacity: 1 !important; transform: none !important; transition: none; }
+  [data-anim] { animation: none !important; }
+}
+
+/* Sticky lesson nav */
+.lesson-nav { position: sticky; top: 0; z-index: 50; background: var(--header-bg); backdrop-filter: blur(10px); border-bottom: 1px solid var(--border-2); }
+.lesson-nav__row { max-width: 1120px; margin: 0 auto; padding: 9px 24px 0; display: flex; align-items: center; gap: 10px; }
+.lesson-nav__back { font-size: 12.5px; color: var(--muted); white-space: nowrap; }
+.lesson-nav__badge { font-family: var(--font-mono); font-size: 11px; font-weight: 700; color: var(--yellow); border: 1px solid color-mix(in srgb, var(--yellow) 35%, transparent); border-radius: 7px; padding: 3px 8px; white-space: nowrap; }
+.lesson-nav__title { font-size: 13px; font-weight: 600; color: var(--text-2); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.lesson-nav__grow { flex: 1 1 auto; min-width: 8px; }
+/* Mục lục: một dải cuộn ngang ở MỌI bề rộng — xuống dòng lung tung thì thanh bar cao thấp bất định. */
+.lesson-nav__links {
+  max-width: 1120px; margin: 0 auto; padding: 7px 24px 9px;
+  display: flex; gap: 6px; flex-wrap: nowrap; overflow-x: auto;
+  font-family: var(--font-mono); font-size: 10.5px;
+  scrollbar-width: none; -webkit-overflow-scrolling: touch;
+}
+.lesson-nav__links::-webkit-scrollbar { display: none; }
+.lesson-nav__links a {
+  flex: 0 0 auto; color: var(--muted); padding: 5px 9px; border-radius: 6px;
+  background: var(--panel); border: 1px solid var(--border-2); white-space: nowrap;
+}
+.lesson-nav__links a:hover { color: var(--text-2); border-color: var(--border-3); }
+.lesson-nav__links a.is-hot { color: var(--yellow); background: color-mix(in srgb, var(--yellow) 8%, transparent); border-color: color-mix(in srgb, var(--yellow) 30%, transparent); }
+.lesson-nav__progress { height: 2px; width: 0%; background: linear-gradient(90deg, var(--cyan), var(--yellow)); }
+
+/* Canvas panel: luôn nền tối để khớp màu vẽ hardcode của scene */
+.canvas-panel { background: #12151a; border: 1px solid #232836; border-radius: 14px; overflow: hidden; }
+.canvas-panel__head { padding: 16px 20px 0; display: flex; align-items: baseline; gap: 12px; flex-wrap: wrap; color: #e8ecf4; }
+.canvas-panel__title { font-weight: 600; font-size: 15px; }
+.canvas-panel__sub { color: #5c6579; font-size: 12.5px; font-style: italic; }
+.canvas-panel canvas { width: 100%; display: block; }
+
+/* Code block tối ở cả hai theme */
+.codeblock { margin: 0; padding: 16px 18px; overflow: auto; font-family: var(--font-mono); font-size: 12.5px; line-height: 1.62; background: #0b0e14; color: #e6eaf2; }
+
+/* Buttons */
+.btn { border: 1px solid var(--border-3); background: var(--panel); color: var(--text-2); border-radius: 9px; padding: 8px 13px; font-family: var(--font-mono); font-size: 12.5px; cursor: pointer; }
+.btn--primary { border-color: color-mix(in srgb, var(--yellow) 50%, transparent); background: color-mix(in srgb, var(--yellow) 10%, transparent); color: var(--yellow); font-weight: 700; }
+.btn--toggle-on { border-color: var(--cyan); background: color-mix(in srgb, var(--cyan) 13%, transparent); color: var(--cyan-soft); }
+
+/* Stat mini-cards trong bài học */
+.stat { flex: 1; min-width: 150px; background: var(--panel-2); border: 1px solid var(--border-2); border-radius: 10px; padding: 10px 12px; }
+.stat__k { font-size: 10px; color: var(--faint); font-family: var(--font-mono); letter-spacing: 0.6px; }
+.stat__v { font-size: 13.5px; font-weight: 600; margin-top: 3px; color: var(--text-hi); }
+.stat--good .stat__v { color: var(--green); }
+.stat--warn .stat__v { color: var(--yellow); }
+.stat--bad .stat__v { color: var(--red); }
+.stat--bad-b { border-color: color-mix(in srgb, var(--red) 35%, transparent); }
+.stat--good-b { border-color: color-mix(in srgb, var(--green) 35%, transparent); }
+
+/* Bảng dữ liệu */
+.dtable { border-collapse: collapse; width: 100%; font-size: 13px; }
+.dtable td { padding: 10px; border-bottom: 1px solid var(--border-2); }
+.dtable tr.dtable__head td { padding: 12px 10px; border-bottom: 1px solid var(--border); font-family: var(--font-mono); font-size: 10.5px; color: var(--faint); text-align: left; }
+
+/* Checklist */
+.check-item { display: flex; gap: 12px; align-items: flex-start; padding: 11px 14px; border-radius: 10px; border: 1px solid var(--border); background: var(--panel); color: var(--text-2); cursor: pointer; width: 100%; text-align: left; font-size: 13.5px; line-height: 1.55; font-family: inherit; }
+.check-item.is-done { border-color: color-mix(in srgb, var(--green) 45%, transparent); background: color-mix(in srgb, var(--green) 7%, transparent); color: var(--green-soft); }
+.check-item__mark { flex: 0 0 auto; width: 20px; height: 20px; border-radius: 6px; border: 1.5px solid var(--faint-2); color: var(--green); display: flex; align-items: center; justify-content: center; font-size: 13px; font-weight: 700; }
+.check-item.is-done .check-item__mark { border-color: var(--green); }
+
+/* Responsive: mobile (iPhone) */
+@media (max-width: 640px) {
+  .container, .lesson-nav__row { padding-left: 16px; padding-right: 16px; }
+  .sec-head__title { font-size: 24px; }
+  .hero-title { font-size: 36px !important; }
+  .lesson-nav__links { padding-left: 16px; padding-right: 16px; }
+  .lesson-nav__links a { padding: 8px 10px; }
+  .lesson-nav__title { display: none; } /* badge đã nói đủ, nhường chỗ cho nút đổi chế độ */
+  .btn { padding: 10px 14px; min-height: 44px; }
+  .check-item { min-height: 44px; }
+}
+
+/* ===== Chế độ trình chiếu (LessonDeck) — xem ADR-0006 ===== */
+.deck-toggle {
+  flex: 0 0 auto;
+  font-family: var(--font-mono); font-size: 11.5px; letter-spacing: 0.3px;
+  border: 1px solid var(--border-3); background: var(--panel); color: var(--muted);
+  border-radius: 8px; padding: 6px 11px; cursor: pointer; white-space: nowrap;
+}
+.deck-toggle:hover { color: var(--text-2); border-color: var(--faint); }
+.deck-toggle.is-on { border-color: var(--cyan); color: var(--cyan); background: color-mix(in srgb, var(--cyan) 12%, transparent); }
+
+.deck-bar {
+  position: fixed; left: 50%; transform: translateX(-50%); bottom: 16px; z-index: 40;
+  width: min(560px, calc(100% - 24px));
+  background: color-mix(in srgb, var(--panel) 94%, transparent);
+  backdrop-filter: blur(10px);
+  border: 1px solid var(--border-3); border-radius: 14px;
+  box-shadow: 0 6px 28px rgba(0, 0, 0, .28);
+  padding: 10px 12px 9px;
+}
+.deck-bar__row { display: flex; align-items: center; gap: 10px; }
+.deck-bar__row .btn { min-width: 46px; text-align: center; }
+.deck-bar__now { flex: 1; min-width: 0; text-align: center; }
+.deck-bar__count { display: block; font-size: 10px; color: var(--faint); letter-spacing: 0.8px; }
+.deck-bar__label {
+  display: block; font-size: 13px; font-weight: 600; color: var(--text-2);
+  white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+}
+.deck-bar__ticks { display: flex; gap: 3px; margin-top: 9px; }
+.deck-tick {
+  flex: 1; height: 5px; min-width: 0; padding: 0; border: 0; border-radius: 3px;
+  background: var(--border-2); cursor: pointer;
+}
+.deck-tick.is-done { background: color-mix(in srgb, var(--cyan) 45%, transparent); }
+.deck-tick.is-on { background: var(--cyan); }
+.deck-tick:focus-visible { outline: 2px solid var(--cyan); outline-offset: 2px; }
+
+/* Slide cuối phải chừa chỗ cho thanh lái, kẻo nút đè lên nội dung */
+.deck-bar ~ * { pointer-events: auto; }
+body:has(.deck-bar) { padding-bottom: 92px; }
+
+@media (max-width: 640px) {
+  .deck-bar { bottom: 10px; padding: 9px 10px 8px; }
+  .deck-bar__row .btn { min-height: 44px; }
+  .deck-tick { height: 7px; }
+}
+
+
+/* ===== Khối một mục trong trang bài học =====
+   Trước đây là hằng `wrap` lặp trong cả ba file bài học. Đưa thành class để (a) hết trùng lặp,
+   (b) chế độ trình chiếu chỉnh lại được bằng CSS mà không phải truyền prop xuống từng mục.
+   padding-top 78px là để thanh LessonNav dính không che mất tiêu đề khi nhảy anchor. */
+.lesson-section { max-width: 1120px; margin: 0 auto; padding: 78px 24px 0; }
+.lesson-section--first { padding-top: 30px; }
+.lesson-section--last { padding-bottom: 90px; }
+
+/* Bố cục riêng cho một slide.
+   Mục trong bài vốn được thiết kế để ĐỌC KHI CUỘN: chừa 78px trên đầu cho thanh nav dính, và
+   dựa vào mục kế tiếp để tạo nhịp. Đặt nguyên vậy vào khung slide thì thừa một mảng trống trên
+   đầu, còn mục ngắn thì dồn hết lên trên để trống nửa dưới. Ba luật dưới đây chỉnh lại. */
+.deck-slide { min-height: calc(100vh - 190px); display: flex; flex-direction: column; justify-content: center; }
+.deck-slide > .lesson-section { padding-top: 26px; padding-bottom: 26px; width: 100%; }
+.deck-slide > .lesson-hero { padding-bottom: 20px; }
+/* Mục cao hơn màn hình thì thôi căn giữa — để nó bắt đầu từ trên xuống cho tự nhiên khi cuộn. */
+@media (max-height: 700px) {
+  .deck-slide { justify-content: flex-start; }
+}
+@media (max-width: 640px) {
+  .deck-slide { min-height: 0; justify-content: flex-start; }
+  .deck-slide > .lesson-section { padding-top: 18px; }
+}
