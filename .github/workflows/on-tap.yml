@@ -1,0 +1,62 @@
+# Bot đăng đề ôn thay cho chủ repo.
+#
+# Vì sao phải vòng qua workflow: routine Claude ghi GitHub dưới danh nghĩa handonn2000,
+# mà GitHub không đẩy push cho hoạt động của chính mình. Issue do github-actions[bot]
+# mở thì bot là actor KHÁC → `@handonn2000` trong thân bài thành direct mention thật,
+# cộng thêm assignee → trúng cả hai kênh push đang bật trên GitHub Mobile.
+name: Ôn tập — bot đăng đề
+
+on:
+  workflow_dispatch:
+    inputs:
+      action:
+        description: 'create | comment | comment_close'
+        required: true
+        default: 'create'
+      body:
+        description: 'Nội dung markdown'
+        required: true
+      title:
+        description: 'Tiêu đề issue (chỉ dùng khi action=create)'
+        required: false
+      issue:
+        description: 'Số issue (dùng khi action=comment hoặc comment_close)'
+        required: false
+
+permissions:
+  issues: write
+
+jobs:
+  post:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Đăng lên issue
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          REPO: ${{ github.repository }}
+          ACTION: ${{ inputs.action }}
+          TITLE: ${{ inputs.title }}
+          BODY: ${{ inputs.body }}
+          ISSUE: ${{ inputs.issue }}
+        run: |
+          set -euo pipefail
+          printf '%s' "$BODY" > /tmp/body.md
+          case "$ACTION" in
+            create)
+              url=$(gh issue create --repo "$REPO" --title "$TITLE" \
+                    --body-file /tmp/body.md --assignee handonn2000)
+              echo "Đã mở đề: $url" | tee -a "$GITHUB_STEP_SUMMARY"
+              ;;
+            comment|comment_close)
+              gh issue comment "$ISSUE" --repo "$REPO" --body-file /tmp/body.md
+              echo "Đã comment vào issue #$ISSUE" | tee -a "$GITHUB_STEP_SUMMARY"
+              if [ "$ACTION" = "comment_close" ]; then
+                gh issue close "$ISSUE" --repo "$REPO" --reason completed
+                echo "Đã đóng issue #$ISSUE" | tee -a "$GITHUB_STEP_SUMMARY"
+              fi
+              ;;
+            *)
+              echo "action không hợp lệ: $ACTION" >&2
+              exit 1
+              ;;
+          esac
