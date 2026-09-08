@@ -1,5 +1,6 @@
 import { Html } from './Html';
 import { Reveal } from './Reveal';
+import { UI } from '@/content/ui';
 
 // Thẻ ôn toán nền mở đầu bài học — đúng lời hứa ở thẻ phương pháp 03 trang Lộ trình.
 // Dữ liệu: src/content/courses/<slug>/math-primers.js, khóa theo id buổi.
@@ -20,9 +21,9 @@ export function MathPrimer({ minutes, lead, terms }: {
     <Reveal className="card" style={{ marginTop: 26, borderColor: 'color-mix(in srgb, var(--purple) 30%, transparent)' }}>
       <div style={{ display: 'flex', alignItems: 'baseline', gap: 12, flexWrap: 'wrap' }}>
         <span className="mono" style={{ fontSize: 11, color: 'var(--purple)', letterSpacing: '0.8px' }}>
-          🧮 TOÁN NỀN — {minutes} PHÚT, ĐỌC TRƯỚC KHI VÀO BÀI
+          {UI.mathPrimer.header(minutes)}
         </span>
-        <span className="mono" style={{ fontSize: 11.5, color: 'var(--faint)' }}>{terms.length} thuật ngữ</span>
+        <span className="mono" style={{ fontSize: 11.5, color: 'var(--faint)' }}>{UI.mathPrimer.terms(terms.length)}</span>
       </div>
       <Html as="p" t={lead} style={{ color: 'var(--muted)', fontSize: 13.5, lineHeight: 1.7, margin: '10px 0 0', maxWidth: 840 }} />
       <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit,minmax(min(320px,100%),1fr))', gap: 12, marginTop: 16 }}>

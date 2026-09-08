@@ -2,6 +2,7 @@
 // Engine sinh trace nằm ở search-engine.js (module JS thuần, thay được bằng WASM sau).
 import { useEffect, useMemo, useRef, useState } from 'react';
 import { PRESETS, runTrace } from '@/features/search-lab/search-engine.js';
+import { T } from './lesson03.text';
 
 const MONO = "'JetBrains Mono',monospace";
 
@@ -15,12 +16,12 @@ interface Preset {
   labels: string[]; pos: [number, number][]; m: number[][]; h: number[];
 }
 
-const AL: [string, string][] = [['BFS', 'FIFO'], ['DFS', 'LIFO'], ['UCS', 'g(n)'], ['IDS', 'ℓ↑'], ['GBFS', 'h(n)'], ['ASTAR', 'f=g+h'], ['HC', 'leo đồi']];
+const AL: [string, string][] = [['BFS', 'FIFO'], ['DFS', 'LIFO'], ['UCS', 'g(n)'], ['IDS', 'ℓ↑'], ['GBFS', 'h(n)'], ['ASTAR', 'f=g+h'], ['HC', T.searchlab.s1]];
 const FT_MAP: Record<string, string> = {
-  BFS: 'FRONTIER — hàng đợi FIFO (trái = ra trước)', DFS: 'FRONTIER — ngăn xếp (phải = đỉnh, ra trước)',
-  UCS: 'FRONTIER — hàng đợi ưu tiên theo g (đã sắp xếp)', IDS: 'NHÁNH ĐANG ĐI (DLS quay lui)',
-  GBFS: 'FRONTIER — hàng đợi ưu tiên theo h', ASTAR: 'FRONTIER — hàng đợi ưu tiên theo f = g + h',
-  HC: 'FRONTIER — không có (chỉ một nút hiện tại)',
+  BFS: T.searchlab.s2, DFS: T.searchlab.s3,
+  UCS: T.searchlab.s4, IDS: T.searchlab.s5,
+  GBFS: T.searchlab.s6, ASTAR: T.searchlab.s7,
+  HC: T.searchlab.s8,
 };
 
 export function SearchLab() {
@@ -108,14 +109,14 @@ export function SearchLab() {
           </button>
         ))}
         <div style={{ flex: 1 }} />
-        {[['lab', 'Lab 1 · 6 đỉnh'], ['romania', 'Romania · 10 đỉnh']].map(([k, label]) => (
+        {[['lab', T.searchlab.s9], ['romania', T.searchlab.s10]].map(([k, label]) => (
           <button key={k} onClick={() => setPreset(k)} style={btnStyle(preset === k)}>{label}</button>
         ))}
       </div>
       <div style={{ display: 'flex', flexWrap: 'wrap' }}>
         <canvas ref={canvasRef} style={{ flex: '1 1 560px', minWidth: 'min(440px, 100%)', height: 470, display: 'block' }} />
         <div style={{ flex: '1 1 300px', maxWidth: 400, borderLeft: '1px solid #1E2430', padding: 18, display: 'flex', flexDirection: 'column', gap: 15, background: '#0E1117' }}>
-          <div style={{ fontFamily: MONO, fontSize: 11, color: '#5C6579' }}>BƯỚC {step + 1} / {steps.length}</div>
+          <div style={{ fontFamily: MONO, fontSize: 11, color: '#5C6579' }}>{T.fn.stepOf(step + 1, steps.length)}</div>
           <div style={{ fontSize: 13.5, lineHeight: 1.65, color: '#D9DFEC', minHeight: 86 }}>{st.txt}</div>
           <div>
             <div style={{ fontFamily: MONO, fontSize: 10, letterSpacing: '.6px', color: '#58C4DD' }}>{FT_MAP[algo]}</div>
@@ -129,7 +130,7 @@ export function SearchLab() {
             </div>
           </div>
           <div>
-            <div style={{ fontFamily: MONO, fontSize: 10, letterSpacing: '.6px', color: '#5C6579' }}>EXPLORED — ĐÃ MỞ ({st.ex.length})</div>
+            <div style={{ fontFamily: MONO, fontSize: 10, letterSpacing: '.6px', color: '#5C6579' }}>{T.fn.explored(st.ex.length)}</div>
             <div style={{ display: 'flex', gap: 6, flexWrap: 'wrap', marginTop: 8, minHeight: 26 }}>
               {st.ex.map((n, i) => (
                 <div key={i} style={{ padding: '4px 8px', borderRadius: 8, border: '1px solid #2A3242', background: '#12151A' }}>
@@ -146,24 +147,24 @@ export function SearchLab() {
                 : { background: 'rgba(252,98,85,.08)', border: '1px solid rgba(252,98,85,.4)', color: '#F09088' }),
             }}>
               {st.a === 'goal' && st.path
-                ? `Đường đi: ${st.path.map(L).join(' → ')} · chi phí ${st.cost} · đã mở ${st.ex.length} nút`
-                : st.a === 'stuck' ? 'Kẹt cực trị địa phương → output: -1' : 'Vô nghiệm → output: -1'}
+                ? T.fn.goalPath(st.path.map(L).join(' → '), st.cost, st.ex.length)
+                : st.a === 'stuck' ? T.searchlab.s11 : T.searchlab.s12}
             </div>
           ) : null}
         </div>
       </div>
       <div style={{ padding: '12px 16px', borderTop: '1px solid #1E2430', display: 'flex', gap: 8, flexWrap: 'wrap', alignItems: 'center' }}>
-        <button onClick={() => { tRef.current = 0; setStep(0); setPlaying(false); }} style={navBtn}>⟲ Về đầu</button>
-        <button onClick={() => { if (step > 0) { tRef.current = 1; setStep(step - 1); setPlaying(false); } }} style={navBtn}>◀ Lùi</button>
+        <button onClick={() => { tRef.current = 0; setStep(0); setPlaying(false); }} style={navBtn}>{T.searchlab.s13}</button>
+        <button onClick={() => { if (step > 0) { tRef.current = 1; setStep(step - 1); setPlaying(false); } }} style={navBtn}>{T.searchlab.s14}</button>
         <button
           onClick={() => {
             if (step >= steps.length - 1 && tRef.current >= 1) { tRef.current = 0; setStep(0); setPlaying(true); }
             else setPlaying((p) => !p);
           }}
           style={{ ...navBtn, border: '1px solid rgba(244,211,69,.5)', background: 'rgba(244,211,69,.1)', color: '#F4D345', fontWeight: 700, padding: '8px 16px' }}>
-          {playing ? '❚❚ Dừng' : '▶ Chạy'}
+          {playing ? T.searchlab.s15 : T.searchlab.s16}
         </button>
-        <button onClick={() => { if (step < steps.length - 1) { tRef.current = 0; setStep(step + 1); setPlaying(false); } }} style={navBtn}>Tiến ▶</button>
+        <button onClick={() => { if (step < steps.length - 1) { tRef.current = 0; setStep(step + 1); setPlaying(false); } }} style={navBtn}>{T.searchlab.s17}</button>
         <div style={{ flex: 1 }} />
         {[[0.5, '0.5×'], [1, '1×'], [2, '2×']].map(([v, label]) => (
           <button key={String(v)} onClick={() => setSpeed(v as number)} style={btnStyle(speed === v)}>{label as string}</button>
@@ -247,7 +248,7 @@ function drawViz(x: CanvasRenderingContext2D, w: number, h: number, P: Preset, s
     if (informed) { x.font = '9.5px ' + MONO; x.fillStyle = 'rgba(244,211,69,.9)'; x.textAlign = 'left'; x.fillText('h=' + P.h[i], cx + r + 4, cy - r + 2); x.textAlign = 'center'; }
     if (i === P.src) { x.font = '8.5px ' + MONO; x.fillStyle = '#5C6579'; x.fillText('START', cx, cy - r - 10); }
     if (i === P.dst) { x.font = '8.5px ' + MONO; x.fillStyle = '#83C167'; x.fillText('GOAL', cx, cy - r - 12); }
-    if (st.a === 'stuck' && i === st.cur) { x.font = '700 10px ' + MONO; x.fillStyle = '#FC6255'; x.fillText('KẸT', cx, cy - r - 12); }
+    if (st.a === 'stuck' && i === st.cur) { x.font = '700 10px ' + MONO; x.fillStyle = '#FC6255'; x.fillText(T.searchlab.s18, cx, cy - r - 12); }
   }
   const lim = limitAt[stepIdx];
   if (algo === 'IDS' && lim != null) {

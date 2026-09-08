@@ -1,3 +1,5 @@
+// Đặt bí danh TXT: các hàm vẽ đã có biến cục bộ `T` là THỜI GIAN của vòng rAF.
+import { T as TXT } from './lesson01.text';
 // Ba cảnh canvas của Buổi 1 — port nguyên logic vẽ từ bản thiết kế HTML.
 import { MONO, SANS, rr, wrapText, easeInOut, type SceneApi } from '@/components/CanvasScene';
 import { QUAD, ERAS, WINTERS, TIMELINE } from '@/content/courses/csc14003/intro-ai.js';
@@ -15,13 +17,13 @@ export function drawQuad(x: Ctx, { clock, w, h }: SceneApi, rm: boolean) {
   const ease = easeInOut(ph);
   x.textAlign = 'center'; x.textBaseline = 'middle';
   x.font = '700 11px ' + MONO; x.fillStyle = '#7A8399';
-  x.fillText('HUMANS — CHUẨN LÀ NGƯỜI', padL + gw / 2, padT - 30);
-  x.fillText('RATIONALITY — CHUẨN LÀ DUY LÝ', padL + gw * 1.5, padT - 30);
+  x.fillText(TXT.scenes.s1, padL + gw / 2, padT - 30);
+  x.fillText(TXT.scenes.s2, padL + gw * 1.5, padT - 30);
   x.textAlign = 'left'; x.font = '700 10.5px ' + MONO;
   x.fillStyle = '#7A8399'; x.fillText('THOUGHT', 14, padT + gh / 2 - 9);
-  x.fillStyle = '#5C6579'; x.font = '10px ' + MONO; x.fillText('suy nghĩ', 14, padT + gh / 2 + 8);
+  x.fillStyle = '#5C6579'; x.font = '10px ' + MONO; x.fillText(TXT.scenes.s3, 14, padT + gh / 2 + 8);
   x.font = '700 10.5px ' + MONO; x.fillStyle = '#7A8399'; x.fillText('BEHAVIOR', 14, padT + gh * 1.5 - 9);
-  x.fillStyle = '#5C6579'; x.font = '10px ' + MONO; x.fillText('hành động', 14, padT + gh * 1.5 + 8);
+  x.fillStyle = '#5C6579'; x.font = '10px ' + MONO; x.fillText(TXT.scenes.s4, 14, padT + gh * 1.5 + 8);
   x.strokeStyle = 'rgba(120,132,155,.22)'; x.lineWidth = 1;
   x.beginPath(); x.moveTo(padL + gw, padT - 12); x.lineTo(padL + gw, padT + gh * 2 + 8); x.stroke();
   x.beginPath(); x.moveTo(80, padT + gh); x.lineTo(w - padR + 6, padT + gh); x.stroke();
@@ -66,14 +68,14 @@ export function drawTuring(x: Ctx, { clock, w, h }: SceneApi, rm: boolean) {
     x.font = '700 10px ' + MONO; x.fillStyle = col; x.fillText(tag, bx0 + 14, by0 - bh0 / 2 + 12);
     x.font = '600 15px ' + SANS; x.fillStyle = '#ECEFF4'; x.fillText(name, bx0 + 14, by0 - bh0 / 2 + 30);
   };
-  box(ax, acy, aw, 84, '#F4D345', 'INTERROGATOR', 'Người hỏi');
-  box(bx, hy, bw, 66, '#58C4DD', 'PLAYER A', 'Một người');
-  box(bx, my, bw, 66, '#C792EA', 'PLAYER B', 'Một cái máy');
+  box(ax, acy, aw, 84, '#F4D345', 'INTERROGATOR', TXT.scenes.s5);
+  box(bx, hy, bw, 66, '#58C4DD', 'PLAYER A', TXT.scenes.s6);
+  box(bx, my, bw, 66, '#C792EA', 'PLAYER B', TXT.scenes.s7);
   x.setLineDash([5, 6]); x.strokeStyle = 'rgba(160,170,190,.35)'; x.lineWidth = 1.4;
   x.beginPath(); x.moveTo(wall, 34); x.lineTo(wall, h - 46); x.stroke(); x.setLineDash([]);
   x.save(); x.translate(wall - 10, h / 2); x.rotate(-Math.PI / 2);
   x.textAlign = 'center'; x.textBaseline = 'bottom'; x.font = '10px ' + MONO;
-  x.fillStyle = '#5C6579'; x.fillText('MÀN NGĂN — CHỈ TRAO ĐỔI BẰNG CHỮ VIẾT', 0, 0); x.restore();
+  x.fillStyle = '#5C6579'; x.fillText(TXT.scenes.s8, 0, 0); x.restore();
   const sx = ax + aw, ey = [hy, my];
   ey.forEach((yy) => {
     x.strokeStyle = 'rgba(120,132,155,.25)'; x.lineWidth = 1.2;
@@ -90,7 +92,7 @@ export function drawTuring(x: Ctx, { clock, w, h }: SceneApi, rm: boolean) {
   if (T < 3) {
     const t = Math.min(1, T / 2.4);
     x.font = '10.5px ' + MONO; x.fillStyle = '#F4D345';
-    x.fillText('câu hỏi viết →', (sx + bx) / 2, acy - 44);
+    x.fillText(TXT.scenes.s9, (sx + bx) / 2, acy - 44);
     ey.forEach((yy) => {
       const p = pt(t, yy);
       x.fillStyle = '#F4D345'; x.shadowColor = '#F4D345'; x.shadowBlur = 12;
@@ -99,7 +101,7 @@ export function drawTuring(x: Ctx, { clock, w, h }: SceneApi, rm: boolean) {
   } else if (T < 6) {
     const t = Math.min(1, (T - 3) / 2.4);
     x.font = '10.5px ' + MONO; x.fillStyle = '#83C167';
-    x.fillText('← trả lời viết', (sx + bx) / 2, acy + 44);
+    x.fillText(TXT.scenes.s10, (sx + bx) / 2, acy + 44);
     ([['#58C4DD', hy], ['#C792EA', my]] as [string, number][]).forEach(([col, yy]) => {
       const p = pt(1 - t, yy);
       x.fillStyle = col; x.shadowColor = col; x.shadowBlur = 12;
@@ -110,12 +112,12 @@ export function drawTuring(x: Ctx, { clock, w, h }: SceneApi, rm: boolean) {
     x.font = '700 30px ' + MONO; x.globalAlpha = a; x.fillStyle = '#F4D345';
     x.fillText('?', ax + aw / 2, acy + 52); x.globalAlpha = 1;
     x.font = '11px ' + MONO; x.fillStyle = '#97A0B5';
-    x.fillText('cái nào là người, cái nào là máy?', (ax + aw / 2 + wall) / 2, h - 26);
+    x.fillText(TXT.scenes.s11, (ax + aw / 2 + wall) / 2, h - 26);
   } else {
     const a = Math.min(1, (T - 8.4) / 0.6);
     x.globalAlpha = a;
     x.font = '700 13.5px ' + MONO; x.fillStyle = '#83C167';
-    x.fillText('KHÔNG PHÂN BIỆT ĐƯỢC → MÁY VƯỢT PHÉP THỬ', w / 2, h - 24);
+    x.fillText(TXT.scenes.s12, w / 2, h - 24);
     x.strokeStyle = 'rgba(131,193,103,.6)'; x.lineWidth = 1.6;
     rr(x, bx - 4, my - 37, bw + 8, 74, 14); x.stroke();
     x.globalAlpha = 1;
@@ -198,5 +200,5 @@ export function drawTimeline(x: Ctx, { clock, w, h }: SceneApi, rm: boolean) {
     x.beginPath(); x.moveTo(X, eraY + 20); x.lineTo(X, axis + 20); x.stroke();
   }
   x.textAlign = 'left'; x.textBaseline = 'alphabetic'; x.font = '9.5px ' + MONO;
-  x.fillStyle = '#3E4557'; x.fillText('tám thập kỷ AI — các mốc chính và bốn giai đoạn', 16, h - 12);
+  x.fillStyle = '#3E4557'; x.fillText(TXT.scenes.s13, 16, h - 12);
 }

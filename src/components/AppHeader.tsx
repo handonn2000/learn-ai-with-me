@@ -1,5 +1,7 @@
 import { Link, useLocation } from 'react-router-dom';
+import { LangToggle } from '@/components/LangToggle';
 import { useTheme } from '@/lib/theme';
+import { UI } from '@/content/ui';
 
 // Header chung của app (trên các trang không phải bài học full-bleed).
 export function AppHeader() {
@@ -27,18 +29,21 @@ export function AppHeader() {
           learn-ai<span style={{ color: 'var(--cyan)' }}>-with-me</span>
         </Link>
         <nav style={{ display: 'flex', gap: 4, marginLeft: 10 }}>
-          {item('/', 'Trang chủ')}
-          {item('/courses', 'Khóa học')}
-          {item('/blog', 'Blog')}
+          {item('/', UI.header.home)}
+          {item('/courses', UI.header.courses)}
+          {item('/blog', UI.header.blog)}
         </nav>
-        <button
-          onClick={toggle}
-          className="btn"
-          aria-label="Đổi giao diện sáng/tối"
-          style={{ marginLeft: 'auto', minHeight: 34, padding: '5px 12px' }}
-        >
-          {theme === 'dark' ? '☾ tối' : '☀ sáng'}
-        </button>
+        <span style={{ marginLeft: 'auto', display: 'flex', gap: 8, alignItems: 'center' }}>
+          <LangToggle />
+          <button
+            onClick={toggle}
+            className="btn"
+            aria-label={UI.header.themeAria}
+            style={{ minHeight: 34, padding: '5px 12px' }}
+          >
+            {theme === 'dark' ? UI.header.dark : UI.header.light}
+          </button>
+        </span>
       </div>
     </header>
   );

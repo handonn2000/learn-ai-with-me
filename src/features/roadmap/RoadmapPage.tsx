@@ -5,6 +5,10 @@ import { useProgress } from '@/lib/useProgress';
 import { addDays, fmtShort, intervals, quizTip, scoreColorVar, startOfToday, type ReviewScheme } from '@/lib/spaced-repetition';
 import type { Session } from '@/content/types';
 import NotFoundPage from '@/pages/NotFoundPage';
+import { topicLabel } from '@/content/courses/csc14003/topics';
+import { LOCALE_TAG } from '@/lib/locale';
+import { UI } from '@/content/ui';
+import { CourseBaseline } from './CourseBaseline';
 
 const mono = 'var(--font-mono)';
 type Status = 'todo' | 'doing' | 'done';
@@ -14,7 +18,7 @@ interface TodayItem { tag: string; tagBg: string; text: string; href?: string; o
 export default function RoadmapPage() {
   const { slug } = useParams();
   const course = getCourse(slug);
-  const { db, update } = useProgress();
+  const { db, update } = useProgress(slug);
   const [scheme, setScheme] = useState<ReviewScheme>('1-3-7-14-30');
   const today = startOfToday();
   const ivs = intervals(scheme);
@@ -38,8 +42,8 @@ export default function RoadmapPage() {
           if (!doneIdx.includes(i) && date <= today) {
             dueCount++;
             todayItems.push({
-              tag: 'ÔN LẠI', tagBg: 'var(--yellow)',
-              text: `${sd.title} — lần ôn thứ ${i + 1} (+${n} ngày, hạn ${fmtShort(date)}). Làm lại quiz, hoặc tự giải thích to các ý chính cho chính mình nghe.`,
+              tag: UI.roadmap.tagReview, tagBg: 'var(--yellow)',
+              text: (course.roadmapOnly ? UI.plan.review : UI.roadmap.itemReview)(sd.title, i + 1, n, fmtShort(date)),
               href: sd.lessonPath ? sd.lessonPath + '#quiz' : undefined,
               onMark: () => update((d) => {
                 const r = d.sessions[sd.id] || (d.sessions[sd.id] = {});
@@ -54,15 +58,15 @@ export default function RoadmapPage() {
     course.parts.forEach((p, i) => {
       const ids = course.sessions.filter((s) => s.part === i).map((s) => s.id);
       const allDone = ids.every((id) => (db.sessions[id] || {}).status === 'done');
-      if (allDone && !pt[p.id]) {
-        todayItems.push({ tag: 'KIỂM TRA', tagBg: p.color, text: `Bạn xong ${p.no} rồi — làm Kiểm tra tổng hợp để chốt lại trước khi sang phần mới.`, href: `/courses/${course.slug}/tests#p${i + 1}` });
+      if (course.hasPartTests && allDone && !pt[p.id]) {
+        todayItems.push({ tag: UI.roadmap.tagTest, tagBg: p.color, text: UI.roadmap.itemTest(p.no), href: `/courses/${course.slug}/tests#p${i + 1}` });
       }
     });
     if (nextSession) {
-      todayItems.push({ tag: 'HỌC TIẾP', tagBg: 'var(--cyan)', text: `${nextSession.title} (tuần ${nextSession.week}) — mở đầu bằng thẻ toán nền, kết lại bằng quiz.`, href: nextSession.lessonPath });
+      todayItems.push({ tag: UI.roadmap.tagNext, tagBg: 'var(--cyan)', text: (course.roadmapOnly ? UI.plan.next : UI.roadmap.itemNext)(nextSession.title, nextSession.week), href: nextSession.lessonPath });
     }
     if (todayItems.length === 0) {
-      todayItems.push({ tag: 'HOÀN TẤT', tagBg: 'var(--green)', text: 'Bạn học hết cả khóa rồi và không còn lịch ôn nào đến hạn. Nghỉ đi, xứng đáng mà 🎉' });
+      todayItems.push({ tag: UI.roadmap.tagDone, tagBg: 'var(--green)', text: UI.roadmap.itemAllDone });
     }
     const avg = quizzes.length ? Math.round(quizzes.reduce((a, b) => a + b, 0) / quizzes.length) : null;
     return { doneCount, dueCount, todayItems, avg };
@@ -95,61 +99,64 @@ export default function RoadmapPage() {
             {course.title} <em style={{ color: 'var(--cyan)' }}>{course.titleAccent}</em>
           </h1>
           <div style={{ fontSize: 15, color: 'var(--muted-2)' }}>{course.subtitle}</div>
+          {course.roadmapOnly && <div className="course-plan-badge mono">{UI.plan.badge}</div>}
           <p style={{ fontSize: 13.5, color: 'var(--muted)', lineHeight: 1.7, margin: '10px 0 0', maxWidth: 620, textWrap: 'pretty' }}>{course.description}</p>
         </div>
         <div style={{ display: 'flex', gap: 14, flexWrap: 'wrap' }}>
-          {statCard('Tiến độ', <>{view.doneCount}<span style={{ fontSize: 14, color: 'var(--muted-2)', fontWeight: 400 }}> / {total} buổi</span></>,
+          {statCard(UI.roadmap.statProgress, <>{view.doneCount}<span style={{ fontSize: 14, color: 'var(--muted-2)', fontWeight: 400 }}>{UI.roadmap.ofSessions(total)}</span></>,
             <div style={{ height: 5, background: 'var(--border)', borderRadius: 3, marginTop: 8, overflow: 'hidden' }}>
               <div style={{ height: '100%', background: 'var(--cyan)', borderRadius: 3, width: `${Math.round((view.doneCount / total) * 100)}%` }} />
             </div>)}
-          {statCard('Quiz TB', <span style={{ color: scoreColorVar(view.avg) }}>{view.avg == null ? '—' : view.avg + '%'}</span>,
-            <div style={{ fontSize: 11, color: 'var(--muted-2)', marginTop: 6 }}>trên các buổi đã làm</div>)}
-          {statCard('Cần ôn hôm nay', <span style={{ color: view.dueCount > 0 ? 'var(--yellow)' : 'var(--green)' }}>{view.dueCount}</span>,
+          {!course.roadmapOnly && statCard(UI.roadmap.statAvg, <span style={{ color: scoreColorVar(view.avg) }}>{view.avg == null ? '—' : view.avg + '%'}</span>,
+            <div style={{ fontSize: 11, color: 'var(--muted-2)', marginTop: 6 }}>{UI.roadmap.avgSub}</div>)}
+          {statCard(UI.roadmap.statDue, <span style={{ color: view.dueCount > 0 ? 'var(--yellow)' : 'var(--green)' }}>{view.dueCount}</span>,
             <div style={{ fontSize: 11, color: 'var(--muted-2)', marginTop: 6 }}>
-              theo lịch{' '}
+              {UI.roadmap.dueScheduleA}
               <button onClick={() => setScheme(scheme === '1-3-7-14-30' ? '2-5-10-21' : '1-3-7-14-30')}
-                title="Bấm để đổi lịch ôn"
+                title={UI.roadmap.schemeTitle}
                 style={{ background: 'none', border: 'none', padding: 0, color: 'var(--cyan)', cursor: 'pointer', fontSize: 11, fontFamily: 'inherit' }}>
                 {ivs.join('·')}
-              </button>{' '}ngày
+              </button>{UI.roadmap.dueScheduleB}
             </div>)}
         </div>
       </header>
 
+      {course.baseline && <CourseBaseline baseline={course.baseline} />}
+
       <section style={{ marginTop: 26, background: 'var(--panel)', border: '1px solid var(--border)', borderLeft: '4px solid var(--cyan)', borderRadius: 10, padding: '20px 24px' }}>
         <div style={{ display: 'flex', alignItems: 'baseline', gap: 12, flexWrap: 'wrap' }}>
           <div style={{ fontFamily: mono, fontSize: 11, letterSpacing: '0.12em', textTransform: 'uppercase', color: 'var(--cyan)', fontWeight: 600 }}>
-            Hôm nay · {new Date().toLocaleDateString('vi-VN', { weekday: 'long', day: 'numeric', month: 'numeric' })}
+            {UI.roadmap.todayA}{new Date().toLocaleDateString(LOCALE_TAG, { weekday: 'long', day: 'numeric', month: 'numeric' })}
           </div>
-          <div style={{ fontSize: 12, color: 'var(--muted-2)' }}>tôi tự sinh từ tiến độ & lịch ôn của bạn</div>
+          <div style={{ fontSize: 12, color: 'var(--muted-2)' }}>{UI.roadmap.todaySub}</div>
         </div>
         <div style={{ display: 'flex', flexDirection: 'column', gap: 10, marginTop: 14 }}>
           {view.todayItems.map((t, i) => (
             <div key={i} style={{ display: 'flex', alignItems: 'center', gap: 14, padding: '11px 14px', background: 'var(--panel-2)', border: '1px dashed var(--border-3)', borderRadius: 8, flexWrap: 'wrap' }}>
               <span style={{ fontFamily: mono, fontSize: 10, fontWeight: 600, letterSpacing: '0.08em', padding: '3px 8px', borderRadius: 4, color: 'var(--on-accent)', background: t.tagBg }}>{t.tag}</span>
               <span style={{ flex: 1, fontSize: 14.5, minWidth: 220 }}>{t.text}</span>
-              {t.href ? <Link to={t.href} style={{ fontSize: 13, fontWeight: 600, whiteSpace: 'nowrap' }}>Mở →</Link> : null}
+              {t.href ? <Link to={t.href} style={{ fontSize: 13, fontWeight: 600, whiteSpace: 'nowrap' }}>{UI.roadmap.open}</Link> : null}
               {t.onMark ? (
-                <button onClick={t.onMark} className="btn" style={{ borderColor: 'var(--cyan)', color: 'var(--cyan)', fontFamily: 'inherit', fontSize: 12.5, fontWeight: 600, padding: '5px 12px' }}>Đã ôn ✓</button>
+                <button onClick={t.onMark} className="btn" style={{ borderColor: 'var(--cyan)', color: 'var(--cyan)', fontFamily: 'inherit', fontSize: 12.5, fontWeight: 600, padding: '5px 12px' }}>{UI.roadmap.markReviewed}</button>
               ) : null}
             </div>
           ))}
         </div>
       </section>
 
-      <section style={{ marginTop: 26, display: 'grid', gridTemplateColumns: 'repeat(auto-fit,minmax(220px,1fr))', gap: 12 }}>
+      {!course.roadmapOnly && <section style={{ marginTop: 26, display: 'grid', gridTemplateColumns: 'repeat(auto-fit,minmax(220px,1fr))', gap: 12 }}>
         {[
-          ['01 · ACTIVE RECALL', 'Bắt bạn tự nhớ trước khi cho xem đáp án. Quiz và chế độ «đoán bước tiếp theo» trong mỗi bài đều làm đúng một việc: không cho bạn đọc lướt.'],
-          ['02 · SPACED REPETITION', `Xong một buổi là lịch ôn tự đặt sau ${ivs.join('·')} ngày. Ôn đúng lúc sắp quên mới nhớ bền — ôn sớm quá thì phí công.`],
-          ['03 · TOÁN NỀN TRƯỚC', 'Mỗi buổi mở màn bằng thẻ ôn toán 5–10 phút kèm thuật ngữ Anh–Việt, để lát nữa gặp công thức bạn không phải khựng lại.'],
-          ['04 · BÁO CÁO SAU BUỔI', 'Quiz chấm theo chủ đề rồi tự sinh báo cáo mạnh/yếu ngay dưới mỗi buổi. Bạn khỏi phải đoán mình đang hổng chỗ nào.'],
+          [UI.roadmap.p1Title, UI.roadmap.p1Body],
+          [UI.roadmap.p2Title, UI.roadmap.p2Body(ivs.join('·'))],
+          [UI.roadmap.p3Title, UI.roadmap.p3Body],
+          [UI.roadmap.p4Title, UI.roadmap.p4Body],
         ].map(([k, v]) => (
           <div key={k} style={{ background: 'var(--panel)', border: '1px solid var(--border)', borderRadius: 10, padding: '16px 18px' }}>
             <div style={{ fontFamily: mono, fontSize: 10, color: 'var(--cyan)', fontWeight: 600, letterSpacing: '0.1em' }}>{k}</div>
             <div style={{ fontSize: 13.5, marginTop: 7, lineHeight: 1.5, color: 'var(--text-2)' }}>{v}</div>
           </div>
         ))}
-      </section>
+      </section>}
 
       {course.parts.map((p, pi) => {
         const sessions = course.sessions.filter((s) => s.part === pi);
@@ -164,17 +171,18 @@ export default function RoadmapPage() {
             </div>
             <div style={{ display: 'flex', flexDirection: 'column', gap: 14, marginTop: 16 }}>
               {sessions.map((sd) => (
-                <SessionCard key={sd.id} sd={sd} color={p.color} rec={db.sessions[sd.id] || {}} ivs={ivs} today={today}
+                <SessionCard key={sd.id} sd={sd} color={p.color} rec={db.sessions[sd.id] || {}} ivs={ivs} today={today} planned={!sd.lessonPath && !!course.baseline} labels={course.topicLabels}
+                  prerequisites={course.sessions.filter((s) => sd.prerequisiteIds?.includes(s.id)).map((s) => UI.plan.session(s.week))}
                   onStatus={(st) => setStatus(sd.id, st)}
                   onReview={(i) => update((d) => { const r = d.sessions[sd.id]; if (r) r.reviewsDone = [...(r.reviewsDone || []), i]; })} />
               ))}
               <div style={{ background: 'var(--panel)', border: `1.5px dashed ${p.color}`, borderRadius: 12, padding: '16px 20px', display: 'flex', gap: 14, alignItems: 'center', flexWrap: 'wrap' }}>
-                <span style={{ fontFamily: mono, fontSize: 10, fontWeight: 600, letterSpacing: '0.08em', color: 'var(--on-accent)', background: p.color, borderRadius: 4, padding: '3px 8px' }}>KIỂM TRA TỔNG HỢP</span>
-                <div style={{ flex: 1, minWidth: 220, fontSize: 13, color: 'var(--text-2)' }}>{p.testDesc} — làm khi bạn đã xong hết các buổi của phần.</div>
-                {t ? <span style={{ fontFamily: mono, fontSize: 12, fontWeight: 600, color: scoreColorVar(t.score) }}>ĐIỂM {t.score}%</span> : null}
-                <Link to={`/courses/${course.slug}/tests#p${pi + 1}`} style={{ fontSize: 13, fontWeight: 700, background: 'var(--panel)', border: `1.5px solid ${p.color}`, color: p.color, padding: '7px 14px', borderRadius: 7 }}>
-                  {t ? 'Làm lại' : 'Làm bài'} →
-                </Link>
+                <span style={{ fontFamily: mono, fontSize: 10, fontWeight: 600, letterSpacing: '0.08em', color: 'var(--on-accent)', background: p.color, borderRadius: 4, padding: '3px 8px' }}>{course.hasPartTests ? UI.roadmap.partTestChip : UI.plan.milestone}</span>
+                <div style={{ flex: 1, minWidth: 220, fontSize: 13, color: 'var(--text-2)' }}>{p.testDesc}{course.hasPartTests ? UI.roadmap.partTestSuffix : ''}</div>
+                {t ? <span style={{ fontFamily: mono, fontSize: 12, fontWeight: 600, color: scoreColorVar(t.score) }}>{UI.roadmap.score(t.score)}</span> : null}
+                {course.hasPartTests && <Link to={`/courses/${course.slug}/tests#p${pi + 1}`} style={{ fontSize: 13, fontWeight: 700, background: 'var(--panel)', border: `1.5px solid ${p.color}`, color: p.color, padding: '7px 14px', borderRadius: 7 }}>
+                  {t ? UI.roadmap.retake : UI.roadmap.take} →
+                </Link>}
               </div>
             </div>
           </section>
@@ -182,13 +190,13 @@ export default function RoadmapPage() {
       })}
 
       <footer style={{ marginTop: 44, borderTop: '1px dashed var(--border-3)', paddingTop: 16, display: 'flex', justifyContent: 'space-between', flexWrap: 'wrap', gap: 10, fontSize: 12, color: 'var(--muted-2)' }}>
-        <div>Tiến độ lưu ngay trên trình duyệt này (localStorage) — không gửi đi đâu cả.</div>
+        <div>{UI.roadmap.privacyNote}</div>
       </footer>
     </div>
   );
 }
 
-function SessionCard({ sd, color, rec, ivs, today, onStatus, onReview }: {
+function SessionCard({ sd, color, rec, ivs, today, onStatus, onReview, planned, prerequisites, labels }: {
   sd: Session;
   color: string;
   rec: { status?: Status; completedAt?: string; reviewsDone?: number[]; quizScore?: number; quizRight?: string[]; quizWrong?: string[] };
@@ -196,12 +204,16 @@ function SessionCard({ sd, color, rec, ivs, today, onStatus, onReview }: {
   today: Date;
   onStatus: (st: Status) => void;
   onReview: (i: number) => void;
+  planned?: boolean;
+  labels?: Record<string, string>;
+  prerequisites: string[];
 }) {
+  const labelTopic = (id: string) => labels?.[id] || topicLabel(id);
   const status: Status = rec.status || 'todo';
   const score = rec.quizScore;
   const right = rec.quizRight || [];
   const wrong = rec.quizWrong || [];
-  const hasReport = status === 'done' || typeof score === 'number';
+  const hasReport = !planned && (status === 'done' || typeof score === 'number');
   const dot = status === 'done' ? 'var(--green)' : status === 'doing' ? 'var(--cyan)' : 'var(--panel)';
   const dotBd = status === 'done' ? 'var(--green)' : status === 'doing' ? 'var(--cyan)' : 'var(--border-3)';
   const segBtn = (label: string, st: Status, on: string) => (
@@ -213,13 +225,13 @@ function SessionCard({ sd, color, rec, ivs, today, onStatus, onReview }: {
   return (
     <article style={{ background: 'var(--panel)', border: '1px solid var(--border)', borderRadius: 12, padding: '18px 20px', display: 'flex', gap: 18, alignItems: 'flex-start', flexWrap: 'wrap' }}>
       <div style={{ textAlign: 'center', minWidth: 52 }}>
-        <div style={{ fontFamily: 'var(--font-mono)', fontSize: 10, color: 'var(--muted-2)', letterSpacing: '0.08em' }}>TUẦN</div>
+        <div style={{ fontFamily: 'var(--font-mono)', fontSize: 10, color: 'var(--muted-2)', letterSpacing: '0.08em' }}>{UI.roadmap.week}</div>
         <div style={{ fontFamily: 'var(--font-mono)', fontSize: 26, fontWeight: 600, color, lineHeight: 1.1 }}>{String(sd.week).padStart(2, '0')}</div>
         <div style={{ width: 10, height: 10, borderRadius: '50%', margin: '8px auto 0', background: dot, border: `2px solid ${dotBd}` }} />
       </div>
       <div style={{ flex: '1 1 320px', minWidth: 0 }}>
         <div style={{ display: 'flex', alignItems: 'baseline', gap: 10, flexWrap: 'wrap' }}>
-          <h3 style={{ margin: 0, fontSize: 17, fontWeight: 600 }}>{sd.title.replace(/^Buổi \d+ · /, '')}</h3>
+          <h3 style={{ margin: 0, fontSize: 17, fontWeight: 600 }}>{sd.title.replace(new RegExp(UI.roadmap.titlePrefix), '')}</h3>
           <span style={{ fontFamily: 'var(--font-mono)', fontSize: 11, color: 'var(--muted-2)' }}>{sd.en}</span>
           <span style={{ fontSize: 11.5, color: 'var(--muted-2)', background: 'var(--panel-2)', border: '1px solid var(--border)', borderRadius: 4, padding: '2px 7px' }}>{sd.hours}</span>
           {sd.labChip ? (
@@ -228,13 +240,16 @@ function SessionCard({ sd, color, rec, ivs, today, onStatus, onReview }: {
         </div>
         <div style={{ fontSize: 13.5, color: 'var(--text-2)', marginTop: 6, lineHeight: 1.55 }}>{sd.topics}</div>
         <div style={{ fontFamily: 'var(--font-mono)', fontSize: 11.5, color: 'var(--muted-2)', marginTop: 8, lineHeight: 1.7 }}>
-          <span style={{ color, fontWeight: 600 }}>TOÁN NỀN · </span>{sd.math}
+          <span style={{ color, fontWeight: 600 }}>{planned ? UI.plan.readiness : UI.roadmap.mathChip}</span>{sd.math}
         </div>
+        {prerequisites.length > 0 && <div className="session-plan-line"><span className="mono">{UI.plan.depends}</span>{prerequisites.join(' · ')}</div>}
+        {sd.outcome && <div className="session-plan-line"><span className="mono">{UI.plan.outcome}</span>{sd.outcome}</div>}
+        {sd.practice && <div className="session-plan-line"><span className="mono">{UI.plan.practice}</span>{sd.practice}</div>}
         <div style={{ display: 'flex', gap: 16, flexWrap: 'wrap', marginTop: 10, fontSize: 12.5, alignItems: 'center' }}>
           {sd.lessonPath ? (
-            <Link to={sd.lessonPath} style={{ fontWeight: 700, background: 'var(--cyan)', color: 'var(--on-accent)', padding: '7px 14px', borderRadius: 7 }}>Mở bài học tương tác →</Link>
+            <Link to={sd.lessonPath} style={{ fontWeight: 700, background: 'var(--cyan)', color: 'var(--on-accent)', padding: '7px 14px', borderRadius: 7 }}>{UI.roadmap.openLesson}</Link>
           ) : (
-            <span style={{ fontSize: 12, color: 'var(--muted-2)', border: '1px dashed var(--border-3)', borderRadius: 7, padding: '7px 12px' }}>Bài học tương tác đang dựng</span>
+            <span style={{ fontSize: 12, color: 'var(--muted-2)', border: '1px dashed var(--border-3)', borderRadius: 7, padding: '7px 12px' }}>{planned ? UI.plan.lesson : UI.roadmap.lessonBuilding}</span>
           )}
           <span style={{ display: 'inline-flex', gap: 14, alignItems: 'center' }}>
             {sd.links.map((lk) => (
@@ -244,33 +259,33 @@ function SessionCard({ sd, color, rec, ivs, today, onStatus, onReview }: {
         </div>
         {hasReport ? (
           <div style={{ marginTop: 12, borderTop: '1px dashed var(--border)', paddingTop: 10, display: 'grid', gridTemplateColumns: 'repeat(auto-fit,minmax(200px,1fr))', gap: 8, fontSize: 12.5, lineHeight: 1.55 }}>
-            <div><span className="mono" style={{ fontSize: 10, letterSpacing: '0.08em', color: 'var(--green)', fontWeight: 600 }}>ƯU ĐIỂM · </span>
-              {right.length ? 'Trả lời đúng: ' + right.join(', ') + '.' : typeof score === 'number' ? 'Đã hoàn thành quiz.' : 'Đã đánh dấu hoàn thành.'}</div>
-            <div><span className="mono" style={{ fontSize: 10, letterSpacing: '0.08em', color: 'var(--red)', fontWeight: 600 }}>CẦN CẢI THIỆN · </span>
-              {wrong.length ? 'Trả lời sai: ' + wrong.join(', ') + '.' : typeof score === 'number' ? 'Không sai chủ đề nào — ngon.' : 'Chưa có dữ liệu quiz.'}</div>
-            <div><span className="mono" style={{ fontSize: 10, letterSpacing: '0.08em', color: 'var(--cyan)', fontWeight: 600 }}>GỢI Ý · </span>{quizTip(score)}</div>
+            <div><span className="mono" style={{ fontSize: 10, letterSpacing: '0.08em', color: 'var(--green)', fontWeight: 600 }}>{UI.roadmap.strong}</span>
+              {right.length ? UI.roadmap.answeredRight(right.map(labelTopic).join(', ')) : typeof score === 'number' ? UI.roadmap.quizDone : UI.roadmap.markedDone}</div>
+            <div><span className="mono" style={{ fontSize: 10, letterSpacing: '0.08em', color: 'var(--red)', fontWeight: 600 }}>{UI.roadmap.weak}</span>
+              {wrong.length ? UI.roadmap.answeredWrong(wrong.map(labelTopic).join(', ')) : typeof score === 'number' ? UI.roadmap.noWrongTopic : UI.roadmap.noQuizData}</div>
+            <div><span className="mono" style={{ fontSize: 10, letterSpacing: '0.08em', color: 'var(--cyan)', fontWeight: 600 }}>{UI.roadmap.hint}</span>{UI.tip[quizTip(score)]}</div>
           </div>
         ) : null}
       </div>
       <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'flex-end', gap: 10, minWidth: 150 }}>
         {typeof score === 'number' ? (
-          <div style={{ fontFamily: 'var(--font-mono)', fontSize: 12, fontWeight: 600, color: scoreColorVar(score), background: `color-mix(in srgb, ${scoreColorVar(score)} 12%, transparent)`, borderRadius: 6, padding: '4px 10px' }}>QUIZ {score}%</div>
+          <div style={{ fontFamily: 'var(--font-mono)', fontSize: 12, fontWeight: 600, color: scoreColorVar(score), background: `color-mix(in srgb, ${scoreColorVar(score)} 12%, transparent)`, borderRadius: 6, padding: '4px 10px' }}>{UI.roadmap.quizBadge(score)}</div>
         ) : null}
         <div style={{ display: 'flex', border: '1px solid var(--border)', borderRadius: 7, overflow: 'hidden' }}>
-          {segBtn('Chưa', 'todo', 'var(--text-hi)')}
-          {segBtn('Đang', 'doing', 'var(--cyan)')}
-          {segBtn('Xong ✓', 'done', 'var(--green)')}
+          {segBtn(UI.roadmap.stTodo, 'todo', 'var(--text-hi)')}
+          {segBtn(UI.roadmap.stDoing, 'doing', 'var(--cyan)')}
+          {segBtn(UI.roadmap.stDone, 'done', 'var(--green)')}
         </div>
         {status === 'done' && rec.completedAt ? (
           <div style={{ display: 'flex', gap: 6, alignItems: 'center' }}>
-            <span className="mono" style={{ fontSize: 9.5, color: 'var(--muted-2)', letterSpacing: '0.06em' }}>ÔN</span>
+            <span className="mono" style={{ fontSize: 9.5, color: 'var(--muted-2)', letterSpacing: '0.06em' }}>{UI.roadmap.reviewDots}</span>
             {ivs.map((n, i) => {
               const date = addDays(rec.completedAt!, n);
               const isDone = (rec.reviewsDone || []).includes(i);
               const due = !isDone && date <= today;
               return (
                 <button key={i} onClick={due ? () => onReview(i) : undefined}
-                  title={`Ôn lần ${i + 1} · ${fmtShort(date)}` + (isDone ? ' · đã ôn' : due ? ' · ĐẾN HẠN' : '')}
+                  title={UI.roadmap.reviewDotTitle(i + 1, fmtShort(date)) + (isDone ? UI.roadmap.reviewDone : due ? UI.roadmap.reviewDue : '')}
                   style={{
                     width: 22, height: 22, borderRadius: '50%', cursor: due ? 'pointer' : 'default', fontFamily: 'var(--font-mono)', fontSize: 8.5, fontWeight: 600,
                     display: 'flex', alignItems: 'center', justifyContent: 'center',

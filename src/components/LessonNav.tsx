@@ -1,5 +1,7 @@
 import { useEffect, useRef } from 'react';
 import { Link } from 'react-router-dom';
+import { LangToggle } from '@/components/LangToggle';
+import { UI } from '@/content/ui';
 
 // Thanh điều hướng dính đầu trang bài học + vạch tiến độ cuộn.
 export function LessonNav({ badge, title, backTo, items, right }: {
@@ -25,13 +27,14 @@ export function LessonNav({ badge, title, backTo, items, right }: {
           Tách hai hàng vì nhét chung một flex-wrap thì mục lục chiếm trọn dòng rồi
           đẩy nút xuống dòng dưới, trông như bị lỗi. */}
       <div className="lesson-nav__row">
-        <Link to={backTo} className="lesson-nav__back">← Lộ trình</Link>
+        <Link to={backTo} className="lesson-nav__back">{UI.lessonNav.back}</Link>
         <span className="lesson-nav__badge">{badge}</span>
         <span className="lesson-nav__title">{title}</span>
         <span className="lesson-nav__grow" />
+        <LangToggle />
         {right}
       </div>
-      <nav className="lesson-nav__links" aria-label="Mục lục bài học">
+      <nav className="lesson-nav__links" aria-label={UI.lessonNav.toc}>
         {items.map((it) => (
           <a key={it.href} href={it.href} className={it.hot ? 'is-hot' : ''}>{it.label}</a>
         ))}

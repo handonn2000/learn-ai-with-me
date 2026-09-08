@@ -1,4 +1,5 @@
 import { useLocalList } from '@/lib/useLocalList';
+import { UI } from '@/content/ui';
 
 // Khối "ZERO → HERO — tự kiểm" cuối bài học, tick lưu localStorage.
 export function CheckList({ storageKey, items }: { storageKey: string; items: string[] }) {
@@ -6,7 +7,7 @@ export function CheckList({ storageKey, items }: { storageKey: string; items: st
   return (
     <div className="card">
       <div style={{ display: 'flex', alignItems: 'baseline', gap: 12, flexWrap: 'wrap' }}>
-        <span className="mono" style={{ fontSize: 11, color: 'var(--green)', letterSpacing: '0.8px' }}>ZERO → HERO — TỰ KIỂM</span>
+        <span className="mono" style={{ fontSize: 11, color: 'var(--green)', letterSpacing: '0.8px' }}>{UI.checklist.title}</span>
         <span className="mono" style={{ fontSize: 12, color: 'var(--faint)' }}>{done.length}/{items.length}</span>
       </div>
       <div style={{ display: 'flex', flexDirection: 'column', gap: 8, marginTop: 14 }}>

@@ -16,6 +16,9 @@ export interface Session {
   labChip?: string;
   links: MaterialLink[];
   lessonPath?: string; // route bài học tương tác nếu đã dựng
+  outcome?: string;
+  practice?: string; // proposed evidence, not an implemented lab
+  prerequisiteIds?: string[];
 }
 export interface Part {
   id: string; // khóa ổn định để lưu tiến độ & không đổi khi sắp xếp lại phần
@@ -27,6 +30,7 @@ export interface Part {
   testDesc: string;
 }
 export interface Course {
+  topicLabels?: Record<string, string>;
   slug: string;
   code: string;
   title: string;
@@ -35,6 +39,17 @@ export interface Course {
   description: string; // giới thiệu ngắn về khóa, hiện ở trang Khóa học + đầu lộ trình
   org: string;
   weeks: number;
+  roadmapOnly?: boolean;
+  hasPartTests?: boolean;
+  baseline?: {
+    audience: string;
+    prerequisites: string[];
+    outcomes: string[];
+    pace: string;
+    scope: string;
+    tools: string;
+    completion: string;
+  };
   parts: Part[];
   sessions: Session[];
   Component?: LazyExoticComponent<ComponentType>;

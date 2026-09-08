@@ -2,6 +2,8 @@
    Cố ý dùng SVG chứ không canvas: cảnh chỉ đổi khi người học bấm, nên HTML/SVG đọc được bằng
    trình đọc màn hình, chọn được chữ, và không cần vòng lặp rAF nào. */
 
+import { T } from './lesson02.text';
+
 export interface RoomStep {
   t: number; loc: string; world: Record<string, string>;
   percept: [string, string] | null; action: string | null;
@@ -70,7 +72,7 @@ export function VacuumRoom({ s, prev, rm, memo, cells }: {
 
   return (
     <svg viewBox="0 0 400 214" style={{ width: '100%', display: 'block' }} role="img"
-      aria-label={`Bước ${s.t}: robot đang ở ô ${s.loc}. ` + cells.map((c) => `ô ${c} ${s.world[c] === 'dirty' ? 'bẩn' : 'sạch'}`).join(', ')}>
+      aria-label={T.fn.roomAria(s.t, s.loc) + cells.map((c) => T.fn.cellState(c, s.world[c] === 'dirty')).join(', ')}>
       <rect x={10} y={20} width={380} height={76} rx={10} fill="var(--panel-2)" opacity={0.5} />
       <line x1={10} y1={96} x2={390} y2={96} stroke="var(--border-2)" strokeWidth={1.5} />
 
@@ -99,7 +101,7 @@ export function VacuumRoom({ s, prev, rm, memo, cells }: {
             {memo ? (
               <text x={c} y={TY + TH + 19} textAnchor="middle" fontFamily="var(--font-mono)" fontSize={tight ? 10.5 : 12.5}
                 fill={s.belief[id] ? 'var(--green)' : 'var(--faint-2)'}>
-                {s.belief[id] ? (tight ? 'đã thấy sạch' : 'sổ tay: đã thấy sạch') : (tight ? 'chưa biết' : 'sổ tay: chưa biết')}
+                {s.belief[id] ? (tight ? T.vacuumroom.s1 : T.vacuumroom.s2) : (tight ? T.vacuumroom.s3 : T.vacuumroom.s4)}
               </text>
             ) : null}
           </g>
@@ -153,11 +155,11 @@ export function VacuumRoom({ s, prev, rm, memo, cells }: {
             [{s.percept[0]}, {s.percept[1] === 'dirty' ? 'Dirty' : 'Clean'}]
           </text>
           <text x={0} y={-25} textAnchor="middle" fontFamily="var(--font-mono)" fontSize={11}
-            fill="var(--faint-2)" letterSpacing="0.6">{moved ? 'ĐÃ THẤY Ở ĐÂY' : 'TRI GIÁC'}</text>
+            fill="var(--faint-2)" letterSpacing="0.6">{moved ? T.vacuumroom.s5 : T.vacuumroom.s6}</text>
         </g>
       ) : (
         <text x={here} y={FLOOR - 52} textAnchor="middle" fontFamily="var(--font-mono)" fontSize={13} fill="var(--faint-2)">
-          chưa nhìn gì
+          {T.vacuumroom.s7}
         </text>
       )}
     </svg>

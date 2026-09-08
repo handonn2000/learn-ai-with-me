@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { Html } from '@/components/Html';
-import { DIMS, ENVIRONMENTS } from '@/content/courses/csc14003/agents-data.js';
+import { DIMS, ENVIRONMENTS } from '@/content/courses/csc14003/agents-data.locale';
+import { T } from './lesson02.text';
 
 interface Dim { id: string; vn: string; en: string; left: string; right: string; leftEn: string; rightEn: string; mid?: string; midEn?: string }
 interface Env { id: string; label: string; en: string; v: Record<string, 'l' | 'm' | 'r'>; note: string }
@@ -25,8 +26,8 @@ export function EnvExplorer() {
   return (
     <div className="card" style={{ padding: '20px 22px 22px' }}>
       <div style={{ display: 'flex', alignItems: 'baseline', gap: 12, flexWrap: 'wrap' }}>
-        <span style={{ fontWeight: 600, fontSize: 15 }}>Bảng khám phá · môi trường nào rơi vào vế nào</span>
-        <span style={{ color: 'var(--faint)', fontSize: 12.5, fontStyle: 'italic' }}>sáu chiều xếp được thành bảng so sánh</span>
+        <span style={{ fontWeight: 600, fontSize: 15 }}>{T.envexplorer.s1}</span>
+        <span style={{ color: 'var(--faint)', fontSize: 12.5, fontStyle: 'italic' }}>{T.envexplorer.s2}</span>
       </div>
 
       <div style={{ display: 'flex', gap: 8, flexWrap: 'wrap', marginTop: 14 }}>

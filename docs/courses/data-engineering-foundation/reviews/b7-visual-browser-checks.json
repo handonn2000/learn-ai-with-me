@@ -1,0 +1,23 @@
+{
+  "checks": [
+    "journey: forward/back, play/pause, speed, reset",
+    "offsets: forward/back, play/pause, speed, reset",
+    "replicas: forward/back, play/pause, speed, reset",
+    "cdc-path: forward/back, play/pause, speed, reset",
+    "storage: all three layouts",
+    "all local brand images loaded; light/dark screenshots",
+    "VI at 375px and 320px: no page or figure overflow",
+    "reduced motion: no autoplay control, static transitions, manual steps remain",
+    "deck mode: replica chapter visible through anchor"
+  ],
+  "errors": [],
+  "sha256": {
+    "src/features/lessons/def/b7/IngestionVisuals.tsx": "6f9a129c236c978a8aad49e08127ea834f474f47fc511f2f60c7840c8989c4d8",
+    "src/features/lessons/def/b7/IngestionLabs.tsx": "743c5b1e3acf9b9a7c0a87b26537dd233db2cf5c85fc7d3fa6b3cbb1953d50e0",
+    "src/features/lessons/def/b7/Lesson07Ingestion.tsx": "62a6e19d83b15f131537a94e44ea7aed214999115ab48460c55c027a4c39e726",
+    "src/features/lessons/def/b7/lesson07.text.vi.ts": "44f742186b266018ea1e3e99bb7b29656f9d07285399f7583a8be96e42b9394c",
+    "src/features/lessons/def/b7/lesson07.text.en.ts": "06684987340fc6cbb5073d5ea4c31b0fc3e4338975579bd8bc8ee47001582b88",
+    "src/styles/global.css": "585c1d59d6a9ab32ca071ce25827498fdff3cf341084bd46ea8aed8f37e6258e"
+  },
+  "scope": "Isolated Chromium against local production build; screenshots in /tmp/def-visual-check. No production deployment or real Kafka/DB connection."
+}

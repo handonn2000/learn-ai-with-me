@@ -119,5 +119,5 @@ export const CHECKS = [
   'Ai đó kể cho bạn một hệ thống lạ, bạn xếp được nó vào đúng 1 trong 4 ô — đúng ≥ 6/8 câu ở ô tương tác mục 05.',
   'Kể được các mốc: 1943, 1950, 1956, 1997, 2012, 2016, 2017, 2022 và giai đoạn AI Winter 1988–93.',
   'Nêu được 4 lĩnh vực nền và đóng góp của mỗi lĩnh vực cho AI.',
-  'Làm xong bài tập buổi 1: hai bản PEAS và hai lần phân tích tính chất môi trường, có giải thích cho từng chiều.'
+  'Làm xong bốn câu PEAS ở mục 10 của Buổi 2: hai bản PEAS và hai lần phân tích tính chất môi trường, có giải thích cho từng chiều.'
 ];

@@ -1,0 +1,15 @@
+{
+  "results": [
+    "15 content sections + cover; all navigation anchors resolve",
+    "Routing send/read, independent group positions, Back and configuration reset",
+    "All 8 crash scenarios, end-state balances, back/next/reset; reduced-motion retains step controls",
+    "CDC source deletion/capture changes and retained offsets 2,3 versus 1,2,3",
+    "8-question quiz saves 100% to DEF only, preserves AI sentinel, reload keeps score",
+    "Locale switch preserves score; VI mobile 390px has no document overflow across sections/labs",
+    "Presentation mode opens the correct chapter/lab",
+    "Course roadmap exposes the Week 7 lesson"
+  ],
+  "errors": [],
+  "viewport": "1440x1000 / 390x844",
+  "isolatedContext": true
+}

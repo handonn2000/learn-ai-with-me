@@ -1,8 +1,9 @@
 import { useMemo, useState } from 'react';
 import { Html } from '@/components/Html';
 import { prefersReducedMotion as rm } from '@/lib/motion';
-import { compareFinal, MEASURES, PRESETS, PROGRAMS, runVacuum, STEPS, WORLDS } from '@/content/courses/csc14003/vacuum-world.js';
+import { compareFinal, MEASURES, PRESETS, PROGRAMS, runVacuum, STEPS, WORLDS } from '@/content/courses/csc14003/vacuum-world.locale';
 import { VacuumRoom } from './VacuumRoom';
+import { T } from './lesson02.text';
 
 interface Step {
   t: number; loc: string; world: Record<string, string>;
@@ -10,23 +11,23 @@ interface Step {
   belief: Record<string, string | null>;
   score: { clean: number; clean_move: number; dirt: number };
   gained: { clean: number; clean_move: number; dirt: number } | null;
-  note: string;
+  noteKey: string;
 }
 
 
 const ACTION_VN: Record<string, string> = {
-  Suck: 'Suck · hút',
-  Left: 'Left · sang trái',
-  Right: 'Right · sang phải',
-  NoOp: 'NoOp · đứng yên',
+  Suck: T.vacuumlab.s1,
+  Left: T.vacuumlab.s2,
+  Right: T.vacuumlab.s3,
+  NoOp: T.vacuumlab.s4,
 };
 
 /** Màu băng hành động — cũng là bảng chú giải, nên giữ một chỗ duy nhất. */
 const ACTION_TONE: Record<string, { c: string; vn: string }> = {
-  Suck: { c: 'var(--green)', vn: 'hút' },
-  Left: { c: 'var(--cyan)', vn: 'di chuyển' },
-  Right: { c: 'var(--cyan)', vn: 'di chuyển' },
-  NoOp: { c: 'var(--faint-2)', vn: 'đứng yên' },
+  Suck: { c: 'var(--green)', vn: T.vacuumlab.s5 },
+  Left: { c: 'var(--cyan)', vn: T.vacuumlab.s6 },
+  Right: { c: 'var(--cyan)', vn: T.vacuumlab.s7 },
+  NoOp: { c: 'var(--faint-2)', vn: T.vacuumlab.s8 },
 };
 
 /** Băng hành động: 20 bước nằm cạnh nhau, nhìn phát ra ngay cả bài của chương trình. */
@@ -34,9 +35,9 @@ function ActionTape({ trace, t, onPick }: { trace: Step[]; t: number; onPick: (i
   return (
     <div style={{ marginTop: 12 }}>
       <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'baseline', gap: 10, flexWrap: 'wrap' }}>
-        <span className="mono" style={{ fontSize: 10, color: 'var(--faint)', letterSpacing: '0.7px' }}>BĂNG HÀNH ĐỘNG · BẤM ĐỂ NHẢY TỚI BƯỚC BẤT KỲ</span>
+        <span className="mono" style={{ fontSize: 10, color: 'var(--faint)', letterSpacing: '0.7px' }}>{T.vacuumlab.s9}</span>
         <span style={{ display: 'flex', gap: 12, flexWrap: 'wrap' }}>
-          {[['var(--green)', 'hút'], ['var(--cyan)', 'di chuyển'], ['var(--faint-2)', 'đứng yên']].map(([c, l]) => (
+          {[['var(--green)', T.vacuumlab.s10], ['var(--cyan)', T.vacuumlab.s11], ['var(--faint-2)', T.vacuumlab.s12]].map(([c, l]) => (
             <span key={l} className="mono" style={{ fontSize: 10, color: 'var(--faint)', display: 'inline-flex', alignItems: 'center', gap: 5 }}>
               <span style={{ width: 9, height: 9, borderRadius: 2, background: c }} />{l}
             </span>
@@ -49,7 +50,7 @@ function ActionTape({ trace, t, onPick }: { trace: Step[]; t: number; onPick: (i
           const on = st.t === t;
           return (
             <button key={st.t} type="button" onClick={() => onPick(st.t)}
-              title={`Bước ${st.t}${st.action ? ' · ' + ACTION_VN[st.action] : ''}`}
+              title={T.fn.stepTitle(st.t, st.action ? ACTION_VN[st.action] : '')}
               style={{
                 flex: '0 0 auto', width: 17, height: 34, padding: 0, cursor: 'pointer',
                 borderRadius: 4, background: on ? tone : `color-mix(in srgb, ${tone} 30%, transparent)`,
@@ -69,11 +70,11 @@ function PerceptTape({ trace, t }: { trace: Step[]; t: number }) {
   return (
     <div className="panel-inner" style={{ marginTop: 12 }}>
       <div className="mono" style={{ fontSize: 10, color: 'var(--faint)', letterSpacing: '0.7px' }}>
-        CHUỖI TRI GIÁC ĐÃ NHẬN · {seen.length} tri giác
+        {T.fn.perceptsSeen(seen.length)}
       </div>
       <div style={{ display: 'flex', gap: 6, marginTop: 8, flexWrap: 'wrap', alignItems: 'center', minHeight: 26 }}>
         {seen.length === 0 ? (
-          <span style={{ fontSize: 12.5, color: 'var(--faint-2)', fontStyle: 'italic' }}>chưa có gì — máy vừa bật</span>
+          <span style={{ fontSize: 12.5, color: 'var(--faint-2)', fontStyle: 'italic' }}>{T.vacuumlab.s13}</span>
         ) : (
           <>
             {seen.length > shown.length ? <span className="mono" style={{ fontSize: 11, color: 'var(--faint-2)' }}>…</span> : null}
@@ -115,33 +116,33 @@ export function VacuumLab() {
   return (
     <div className="card" style={{ padding: '20px 22px 22px' }}>
       <div style={{ display: 'flex', alignItems: 'baseline', gap: 12, flexWrap: 'wrap' }}>
-        <span style={{ fontWeight: 600, fontSize: 15 }}>Lab · thế giới hút bụi {cells.length} ô</span>
+        <span style={{ fontWeight: 600, fontSize: 15 }}>{T.fn.labTitle(cells.length)}</span>
         <span style={{ color: 'var(--faint)', fontSize: 12.5, fontStyle: 'italic' }}>
-          cùng một chuỗi hành động, ba thước đo chấm song song
+          {T.vacuumlab.s14}
         </span>
       </div>
 
       {/* Bộ chọn */}
       <div style={{ display: 'grid', gap: 10, marginTop: 16 }}>
         <div style={{ display: 'flex', gap: 8, alignItems: 'center', flexWrap: 'wrap' }}>
-          <span className="mono" style={{ fontSize: 10, color: 'var(--faint)', letterSpacing: '0.7px', minWidth: 92 }}>CHƯƠNG TRÌNH</span>
+          <span className="mono" style={{ fontSize: 10, color: 'var(--faint)', letterSpacing: '0.7px', minWidth: 92 }}>{T.vacuumlab.s15}</span>
           {PROGRAMS.map((p: { id: string; name: string }) => (
             <button key={p.id} type="button" onClick={() => pick(setProgramId)(p.id)}
               className={'btn' + (programId === p.id ? ' btn--toggle-on' : '')}>{p.name}</button>
           ))}
         </div>
         <div style={{ display: 'flex', gap: 8, alignItems: 'center', flexWrap: 'wrap' }}>
-          <span className="mono" style={{ fontSize: 10, color: 'var(--faint)', letterSpacing: '0.7px', minWidth: 92 }}>THẾ GIỚI</span>
+          <span className="mono" style={{ fontSize: 10, color: 'var(--faint)', letterSpacing: '0.7px', minWidth: 92 }}>{T.vacuumlab.s16}</span>
           {WORLDS.map((w: { id: string; label: string }) => (
             <button key={w.id} type="button" onClick={() => pick(setWorldId)(w.id)}
               className={'btn' + (worldId === w.id ? ' btn--toggle-on' : '')}>{w.label}</button>
           ))}
           <span style={{ fontSize: 12, color: 'var(--faint)' }}>
-            {worldId === 'w2' ? 'bản gốc — A và B' : 'hành lang A · B · C · D, vẫn đúng bốn hành động cũ'}
+            {worldId === 'w2' ? T.vacuumlab.s17 : T.vacuumlab.s18}
           </span>
         </div>
         <div style={{ display: 'flex', gap: 8, alignItems: 'center', flexWrap: 'wrap' }}>
-          <span className="mono" style={{ fontSize: 10, color: 'var(--faint)', letterSpacing: '0.7px', minWidth: 92 }}>SÀN LÚC ĐẦU</span>
+          <span className="mono" style={{ fontSize: 10, color: 'var(--faint)', letterSpacing: '0.7px', minWidth: 92 }}>{T.vacuumlab.s19}</span>
           {PRESETS.map((p: { id: string; label: string }) => (
             <button key={p.id} type="button" onClick={() => pick(setPresetId)(p.id)}
               className={'btn' + (presetId === p.id ? ' btn--toggle-on' : '')}>{p.label}</button>
@@ -158,9 +159,9 @@ export function VacuumLab() {
             <VacuumRoom s={s} prev={prev} rm={rm} memo={programId === 'memo'} cells={cells} />
           </div>
           <div className="panel-inner" style={{ marginTop: 12, display: 'flex', justifyContent: 'space-between', gap: 10, flexWrap: 'wrap' }}>
-            <span className="mono" style={{ fontSize: 10, color: 'var(--faint)', letterSpacing: '0.7px' }}>HÀNH ĐỘNG BƯỚC NÀY</span>
+            <span className="mono" style={{ fontSize: 10, color: 'var(--faint)', letterSpacing: '0.7px' }}>{T.vacuumlab.s20}</span>
             <span className="mono" style={{ fontSize: 12, color: s.action ? ACTION_TONE[s.action].c : 'var(--faint-2)' }}>
-              {s.action ? ACTION_VN[s.action] : '— chưa chạy'}
+              {s.action ? ACTION_VN[s.action] : T.vacuumlab.s21}
             </span>
           </div>
           <PerceptTape trace={trace} t={t} />
@@ -188,17 +189,17 @@ export function VacuumLab() {
               </div>
             );
           })}
-          <div style={{ fontSize: 12.5, color: 'var(--text-2)', lineHeight: 1.6, minHeight: 40, marginTop: 2 }}>{s.note}</div>
+          <div style={{ fontSize: 12.5, color: 'var(--text-2)', lineHeight: 1.6, minHeight: 40, marginTop: 2 }}>{T.note[s.noteKey as keyof typeof T.note]}</div>
         </div>
       </div>
 
       {/* Điều khiển */}
       <div style={{ display: 'flex', gap: 8, alignItems: 'center', flexWrap: 'wrap', marginTop: 14 }}>
-        <button type="button" className="btn" onClick={() => setT(0)} disabled={t === 0}>↺ Về đầu</button>
-        <button type="button" className="btn" onClick={() => setT((x) => Math.max(0, x - 1))} disabled={t === 0}>← Lùi</button>
-        <button type="button" className="btn btn--primary" onClick={() => setT((x) => Math.min(STEPS, x + 1))} disabled={t >= STEPS}>Tiến →</button>
-        <button type="button" className="btn" onClick={() => setT(STEPS)} disabled={t >= STEPS}>Tới cuối ⇥</button>
-        <span className="mono" style={{ fontSize: 11.5, color: 'var(--faint)' }}>BƯỚC {s.t} / {STEPS}</span>
+        <button type="button" className="btn" onClick={() => setT(0)} disabled={t === 0}>{T.vacuumlab.s22}</button>
+        <button type="button" className="btn" onClick={() => setT((x) => Math.max(0, x - 1))} disabled={t === 0}>{T.vacuumlab.s23}</button>
+        <button type="button" className="btn btn--primary" onClick={() => setT((x) => Math.min(STEPS, x + 1))} disabled={t >= STEPS}>{T.vacuumlab.s24}</button>
+        <button type="button" className="btn" onClick={() => setT(STEPS)} disabled={t >= STEPS}>{T.vacuumlab.s25}</button>
+        <span className="mono" style={{ fontSize: 11.5, color: 'var(--faint)' }}>{T.fn.stepOf(s.t, STEPS)}</span>
       </div>
 
       <ActionTape trace={trace} t={t} onPick={setT} />
@@ -208,13 +209,13 @@ export function VacuumLab() {
         <table className="dtable" style={{ minWidth: 460 }}>
           <tbody>
             <tr className="dtable__head">
-              <td>ĐIỂM SAU {STEPS} BƯỚC</td>
+              <td>{T.fn.scoreAfter(STEPS)}</td>
               {MEASURES.map((m: { id: string; label: string }) => <td key={m.id}>{m.label}</td>)}
             </tr>
-            {finals.map((f: { programId: string; name: string; score: Step['score'] }) => (
+            {finals.map((f: { programId: string; score: Step['score'] }) => (
               <tr key={f.programId}>
                 <td style={{ color: f.programId === programId ? 'var(--cyan)' : 'var(--muted)', fontWeight: f.programId === programId ? 600 : 400 }}>
-                  {f.name}
+                  {PROGRAMS.find((p: { id: string }) => p.id === f.programId)?.name}
                 </td>
                 {MEASURES.map((m: { id: string }) => {
                   const mine = f.score[m.id as keyof Step['score']];
@@ -230,7 +231,7 @@ export function VacuumLab() {
           </tbody>
         </table>
       </div>
-      <Html as="p" t="Bảng này chấm cả hai chương trình trên đúng sàn nhà bạn đang chọn, nên bạn không cần bấm đi bấm lại mới so được. Ô xanh là đứa thắng ở thước đó, ô đỏ là đứa thua — và <strong class='hl'>chú ý cột nào hòa, cột nào không</strong>."
+      <Html as="p" t={T.vacuumlab.s26}
         style={{ fontSize: 12.5, color: 'var(--muted)', margin: '10px 0 0', lineHeight: 1.6 }} />
     </div>
   );

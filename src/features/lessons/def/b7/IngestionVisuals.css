@@ -1,0 +1,146 @@
+/* Presentation varies by mechanism; shared controls are use-case tabs only. */
+.def-scenario-tabs { display: flex; flex-wrap: wrap; gap: 4px 18px; border-bottom: 1px solid var(--border-3); margin: 20px 0 26px; }
+.def-scenario-tabs [role='tab'] { position: relative; border: 0; border-bottom: 2px solid transparent; padding: 12px 3px; min-height: 44px; background: transparent; color: var(--muted); font-size: 13px; text-align: left; cursor: pointer; }
+.def-scenario-tabs [aria-selected='true'] { color: var(--cyan-hi); border-bottom-color: var(--cyan); font-weight: 600; }
+.def-scenario-tabs [role='tab']:hover { color: var(--text-hi); }
+.def-scenario-tabs [role='tab']:focus-visible { outline: 2px solid var(--cyan); outline-offset: 3px; }
+.def-scenarios [role='tabpanel'] { min-width: 0; }
+.def-loop-progress { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 12px; color: var(--muted); font-size: 11px; margin: 20px 0 8px; }
+.def-loop-progress > div { display: flex; gap: 5px; }
+.def-loop-progress i { width: 16px; height: 3px; background: var(--border-3); transition: background .4s; }
+.def-loop-progress i.is-current { background: var(--cyan); }
+.def-loop-static { display: none; }
+[data-loop-state='reduced'] .def-loop-running { display: none; }
+[data-loop-state='reduced'] .def-loop-static { display: inline; }
+[data-loop-state='reduced'] .def-loop-progress > div { display: none; }
+.def-visual .def-loop-caption { min-height: 82px; margin-bottom: 0; }
+.def-visual { overflow: hidden; }
+.def-visual .def-election { min-height: 22px; margin-bottom: 0; }
+/* A route map, with one order travelling through stops. */
+.def-transit-map { position: relative; margin: 38px 4px 22px; padding-top: 20px; }
+.def-transit-map > ol { position: relative; display: grid; grid-template-columns: repeat(5, minmax(0,1fr)); gap: 12px; margin: 0; padding: 0; list-style: none; }
+.def-transit-map li { display: flex; flex-direction: column; align-items: center; gap: 12px; text-align: center; }
+.def-transit-stop { width: 70px; height: 70px; display: grid; place-items: center; border: 2px solid var(--border-3); background: var(--panel); border-radius: 50%; transition: border-color .6s, box-shadow .6s; }
+.def-transit-stop > .mono { color: var(--muted); font-size: 18px; }
+.def-transit-stop .def-brand-art { width: 48px; height: 48px; border-radius: 50%; }
+.def-transit-map .is-current .def-transit-stop { border-color: var(--cyan); box-shadow: 0 0 0 8px color-mix(in srgb, var(--cyan) 10%, transparent); }
+.def-transit-map li > strong { font-size: 13px; color: var(--text-hi); }
+.def-transit-map li > small { font-size: 11px; color: var(--text-2); line-height: 1.6; }
+.def-transit-rail { position: absolute; top: 54px; left: 9%; right: 9%; height: 3px; background: var(--border-3); }
+.def-transit-rail i { position: absolute; width: 14px; height: 14px; top: -5px; border-radius: 50%; background: var(--cyan); box-shadow: 0 0 18px var(--cyan); transition: left 1.4s ease-in-out; }
+/* Colored data tiles keep their identities while their physical neighbors change. */
+.def-scene--storage { background: linear-gradient(135deg, color-mix(in srgb, var(--purple) 5%, var(--panel)), var(--panel)); }
+.def-storage-cell { transition: left 1s cubic-bezier(.22,.7,.2,1), top 1s cubic-bezier(.22,.7,.2,1), background .6s, box-shadow .6s; }
+.def-storage-cell.def-field-0 { border-top: 3px solid var(--purple); }
+.def-storage-cell.def-field-2 { border-top: 3px solid var(--orange); }
+.def-storage-cell.is-amount { border: 1px solid var(--border-3); border-top: 3px solid var(--cyan); background: var(--panel-2); }
+.def-storage.is-scanning .is-amount { background: color-mix(in srgb, var(--cyan) 16%, var(--panel)); box-shadow: inset 0 0 0 1px var(--cyan); }
+/* Branching wire diagram. Labels stay HTML-sized, even as the SVG adapts. */
+.def-branch-map { height: 350px; position: relative; display: grid; grid-template-columns: 29% 30% 41%; align-items: center; }
+.def-branch-map > svg { position: absolute; inset: 0; width: 100%; height: 100%; pointer-events: none; }
+.def-wire { fill: none; stroke: var(--border-3); stroke-width: 2; }
+.def-wire-flow { fill: none; stroke: var(--cyan); stroke-width: 3; stroke-dasharray: 8 170; animation: def-signal-dash 3s linear infinite; }
+@keyframes def-signal-dash { to { stroke-dashoffset: -178; } }
+.def-branch-source, .def-branch-hub, .def-branch-targets { position: relative; z-index: 1; }
+.def-branch-source { display: flex; flex-direction: column; align-items: center; gap: 12px; width: 150px; background: var(--panel); padding: 18px 6px; border-radius: 12px; justify-self: center; }
+.def-branch-source > .def-brand { flex-direction: column; }
+.def-branch-source > small, .def-branch-hub > small, .def-branch-targets small { font-size: 11px; color: var(--text-2); line-height: 1.6; }
+.def-branch-hub { display: grid; justify-items: center; gap: 10px; text-align: center; }
+.def-branch-hub > div { width: 88px; height: 88px; border-radius: 50%; display: grid; place-items: center; font: 600 19px var(--font-mono); border: 1px solid var(--cyan); color: var(--cyan-hi); background: var(--panel); box-shadow: 0 0 0 10px color-mix(in srgb, var(--cyan) 6%, transparent); }
+.def-branch-targets { display: grid; gap: 24px; justify-items: end; }
+.def-branch-targets > div { width: 200px; display: flex; flex-direction: column; gap: 4px; background: var(--panel); padding: 8px; border-left: 2px solid var(--border-3); transition: border-color .7s; }
+.def-branch-targets > div.is-delivered { border-color: var(--green); }
+.def-branch-targets .def-brand-art { width: 38px; height: 38px; }
+.def-event-pulse { font-size: 11px; color: var(--cyan); animation: def-event-breathe 3s ease-in-out infinite; }
+@keyframes def-event-breathe { 0%,100% { opacity: .5; } 50% { opacity: 1; } }
+/* Three genuinely different Kafka use cases share tabs, not one misleading chain. */
+.def-signal-path .def-v-arrow { position: relative; }
+.def-signal-path .def-v-arrow i { position: absolute; width: 5px; height: 5px; border-radius: 50%; top: 50%; left: 0; background: var(--cyan); animation: def-path-signal 2s linear infinite; }
+@keyframes def-path-signal { from { transform: translateX(0); opacity: .2; } 50% { opacity: 1; } to { transform: translateX(23px); opacity: .2; } }
+.def-stream-orbit { display: grid; grid-template-columns: 1fr 130px 1fr; align-items: center; min-height: 240px; padding: 12px 30px; }
+.def-orbit-system { width: 185px; height: 185px; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 18px; border: 1px solid var(--cyan); border-radius: 50%; background: radial-gradient(circle, color-mix(in srgb, var(--cyan) 12%, var(--panel)), var(--panel)); justify-self: center; }
+.def-orbit-system > strong { font-size: 12px; }
+.def-stream-arcs { position: relative; display: flex; flex-direction: column; justify-content: space-between; height: 94px; color: var(--cyan); border-top: 2px dashed var(--border-3); border-bottom: 2px dashed var(--border-3); }
+.def-stream-arcs > span { text-align: center; font-size: 22px; line-height: 1; }
+.def-stream-arcs > i { position: absolute; width: 8px; height: 8px; background: var(--cyan); border-radius: 50%; animation: def-stream-roundtrip 4s linear infinite; }
+@keyframes def-stream-roundtrip { 0% { left:0; top:-5px; } 45% {left:95%;top:-5px;} 50% {left:95%;top:87px;} 95% {left:0;top:87px;} 100% {left:0;top:-5px;} }
+.def-stream-app { border: 1px solid var(--purple); border-radius: 18px; min-height: 154px; padding: 20px; display: flex; flex-direction: column; gap: 12px; background: color-mix(in srgb, var(--purple) 5%, var(--panel)); }
+.def-stream-app > .mono { color: var(--purple); font-size: 21px; }
+.def-stream-app strong { font-size: 14px; }
+.def-stream-app small { color: var(--text-2); line-height: 1.6; font-size: 12px; }
+.def-mirror-map { display: grid; grid-template-columns: 1fr 1fr 1fr; align-items: center; gap: 20px; padding: 36px 20px; }
+.def-cluster-stack { padding: 16px; display: flex; flex-direction: column; align-items: center; gap: 18px; }
+.def-cluster-stack > strong { font-size: 13px; }
+.def-cluster-stack > div { display: flex; gap: 8px; transform: skewY(-8deg); }
+.def-cluster-stack i { width: 35px; height: 60px; border: 1px solid var(--cyan); background: repeating-linear-gradient(0deg, var(--panel) 0 12px, var(--border-3) 12px 14px); box-shadow: 5px 5px 0 color-mix(in srgb, var(--cyan) 12%, var(--panel)); }
+.def-mirror-transfer { display: flex; flex-direction: column; gap: 18px; text-align: center; font-size: 13px; }
+.def-mirror-transfer > span { position: relative; border-bottom: 2px dashed var(--border-3); color: var(--cyan); font-size: 25px; }
+.def-mirror-transfer i { position: absolute; width: 9px; height: 9px; border-radius: 2px; bottom: -5px; background: var(--cyan); animation: def-mirror-send 2.5s linear infinite; }
+@keyframes def-mirror-send { from { left: 0; } to { left: 94%; } }
+.def-mirror-transfer small { color: var(--text-2); line-height: 1.6; }
+/* A conveyor read head and a separate recovery bookmark. */
+.def-log-conveyor { position: relative; padding: 20px 0 2px; border-top: 1px solid var(--border-3); border-bottom: 1px solid var(--border-3); }
+.def-log-conveyor::before { content: ''; display: block; height: 7px; margin-bottom: 14px; background: repeating-linear-gradient(90deg, var(--border-3) 0 5px, transparent 5px 18px); }
+.def-offset-cell { transition: background .65s, border-color .65s; }
+/* CSS 3D racks: partition labels stay frontal and legible. */
+.def-rack-floor { padding: 30px 15px 18px; background-image: linear-gradient(var(--border) 1px, transparent 1px), linear-gradient(90deg, var(--border) 1px, transparent 1px); background-size: 32px 32px; border-radius: 12px; perspective: 1200px; }
+.def-isometric-brokers { transform: rotateX(5deg) rotateY(-6deg); gap: 22px; padding: 12px 8px; }
+.def-isometric-brokers .def-broker { position: relative; border-radius: 5px; box-shadow: 7px 7px 0 var(--border-3); background: var(--panel); }
+.def-isometric-brokers .def-broker::before { content: ''; position: absolute; left: -1px; right: -1px; height: 12px; top: -12px; background: var(--border-3); transform: skewX(-30deg); transform-origin: bottom; border: 1px solid var(--muted-2); }
+.def-isometric-brokers .def-broker h4 { display: flex; align-items: center; gap: 8px; font-family: var(--font-mono); }
+.def-isometric-brokers .def-broker h4 > i { width: 6px; height: 6px; background: var(--green); border-radius: 50%; flex: 0 0 auto; }
+.def-isometric-brokers .is-offline h4 > i { background: var(--red); }
+.def-rack-status { display: block; height: 28px; font-size: 11px; color: var(--green); }
+.def-isometric-brokers .is-offline .def-rack-status { color: var(--red); }
+.def-isometric-brokers .is-leader .def-mini-log i { animation: def-event-breathe 2s ease-in-out infinite; }
+/* Code and editorial emphasis are independent of animation state. */
+.def-syntax { margin: 24px 0; border: 1px solid var(--border-3); border-radius: 13px; overflow: hidden; background: var(--panel-2); }
+.def-syntax-label { display: flex; align-items: center; gap: 10px; padding: 12px 18px; border-bottom: 1px solid var(--border-3); font: 12px var(--font-mono); color: var(--muted); }
+.def-syntax-label > span { color: var(--cyan); }
+.def-syntax pre { margin: 0; padding: 22px; font-size: 13px; line-height: 1.85; white-space: pre-wrap; overflow-wrap: anywhere; tab-size: 2; }
+.def-syntax--compact pre { font-size: 12px; max-height: none; }
+.def-token--plain, .def-token--punctuation { color: var(--text-2); }
+.def-token--key { color: var(--cyan-hi); }
+.def-token--string { color: var(--green); }
+.def-token--number { color: var(--num); }
+.def-token--literal { color: var(--purple); }
+.def-prose .def-term { color: var(--cyan-hi); font-weight: 600; }
+.def-prose .def-principle { color: var(--text-hi); font-weight: 600; background: linear-gradient(transparent 60%, color-mix(in srgb, var(--yellow) 16%, transparent) 60%); }
+.def-key-idea { margin: 28px 0; padding: 18px 22px; border-left: 3px solid var(--yellow); background: color-mix(in srgb, var(--yellow) 5%, var(--panel)); }
+.def-key-idea > span { display: block; color: var(--yellow); font: 11px var(--font-mono); margin-bottom: 10px; }
+.def-key-idea p { font-size: 16px; font-weight: 600; color: var(--text-hi); margin: 0; }
+.def-lesson .def-prose code { color: var(--purple); background: color-mix(in srgb, var(--purple) 7%, var(--panel)); padding: 1px 4px; border-radius: 3px; }
+/* Offscreen scenes, inactive deck slides and background tabs suspend every loop. */
+[data-loop-state]:not([data-loop-state='running']) *, [data-loop-state]:not([data-loop-state='running']) *::before, [data-loop-state]:not([data-loop-state='running']) *::after { animation-play-state: paused !important; }
+@media (max-width: 760px) {
+  .def-transit-map { padding: 0; margin: 28px 0; }
+  .def-transit-map > ol { grid-template-columns: 1fr; gap: 24px; }
+  .def-transit-map li { display: grid; grid-template-columns: 65px 1fr; grid-template-rows: auto auto; text-align: left; gap: 6px 18px; }
+  .def-transit-stop { grid-row: 1 / 3; width: 62px; height: 62px; }
+  .def-transit-map li > strong { align-self: end; }
+  .def-transit-map li > small { align-self: start; }
+  .def-transit-rail { left: 30px; right: auto; top: 30px; bottom: 30px; width: 3px; height: auto; }
+  .def-transit-rail i { display: none; }
+  .def-branch-map { height: auto; display: flex; flex-direction: column; gap: 28px; padding: 10px 0; }
+  .def-branch-map > svg { display: none; }
+  .def-branch-source { width: 100%; }
+  .def-branch-hub::before, .def-branch-hub::after { content: '↓'; color: var(--cyan); font-size: 22px; }
+  .def-branch-targets { gap: 14px; width: 100%; border-left: 1px solid var(--border-3); padding-left: 18px; }
+  .def-branch-targets > div { width: 100%; }
+  .def-signal-path .def-v-arrow i { display: none; }
+  .def-stream-orbit { grid-template-columns: 1fr; padding: 0; gap: 18px; }
+  .def-stream-arcs { width: 120px; justify-self: center; }
+  .def-orbit-system { width: 170px; height: 170px; }
+  .def-mirror-map { grid-template-columns: 1fr; padding: 0; gap: 10px; }
+  .def-mirror-transfer { width: 180px; justify-self: center; gap: 8px; }
+  .def-isometric-brokers { transform: none; gap: 22px 18px; padding: 10px 0; }
+  .def-rack-floor { padding: 20px 8px; }
+  .def-isometric-brokers .def-broker { padding: 9px; }
+  .def-visual .def-loop-caption { min-height: 135px; }
+  .def-syntax pre { padding: 14px; font-size: 12px; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .def-animation-observer *, .def-animation-observer *::before, .def-animation-observer *::after { animation: none !important; transition: none !important; }
+  .def-isometric-brokers { transform: none; }
+  .def-transit-rail i { display: none; }
+}

@@ -1,7 +1,8 @@
 // Code Lab — pseudo-code + Python của 7 thuật toán Lab 1, tô màu bằng tokenizer của engine.
 import { useMemo, useState } from 'react';
 import { tokenize } from '@/features/search-lab/search-engine.js';
-import { ALGOS, HELPER_PY, MAIN_PY } from '@/content/courses/csc14003/lab-searching.js';
+import { ALGOS, HELPER_PY, MAIN_PY } from '@/content/courses/csc14003/lab-searching.locale';
+import { T } from './lesson03.text';
 
 const MONO = "'JetBrains Mono',monospace";
 const TOKEN_COLORS: Record<string, string> = { kw: '#58C4DD', fn: '#F4D345', st: '#83C167', nu: '#FF9580', cm: '#7A8399', sy: '#58C4DD' };
@@ -28,7 +29,7 @@ export function CodeLab() {
   return (
     <div className="canvas-panel" style={{ borderRadius: 16 }}>
       <div style={{ padding: '13px 18px', borderBottom: '1px solid #1E2430', fontFamily: MONO, fontSize: 11, color: '#F4D345', letterSpacing: '.8px' }}>
-        BÀN LÀM VIỆC — CHỌN THUẬT TOÁN, ĐỌC PSEUDO RỒI SOI PYTHON
+        {T.f_codelab.s1}
       </div>
       <div style={{ display: 'flex', flexWrap: 'wrap' }}>
         <div style={{ flex: '0 0 172px', padding: 14, display: 'flex', flexDirection: 'column', gap: 8, borderRight: '1px solid #1E2430' }}>
@@ -58,7 +59,7 @@ export function CodeLab() {
               <Code src={cur.pseudo} style={{ fontSize: 12, padding: '14px 16px', border: '1px solid #1E2430', borderRadius: 10 }} />
             </div>
             <div>
-              <div style={{ fontFamily: MONO, fontSize: 10, letterSpacing: '.6px', color: '#5C6579', marginBottom: 8 }}>PYTHON — KHUNG LAB 1</div>
+              <div style={{ fontFamily: MONO, fontSize: 10, letterSpacing: '.6px', color: '#5C6579', marginBottom: 8 }}>{T.f_codelab.pythonHeading}</div>
               <Code src={cur.py} style={{ fontSize: 12, padding: '14px 16px', border: '1px solid #1E2430', borderRadius: 10 }} />
             </div>
           </div>

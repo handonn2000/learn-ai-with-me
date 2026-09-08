@@ -13,6 +13,7 @@ export const csc14003: Course = {
     'Đi từ câu hỏi “trí tuệ nhân tạo là gì” tới chỗ tự cài được các thuật toán tìm kiếm, viết được suy luận logic và huấn luyện được mô hình học máy đầu tiên. Bài học do mình viết lại theo cách hiểu của mình, tham khảo khóa “Các thuật toán thông minh nhân tạo” (Đại học Khoa học Tự nhiên – TP.HCM) và CS188 — Introduction to Artificial Intelligence (UC Berkeley).',
   org: 'Sổ tay tự học · CSC14003',
   weeks: 11,
+  hasPartTests: true,
   parts: [
     { id: 'foundations', no: 'PHẦN I', title: 'Nhập môn & Tác tử', en: 'Foundations & Agents', range: 'Tuần 1–2', color: 'var(--green)',
       testDesc: '8 câu · Buổi 1–2 · bốn hướng tiếp cận AI, phép thử Turing, PEAS, kiến trúc agent' },

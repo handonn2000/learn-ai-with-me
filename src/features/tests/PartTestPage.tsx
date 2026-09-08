@@ -2,10 +2,12 @@ import { useMemo, useState } from 'react';
 import { Link, useLocation, useParams } from 'react-router-dom';
 import katex from 'katex';
 import 'katex/dist/katex.min.css';
-import { PART_TESTS } from '@/content/courses/csc14003/part-tests';
+import { PART_TESTS } from '@/content/courses/csc14003/part-tests.locale';
 import { getCourse } from '@/content/courses';
 import { useProgress } from '@/lib/useProgress';
 import NotFoundPage from '@/pages/NotFoundPage';
+import { topicLabel } from '@/content/courses/csc14003/topics';
+import { UI } from '@/content/ui';
 
 const mono = 'var(--font-mono)';
 void mono;
@@ -27,9 +29,17 @@ export default function PartTestPage() {
   const [picks, setPicks] = useState<Record<number, Record<number, number>>>(() =>
     Object.fromEntries(PART_TESTS.map((_, i) => [i, {}])));
   const [saved, setSaved] = useState<Record<number, boolean>>({});
-  const { db, update } = useProgress();
+  const { db, update } = useProgress(slug);
 
   if (!course) return <NotFoundPage />;
+  // The existing question bank belongs to CSC14003. Never expose it under another course.
+  if (!course.hasPartTests || course.slug !== 'csc14003') return (
+    <div className="container container--narrow" style={{ padding: '36px 24px 100px' }}>
+      <Link to={`/courses/${course.slug}`}>{UI.plan.back}</Link>
+      <h1>{course.title} {course.titleAccent}</h1>
+      <p>{UI.plan.testsUnavailable}</p>
+    </div>
+  );
   const P = PART_TESTS[part];
   const partId = course.parts[part]?.id;
   const pk = picks[part];
@@ -37,8 +47,8 @@ export default function PartTestPage() {
   const total = P.qs.length;
   const correct = P.qs.filter((q, i) => pk[i] === q.a).length;
   const score = Math.round((correct / total) * 100);
-  const rightT = [...new Set(P.qs.filter((q, i) => pk[i] === q.a).map((q) => q.topic))];
-  const wrongT = [...new Set(P.qs.filter((q, i) => pk[i] != null && pk[i] !== q.a).map((q) => q.topic))];
+  const rightT = [...new Set(P.qs.filter((q, i) => pk[i] === q.a).map((q) => q.topicId))];
+  const wrongT = [...new Set(P.qs.filter((q, i) => pk[i] != null && pk[i] !== q.a).map((q) => q.topicId))];
 
   const save = () => {
     if (answered < total || !partId) return;
@@ -53,14 +63,14 @@ export default function PartTestPage() {
     <div className="container container--narrow" style={{ padding: '36px 24px 100px' }}>
       <header style={{ borderBottom: '1px solid var(--border)', paddingBottom: 18 }}>
         <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'baseline', flexWrap: 'wrap', gap: 8 }}>
-          <Link to={`/courses/${course.slug}`} className="mono" style={{ fontSize: 12 }}>← Lộ trình 11 tuần</Link>
-          <div className="mono" style={{ fontSize: 11, color: 'var(--muted-2)', letterSpacing: '0.1em' }}>ĐÓNG SÁCH LẠI · ĐỪNG XEM LẠI BÀI TRƯỚC KHI LÀM</div>
+          <Link to={`/courses/${course.slug}`} className="mono" style={{ fontSize: 12 }}>{UI.test.back}</Link>
+          <div className="mono" style={{ fontSize: 11, color: 'var(--muted-2)', letterSpacing: '0.1em' }}>{UI.test.closedBook}</div>
         </div>
         <h1 style={{ margin: '14px 0 4px', fontFamily: 'var(--font-serif)', fontSize: 32, fontWeight: 700 }}>
-          Kiểm tra <em style={{ color: 'var(--cyan)' }}>tổng hợp</em> cuối phần
+          {UI.test.titleA}<em style={{ color: 'var(--cyan)' }}>{UI.test.titleAccent}</em>{UI.test.titleB}
         </h1>
         <div style={{ fontSize: 14.5, color: 'var(--muted-2)', lineHeight: 1.6 }}>
-          Mỗi phần một bài, làm sau khi bạn học xong các buổi trong phần đó. Tôi chấm theo từng buổi, nên bạn biết chính xác phải quay lại chỗ nào chứ không phải mò. Kết quả tự lưu vào lộ trình.
+          {UI.test.lead}
         </div>
       </header>
 
@@ -102,7 +112,7 @@ export default function PartTestPage() {
             <div key={i} style={{ background: 'var(--panel)', border: '1px solid var(--border)', borderRadius: 12, padding: '18px 20px' }}>
               <div style={{ display: 'flex', gap: 10, alignItems: 'baseline', flexWrap: 'wrap' }}>
                 <span className="mono" style={{ fontSize: 11, color: 'var(--muted-2)' }}>{i + 1}/{total}</span>
-                <span className="mono" style={{ fontSize: 10.5, fontWeight: 600, letterSpacing: '0.06em', color: P.colorVar, background: `color-mix(in srgb, ${P.colorVar} 12%, transparent)`, borderRadius: 4, padding: '2px 8px' }}>{q.topic}</span>
+                <span className="mono" style={{ fontSize: 10.5, fontWeight: 600, letterSpacing: '0.06em', color: P.colorVar, background: `color-mix(in srgb, ${P.colorVar} 12%, transparent)`, borderRadius: 4, padding: '2px 8px' }}>{topicLabel(q.topicId)}</span>
               </div>
               <div style={{ fontSize: 14.5, fontWeight: 600, lineHeight: 1.55, marginTop: 8 }}>{q.q}</div>
               {q.tex ? <div style={{ marginTop: 8, fontSize: 16 }}><Tex tex={q.tex} /></div> : null}
@@ -130,7 +140,7 @@ export default function PartTestPage() {
                   background: picked === q.a ? 'color-mix(in srgb, var(--green) 10%, transparent)' : 'color-mix(in srgb, var(--red) 10%, transparent)',
                   border: `1px solid ${picked === q.a ? 'color-mix(in srgb, var(--green) 40%, transparent)' : 'color-mix(in srgb, var(--red) 40%, transparent)'}`,
                 }}>
-                  {(picked === q.a ? '✓ Đúng. ' : `✗ Sai — đáp án là ${String.fromCharCode(65 + q.a)}. `) + q.ex}
+                  {(picked === q.a ? UI.test.correct : UI.test.incorrect(String.fromCharCode(65 + q.a))) + q.ex}
                 </div>
               ) : null}
             </div>
@@ -144,20 +154,20 @@ export default function PartTestPage() {
           color: answered < total ? 'var(--muted-2)' : 'var(--on-accent)',
           borderRadius: 9, padding: '12px 22px', fontSize: 14.5, fontWeight: 700, cursor: 'pointer', fontFamily: 'inherit',
         }}>
-          {saved[part] ? 'Đã lưu vào lộ trình ✓' : 'Nộp & lưu vào lộ trình'}
+          {saved[part] ? UI.test.savedBtn : UI.test.saveBtn}
         </button>
         <span style={{ fontSize: 13, color: 'var(--muted-2)' }}>
-          {answered < total ? `Đã trả lời ${answered}/${total}` : `Xong ${total}/${total} — đúng ${correct} câu`}
+          {answered < total ? UI.test.answered(answered, total) : UI.test.finished(total, correct)}
         </span>
       </div>
 
       {saved[part] ? (
         <div style={{ marginTop: 16, background: 'var(--panel)', border: '1px solid var(--border)', borderLeft: '4px solid var(--green)', borderRadius: 12, padding: '18px 20px', fontSize: 13.5, lineHeight: 1.7 }}>
-          <div style={{ fontFamily: 'var(--font-serif)', fontSize: 22, fontWeight: 700 }}>Kết quả: {score}% ({correct}/{total})</div>
-          <div style={{ marginTop: 6 }}><span className="mono" style={{ fontSize: 10.5, letterSpacing: '0.08em', color: 'var(--green)', fontWeight: 600 }}>VỮNG · </span>{rightT.length ? rightT.join(' · ') : '—'}</div>
-          <div><span className="mono" style={{ fontSize: 10.5, letterSpacing: '0.08em', color: 'var(--red)', fontWeight: 600 }}>HỔNG · </span>{wrongT.length ? wrongT.join(' · ') + ' — mở lại mấy buổi này trong lộ trình nhé.' : 'Không hổng buổi nào!'}</div>
-          <div><span className="mono" style={{ fontSize: 10.5, letterSpacing: '0.08em', color: 'var(--cyan)', fontWeight: 600 }}>GỢI Ý · </span>
-            {score < 60 ? 'Quay lại học mấy buổi bị hổng đã, rồi làm lại bài này sau 2 ngày. Đừng làm lại ngay — lúc còn nhớ đáp án thì chỉ là tự lừa mình.' : score < 85 ? 'Ôn đúng mấy buổi sai ở trên thôi, đừng ôn lại hết. Làm lại sau 2–3 ngày để chốt.' : 'Phần này bạn vững rồi 🎉 Sang phần kế tiếp theo lộ trình thôi.'}
+          <div style={{ fontFamily: 'var(--font-serif)', fontSize: 22, fontWeight: 700 }}>{UI.test.result(score, correct, total)}</div>
+          <div style={{ marginTop: 6 }}><span className="mono" style={{ fontSize: 10.5, letterSpacing: '0.08em', color: 'var(--green)', fontWeight: 600 }}>{UI.test.solid}</span>{rightT.length ? rightT.map(topicLabel).join(' · ') : UI.test.none}</div>
+          <div><span className="mono" style={{ fontSize: 10.5, letterSpacing: '0.08em', color: 'var(--red)', fontWeight: 600 }}>{UI.test.weak}</span>{wrongT.length ? wrongT.map(topicLabel).join(' · ') + UI.test.gapsSuffix : UI.test.noGaps}</div>
+          <div><span className="mono" style={{ fontSize: 10.5, letterSpacing: '0.08em', color: 'var(--cyan)', fontWeight: 600 }}>{UI.test.hint}</span>
+            {score < 60 ? UI.test.tipLow : score < 85 ? UI.test.tipMid : UI.test.tipHigh}
           </div>
         </div>
       ) : null}

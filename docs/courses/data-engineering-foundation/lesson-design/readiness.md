@@ -1,0 +1,32 @@
+# Readiness glossary / Thuật ngữ đầu vào
+
+These short definitions are proposed for each lesson's opening `#toan` card. The technical term stays visible in English in both locales; its explanation and purpose are localized. No advanced mathematics is assumed.
+
+Các định nghĩa ngắn này dành cho thẻ `#toan` đầu bài. Giữ thuật ngữ tiếng Anh ở cả hai locale; dịch lời giải thích và lý do cần biết. Không giả định kiến thức toán nâng cao.
+
+| Lesson | Term / Thuật ngữ | Definition / Định nghĩa | Why this lesson needs it / Vì sao bài này cần |
+|---|---|---|---|
+| 07 | Record · Bản ghi | A unit of data with fields. / Một đơn vị dữ liệu gồm các trường. | Follow a row as it becomes an event. / Theo một dòng khi trở thành sự kiện. |
+| 07 | Key · Khóa | A value used to identify or group records. / Giá trị dùng nhận diện hoặc nhóm bản ghi. | Explain keyed partition routing. / Giải thích định tuyến partition theo key. |
+| 07 | Offset · Vị trí trong log | A position within one partition's log, not a global event ID. / Vị trí trong log của một partition, không phải ID sự kiện toàn cục. | Reason about resume and replay. / Lý giải tiếp tục đọc và replay. |
+| 07 | Throughput / latency · Lưu lượng / độ trễ | Amount processed per unit time versus time taken for an operation or event. / Lượng xử lý mỗi đơn vị thời gian so với thời gian một thao tác hoặc sự kiện mất để đi qua hệ thống. | Separate more capacity from fresher results. / Tách năng lực xử lý khỏi độ mới kết quả. |
+| 08 | Metadata · Dữ liệu mô tả | Information about data, such as schema, owner or load time. / Thông tin mô tả dữ liệu, như schema, owner, thời điểm nạp. | Find and interpret stored records. / Tìm và hiểu dữ liệu đã lưu. |
+| 08 | Schema · Cấu trúc dữ liệu | A description of fields, types and relevant constraints. / Mô tả trường, kiểu và các ràng buộc liên quan. | Compare storage formats and model levels. / So sánh định dạng lưu và mức mô hình. |
+| 08 | Entity / relationship · Thực thể / quan hệ | A business object and an association between objects. / Đối tượng nghiệp vụ và liên kết giữa các đối tượng. | Build customer/order models. / Xây mô hình khách hàng/đơn hàng. |
+| 08 | Retention · Chính sách lưu giữ | Rules for how long or under what conditions data is retained. / Quy tắc giữ dữ liệu trong bao lâu hoặc theo điều kiện nào. | Explain archives, replay and lifecycle. / Giải thích archive, replay, vòng đời. |
+| 09 | Partition · Phân vùng dữ liệu | A split of a dataset processed as part of distributed work. / Một phần dataset được xử lý trong công việc phân tán. | Distinguish task count and data placement. / Tách số task khỏi cách đặt dữ liệu. |
+| 09 | Sum / distinct · Tổng / giá trị phân biệt | Adding values versus counting different values. / Cộng giá trị so với đếm các giá trị khác nhau. | Understand aggregation and cardinality costs. / Hiểu chi phí aggregate và cardinality. |
+| 09 | Transformation / action · Biến đổi / hành động | A plan operation versus an operation that asks Spark to execute work. / Thao tác mô tả kế hoạch so với thao tác yêu cầu Spark thực thi. | Make lazy evaluation observable. / Quan sát lazy evaluation. |
+| 09 | Serialization · Tuần tự hóa | Converting program data to bytes for transport or storage. / Chuyển dữ liệu trong chương trình thành byte để truyền hoặc lưu. | Trace CPU, memory and network costs. / Theo chi phí CPU, bộ nhớ, mạng. |
+| 10 | Event / processing time · Thời gian sự kiện / xử lý | When the event occurred versus when the engine processes it. / Lúc sự kiện xảy ra so với lúc engine xử lý nó. | Explain out-of-order arrival. / Giải thích sự kiện đến sai thứ tự. |
+| 10 | Interval · Khoảng thời gian | A range with explicit boundaries; `[a,b)` includes a and excludes b. / Khoảng có biên rõ; `[a,b)` gồm a, không gồm b. | Assign boundary events to windows consistently. / Gán sự kiện ở biên vào window nhất quán. |
+| 10 | State · Trạng thái lưu lại | Information retained from previous events. / Thông tin được giữ từ các sự kiện trước. | Compute running totals and recover progress. / Tính tổng tích lũy và khôi phục tiến độ. |
+| 10 | Watermark · Mốc tiến độ event time | A signal used to advance event-time processing under a chosen lateness assumption. / Tín hiệu đẩy tiến độ event-time theo giả định độ trễ đã chọn. | Decide when to emit and later clean window state. / Quyết định phát kết quả rồi dọn state của window. |
+| 11 | Primary / foreign key · Khóa chính / ngoại | A row identifier versus a reference to a key in another relation. / Khóa nhận diện dòng so với khóa tham chiếu tới quan hệ khác. | Follow joins without accidental duplication. / Theo join mà không nhân bản ngoài ý muốn. |
+| 11 | Functional dependency · Phụ thuộc hàm | X determines Y when each X value has a single corresponding Y value. / X xác định Y khi mỗi giá trị X có một giá trị Y tương ứng. | Explain 2NF and 3NF beyond memorizing names. / Giải thích 2NF, 3NF thay vì chỉ thuộc tên. |
+| 11 | Grain · Mức chi tiết | The business meaning of one fact row. / Ý nghĩa nghiệp vụ của một dòng fact. | Decide which measurements and joins are valid. / Quyết định phép đo và join phù hợp. |
+| 11 | Effective time · Thời gian hiệu lực | The interval in which a version is valid for the modeled business history. / Khoảng một version có hiệu lực trong lịch sử nghiệp vụ được mô hình hóa. | Join facts to SCD versions and retrieve historical features. / Join fact với SCD version và truy xuất feature lịch sử. |
+| 12 | DAG · Đồ thị có hướng không chu trình | A dependency graph whose directed edges cannot form a cycle. / Đồ thị dependency mà các cạnh có hướng không tạo vòng. | Determine valid task order and parallel work. / Xác định thứ tự task hợp lệ và việc song song. |
+| 12 | Task instance · Lần thực thi task | A particular task's execution within a particular run. / Lần thực thi một task trong một run cụ thể. | Distinguish definitions, status and retry history. / Phân biệt định nghĩa, trạng thái, lịch sử retry. |
+| 12 | Data interval · Khoảng dữ liệu | The time range of data a run is intended to process. / Khoảng thời gian dữ liệu mà run được thiết kế để xử lý. | Separate run time from the data being backfilled. / Tách giờ chạy khỏi dữ liệu được backfill. |
+| 12 | Idempotency · Tính lũy đẳng | Repeating the same operation preserves the intended final effect. / Lặp cùng thao tác vẫn giữ tác động cuối mong muốn. | Make retry and rerun safe for published outputs. / Làm retry/rerun an toàn với đầu ra công bố. |

@@ -1,5 +1,6 @@
 import { Children, useCallback, useEffect, useRef, useState } from 'react';
 import { localStorageStore } from '@/lib/storage';
+import { UI } from '@/content/ui';
 
 /* Chế độ trình chiếu: cùng một nội dung, đổi cách xem từ CUỘN sang TRƯỢT TRÁI PHẢI.
    Xem ADR-0006 để biết vì sao chọn cách này.
@@ -97,12 +98,12 @@ export function LessonDeck({ on, slides, children }: { on: boolean; slides: Slid
       {/* Thanh lái, dính đáy màn hình */}
       <div className="deck-bar">
         <div className="deck-bar__row">
-          <button type="button" className="btn" onClick={() => go(cur - 1)} disabled={cur === 0} aria-label="Mục trước">←</button>
+          <button type="button" className="btn" onClick={() => go(cur - 1)} disabled={cur === 0} aria-label={UI.deck.prev}>←</button>
           <div className="deck-bar__now">
             <span className="mono deck-bar__count">{String(cur + 1).padStart(2, '0')} / {last + 1}</span>
             <span className="deck-bar__label">{s?.label}</span>
           </div>
-          <button type="button" className="btn btn--primary" onClick={() => go(cur + 1)} disabled={cur === last} aria-label="Mục sau">→</button>
+          <button type="button" className="btn btn--primary" onClick={() => go(cur + 1)} disabled={cur === last} aria-label={UI.deck.next}>→</button>
         </div>
         <div className="deck-bar__ticks">
           {slides.slice(0, last + 1).map((sl, i) => (
@@ -119,8 +120,8 @@ export function LessonDeck({ on, slides, children }: { on: boolean; slides: Slid
 export function DeckToggle({ on, onChange }: { on: boolean; onChange: (v: boolean) => void }) {
   return (
     <button type="button" className={'deck-toggle' + (on ? ' is-on' : '')} onClick={() => onChange(!on)}
-      title={on ? 'Chuyển về đọc cuộn' : 'Chuyển sang trình chiếu từng mục'}>
-      {on ? '☰ Cuộn' : '⛶ Trình chiếu'}
+      title={on ? UI.deck.toScroll : UI.deck.toDeck}>
+      {on ? UI.deck.scroll : UI.deck.present}
     </button>
   );
 }

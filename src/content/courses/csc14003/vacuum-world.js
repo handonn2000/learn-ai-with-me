@@ -89,7 +89,7 @@ export function runVacuum(programId, worldId, presetId, steps = STEPS) {
   const snap = () => ({ world: { ...world }, belief: { ...belief }, score: { ...score } });
   const trace = [{
     t: 0, loc: cells[0], percept: null, action: null, gained: null, ...snap(),
-    note: 'Chưa làm gì cả. Đây là sàn nhà lúc bạn vừa bật máy.',
+    noteKey: 'start',
   }];
 
   for (let t = 1; t <= steps; t++) {
@@ -125,30 +125,29 @@ export function runVacuum(programId, worldId, presetId, steps = STEPS) {
 
     trace.push({
       t, loc: cells[idx], percept, action, gained, ...snap(),
-      note: noteFor(action, sucked, moved, cells.length),
+      noteKey: noteFor(action, sucked, moved, cells.length),
     });
   }
 
   return { trace, cells, programId };
 }
 
+/**
+ * Trả KHÓA lời kể, không trả câu. Chữ nằm ở bundle của bài (`T.note`), vì engine mà ôm chữ
+ * thì mỗi ngôn ngữ mới lại phải nhân bản cả engine — xem ADR-0010.
+ */
 function noteFor(action, sucked, moved, n) {
-  if (action === 'Suck') {
-    return sucked
-      ? 'Ô đang bẩn → hút. Sàn sạch thêm một ô.'
-      : 'Hút một ô vốn đã sạch — tốn công, chẳng được điểm rác nào.';
-  }
-  if (moved) return 'Ô này sạch rồi → sang ô bên cạnh xem sao.';
-  if (action === 'Left' || action === 'Right') return 'Đã đụng tường, không đi thêm được.';
-  return n > 2
-    ? 'Sổ tay ghi cả bốn ô đều sạch → đứng yên, khỏi tốn xăng.'
-    : 'Sổ tay ghi cả hai ô đều sạch → đứng yên, khỏi tốn xăng.';
+  if (action === 'Suck') return sucked ? 'suckDirty' : 'suckClean';
+  if (moved) return 'moved';
+  if (action === 'Left' || action === 'Right') return 'wall';
+  return n > 2 ? 'restAll4' : 'restAll2';
 }
 
 /** Điểm cuối của cả hai chương trình trên cùng thế giới + preset — cho bảng so sánh dưới lab. */
 export function compareFinal(worldId, presetId, steps = STEPS) {
   return PROGRAMS.map((p) => {
     const { trace } = runVacuum(p.id, worldId, presetId, steps);
-    return { programId: p.id, name: p.name, score: trace[trace.length - 1].score };
+    // Không trả `name`: đó là chữ hiển thị, UI tự tra từ PROGRAMS theo ngôn ngữ.
+    return { programId: p.id, score: trace[trace.length - 1].score };
   });
 }

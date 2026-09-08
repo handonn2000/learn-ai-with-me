@@ -1,0 +1,602 @@
+[
+  {
+    "lesson": 7,
+    "pages": "4-7",
+    "en": "The order leaves its source",
+    "vi": "Đơn hàng rời hệ thống nguồn",
+    "detail_en": "Trace source → staging → warehouse → marts → users. Explain raw, summary and metadata; quality, security, lineage, metadata management and access control across layers. Relate source quality, CPU/memory limits, extraction speed, volume and format to ingestion design.",
+    "detail_vi": "Theo đơn hàng qua nguồn → staging → warehouse → data mart → người dùng. Giải thích dữ liệu thô, tổng hợp, metadata; chất lượng, bảo mật, lineage, quản lý metadata và quyền truy cập xuyên suốt. Nối chất lượng nguồn, CPU/RAM, tốc độ trích xuất, dung lượng và định dạng với thiết kế ingestion.",
+    "presentation_en": "Annotated architecture diagram and narrative trace",
+    "presentation_vi": "Sơ đồ kiến trúc có chú giải và lời dẫn theo luồng"
+  },
+  {
+    "lesson": 7,
+    "pages": "8-10,15-19",
+    "en": "Different sources, different clocks",
+    "vi": "Mỗi nguồn chạy theo một nhịp",
+    "detail_en": "Files (CSV, JSON, XML, Parquet, images, PDF), local/cloud locations, batch and micro-batch; structured/semi-structured/unstructured data. OLTP and OLAP purpose, operations, access patterns, latency examples and ETL/ELT. Redraw row/column/hybrid layouts; cover system, application, debug, audit, security and network logs from containers, servers and IoT.",
+    "detail_vi": "Tệp CSV, JSON, XML, Parquet, ảnh, PDF; lưu cục bộ/cloud; batch và micro-batch; dữ liệu có cấu trúc, bán cấu trúc, phi cấu trúc. So sánh mục đích, thao tác, cách truy cập, ví dụ độ trễ OLTP/OLAP và ETL/ELT. Vẽ lại lưu theo hàng/cột/hybrid; giải thích log hệ thống, ứng dụng, debug, audit, bảo mật, mạng từ container, server và IoT.",
+    "presentation_en": "Comparison table with worked records and explanatory prose",
+    "presentation_vi": "Bảng so sánh cùng bản ghi minh họa và lời giải thích"
+  },
+  {
+    "lesson": 7,
+    "pages": "11-14",
+    "en": "Capture the change, including the deletion",
+    "vi": "Bắt lấy thay đổi, kể cả bản ghi bị xóa",
+    "detail_en": "Compare timestamp polling, triggers and transaction-log CDC for INSERT/UPDATE/DELETE. Walk through LAST_MODIFIED indexing and soft deletes, audit-table writes and cascading-trigger maintenance, vendor log formats and transaction boundaries. Keep the source-load tradeoff; correct the claim that log-based CDC adds zero load.",
+    "detail_vi": "So sánh polling theo timestamp, trigger và CDC đọc transaction log với INSERT/UPDATE/DELETE. Đi qua index LAST_MODIFIED, soft delete, ghi audit table, bảo trì trigger dây chuyền, định dạng log và ranh giới transaction. Giữ phân tích tải lên nguồn; sửa khẳng định CDC đọc log không tạo thêm tải.",
+    "presentation_en": "Comparison table with worked records and explanatory prose",
+    "presentation_vi": "Bảng so sánh cùng bản ghi minh họa và lời giải thích"
+  },
+  {
+    "lesson": 7,
+    "pages": "20-25",
+    "en": "One event, several destinations",
+    "vi": "Một sự kiện, nhiều nơi nhận",
+    "detail_en": "Revisit the overloaded e-commerce database. Explain producer push, consumer pull, brokers/cluster, Kafka core versus Connect source/sink, Streams and MirrorMaker across two clusters. Preserve ZooKeeper's historical role and add the verified KRaft distinction. Account for the original Kafka use-case diagram.",
+    "detail_vi": "Trở lại cơ sở dữ liệu thương mại điện tử quá tải. Giải thích producer đẩy, consumer kéo, broker/cluster; Kafka core so với Connect source/sink, Streams và MirrorMaker giữa hai cluster. Giữ vai trò lịch sử của ZooKeeper, thêm phân biệt KRaft đã xác minh; diễn giải các nhánh ứng dụng trong hình nguồn.",
+    "presentation_en": "Annotated architecture diagram and narrative trace",
+    "presentation_vi": "Sơ đồ kiến trúc có chú giải và lời dẫn theo luồng"
+  },
+  {
+    "lesson": 7,
+    "pages": "26-29",
+    "en": "A topic becomes parallel lanes",
+    "vi": "Topic tách thành những làn song song",
+    "detail_en": "Define all six core terms: topic, partition, offset, producer, consumer, broker. Compare event/domain/environment topic naming. Show an ordered append log per partition; distinguish per-partition ordering from a global ordering claim.",
+    "detail_vi": "Định nghĩa đủ sáu thuật ngữ topic, partition, offset, producer, consumer, broker. So sánh cách đặt topic theo sự kiện, miền nghiệp vụ và môi trường. Minh họa append log có thứ tự trong từng partition; phân biệt với thứ tự toàn cục.",
+    "presentation_en": "Before/after diagrams with mechanism cards",
+    "presentation_vi": "Sơ đồ trước/sau cùng thẻ giải thích cơ chế"
+  },
+  {
+    "lesson": 7,
+    "pages": "30-35",
+    "en": "More lanes do not mean free speed",
+    "vi": "Thêm làn không đồng nghĩa tốc độ miễn phí",
+    "detail_en": "Explain independent readers, redistribution across brokers, throughput and controller overhead. Preserve the 16-consumer/16-partition example and identify 5–10 MB/s as a source estimate requiring context. Trace partition offsets, consumer position, log end and lag, replay/resume, keyed and unkeyed routing with client/version qualifications.",
+    "detail_vi": "Giải thích reader độc lập, phân phối partition giữa broker, throughput và chi phí controller. Giữ ví dụ 16 consumer/16 partition; đánh dấu 5–10 MB/s là ước lượng của nguồn cần bối cảnh. Theo offset, vị trí consumer, cuối log, lag, replay/resume và định tuyến có/không key với điều kiện client/phiên bản.",
+    "presentation_en": "Comparison table with worked records and explanatory prose",
+    "presentation_vi": "Bảng so sánh cùng bản ghi minh họa và lời giải thích"
+  },
+  {
+    "lesson": 7,
+    "pages": "36",
+    "en": "The readers divide the work",
+    "vi": "Các consumer chia nhau công việc",
+    "detail_en": "Show partition assignment within one consumer group, independent progress across different groups, parallelism and an idle consumer when readers outnumber partitions. Explain why exclusive partition ownership does not eliminate retry duplicates.",
+    "detail_vi": "Minh họa chia partition trong cùng consumer group, tiến độ độc lập giữa các group, tính song song và consumer rảnh khi số reader vượt số partition. Giải thích vì sao một partition chỉ có một consumer phụ trách vẫn không loại bỏ bản ghi trùng do retry.",
+    "presentation_en": "Step player with a persistent HTML trace table",
+    "presentation_vi": "Trình phát từng bước cùng bảng trace HTML luôn đọc được"
+  },
+  {
+    "lesson": 7,
+    "pages": "37",
+    "en": "A broker disappears",
+    "vi": "Một broker biến mất",
+    "detail_en": "Trace leader/follower replication, replication factor, in-sync replicas and election after a leader failure. Connect durability to acknowledgments, replica health and configuration; preserve the failure diagram without promising unconditional no-loss behavior.",
+    "detail_vi": "Theo replication leader/follower, replication factor, ISR và bầu leader khi lỗi. Nối độ bền với acknowledgment, tình trạng replica và cấu hình; dựng lại hình sự cố mà không hứa dữ liệu luôn được bảo toàn vô điều kiện.",
+    "presentation_en": "Annotated architecture diagram and narrative trace",
+    "presentation_vi": "Sơ đồ kiến trúc có chú giải và lời dẫn theo luồng"
+  },
+  {
+    "lesson": 7,
+    "pages": "38-39",
+    "en": "The crash between processing and commit",
+    "vi": "Sự cố giữa xử lý và commit",
+    "detail_en": "Compare at-most-once, at-least-once and exactly-once with a crash timeline. Explain acks=0/1/all, retries, commit-before/after processing, producer idempotence and transactional boundaries. Explicitly repair the repeated heading and distinguish log deduplication from exactly-once external side effects.",
+    "detail_vi": "So sánh at-most-once, at-least-once và exactly-once bằng timeline sự cố. Giải thích acks=0/1/all, retry, commit trước/sau xử lý, producer idempotence và ranh giới transaction. Sửa tiêu đề bị lặp; phân biệt chống trùng trong log với tác động exactly-once ở hệ thống bên ngoài.",
+    "presentation_en": "Failure case, decision tree and explained alternatives",
+    "presentation_vi": "Tình huống sự cố, cây quyết định và các lựa chọn có giải thích"
+  },
+  {
+    "lesson": 7,
+    "pages": "40-43",
+    "en": "The log remembers; Debezium translates",
+    "vi": "Log lưu dấu; Debezium chuyển ngữ",
+    "detail_en": "Compare time retention, size retention and compaction; retain the 7-day/1-GB-per-partition examples as configurations, not universal defaults. Trace database log → Debezium → Kafka → downstream sink. Explain binlog/WAL/redo conversion and preserve the source connector list with support/version caveats.",
+    "detail_vi": "So sánh retention theo thời gian, dung lượng và compaction; giữ ví dụ 7 ngày/1 GB mỗi partition dưới dạng cấu hình minh họa. Theo database log → Debezium → Kafka → sink. Giải thích chuyển đổi binlog/WAL/redo và giữ danh sách connector nguồn kèm lưu ý phiên bản/hỗ trợ.",
+    "presentation_en": "Step player with a persistent HTML trace table",
+    "presentation_vi": "Trình phát từng bước cùng bảng trace HTML luôn đọc được"
+  },
+  {
+    "lesson": 8,
+    "pages": "3-10",
+    "en": "The same bytes need different homes",
+    "vi": "Cùng những byte dữ liệu, những nơi lưu khác nhau",
+    "detail_en": "Explain why storage turns recorded information into a usable asset. Compare file hierarchy/path/NAS, block IDs/disks/SAN and object ID/metadata/data/buckets. Preserve every comparison axis: metadata, structure, latency, scaling, modification, cost and use case; label workload-dependent claims.",
+    "detail_vi": "Giải thích vì sao lưu trữ biến thông tin được ghi lại thành tài sản dùng được. So sánh file hierarchy/path/NAS, block ID/disk/SAN và object ID/metadata/data/bucket. Giữ mọi trục so sánh: metadata, cấu trúc, độ trễ, mở rộng, sửa đổi, chi phí và ứng dụng; nêu điều kiện workload.",
+    "presentation_en": "Comparison table with worked records and explanatory prose",
+    "presentation_vi": "Bảng so sánh cùng bản ghi minh họa và lời giải thích"
+  },
+  {
+    "lesson": 8,
+    "pages": "11-13",
+    "en": "Memory buys time, not permanence",
+    "vi": "Bộ nhớ mua tốc độ, không mua sự vĩnh viễn",
+    "detail_en": "Redraw the latency ladder and distinguish illustrative orders of magnitude from measurements. Compare Redis, Memcached and Hazelcast across latency, partitioning, complex types, performance context, snapshots, replication, pub/sub and workloads. Explain cache durability and capacity tradeoffs.",
+    "detail_vi": "Vẽ lại thang độ trễ, phân biệt bậc độ lớn minh họa với số đo. So sánh Redis, Memcached, Hazelcast theo độ trễ, partitioning, kiểu dữ liệu, bối cảnh hiệu năng, snapshot, replication, pub/sub và ứng dụng. Giải thích đánh đổi dung lượng và độ bền của cache.",
+    "presentation_en": "Comparison table with worked records and explanatory prose",
+    "presentation_vi": "Bảng so sánh cùng bản ghi minh họa và lời giải thích"
+  },
+  {
+    "lesson": 8,
+    "pages": "14-16",
+    "en": "Finding the blocks across machines",
+    "vi": "Tìm các block giữa nhiều máy",
+    "detail_en": "Trace HDFS client metadata requests to NameNode and data access to DataNodes; blocks, permissions, replica locations, heartbeats, block reports and racks. Separate the source's 64-MB example from a verified version default. Explain streaming/tiered storage, historical-read pressure and sink offload; source-system versus storage ownership and lifecycle.",
+    "detail_vi": "Theo yêu cầu metadata đến NameNode và đọc dữ liệu tại DataNode; block, quyền, vị trí replica, heartbeat, block report và rack. Phân biệt ví dụ 64 MB của nguồn với mặc định theo phiên bản đã kiểm. Giải thích streaming/tiered storage, tải đọc lịch sử, sink offload; so sánh quyền sở hữu/vòng đời của source system và storage.",
+    "presentation_en": "Annotated architecture diagram and narrative trace",
+    "presentation_vi": "Sơ đồ kiến trúc có chú giải và lời dẫn theo luồng"
+  },
+  {
+    "lesson": 8,
+    "pages": "17-24",
+    "en": "Stored data is not yet an agreed truth",
+    "vi": "Dữ liệu đã lưu chưa thành sự thật thống nhất",
+    "detail_en": "Explain warehouse/SSOT, data model → related dataset → access control → report flow. Compare conceptual, logical and physical models by purpose, focus, audience and concrete customer/order example; physical models include database-specific types, keys and constraints.",
+    "detail_vi": "Giải thích warehouse/SSOT và luồng data model → dataset có quan hệ → quyền truy cập → báo cáo. So sánh conceptual, logical, physical theo mục đích, trọng tâm, đối tượng và ví dụ customer/order; physical có kiểu dữ liệu, key và constraint theo hệ quản trị.",
+    "presentation_en": "Comparison table with worked records and explanatory prose",
+    "presentation_vi": "Bảng so sánh cùng bản ghi minh họa và lời giải thích"
+  },
+  {
+    "lesson": 8,
+    "pages": "25-26",
+    "en": "Shape the model for the question",
+    "vi": "Tạo hình mô hình theo câu hỏi",
+    "detail_en": "Define fact measurements and descriptive dimensions. Draw a star and its normalized snowflake alternative with subdimensions. Explain joins, duplication and analytical usability; preview the deeper modeling treatment in lesson 11.",
+    "detail_vi": "Định nghĩa phép đo ở fact và thuộc tính mô tả ở dimension. Vẽ star và snowflake chuẩn hóa với subdimension. Giải thích join, lặp dữ liệu và khả năng dùng cho phân tích; nối tới phần đào sâu mô hình ở bài 11.",
+    "presentation_en": "Before/after diagrams with mechanism cards",
+    "presentation_vi": "Sơ đồ trước/sau cùng thẻ giải thích cơ chế"
+  },
+  {
+    "lesson": 8,
+    "pages": "27-31",
+    "en": "A lake keeps possibilities open",
+    "vi": "Data lake giữ lại nhiều khả năng",
+    "detail_en": "Cover native formats, heterogeneous types, horizontal scaling, schema-on-read and raw retention. Trace ETL to ML/reporting and compare lake/warehouse type, format, schema, cost, workload and performance. Explain the Delta Lake bridge without presenting a warehouse as categorically unable to handle semi-structured data.",
+    "detail_vi": "Bao quát định dạng gốc, nhiều kiểu dữ liệu, mở rộng ngang, schema-on-read và giữ raw. Theo ETL tới ML/báo cáo; so sánh lake/warehouse về kiểu, định dạng, schema, chi phí, ứng dụng và hiệu năng. Giải thích cầu nối Delta Lake mà không khẳng định warehouse tuyệt đối không xử lý được dữ liệu bán cấu trúc.",
+    "presentation_en": "Before/after diagrams with mechanism cards",
+    "presentation_vi": "Sơ đồ trước/sau cùng thẻ giải thích cơ chế"
+  },
+  {
+    "lesson": 8,
+    "pages": "32-40",
+    "en": "The lake becomes a swamp",
+    "vi": "Data lake trở thành đầm lầy",
+    "detail_en": "Explain each failure separately: missing metadata, governance, quality, ownership/stewardship, schema documentation and tooling. Connect them to discovery failure, duplication, wasted storage, slower insight, unreliable decisions and compliance exposure. Do not turn the compliance examples into legal advice.",
+    "detail_vi": "Giải thích riêng từng nguyên nhân: thiếu metadata, governance, chất lượng, owner/steward, tài liệu schema và công cụ. Nối với khó tìm dữ liệu, trùng lặp, lãng phí lưu trữ, chậm phân tích, quyết định thiếu tin cậy và rủi ro tuân thủ; ví dụ tuân thủ không phải hướng dẫn pháp lý.",
+    "presentation_en": "Failure case, decision tree and explained alternatives",
+    "presentation_vi": "Tình huống sự cố, cây quyết định và các lựa chọn có giải thích"
+  },
+  {
+    "lesson": 8,
+    "pages": "41-48",
+    "en": "Give every dataset a steward and a trail",
+    "vi": "Mỗi dataset có người phụ trách và dấu vết",
+    "detail_en": "Cover automated catalogs (Glue, Atlas, Amundsen), RBAC/lineage, profiling (GX, Monte Carlo), raw/cleansed/curated zones, Avro/Delta schema evolution, contracts, discovery tags, Airflow/OpenLineage monitoring, freshness/failure alerts, retention and archive/delete policies.",
+    "detail_vi": "Bao quát catalog tự động (Glue, Atlas, Amundsen), RBAC/lineage, profiling (GX, Monte Carlo), vùng raw/cleansed/curated, schema evolution Avro/Delta, contract, tag tìm kiếm, giám sát Airflow/OpenLineage, cảnh báo độ mới/sự cố, retention và archive/delete.",
+    "presentation_en": "Comparison table with worked records and explanatory prose",
+    "presentation_vi": "Bảng so sánh cùng bản ghi minh họa và lời giải thích"
+  },
+  {
+    "lesson": 8,
+    "pages": "49-51",
+    "en": "One foundation, several analytical workloads",
+    "vi": "Một nền tảng cho nhiều kiểu phân tích",
+    "detail_en": "Walk the lakehouse diagram from structured/unstructured/streaming sources through table reliability, schema and versioning to SQL/BI and ML, then analysts, business teams and engineers. Distinguish storage, table format and compute responsibilities.",
+    "detail_vi": "Đi theo hình lakehouse từ nguồn có cấu trúc/phi cấu trúc/streaming qua độ tin cậy của bảng, schema và versioning tới SQL/BI, ML, rồi analyst, nhóm nghiệp vụ và kỹ sư. Tách trách nhiệm của storage, table format và compute.",
+    "presentation_en": "Annotated architecture diagram and narrative trace",
+    "presentation_vi": "Sơ đồ kiến trúc có chú giải và lời dẫn theo luồng"
+  },
+  {
+    "lesson": 8,
+    "pages": "52-57",
+    "en": "Three stages, increasing responsibility",
+    "vi": "Ba tầng, trách nhiệm tăng dần",
+    "detail_en": "Define multi-hop and medallion. Bronze keeps source-shaped data plus load time/process ID, supports CDC archive, audit and replay. Silver cleans/matches/merges/standardizes/integrates with possible 3NF. Gold serves domain-ready, read-optimized star/OBT models, quality rules, analytics and ML. Preserve both batch and streaming paths.",
+    "detail_vi": "Định nghĩa multi-hop và medallion. Bronze giữ cấu trúc nguồn cùng load time/process ID, hỗ trợ CDC archive, audit và replay. Silver làm sạch/match/merge/chuẩn hóa/tích hợp, có thể theo 3NF. Gold phục vụ từng miền bằng star/OBT tối ưu đọc, quy tắc chất lượng, phân tích và ML. Giữ cả batch lẫn streaming.",
+    "presentation_en": "Step player with a persistent HTML trace table",
+    "presentation_vi": "Trình phát từng bước cùng bảng trace HTML luôn đọc được"
+  },
+  {
+    "lesson": 9,
+    "pages": "3-8",
+    "en": "One machine reaches its limit",
+    "vi": "Một máy chạm giới hạn",
+    "detail_en": "Trace the log-processing example: parse logs, count page views and generate reports. Explain storage/compute/reliability limits, distributed scheduler/workers, Spark's languages and batch/streaming/SQL/ML/graph roles. Separate Spark compute from HDFS/S3/Delta/Iceberg/database storage and resource management.",
+    "detail_vi": "Theo ví dụ xử lý log: parse, đếm page view, tạo báo cáo. Giải thích giới hạn storage/compute/độ tin cậy, scheduler/worker phân tán, ngôn ngữ và vai trò batch/streaming/SQL/ML/graph của Spark. Tách compute Spark khỏi HDFS/S3/Delta/Iceberg/database và quản lý tài nguyên.",
+    "presentation_en": "Annotated architecture diagram and narrative trace",
+    "presentation_vi": "Sơ đồ kiến trúc có chú giải và lời dẫn theo luồng"
+  },
+  {
+    "lesson": 9,
+    "pages": "9-16",
+    "en": "A program becomes tasks",
+    "vi": "Chương trình trở thành các task",
+    "detail_en": "Driver/SparkContext, cluster manager, workers, executors, tasks and cache; dataset partition versus task. Walk filter/select/show, lazy plan, application/job/stage/task hierarchy and the full eight-step execution flow. Explain stage boundaries rather than only listing the names.",
+    "detail_vi": "Driver/SparkContext, cluster manager, worker, executor, task và cache; phân biệt partition dữ liệu với task. Theo filter/select/show, lazy plan, phân cấp application/job/stage/task và đủ tám bước thực thi. Giải thích ranh giới stage thay vì chỉ kể tên.",
+    "presentation_en": "Step player with a persistent HTML trace table",
+    "presentation_vi": "Trình phát từng bước cùng bảng trace HTML luôn đọc được"
+  },
+  {
+    "lesson": 9,
+    "pages": "17-30",
+    "en": "Two ways to describe distributed data",
+    "vi": "Hai cách mô tả dữ liệu phân tán",
+    "detail_en": "RDD partitions/lineage/recomputation and SparkSession/SparkContext/local[*]/parallelize with two partitions. DataFrame row/column/schema/immutability and source support; compare APIs. Reconstruct image code for createDataFrame, toDF, CSV header, JSON and JDBC URL/driver/dbtable/options, with readable output tables.",
+    "detail_vi": "RDD partition/lineage/tái tính; SparkSession/SparkContext/local[*]/parallelize với hai partition. DataFrame row/column/schema/immutability và nguồn hỗ trợ; so sánh API. Dựng lại code trong ảnh: createDataFrame, toDF, CSV header, JSON, JDBC URL/driver/dbtable/options, kèm bảng kết quả đọc được.",
+    "presentation_en": "Readable code, input/output tables and line-by-line commentary",
+    "presentation_vi": "Code đọc được, bảng input/output và chú giải từng dòng"
+  },
+  {
+    "lesson": 9,
+    "pages": "31-41",
+    "en": "Objects cross the network as bytes",
+    "vi": "Object đi qua mạng dưới dạng byte",
+    "detail_en": "Explain serialization/deserialization at shuffle, caching and transfer, and CPU/RAM/network costs. Compare Java and Kryo, configuration before context creation, class registration and buffer considerations. Annotate the original setup example with JVM versus Python scope.",
+    "detail_vi": "Giải thích serialization/deserialization khi shuffle, cache và truyền dữ liệu; chi phí CPU/RAM/mạng. So sánh Java/Kryo, cấu hình trước khi tạo context, đăng ký class và bộ đệm. Chú giải ví dụ cấu hình gốc với phạm vi JVM so với Python.",
+    "presentation_en": "Readable code, input/output tables and line-by-line commentary",
+    "presentation_vi": "Code đọc được, bảng input/output và chú giải từng dòng"
+  },
+  {
+    "lesson": 9,
+    "pages": "42-53",
+    "en": "Remember what is worth reusing",
+    "vi": "Giữ lại phần đáng dùng lại",
+    "detail_en": "Disk versus RAM, lazy cache materialization, cache/persist and all five source storage choices: MEMORY_ONLY, MEMORY_AND_DISK, MEMORY_ONLY_SER, MEMORY_AND_DISK_SER, DISK_ONLY. Show recompute versus disk fallback and serialized versus deserialized tradeoffs; RDD/DataFrame/Python differences, reuse decisions and unpersist.",
+    "detail_vi": "Disk so với RAM, cache chỉ vật hóa khi thực thi, cache/persist và đủ năm lựa chọn nguồn: MEMORY_ONLY, MEMORY_AND_DISK, MEMORY_ONLY_SER, MEMORY_AND_DISK_SER, DISK_ONLY. Minh họa tái tính so với disk fallback, serialized/deserialized; phân biệt RDD/DataFrame/Python, quyết định tái dùng và unpersist.",
+    "presentation_en": "Parameter controls, diagram and computed results",
+    "presentation_vi": "Điều chỉnh tham số, sơ đồ và kết quả được tính"
+  },
+  {
+    "lesson": 9,
+    "pages": "54-62",
+    "en": "The slowest partition sets the pace",
+    "vi": "Partition chậm nhất quyết định nhịp",
+    "detail_en": "Teach skew (700M/10M/8M/12M rows), shuffle explosion, high cardinality, wide schemas and schema evolution independently. Explain groupBy/join/distinct/repartition, spill and network pressure; retain the day-1/day-30 schema example and show why more machines do not remove a hot key.",
+    "detail_vi": "Dạy riêng skew (700M/10M/8M/12M dòng), shuffle explosion, high cardinality, wide schema và schema evolution. Giải thích groupBy/join/distinct/repartition, spill và áp lực mạng; giữ ví dụ schema ngày 1/ngày 30, chỉ ra vì sao thêm máy không xóa được hot key.",
+    "presentation_en": "Failure case, decision tree and explained alternatives",
+    "presentation_vi": "Tình huống sự cố, cây quyết định và các lựa chọn có giải thích"
+  },
+  {
+    "lesson": 9,
+    "pages": "63-67",
+    "en": "Move the filter before the traffic jam",
+    "vi": "Đưa bộ lọc lên trước chỗ tắc",
+    "detail_en": "Trace logical plan, analysis, optimized logical plan and physical plan. Reconstruct both source query diagrams and SQL, including t1/t2 join, t2.id threshold, projection and sum. Animate legal filter pushdown and explain assumptions for preserving query results.",
+    "detail_vi": "Theo logical plan, analysis, optimized logical plan và physical plan. Dựng lại cả hai sơ đồ và SQL nguồn, gồm join t1/t2, ngưỡng t2.id, projection và sum. Minh họa filter pushdown hợp lệ và điều kiện giữ nguyên kết quả truy vấn.",
+    "presentation_en": "Before/after diagrams with mechanism cards",
+    "presentation_vi": "Sơ đồ trước/sau cùng thẻ giải thích cơ chế"
+  },
+  {
+    "lesson": 9,
+    "pages": "68-74",
+    "en": "A faster engine beneath the plan",
+    "vi": "Bộ máy nhanh hơn bên dưới kế hoạch",
+    "detail_en": "Tungsten binary layout, Java-object/GC overhead, optional off-heap memory, cache-aware access (L1/L2/L3/RAM) and whole-stage code generation. Distinguish latency illustrations from speedup guarantees. AQE uses runtime statistics to switch joins, coalesce shuffle partitions and split skewed joins.",
+    "detail_vi": "Tungsten binary layout, chi phí Java object/GC, off-heap tùy cấu hình, truy cập phù hợp cache (L1/L2/L3/RAM) và whole-stage code generation. Phân biệt minh họa độ trễ với cam kết tăng tốc. AQE dùng thống kê runtime để đổi join, gộp shuffle partition và chia skewed join.",
+    "presentation_en": "Annotated architecture diagram and narrative trace",
+    "presentation_vi": "Sơ đồ kiến trúc có chú giải và lời dẫn theo luồng"
+  },
+  {
+    "lesson": 9,
+    "pages": "75-83",
+    "en": "Tune the work before adding machines",
+    "vi": "Chỉnh công việc trước khi thêm máy",
+    "detail_en": "Partition count versus spill/scheduling overhead; early filtering, broadcast hash joins, pre-aggregation; identify/isolate/salt/merge heavy keys. Approximate distinct versus exact counts, early projection, Parquet/ORC column pruning versus CSV, schema enforcement/evolution with Delta/Iceberg.",
+    "detail_vi": "Số partition so với spill/chi phí scheduling; lọc sớm, broadcast hash join, pre-aggregation; tìm/tách/salt/gộp heavy key. Đếm distinct xấp xỉ so với chính xác, projection sớm, column pruning Parquet/ORC so với CSV, schema enforcement/evolution bằng Delta/Iceberg.",
+    "presentation_en": "Parameter controls, diagram and computed results",
+    "presentation_vi": "Điều chỉnh tham số, sơ đồ và kết quả được tính"
+  },
+  {
+    "lesson": 9,
+    "pages": "84-88",
+    "en": "Read the traces left by a job",
+    "vi": "Đọc dấu vết của một job",
+    "detail_en": "Explain Spark UI active/pending/completed stages, duration, tasks and shuffle. Dynamic allocation scales executors using backlog and idle signals; retain 1s/60s as version-qualified values. Compaction via coalesce/repartition/Delta OPTIMIZE, file-open overhead and periodic maintenance; distinguish preserved logical records from physical byte-size changes.",
+    "detail_vi": "Giải thích Spark UI với stage đang chạy/chờ/xong, thời lượng, task và shuffle. Dynamic allocation đổi số executor theo backlog/idle; giữ 1s/60s có điều kiện phiên bản. Compaction bằng coalesce/repartition/Delta OPTIMIZE, chi phí mở file và bảo trì định kỳ; phân biệt giữ nguyên bản ghi logic với thay đổi byte vật lý.",
+    "presentation_en": "Comparison table with worked records and explanatory prose",
+    "presentation_vi": "Bảng so sánh cùng bản ghi minh họa và lời giải thích"
+  },
+  {
+    "lesson": 10,
+    "pages": "3-12",
+    "en": "A computation with no final record",
+    "vi": "Phép tính không có bản ghi cuối",
+    "detail_en": "Bounded/unbounded streams; filtering, enrichment, aggregation and routing. JobManager/TaskManager/slots, shared CPU versus managed memory, operator/subtask/parallelism with 3-slot and 4-subtask examples. Execution graph, task assignment, monitoring, checkpoint completion and source rewind after failure.",
+    "detail_vi": "Stream bounded/unbounded; filter, enrich, aggregate và route. JobManager/TaskManager/slot, CPU dùng chung so với managed memory, operator/subtask/parallelism với ví dụ 3 slot và 4 subtask. Execution graph, phân task, giám sát, checkpoint hoàn tất và tua nguồn khi lỗi.",
+    "presentation_en": "Annotated architecture diagram and narrative trace",
+    "presentation_vi": "Sơ đồ kiến trúc có chú giải và lời dẫn theo luồng"
+  },
+  {
+    "lesson": 10,
+    "pages": "13-22",
+    "en": "The event has more than one clock",
+    "vi": "Sự kiện có nhiều hơn một chiếc đồng hồ",
+    "detail_en": "Processing, ingestion and event time; timestamp extraction, watermark generation and downstream progress. Retain 00:58−5s=00:53 and 01:05−5s=01:00; monotonous, bounded and custom strategies; 10:01:20−10s=10:01:10. Explain out-of-order tolerance, measurement tradeoffs and that watermarks are progress assumptions, not proof of completeness.",
+    "detail_vi": "Processing, ingestion, event time; lấy timestamp, tạo watermark và tiến độ downstream. Giữ 00:58−5s=00:53, 01:05−5s=01:00; chiến lược monotonous, bounded, custom; 10:01:20−10s=10:01:10. Giải thích out-of-order tolerance, đánh đổi đo lường và watermark là giả định tiến độ, không phải chứng minh đủ sự kiện.",
+    "presentation_en": "Step player with a persistent HTML trace table",
+    "presentation_vi": "Trình phát từng bước cùng bảng trace HTML luôn đọc được"
+  },
+  {
+    "lesson": 10,
+    "pages": "23-32",
+    "en": "Cut a moving stream into windows",
+    "vi": "Chia dòng đang chảy thành cửa sổ",
+    "detail_en": "Tumbling, sliding, session and global windows, size/slide/inactivity gaps and event membership. Preserve revenue/hour, rolling 10-minute/1-minute, clickstream and 100-event examples. Separate window assignment, trigger firing, emission and state cleanup; explain time-domain-dependent defaults and global trigger behavior.",
+    "detail_vi": "Tumbling, sliding, session, global; size/slide/inactivity gap và sự kiện thuộc cửa sổ nào. Giữ ví dụ doanh thu/giờ, rolling 10 phút/bước 1 phút, clickstream, 100 sự kiện. Tách chia window, trigger, phát kết quả, dọn state; giải thích default theo time domain và trigger global.",
+    "presentation_en": "Parameter controls, diagram and computed results",
+    "presentation_vi": "Điều chỉnh tham số, sơ đồ và kết quả được tính"
+  },
+  {
+    "lesson": 10,
+    "pages": "33-40",
+    "en": "The missing event arrives after the result",
+    "vi": "Sự kiện thiếu đến sau kết quả",
+    "detail_en": "Compare drop, allowed lateness and side output, including corrected count 3→4. Redraw the 10s disorder/15s lateness timeline with an explicit watermark at every arrival. Explain collecting/waiting/deleted states, repeated emissions, audit/reprocessing/alerts/DLQ and downstream upserts. Keep the latency/memory/correctness comparison with qualified costs.",
+    "detail_vi": "So sánh drop, allowed lateness, side output, gồm kết quả sửa 3→4. Vẽ lại timeline disorder 10s/lateness 15s với watermark rõ ở mỗi lần đến. Giải thích trạng thái collecting/waiting/deleted, phát lại kết quả, audit/reprocessing/alert/DLQ và upsert downstream. Giữ bảng đánh đổi độ trễ/bộ nhớ/độ đúng có điều kiện.",
+    "presentation_en": "Step player with a persistent HTML trace table",
+    "presentation_vi": "Trình phát từng bước cùng bảng trace HTML luôn đọc được"
+  },
+  {
+    "lesson": 10,
+    "pages": "41-50",
+    "en": "Several languages describe the flow",
+    "vi": "Nhiều ngôn ngữ mô tả cùng dòng dữ liệu",
+    "detail_en": "DataStream, Table API, SQL and the agenda's ProcessFunction. Explain map/filter/flatMap/keyBy/window/aggregate/union/connect; dynamic tables, parser/optimizer/planner and interoperability. Rebuild Java/Python/SQL examples, source schema/WATERMARK, TUMBLE/HOP/SESSION; correct the undefined window_start and qualify equivalent-plan claims.",
+    "detail_vi": "DataStream, Table API, SQL và ProcessFunction trên agenda. Giải thích map/filter/flatMap/keyBy/window/aggregate/union/connect; dynamic table, parser/optimizer/planner và chuyển đổi API. Dựng lại ví dụ Java/Python/SQL, schema/WATERMARK, TUMBLE/HOP/SESSION; sửa window_start chưa định nghĩa và điều kiện khẳng định kế hoạch tương đương.",
+    "presentation_en": "Readable code, input/output tables and line-by-line commentary",
+    "presentation_vi": "Code đọc được, bảng input/output và chú giải từng dòng"
+  },
+  {
+    "lesson": 10,
+    "pages": "51-57",
+    "en": "Each key carries a memory",
+    "vi": "Mỗi key mang một phần ký ức",
+    "detail_en": "Explain running counts, failed logins, hourly revenue, sessions and fraud history. Walk event→read state→compute→write state→emit. Keyed versus operator state, source offsets, and the agenda-only window-state/scaling topics; verify PyFlink support before presenting a limitation as current.",
+    "detail_vi": "Giải thích running count, login lỗi, doanh thu theo giờ, session và lịch sử gian lận. Đi qua event→đọc state→tính→ghi state→emit. Keyed so với operator state, source offset và các mục window state/scaling mới chỉ được nêu; kiểm hỗ trợ PyFlink trước khi coi hạn chế là hiện hành.",
+    "presentation_en": "Annotated architecture diagram and narrative trace",
+    "presentation_vi": "Sơ đồ kiến trúc có chú giải và lời dẫn theo luồng"
+  },
+  {
+    "lesson": 10,
+    "pages": "58-61",
+    "en": "Recover a consistent past",
+    "vi": "Khôi phục một quá khứ nhất quán",
+    "detail_en": "Checkpoint versus code backup; barrier injection, snapshots, async durable writes and all-task acknowledgments. Restore source positions and operator state from the latest completed checkpoint. Add explicit multi-input barrier coordination and source/sink conditions to explain the exactly-once promise made in the agenda.",
+    "detail_vi": "Checkpoint so với sao lưu code; chèn barrier, snapshot, ghi bền bất đồng bộ và acknowledgment của mọi task. Khôi phục vị trí nguồn/state từ checkpoint hoàn tất gần nhất. Bổ sung phối hợp barrier nhiều input và điều kiện source/sink để giải thích cam kết exactly-once trên agenda.",
+    "presentation_en": "Step player with a persistent HTML trace table",
+    "presentation_vi": "Trình phát từng bước cùng bảng trace HTML luôn đọc được"
+  },
+  {
+    "lesson": 10,
+    "pages": "62-67",
+    "en": "Remove the handoffs that do no work",
+    "vi": "Bỏ những lần chuyển giao không tạo giá trị",
+    "detail_en": "Cover watermark, chaining, memory and backpressure tuning categories. Contrast independent network/buffer/serialization/thread steps with compatible chained operators. Explain disableChaining/startNewChain for debugging, profiling and isolation; separate chain boundaries from slot-sharing/resource isolation.",
+    "detail_vi": "Bao quát nhóm tuning watermark, chaining, memory và backpressure. So sánh bước network/buffer/serialization/thread riêng với operator chain tương thích. Giải thích disableChaining/startNewChain cho debug, profiling, isolation; phân biệt ranh giới chain với slot-sharing/tách tài nguyên.",
+    "presentation_en": "Step player with a persistent HTML trace table",
+    "presentation_vi": "Trình phát từng bước cùng bảng trace HTML luôn đọc được"
+  },
+  {
+    "lesson": 10,
+    "pages": "68-71",
+    "en": "The bottleneck pushes upstream",
+    "vi": "Điểm nghẽn đẩy ngược về nguồn",
+    "detail_en": "Trace slow downstream→full buffers→upstream throttling, queue/latency effects and protection limits. Explain UI pressure levels while checking downstream busy operators rather than assuming the first HIGH node is the cause. Evaluate per-operator parallelism, async I/O and RocksDB cache tuning from measured bottlenecks.",
+    "detail_vi": "Theo downstream chậm→buffer đầy→upstream giảm tốc; ảnh hưởng queue/latency và giới hạn bảo vệ. Giải thích mức pressure trên UI, kiểm operator bận phía sau thay vì mặc định node HIGH đầu là nguyên nhân. Đánh giá parallelism từng operator, async I/O, RocksDB cache theo đo lường.",
+    "presentation_en": "Parameter controls, diagram and computed results",
+    "presentation_vi": "Điều chỉnh tham số, sơ đồ và kết quả được tính"
+  },
+  {
+    "lesson": 10,
+    "pages": "72-73",
+    "en": "Choose the failure boundary",
+    "vi": "Chọn ranh giới ảnh hưởng của sự cố",
+    "detail_en": "Compare shared session deployments with dedicated application deployments: isolation, resource sharing, startup/lifecycle and development/production tradeoffs. Preserve the source's recommendation as a recommendation, not a rule that session clusters cannot run production. Close with an end-to-end event-time design.",
+    "detail_vi": "So sánh session dùng chung với application riêng: isolation, chia sẻ tài nguyên, khởi động/vòng đời, đánh đổi phát triển/vận hành. Giữ khuyến nghị nguồn dưới dạng khuyến nghị, không coi session cluster bị cấm trong production. Kết bằng thiết kế event-time xuyên suốt.",
+    "presentation_en": "Step player with a persistent HTML trace table",
+    "presentation_vi": "Trình phát từng bước cùng bảng trace HTML luôn đọc được"
+  },
+  {
+    "lesson": 11,
+    "pages": "3-7",
+    "en": "A warehouse answers a different question",
+    "vi": "Warehouse trả lời một câu hỏi khác",
+    "detail_en": "Warehouse, SSOT, source/staging/raw/summary/metadata/marts/users and ETL. Compare ER versus dimensional modeling by workload, goals and examples, clarifying that a warehouse is still a database system and does not replace transactional responsibilities.",
+    "detail_vi": "Warehouse, SSOT, source/staging/raw/summary/metadata/mart/user và ETL. So sánh ER với dimensional theo workload, mục tiêu, ví dụ; làm rõ warehouse vẫn là hệ thống dữ liệu và không thay trách nhiệm giao dịch hằng ngày.",
+    "presentation_en": "Annotated architecture diagram and narrative trace",
+    "presentation_vi": "Sơ đồ kiến trúc có chú giải và lời dẫn theo luồng"
+  },
+  {
+    "lesson": 11,
+    "pages": "8-15",
+    "en": "Separate entities without losing the order",
+    "vi": "Tách thực thể mà không làm mất đơn hàng",
+    "detail_en": "Entities/attributes/relationships; 1NF atomicity and repeating groups; 2NF composite/candidate keys and partial dependencies; 3NF transitive dependencies. Rebuild product-list and phone examples, then Order_Detail→Customers/Products/Orders/OrderItems with keys, rows and joins. Flag the source's changed quantity instead of silently copying inconsistent data.",
+    "detail_vi": "Entity/attribute/relationship; 1NF giá trị nguyên tử và nhóm lặp; 2NF composite/candidate key, phụ thuộc bộ phận; 3NF phụ thuộc bắc cầu. Dựng lại ví dụ danh sách sản phẩm/số điện thoại rồi Order_Detail→Customers/Products/Orders/OrderItems cùng key, dòng, join. Ghi nhận quantity đổi trong nguồn thay vì chép dữ liệu mâu thuẫn.",
+    "presentation_en": "Readable code, input/output tables and line-by-line commentary",
+    "presentation_vi": "Code đọc được, bảng input/output và chú giải từng dòng"
+  },
+  {
+    "lesson": 11,
+    "pages": "16-22",
+    "en": "Declare what one row means",
+    "vi": "Nói rõ một dòng đại diện cho điều gì",
+    "detail_en": "Dimensional objectives and consumption outputs: facts, dimensions, aggregates, analytical views. Explain grain, foreign keys, measures, date dimensions and filtering/grouping/hierarchies. Preserve sales 500+700=1,200 and inventory 100/80/120: sum 300 is inappropriate, ending 120 or average 100 fits the question. Rebuild fact/dimension examples.",
+    "detail_vi": "Mục tiêu dimensional và đầu ra consumption: fact, dimension, aggregate, analytical view. Giải thích grain, foreign key, measure, date dimension, filter/group/hierarchy. Giữ doanh thu 500+700=1.200 và tồn kho 100/80/120: cộng 300 không phù hợp; tồn cuối 120 hoặc trung bình 100 tùy câu hỏi. Dựng lại ví dụ fact/dimension.",
+    "presentation_en": "Comparison table with worked records and explanatory prose",
+    "presentation_vi": "Bảng so sánh cùng bản ghi minh họa và lời giải thích"
+  },
+  {
+    "lesson": 11,
+    "pages": "23-25",
+    "en": "The shape changes the joins",
+    "vi": "Hình dạng mô hình thay đổi phép join",
+    "detail_en": "Star query workflow, sensor/machine/location/time example and customer→city→state→country snowflake. Compare joins, storage, usability, hierarchy and maintenance; show performance as a workload tradeoff rather than a guaranteed ordering.",
+    "detail_vi": "Luồng query star, ví dụ sensor/machine/location/time và snowflake customer→city→state→country. So sánh join, lưu trữ, khả năng sử dụng, phân cấp và bảo trì; coi hiệu năng là đánh đổi theo workload thay vì thứ hạng tuyệt đối.",
+    "presentation_en": "Before/after diagrams with mechanism cards",
+    "presentation_vi": "Sơ đồ trước/sau cùng thẻ giải thích cơ chế"
+  },
+  {
+    "lesson": 11,
+    "pages": "26-34",
+    "en": "A customer changes; history must choose",
+    "vi": "Khách hàng thay đổi; lịch sử cần một chính sách",
+    "detail_en": "Cover every supplied SCD type: 0, 1, 2, 3, 4, 6. Preserve Peter Pan GBP→USD, natural/surrogate keys, effective dates, current/previous values, history table and active/delete flag semantics. Trace historical fact joins and Type 6 current-value overwrite across versions. Explain the source's own Type 1 usage inconsistency and Type 4 naming context.",
+    "detail_vi": "Bao quát đủ SCD 0, 1, 2, 3, 4, 6. Giữ Peter Pan GBP→USD, natural/surrogate key, ngày hiệu lực, current/previous, history table và ý nghĩa active/delete flag. Theo join fact lịch sử và Type 6 ghi đè giá trị hiện tại trên các version. Giải thích mâu thuẫn về Type 1 và bối cảnh cách gọi Type 4 trong nguồn.",
+    "presentation_en": "Parameter controls, diagram and computed results",
+    "presentation_vi": "Điều chỉnh tham số, sơ đồ và kết quả được tính"
+  },
+  {
+    "lesson": 11,
+    "pages": "35-38",
+    "en": "Keep business keys and history apart",
+    "vi": "Tách business key khỏi lịch sử thuộc tính",
+    "detail_en": "Explain Data Vault motivation under schema change/multiple sources; hubs, links, satellites, load dates and source provenance. Rebuild customer/order/product hubs, order-customer/order-product links and name/address/price/category/status/amount satellites. Position this integration model relative to consumption models.",
+    "detail_vi": "Giải thích Data Vault khi schema đổi/nhiều nguồn; hub, link, satellite, load date và nguồn gốc. Dựng lại hub customer/order/product, link order-customer/order-product, satellite name/address/price/category/status/amount. Đặt mô hình tích hợp này trong quan hệ với mô hình phục vụ phân tích.",
+    "presentation_en": "Annotated architecture diagram and narrative trace",
+    "presentation_vi": "Sơ đồ kiến trúc có chú giải và lời dẫn theo luồng"
+  },
+  {
+    "lesson": 11,
+    "pages": "39-42",
+    "en": "Two routes toward shared business meaning",
+    "vi": "Hai con đường tới ý nghĩa nghiệp vụ thống nhất",
+    "detail_en": "Inmon top-down normalized enterprise warehouse and derived marts versus Kimball dimensional delivery, conformed dimensions and integration. Compare delivery time, consistency, cost and organizational fit. Map bronze/silver/gold to raw, cleaned/3NF/Vault and star/snowflake with every supplied naming convention.",
+    "detail_vi": "Inmon top-down với enterprise warehouse chuẩn hóa và mart dẫn xuất; Kimball triển khai dimensional, conformed dimension và tích hợp. So sánh tốc độ giao, nhất quán, chi phí, phù hợp tổ chức. Nối bronze/silver/gold với raw, cleaned/3NF/Vault, star/snowflake và đủ quy ước đặt tên trong nguồn.",
+    "presentation_en": "Comparison table with worked records and explanatory prose",
+    "presentation_vi": "Bảng so sánh cùng bản ghi minh họa và lời giải thích"
+  },
+  {
+    "lesson": 11,
+    "pages": "43-45",
+    "en": "Read columns to answer large questions",
+    "vi": "Đọc theo cột để trả lời câu hỏi lớn",
+    "detail_en": "Columnar storage, vectorized execution and distributed queries; reproduce the four-pair vector addition with a qualified SIMD explanation. Compare OLTP/OLAP users, operations, row counts, freshness, schemas, response-time examples and engines, including Druid and Doris.",
+    "detail_vi": "Lưu theo cột, vectorized execution, truy vấn phân tán; dựng lại cộng bốn cặp số với giải thích SIMD có điều kiện. So sánh người dùng, thao tác, số dòng, độ mới, schema, ví dụ thời gian phản hồi và engine OLTP/OLAP, gồm Druid và Doris.",
+    "presentation_en": "Annotated architecture diagram and narrative trace",
+    "presentation_vi": "Sơ đồ kiến trúc có chú giải và lời dẫn theo luồng"
+  },
+  {
+    "lesson": 11,
+    "pages": "46-54",
+    "en": "Two engines, different serving priorities",
+    "vi": "Hai engine, những ưu tiên phục vụ khác nhau",
+    "detail_en": "ClickHouse nodes, vectorized execution/cache, column blocks, object storage and coordination metadata; ZooKeeper versus Keeper and deployment variation. Pinot schema/dimension/metric/time columns; real-time, offline segment uploads and hybrid queries. Preserve all comparison axes while qualifying latency/freshness/throughput claims.",
+    "detail_vi": "ClickHouse node, vectorized execution/cache, column block, object storage, metadata điều phối; ZooKeeper so với Keeper và khác biệt triển khai. Pinot schema/dimension/metric/time column; real-time, tải offline segment và hybrid query. Giữ mọi trục so sánh, nêu điều kiện cho độ trễ/độ mới/throughput.",
+    "presentation_en": "Readable code, input/output tables and line-by-line commentary",
+    "presentation_vi": "Code đọc được, bảng input/output và chú giải từng dòng"
+  },
+  {
+    "lesson": 11,
+    "pages": "55-62",
+    "en": "A model needs the past as it was",
+    "vi": "Mô hình cần quá khứ đúng như từng tồn tại",
+    "detail_en": "Fraud transaction fields and behavioral features; training/serving mismatch in filters, rounding/nulls and duplicated team logic (45.73/46/47.10). Explain ingestion, offline/online store, training/serving retrieval, static/contextual/critical freshness and cost. Add a clearly labeled Feast bridge for the agenda-only practical: entities, views, point-in-time retrieval, materialization and online lookup.",
+    "detail_vi": "Các trường giao dịch gian lận và feature hành vi; lệch training/serving do filter, rounding/null và logic lặp giữa nhóm (45.73/46/47.10). Giải thích ingestion, offline/online store, truy xuất training/serving, độ mới static/contextual/critical và chi phí. Bổ sung Feast có nhãn rõ cho practical mới có tên trên agenda: entity, view, point-in-time retrieval, materialization, online lookup.",
+    "presentation_en": "Parameter controls, diagram and computed results",
+    "presentation_vi": "Điều chỉnh tham số, sơ đồ và kết quả được tính"
+  },
+  {
+    "lesson": 12,
+    "pages": "3-10",
+    "en": "Three correct clocks produce one wrong report",
+    "vi": "Ba chiếc đồng hồ đúng tạo một báo cáo sai",
+    "detail_en": "Replay extract at 02:00, transform at 03:00, load at 04:00 with extraction delayed to 03:20. Explain dependencies, safe blocking and parallel customer/order extraction. Define orchestration as coordination and show state, scheduling and fault-tolerance responsibilities.",
+    "detail_vi": "Phát lại extract 02:00, transform 03:00, load 04:00 khi extract trễ đến 03:20. Giải thích dependency, chặn an toàn, trích customer/order song song. Định nghĩa orchestration là điều phối; minh họa trách nhiệm state, scheduling, fault tolerance.",
+    "presentation_en": "Step player with a persistent HTML trace table",
+    "presentation_vi": "Trình phát từng bước cùng bảng trace HTML luôn đọc được"
+  },
+  {
+    "lesson": 12,
+    "pages": "11-14",
+    "en": "A run needs a memory and a recovery path",
+    "vi": "Mỗi lần chạy cần ký ức và đường phục hồi",
+    "detail_en": "Time/manual/data-availability/event triggers; queued/running/success/failed/skipped/retrying states. Retry, logs, alerts, manual reruns and downstream blocking; resource coordination when 100 tasks hit the same database. Distinguish scheduling a run from coordinating its tasks.",
+    "detail_vi": "Trigger theo thời gian/thủ công/dữ liệu sẵn/sự kiện; state queued/running/success/failed/skipped/retrying. Retry, log, alert, chạy lại thủ công, chặn downstream; điều phối khi 100 task cùng truy vấn database. Phân biệt lên lịch một run với điều phối task trong run.",
+    "presentation_en": "Step player with a persistent HTML trace table",
+    "presentation_vi": "Trình phát từng bước cùng bảng trace HTML luôn đọc được"
+  },
+  {
+    "lesson": 12,
+    "pages": "15-17",
+    "en": "A timer cannot judge readiness",
+    "vi": "Bộ hẹn giờ không biết dữ liệu đã sẵn sàng",
+    "detail_en": "Cron purpose and limitations: dependencies, DAGs, centralized metadata and recovery. Add explicitly sourced bridges for agenda-only idempotency, backfill and dynamic pipelines; distinguish retry/rerun/backfill, logical data intervals and duplicate-safe writes.",
+    "detail_vi": "Mục đích/hạn chế cron: dependency, DAG, metadata tập trung, phục hồi. Bổ sung có nguồn rõ cho idempotency, backfill và dynamic pipeline mới có tên trên agenda; phân biệt retry/rerun/backfill, khoảng dữ liệu logic và ghi không nhân bản kết quả.",
+    "presentation_en": "Failure case, decision tree and explained alternatives",
+    "presentation_vi": "Tình huống sự cố, cây quyết định và các lựa chọn có giải thích"
+  },
+  {
+    "lesson": 12,
+    "pages": "18-24",
+    "en": "A DAG is a plan; a run is an event",
+    "vi": "DAG là kế hoạch; run là lần thực hiện",
+    "detail_en": "Airflow capabilities and non-goals; DAG direction/acyclicity, task, DAG Run and Task Instance. Trace DAG files, scheduler, executor, workers, metadata and UI, preserving the source architecture while labeling its version assumptions and adding the current execution-API distinction.",
+    "detail_vi": "Khả năng/giới hạn Airflow; DAG có hướng/không chu trình, task, DAG Run, Task Instance. Theo DAG file, scheduler, executor, worker, metadata và UI; giữ kiến trúc nguồn với giả định phiên bản và phân biệt execution API hiện hành.",
+    "presentation_en": "Annotated architecture diagram and narrative trace",
+    "presentation_vi": "Sơ đồ kiến trúc có chú giải và lời dẫn theo luồng"
+  },
+  {
+    "lesson": 12,
+    "pages": "25-29",
+    "en": "Tasks exchange references, not whole datasets",
+    "vi": "Task trao địa chỉ, không trao cả dataset",
+    "detail_en": "Explain Python/Bash/SQL/S3 sensor/Docker/HTTP/email operators, TaskFlow decorator, file/table/API/workflow readiness sensors. Reconstruct image snippets and correct the FileSensor caption. Explain task isolation, XCom push/pull, paths/counts/model IDs and default-backend small-value boundaries.",
+    "detail_vi": "Giải thích operator Python/Bash/SQL/S3 sensor/Docker/HTTP/email, TaskFlow decorator, sensor chờ file/table/API/workflow. Dựng lại code ảnh và sửa chú thích FileSensor. Giải thích task isolation, XCom push/pull, path/count/model ID và giới hạn giá trị nhỏ của backend mặc định.",
+    "presentation_en": "Readable code, input/output tables and line-by-line commentary",
+    "presentation_vi": "Code đọc được, bảng input/output và chú giải từng dòng"
+  },
+  {
+    "lesson": 12,
+    "pages": "30-38",
+    "en": "Protect the systems beneath the scheduler",
+    "vi": "Bảo vệ hệ thống bên dưới scheduler",
+    "detail_en": "Variables versus Connections, credential handling; Sequential/Local/Celery/Kubernetes executor scope and version support. Concurrency examples 200 tasks, parallelism=64, max_active_runs=1 and pool=5; distinguish task/run/resource limits. UI/grid/logs, alerts, Grafana/Datadog trends and queues.",
+    "detail_vi": "Variables so với Connections, xử lý credential; phạm vi/phiên bản executor Sequential/Local/Celery/Kubernetes. Ví dụ 200 task, parallelism=64, max_active_runs=1, pool=5; phân biệt giới hạn task/run/tài nguyên. UI/grid/log, alert, xu hướng Grafana/Datadog và queue.",
+    "presentation_en": "Comparison table with worked records and explanatory prose",
+    "presentation_vi": "Bảng so sánh cùng bản ghi minh họa và lời giải thích"
+  },
+  {
+    "lesson": 12,
+    "pages": "39-43",
+    "en": "Green tasks can still carry bad data",
+    "vi": "Task xanh vẫn có thể mang dữ liệu sai",
+    "detail_en": "Preserve and investigate the Gartner/PHE/Unity anecdotes with provenance and corrections. Define fitness for purpose and bad-data forms; accuracy, completeness, consistency, timeliness, validity and uniqueness. Turn each into rules for nulls, IDs, email, positive price, future timestamps and a 30% row-count drop.",
+    "detail_vi": "Giữ và kiểm các trường hợp Gartner/PHE/Unity với nguồn/cải chính. Định nghĩa phù hợp mục đích và dạng dữ liệu xấu; accuracy, completeness, consistency, timeliness, validity, uniqueness. Chuyển thành rule null, ID, email, giá dương, timestamp tương lai và row count giảm 30%.",
+    "presentation_en": "Comparison table with worked records and explanatory prose",
+    "presentation_vi": "Bảng so sánh cùng bản ghi minh họa và lời giải thích"
+  },
+  {
+    "lesson": 12,
+    "pages": "44-48",
+    "en": "Quality improves through a feedback loop",
+    "vi": "Chất lượng tiến bộ qua vòng phản hồi",
+    "detail_en": "Business case→profile→rules→monitor→correct. Preserve CRM findings (15% missing email, 10% invalid), email-or-phone rule, phone standardization, duplicate heuristics, 5% alert threshold and upstream training. Table/row/column coverage, alert context, resolution and scale; manual/rule/metric/ML detection approaches.",
+    "detail_vi": "Business case→profile→rule→monitor→correct. Giữ phát hiện CRM (15% thiếu email, 10% sai định dạng), rule email-hoặc-phone, chuẩn hóa phone, heuristic trùng, ngưỡng alert 5% và hướng dẫn nhập liệu upstream. Bao quát table/row/column, bối cảnh cảnh báo, xử lý, mở rộng; phát hiện thủ công/rule/metric/ML.",
+    "presentation_en": "Failure case, decision tree and explained alternatives",
+    "presentation_vi": "Tình huống sự cố, cây quyết định và các lựa chọn có giải thích"
+  },
+  {
+    "lesson": 12,
+    "pages": "49-52",
+    "en": "A failed check must change execution",
+    "vi": "Kiểm tra thất bại phải đổi cách thực thi",
+    "detail_en": "Show the unsafe path where validation fails but transform/load continue. Build a validation gate/circuit-breaker pattern with fail/branch/alert and safe downstream dependencies. Explain logged evidence and recovery, including why a skipped or successful branch is not the same as publishing invalid data.",
+    "detail_vi": "Minh họa luồng không an toàn: validation fail nhưng transform/load tiếp tục. Thiết kế validation gate/circuit breaker bằng fail/branch/alert và dependency downstream an toàn. Giải thích bằng chứng log, phục hồi; phân biệt branch skipped/success với việc công bố dữ liệu sai.",
+    "presentation_en": "Step player with a persistent HTML trace table",
+    "presentation_vi": "Trình phát từng bước cùng bảng trace HTML luôn đọc được"
+  },
+  {
+    "lesson": 12,
+    "pages": "53-61",
+    "en": "Make the agreement executable",
+    "vi": "Biến thỏa thuận thành thứ kiểm được",
+    "detail_en": "Schema renames/removals/types/nullability, contracts for range/freshness/uniqueness at team boundaries. Compare GX, Deequ, dbt tests, Soda and DataHub roles. GX expectations/suites/backends/Airflow gate; Deequ profiling/analyzers/verification, >99% completeness, anomaly detection and incremental metrics; DataHub datasets/schemas/owners/pipelines/lineage/quality and impact analysis.",
+    "detail_vi": "Schema đổi tên/xóa/type/nullability; contract range/freshness/uniqueness ở ranh giới nhóm. So sánh vai trò GX, Deequ, dbt tests, Soda, DataHub. GX expectation/suite/backend/gate Airflow; Deequ profiling/analyzer/verification, completeness >99%, anomaly detection và incremental metric; DataHub dataset/schema/owner/pipeline/lineage/quality, phân tích ảnh hưởng.",
+    "presentation_en": "Annotated architecture diagram and narrative trace",
+    "presentation_vi": "Sơ đồ kiến trúc có chú giải và lời dẫn theo luồng"
+  }
+]

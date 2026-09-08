@@ -1,0 +1,128 @@
+[
+  {
+    "lesson": 7,
+    "en": "Routing and group lab",
+    "vi": "Lab định tuyến và consumer group",
+    "detail_en": "Choose keyed/unkeyed mode, partition count and consumer count. Step six events through visible logs; switch groups and inspect separate offsets. With 3 partitions and 4 consumers in one illustrated group, one consumer is idle. Keyed routing uses an explicitly documented toy hash, not a claim to reproduce every Kafka client.",
+    "detail_vi": "Chọn có/không key, số partition và consumer. Cho sáu sự kiện đi từng bước qua log; đổi group và xem offset riêng. Với 3 partition và 4 consumer trong group minh họa, một consumer rảnh. Định tuyến key dùng toy hash được ghi rõ, không giả vờ mô phỏng mọi Kafka client."
+  },
+  {
+    "lesson": 7,
+    "en": "Crash and replay timeline",
+    "vi": "Timeline crash và replay",
+    "detail_en": "Select commit-before or commit-after, inject a crash before processing or after the side effect, then recover. Fixture: balance 0, event +10. Crash after applying but before commit gives 20 on an unprotected replay; idempotent sink stays 10. The complete event/commit/effect trace remains visible as a table.",
+    "detail_vi": "Chọn commit trước/sau, gây crash trước xử lý hoặc sau tác động, rồi phục hồi. Fixture: số dư 0, event +10. Crash sau tác động trước commit tạo 20 khi replay không bảo vệ; sink idempotent giữ 10. Toàn bộ trace event/commit/tác động hiện bằng bảng."
+  },
+  {
+    "lesson": 7,
+    "en": "CDC comparison and retained log",
+    "vi": "So CDC và log được giữ lại",
+    "detail_en": "Apply insert/update/hard-delete to a small source table; compare timestamp/trigger/log captures. Switch retention time, size and compaction to see which historical records remain. Do not equate consuming a record with deleting it or model compaction as an immediate synchronous delete.",
+    "detail_vi": "Áp insert/update/hard-delete lên bảng nhỏ, so kết quả timestamp/trigger/log. Đổi retention thời gian/dung lượng/compaction để thấy lịch sử còn lại. Không đồng nhất đọc với xóa bản ghi, không mô phỏng compaction thành xóa đồng bộ tức thì."
+  },
+  {
+    "lesson": 8,
+    "en": "Storage access explorer",
+    "vi": "Khám phá cách truy cập storage",
+    "detail_en": "Select one workload and inspect the path/block/object access steps, metadata and update unit. Toggle the HDFS diagram to trace NameNode lookup, DataNode read and replica fallback. The UI explains the tradeoff instead of inventing universal benchmark rankings.",
+    "detail_vi": "Chọn workload, xem từng bước truy cập path/block/object, metadata và đơn vị cập nhật. Chuyển sang hình HDFS để theo lookup NameNode, đọc DataNode, replica fallback. UI giải thích đánh đổi thay vì dựng thứ hạng benchmark tuyệt đối."
+  },
+  {
+    "lesson": 8,
+    "en": "Lake-to-swamp investigation",
+    "vi": "Điều tra data lake thành swamp",
+    "detail_en": "A synthetic catalog contains an ownerless dataset, stale schema, duplicate and missing freshness. Toggle catalog, owner, validation, lineage and retention policies; inspect which issue each fixes and which it cannot. No arbitrary single quality score hides the remaining failures.",
+    "detail_vi": "Catalog giả lập có dataset thiếu owner, schema cũ, bản trùng và thiếu freshness. Bật catalog/owner/validation/lineage/retention; xem mỗi chính sách sửa gì và không sửa được gì. Không dùng một điểm chất lượng tùy ý để che lỗi còn lại."
+  },
+  {
+    "lesson": 8,
+    "en": "Bronze–silver–gold trace",
+    "vi": "Theo dấu bronze–silver–gold",
+    "detail_en": "Step five synthetic rows through raw preservation, quarantine/deduplication and aggregation. Two valid unique orders, one retry duplicate, one invalid amount and one missing key yield 5 bronze rows, 2 valid silver orders and 2 quarantined rows; duplicate handling is logged. Gold sums only accepted rows; replay must preserve the same result.",
+    "detail_vi": "Cho năm dòng giả lập qua giữ raw, quarantine/dedup và aggregate. Hai order hợp lệ duy nhất, một bản retry trùng, một amount sai, một key thiếu tạo 5 dòng bronze, 2 order silver hợp lệ, 2 dòng quarantine; có log xử lý trùng. Gold chỉ cộng dòng chấp nhận; replay phải giữ kết quả."
+  },
+  {
+    "lesson": 9,
+    "en": "Lazy-plan and shuffle player",
+    "vi": "Trình phát lazy plan và shuffle",
+    "detail_en": "Add filter/select/groupBy, then invoke an action. No task runs before the action. Step the DAG through stages/partitions; toggle a valid filter pushdown and broadcast of a small relation, inspect rows moved and unchanged output. Counts are from the small fixture, not runtime performance claims.",
+    "detail_vi": "Thêm filter/select/groupBy rồi gọi action. Không task nào chạy trước action. Theo DAG qua stage/partition; bật filter pushdown hợp lệ và broadcast bảng nhỏ, xem số dòng di chuyển cùng đầu ra không đổi. Số đếm lấy từ fixture nhỏ, không phải cam kết hiệu năng runtime."
+  },
+  {
+    "lesson": 9,
+    "en": "Cache and memory experiment",
+    "vi": "Thí nghiệm cache và bộ nhớ",
+    "detail_en": "Select a storage strategy, capacity and reuse count; inspect which partitions materialize, spill or recompute. First action fills cache, later action reuses it, unpersist releases it. Contrast JVM RDD and DataFrame defaults explicitly; explain why caching a one-use result may add work.",
+    "detail_vi": "Chọn storage strategy, dung lượng, số lần dùng; xem partition được vật hóa, spill hoặc tái tính. Action đầu làm đầy cache, action sau tái dùng, unpersist giải phóng. Tách mặc định JVM RDD/DataFrame; giải thích cache kết quả dùng một lần có thể tăng việc."
+  },
+  {
+    "lesson": 9,
+    "en": "Skew and operations workbench",
+    "vi": "Bàn thực nghiệm skew và vận hành",
+    "detail_en": "Switch balanced/skewed fixtures, inspect task bars, salt a heavy aggregate key then merge partial sums. The final aggregate stays identical while work distribution changes. A second view distinguishes executor scaling from file compaction and shows a mock Spark UI labeled as a teaching model.",
+    "detail_vi": "Đổi fixture cân bằng/skew, xem thanh task, salt key aggregate nặng rồi gộp tổng từng phần. Aggregate cuối giữ nguyên dù phân phối việc đổi. Góc nhìn khác tách tăng executor khỏi file compaction, hiển thị Spark UI mô phỏng có nhãn dùng để học."
+  },
+  {
+    "lesson": 10,
+    "en": "Event-time studio",
+    "vi": "Phòng thực nghiệm event time",
+    "detail_en": "Change window type, size/slide/gap, disorder bound, allowed lateness and late-event policy. Step event/arrival timestamps and explicit watermarks; show initial, revised and side outputs plus state cleanup. Replay the source arithmetic and corrected timeline. For allowed lateness, advancing wall clock alone must not expire an event-time window.",
+    "detail_vi": "Đổi loại window, size/slide/gap, disorder bound, allowed lateness, late policy. Đi từng bước event/arrival timestamp và watermark rõ; xem đầu ra đầu/sửa/side cùng dọn state. Phát lại phép tính nguồn và timeline đã sửa. Với event-time, chỉ tăng đồng hồ thực không được làm window hết hạn."
+  },
+  {
+    "lesson": 10,
+    "en": "Checkpoint and failure player",
+    "vi": "Trình phát checkpoint và sự cố",
+    "detail_en": "Step sources, barriers, keyed state and sink output. Inject failure before/after checkpoint completion; restore only a completed checkpoint with matching source positions. Compare an unprotected external sink with an idempotent/transactional illustrative sink, showing why state recovery alone cannot prevent duplicate side effects.",
+    "detail_vi": "Theo source, barrier, keyed state và đầu ra sink. Gây lỗi trước/sau checkpoint hoàn tất; chỉ khôi phục checkpoint hoàn tất cùng vị trí nguồn. So sink bên ngoài không bảo vệ với sink minh họa idempotent/transactional; cho thấy chỉ phục hồi state chưa ngăn tác động trùng."
+  },
+  {
+    "lesson": 10,
+    "en": "Chaining and backpressure model",
+    "vi": "Mô hình chaining và backpressure",
+    "detail_en": "Set source rate and downstream service rate, toggle compatible chaining and change bottleneck parallelism. Source 8 events/tick and sink 3 events/tick grow backlog by 5 per tick before capacity throttles upstream. Label this as a queue model, not a Flink benchmark; show backpressure upstream of the slow operator.",
+    "detail_vi": "Đặt tốc độ nguồn/đích, bật chaining tương thích và đổi parallelism điểm nghẽn. Nguồn 8 event/nhịp, sink 3 event/nhịp làm backlog tăng 5/nhịp trước khi giới hạn dung lượng hãm upstream. Ghi rõ mô hình queue, không phải benchmark Flink; hiển thị backpressure phía trước operator chậm."
+  },
+  {
+    "lesson": 11,
+    "en": "Normalization and analytical query explorer",
+    "vi": "Khám phá chuẩn hóa và query phân tích",
+    "detail_en": "Move from the source order table to normalized entities, then a star/snowflake view. Highlight keys, grain, joins and duplicate attributes. Use one consistent quantity fixture; calculate sales versus inventory aggregations and explain why the same SUM operator can be appropriate or misleading.",
+    "detail_vi": "Đi từ bảng order nguồn sang entity chuẩn hóa rồi star/snowflake. Tô key, grain, join, thuộc tính lặp. Dùng fixture quantity nhất quán; tính aggregate doanh thu/tồn kho, giải thích vì sao cùng SUM có thể đúng hoặc gây hiểu nhầm."
+  },
+  {
+    "lesson": 11,
+    "en": "SCD history studio",
+    "vi": "Phòng thực nghiệm lịch sử SCD",
+    "detail_en": "Switch types 0/1/2/3/4/6; apply GBP→USD and a later change. Inspect rows, surrogate keys, intervals and current/previous attributes, then query an old sale. Type 1 loses prior values; Type 2 retains correct versions; Type 3 has limited history; Type 6 changes current columns across history rows.",
+    "detail_vi": "Đổi type 0/1/2/3/4/6; áp GBP→USD và một lần đổi sau. Xem dòng, surrogate key, interval, current/previous rồi truy vấn giao dịch cũ. Type 1 mất giá trị trước; Type 2 giữ version; Type 3 giữ lịch sử hạn chế; Type 6 đổi cột current trên các dòng lịch sử."
+  },
+  {
+    "lesson": 11,
+    "en": "Feature time-travel lab",
+    "vi": "Lab feature theo thời điểm",
+    "detail_en": "A training event at 10:00 sees a 09:55 feature, never a 10:05 feature; online lookup may return the newest value. Toggle TTL, freshness and inconsistent null/filter logic, inspect the selected rows and values. The labeled Feast supplement maps the model to entity/view/historical retrieval/materialization/online lookup code.",
+    "detail_vi": "Sự kiện training 10:00 thấy feature 09:55, không dùng feature 10:05; online lookup có thể trả giá trị mới nhất. Đổi TTL, freshness, logic null/filter không nhất quán, xem dòng/giá trị được chọn. Bổ sung Feast có nhãn nối mô hình với code entity/view/historical retrieval/materialization/online lookup."
+  },
+  {
+    "lesson": 12,
+    "en": "Cron versus dependency scheduler",
+    "vi": "Cron so với scheduler theo dependency",
+    "detail_en": "Run the 02:00/03:00/03:20/04:00 scenario in time-only and dependency modes; step, pause, retry and backfill a chosen interval. The safe scheduler never starts transform before extraction succeeds. Rerunning the same interval uses an idempotent fixture and leaves the published row count unchanged.",
+    "detail_vi": "Chạy tình huống 02:00/03:00/03:20/04:00 theo giờ và theo dependency; tiến bước, dừng, retry, backfill interval chọn. Scheduler an toàn không chạy transform trước extract thành công. Chạy lại interval dùng fixture idempotent, giữ số dòng công bố."
+  },
+  {
+    "lesson": 12,
+    "en": "Concurrency control room",
+    "vi": "Phòng điều khiển concurrency",
+    "detail_en": "Set global task capacity, active DAG runs and database pool slots; step independent tasks into queued/running/success/failed states. The pool view never exceeds its slot capacity; changing max_active_runs changes run overlap, not the number of tasks in a single run. Show configuration references and XCom payloads.",
+    "detail_vi": "Đặt sức chứa task toàn cục, active DAG run, database pool slot; đưa task độc lập qua queued/running/success/failed. Pool không vượt slot; đổi max_active_runs thay số run chồng nhau, không phải số task trong một run. Hiển thị tham chiếu cấu hình và payload XCom."
+  },
+  {
+    "lesson": 12,
+    "en": "Validation gate and lineage investigation",
+    "vi": "Điều tra validation gate và lineage",
+    "detail_en": "Inject a null key, duplicate ID, invalid amount, stale dataset or schema rename. Show exact failing rules, evidence, quarantine/stop decision and blocked consumers on a lineage graph. Fix input and rerun: only then can the downstream publication succeed. GX/Deequ examples remain distinct from the browser simulation.",
+    "detail_vi": "Chèn null key, ID trùng, amount sai, dataset cũ hoặc đổi tên schema. Hiện đúng rule lỗi, bằng chứng, quyết định quarantine/stop và consumer bị chặn trên lineage graph. Sửa input, chạy lại rồi mới cho công bố downstream. Ví dụ GX/Deequ tách khỏi simulation trình duyệt."
+  }
+]

@@ -1,6 +1,8 @@
 import { useMemo, useState } from 'react';
 import { Html } from '@/components/Html';
-import { SESSION_QUIZZES } from '@/content/courses/csc14003/session-quizzes.js';
+import { SESSION_QUIZZES } from '@/content/courses/csc14003/session-quizzes.locale';
+import { topicLabel } from '@/content/courses/csc14003/topics';
+import { UI } from '@/content/ui';
 import { quizTip, scoreColorVar } from '@/lib/spaced-repetition';
 import { useProgress } from '@/lib/useProgress';
 
@@ -9,11 +11,18 @@ import { useProgress } from '@/lib/useProgress';
    trang Lộ trình đọc lại ba trường đó để dựng báo cáo mạnh/yếu. Ngưỡng màu và lời khuyên lấy
    từ spaced-repetition.ts để nhất quán với bài Kiểm tra tổng hợp. */
 
-interface QuizQ { topic: string; q: string; opts: string[]; a: number; ex: string }
+// topicId là `string` chứ không phải TopicId: trong array literal của file .js, giá trị nới
+// thành string nên union đóng sẽ báo lỗi cả với dữ liệu ĐÚNG. Membership tập đóng do
+// check_i18n.py canh (ADR-0011).
+export interface QuizQ { topicId: string; q: string; opts: string[]; a: number; ex: string }
 
-export function SessionQuiz({ sessionId, color = 'var(--cyan)' }: { sessionId: string; color?: string }) {
-  const qs = (SESSION_QUIZZES as Record<string, QuizQ[]>)[sessionId] || [];
-  const { db, update } = useProgress();
+// ANNOTATION chứ không phải `as`: cast thì bịt lỗi, annotation thì không — file .js còn sót
+// `topic:` là tsc báo ngay "Property 'topicId' is missing".
+const BANK: Record<string, QuizQ[]> = SESSION_QUIZZES;
+
+export function SessionQuiz({ sessionId, color = 'var(--cyan)', courseSlug = 'csc14003', questions, labelTopic = topicLabel }: { sessionId: string; color?: string; courseSlug?: string; questions?: QuizQ[]; labelTopic?: (id: string) => string }) {
+  const qs = questions ?? (courseSlug === 'csc14003' ? BANK[sessionId] || [] : []);
+  const { db, update } = useProgress(courseSlug);
   const saved = db.sessions[sessionId] || {};
 
   const [picked, setPicked] = useState<(number | null)[]>(() => qs.map(() => null));
@@ -28,8 +37,8 @@ export function SessionQuiz({ sessionId, color = 'var(--cyan)' }: { sessionId: s
     return {
       correct,
       score: qs.length ? Math.round((correct / qs.length) * 100) : 0,
-      right: [...new Set(qs.filter((q, i) => picked[i] === q.a).map((q) => q.topic))],
-      wrong: [...new Set(qs.filter((q, i) => picked[i] != null && picked[i] !== q.a).map((q) => q.topic))],
+      right: [...new Set(qs.filter((q, i) => picked[i] === q.a).map((q) => q.topicId))],
+      wrong: [...new Set(qs.filter((q, i) => picked[i] != null && picked[i] !== q.a).map((q) => q.topicId))],
     };
   }, [qs, picked]);
 
@@ -45,8 +54,8 @@ export function SessionQuiz({ sessionId, color = 'var(--cyan)' }: { sessionId: s
     if (next.filter((p) => p != null).length === qs.length) {
       const correct = qs.filter((q, i) => next[i] === q.a).length;
       const score = Math.round((correct / qs.length) * 100);
-      const right = [...new Set(qs.filter((q, i) => next[i] === q.a).map((q) => q.topic))];
-      const wrong = [...new Set(qs.filter((q, i) => next[i] != null && next[i] !== q.a).map((q) => q.topic))];
+      const right = [...new Set(qs.filter((q, i) => next[i] === q.a).map((q) => q.topicId))];
+      const wrong = [...new Set(qs.filter((q, i) => next[i] != null && next[i] !== q.a).map((q) => q.topicId))];
       update((d) => {
         const r = d.sessions[sessionId] || (d.sessions[sessionId] = {});
         r.quizScore = score;
@@ -68,23 +77,23 @@ export function SessionQuiz({ sessionId, color = 'var(--cyan)' }: { sessionId: s
   return (
     <div className="card" style={{ padding: '20px 22px 22px', borderColor: `color-mix(in srgb, ${color} 30%, transparent)` }}>
       <div style={{ display: 'flex', alignItems: 'baseline', gap: 12, flexWrap: 'wrap' }}>
-        <span style={{ fontWeight: 600, fontSize: 15 }}>Quiz {qs.length} câu</span>
+        <span style={{ fontWeight: 600, fontSize: 15 }}>{UI.quiz.heading(qs.length)}</span>
         <span style={{ color: 'var(--faint)', fontSize: 12.5, fontStyle: 'italic' }}>
-          chấm theo chủ đề — điểm ghi vào trang Lộ trình
+          {UI.quiz.scoredByTopic}
         </span>
         <div style={{ flex: 1 }} />
-        <span className="mono" style={{ fontSize: 11.5, color: 'var(--faint)' }}>ĐÃ TRẢ LỜI {answered}/{qs.length}</span>
+        <span className="mono" style={{ fontSize: 11.5, color: 'var(--faint)' }}>{UI.quiz.answered(answered, qs.length)}</span>
       </div>
 
       {/* Kết quả lần trước — chỉ hiện khi chưa động vào lượt mới */}
       {!started && typeof saved.quizScore === 'number' ? (
         <div className="panel-inner" style={{ marginTop: 14, display: 'flex', gap: 12, alignItems: 'center', flexWrap: 'wrap' }}>
-          <span className="mono" style={{ fontSize: 10, color: 'var(--faint)', letterSpacing: '0.7px' }}>LẦN TRƯỚC</span>
+          <span className="mono" style={{ fontSize: 10, color: 'var(--faint)', letterSpacing: '0.7px' }}>{UI.quiz.lastTime}</span>
           <span style={{ fontSize: 20, fontWeight: 700, color: scoreColorVar(saved.quizScore) }}>{saved.quizScore}%</span>
           {saved.quizWrong?.length ? (
-            <span style={{ fontSize: 12.5, color: 'var(--muted)' }}>hổng: {saved.quizWrong.join(' · ')}</span>
+            <span style={{ fontSize: 12.5, color: 'var(--muted)' }}>{UI.quiz.gaps} {saved.quizWrong.map(labelTopic).join(' · ')}</span>
           ) : (
-            <span style={{ fontSize: 12.5, color: 'var(--green)' }}>không sai chủ đề nào</span>
+            <span style={{ fontSize: 12.5, color: 'var(--green)' }}>{UI.quiz.noGaps}</span>
           )}
         </div>
       ) : null}
@@ -95,7 +104,7 @@ export function SessionQuiz({ sessionId, color = 'var(--cyan)' }: { sessionId: s
           const p = picked[i];
           const tone = p == null ? 'var(--border-2)' : p === item.a ? 'var(--green)' : 'var(--red)';
           return (
-            <button key={item.q} type="button" onClick={() => setQi(i)} title={`Câu ${i + 1} · ${item.topic}`}
+            <button key={item.q} type="button" onClick={() => setQi(i)} title={UI.quiz.qTitle(i + 1, labelTopic(item.topicId))}
               style={{
                 flex: 1, height: 6, minWidth: 0, padding: 0, borderRadius: 3, cursor: 'pointer',
                 background: tone, border: i === qi ? '1px solid var(--text-hi)' : '1px solid transparent',
@@ -108,9 +117,9 @@ export function SessionQuiz({ sessionId, color = 'var(--cyan)' }: { sessionId: s
       <div style={{ marginTop: 16 }}>
         <div style={{ display: 'flex', gap: 10, alignItems: 'baseline', flexWrap: 'wrap' }}>
           <span className="mono" style={{ fontSize: 10.5, fontWeight: 600, letterSpacing: '0.06em', color, background: `color-mix(in srgb, ${color} 12%, transparent)`, borderRadius: 4, padding: '2px 8px' }}>
-            {q.topic}
+            {labelTopic(q.topicId)}
           </span>
-          <span className="mono" style={{ fontSize: 11, color: 'var(--faint-2)' }}>CÂU {qi + 1}</span>
+          <span className="mono" style={{ fontSize: 11, color: 'var(--faint-2)' }}>{UI.quiz.qNo(qi + 1)}</span>
         </div>
         <Html as="p" t={q.q} style={{ fontSize: 15, lineHeight: 1.65, color: 'var(--text-hi)', margin: '12px 0 0', fontWeight: 600 }} />
 
@@ -142,16 +151,16 @@ export function SessionQuiz({ sessionId, color = 'var(--cyan)' }: { sessionId: s
         {pick != null ? (
           <div className="panel-inner" style={{ marginTop: 12, borderColor: `color-mix(in srgb, ${pick === q.a ? 'var(--green)' : 'var(--red)'} 30%, transparent)` }}>
             <span className="mono" style={{ fontSize: 10, letterSpacing: '0.7px', color: pick === q.a ? 'var(--green)' : 'var(--red)' }}>
-              {pick === q.a ? '✓ ĐÚNG' : '✗ CHƯA ĐÚNG'}
+              {pick === q.a ? UI.quiz.right : UI.quiz.wrong}
             </span>
             <Html as="p" t={q.ex} style={{ color: 'var(--text-2)', fontSize: 13, lineHeight: 1.7, margin: '7px 0 0' }} />
           </div>
         ) : null}
 
         <div style={{ display: 'flex', gap: 8, marginTop: 14, flexWrap: 'wrap', alignItems: 'center' }}>
-          <button type="button" className="btn" onClick={() => setQi((x) => Math.max(0, x - 1))} disabled={qi === 0}>← Câu trước</button>
-          <button type="button" className="btn btn--primary" onClick={() => setQi((x) => Math.min(qs.length - 1, x + 1))} disabled={qi >= qs.length - 1}>Câu tiếp →</button>
-          {answered > 0 ? <button type="button" className="btn" onClick={restart}>↺ Làm lại từ đầu</button> : null}
+          <button type="button" className="btn" onClick={() => setQi((x) => Math.max(0, x - 1))} disabled={qi === 0}>{UI.quiz.prev}</button>
+          <button type="button" className="btn btn--primary" onClick={() => setQi((x) => Math.min(qs.length - 1, x + 1))} disabled={qi >= qs.length - 1}>{UI.quiz.next}</button>
+          {answered > 0 ? <button type="button" className="btn" onClick={restart}>{UI.quiz.restart}</button> : null}
         </div>
       </div>
 
@@ -162,21 +171,21 @@ export function SessionQuiz({ sessionId, color = 'var(--cyan)' }: { sessionId: s
             <span style={{ fontFamily: 'var(--font-serif)', fontSize: 22, fontWeight: 700, color: scoreColorVar(result.score) }}>
               {result.score}%
             </span>
-            <span style={{ fontSize: 13, color: 'var(--muted)' }}>đúng {result.correct}/{qs.length} câu</span>
+            <span style={{ fontSize: 13, color: 'var(--muted)' }}>{UI.quiz.correctOf(result.correct, qs.length)}</span>
           </div>
           <div style={{ marginTop: 8, fontSize: 13, lineHeight: 1.6 }}>
             <div>
-              <span className="mono" style={{ fontSize: 10, letterSpacing: '0.08em', color: 'var(--green)', fontWeight: 600 }}>VỮNG · </span>
-              <span style={{ color: 'var(--text-2)' }}>{result.right.length ? result.right.join(' · ') : '—'}</span>
+              <span className="mono" style={{ fontSize: 10, letterSpacing: '0.08em', color: 'var(--green)', fontWeight: 600 }}>{UI.quiz.solid}</span>
+              <span style={{ color: 'var(--text-2)' }}>{result.right.length ? result.right.map(labelTopic).join(' · ') : UI.quiz.none}</span>
             </div>
             <div>
-              <span className="mono" style={{ fontSize: 10, letterSpacing: '0.08em', color: 'var(--red)', fontWeight: 600 }}>HỔNG · </span>
-              <span style={{ color: 'var(--text-2)' }}>{result.wrong.length ? result.wrong.join(' · ') : 'Không sai chủ đề nào — ngon.'}</span>
+              <span className="mono" style={{ fontSize: 10, letterSpacing: '0.08em', color: 'var(--red)', fontWeight: 600 }}>{UI.quiz.weak}</span>
+              <span style={{ color: 'var(--text-2)' }}>{result.wrong.length ? result.wrong.map(labelTopic).join(' · ') : UI.quiz.noWrongTopic}</span>
             </div>
           </div>
-          <p style={{ fontSize: 13, color: 'var(--muted)', lineHeight: 1.65, margin: '10px 0 0' }}>{quizTip(result.score)}</p>
+          <p style={{ fontSize: 13, color: 'var(--muted)', lineHeight: 1.65, margin: '10px 0 0' }}>{UI.tip[quizTip(result.score)]}</p>
           <p style={{ fontSize: 12, color: 'var(--faint)', lineHeight: 1.6, margin: '8px 0 0' }}>
-            Điểm này đã ghi vào trang Lộ trình — mở card của buổi ra là thấy báo cáo mạnh/yếu.
+            {UI.quiz.saved}
           </p>
         </div>
       ) : null}

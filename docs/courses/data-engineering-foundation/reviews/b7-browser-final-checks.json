@@ -1,0 +1,13 @@
+{
+  "checks": [
+    "normal-motion 2x playback advances",
+    "pause stops changes",
+    "reset restores initial state",
+    "keyboard Enter steps",
+    "autoplay stops at final frame",
+    "correct branch topology in rendered HTML",
+    "light desktop/mobile no overflow",
+    "zero console warnings/errors"
+  ],
+  "messages": []
+}
