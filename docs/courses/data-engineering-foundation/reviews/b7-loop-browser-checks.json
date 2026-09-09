@@ -1,0 +1,46 @@
+{
+  "checks": [
+    "no playback/send/read/select controls or frame live regions",
+    "journey auto-advances in real time",
+    "[data-visual=\"journey\"]: all frames and two loop resets (controlled browser clock)",
+    "[data-visual=\"storage\"]: all frames and two loop resets (controlled browser clock)",
+    "[data-visual=\"fanout\"]: all frames and two loop resets (controlled browser clock)",
+    "[data-visual=\"ecosystem\"]: all frames and two loop resets (controlled browser clock)",
+    "[data-visual=\"offsets\"]: all frames and two loop resets (controlled browser clock)",
+    "[data-visual=\"replicas\"]: all frames and two loop resets (controlled browser clock)",
+    "[data-visual=\"cdc-path\"]: all frames and two loop resets (controlled browser clock)",
+    "#routing-lab: all frames and two loop resets (controlled browser clock)",
+    "#crash-lab: all frames and two loop resets (controlled browser clock)",
+    "#cdc-lab: all frames and two loop resets (controlled browser clock)",
+    ".def-retention-animation: all frames and two loop resets (controlled browser clock)",
+    "offscreen scene clock suspended",
+    "document-hidden event suspends clock",
+    "all ecosystem tabs plus ArrowRight/End keyboard behavior",
+    "syntax token roles preserve valid JSON; 10 chapter callouts and selective term emphasis",
+    "all 8 crash scenarios yield correct final balance in static mode",
+    "all CDC and retention tabs preserve captured events and fixed-offset results",
+    "VI 375px/320px: no page, figure, lab, or JSON overflow",
+    "all original framework logos loaded"
+  ],
+  "errors": [],
+  "revision": "DEF b7 repeating scenes, 2026-09-09",
+  "scope": "Browser checks of affected visuals; controlled clock for complete cycles; document-hidden behavior simulated with visibilitychange, not an OS background-tab test.",
+  "supplemental_checks": [
+    "All storage and routing scenarios",
+    "Light/dark ecosystem and syntax screenshots; normal-motion CSS 3D",
+    "No active intervals after route navigation; hidden deck scene suspended"
+  ],
+  "source_sha256": {
+    "src/features/lessons/def/b7/IngestionLabs.css": "78e1760fe2137616119de551df5b8174612554dd657ba83f77aad3f802e6dab3",
+    "src/features/lessons/def/b7/IngestionLabs.tsx": "a2206132f6a51cc25d66927e7e4377a4853a9f5ad527dde69d8640eb1831054d",
+    "src/features/lessons/def/b7/IngestionVisuals.css": "eb3df8eeb687c197e6ca61a40dd110e0edf270debbd786df5574a9fda275c3d4",
+    "src/features/lessons/def/b7/IngestionVisuals.tsx": "2cc4e38d380f7b63f7345c1ee5a69642abc4bfc6e8b0a1c2c693825538b07793",
+    "src/features/lessons/def/b7/Lesson07Ingestion.tsx": "0c94489a7852bb917de1a1d0fb58ad9b3adc4290ed3aedbc4d18ab66089596a6",
+    "src/features/lessons/def/b7/LessonAnimation.tsx": "7c556cc41a2ba7d1d1b3747ccdaa0a3021324db99b4fb8953d6356ca966a454f",
+    "src/features/lessons/def/b7/SyntaxCode.tsx": "a73a76d3394d124ed2d70124ab8ca89d39239cd24af86d2534f5623905dd7219",
+    "src/features/lessons/def/b7/ingestion-engine.ts": "678477c2c5c94822e55ad2b9a16a9cad265c96646b6c4407b2c105290e3e6552",
+    "src/features/lessons/def/b7/lesson07.text.en.ts": "bc5853ca3e01d3e23af6973ce6cdfd1b2afe8d5182b2722f9ce801a5c64b0bd0",
+    "src/features/lessons/def/b7/lesson07.text.ts": "251fedbe77054b79656220d861f0b4d8eb1585e58d0e8a506b348095aa486624",
+    "src/features/lessons/def/b7/lesson07.text.vi.ts": "90ba8705afba4a8bcc5c6529f8ec35f4a285006ca5e56a8922df017dbabe481e"
+  }
+}

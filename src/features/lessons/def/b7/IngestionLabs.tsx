@@ -102,7 +102,7 @@ export function CrashLab() {
             </div>
             <div className="def-receipt-ledger">
               <h4>{L.effect}</h4>
-              <div className="def-receipts">{[0, 1].map((i) => <div key={i} className={`def-effect-receipt ${frame.balance >= (i + 1) * 10 ? 'is-applied' : ''} ${i === 1 ? 'is-duplicate' : ''}`}>
+              <div className="def-receipts">{[0, 1].map((i) => <div key={i} aria-hidden={frame.balance < (i + 1) * 10} className={`def-effect-receipt ${frame.balance >= (i + 1) * 10 ? 'is-applied' : ''} ${i === 1 ? 'is-duplicate' : ''}`}>
                 <div className="def-receipt-rule" /><small className="mono">e1</small><strong className="mono">+10</strong><span>{L.applied}</span>
               </div>)}</div>
               <div className="def-ledger-total"><span>{L.balance}</span><strong className={frame.balance > 10 ? 'is-duplicate' : ''}>{frame.balance}</strong></div>

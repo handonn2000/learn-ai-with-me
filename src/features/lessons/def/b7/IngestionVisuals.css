@@ -101,7 +101,7 @@
 .def-syntax--compact pre { font-size: 12px; max-height: none; }
 .def-token--plain, .def-token--punctuation { color: var(--text-2); }
 .def-token--key { color: var(--cyan-hi); }
-.def-token--string { color: var(--green); }
+.def-token--string { color: var(--green-soft); }
 .def-token--number { color: var(--num); }
 .def-token--literal { color: var(--purple); }
 .def-prose .def-term { color: var(--cyan-hi); font-weight: 600; }
