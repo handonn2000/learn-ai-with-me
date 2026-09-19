@@ -68,13 +68,36 @@ export function FanoutVisual() {
     </div><LoopProgress step={loop.step} length={4} />
   </Visual>;
 }
+function StreamsDiagram({ step }: { step: number }) {
+  const transformed = step >= 1;
+  return <div className="def-streams" data-streams-step={step}>
+    <ol className="def-stream-steps">{V.streamsStages.map((stage, i) => <li key={stage} aria-current={step === i ? 'step' : undefined}><span>{i + 1}</span>{stage}</li>)}</ol>
+    <div className="def-stream-orbit">
+      <div className="def-orbit-system">
+        <div className="def-stream-cluster-heading"><FrameworkLogo brand="kafka" label={false} /><strong>{V.cluster1}</strong></div>
+        <div className={`def-stream-topic def-stream-topic--input ${step === 0 ? 'is-current' : ''}`}><small>{V.streamsInput}</small><strong className="mono">orders</strong><code><span>amount</span>: <b>12</b></code></div>
+        <div className={`def-stream-topic def-stream-topic--output ${step === 3 ? 'is-current' : ''}`}><small>{V.streamsOutput}</small><strong className="mono">orders_cents</strong><code>{step === 3 ? <><span>amount_cents</span>: <b>1200</b></> : <span className="def-stream-awaiting">{V.streamsWaiting}</span>}</code></div>
+      </div>
+      <div className="def-stream-arcs">
+        <div className={`def-stream-lane def-stream-lane--read ${step === 0 ? 'is-current' : ''}`}><strong>1 · {V.streamsStages[0]}</strong><div aria-hidden="true"><i /><b /></div></div>
+        <div className={`def-stream-lane def-stream-lane--write ${step === 2 ? 'is-current' : ''}`}><strong>3 · {V.streamsStages[2]}</strong><div aria-hidden="true"><i /><b /></div></div>
+      </div>
+      <div className={`def-stream-app ${step === 1 ? 'is-transforming' : ''}`}>
+        <strong>{V.streams}</strong><small>{V.streamsOutside}</small>
+        <div className="def-stream-transform"><span>2 · {V.streamsStages[1]}</span><code>amount <b>× 100</b></code></div>
+        <SyntaxCode compact value={JSON.stringify(transformed ? { order_id: 42, amount_cents: 1200 } : { order_id: 42, amount: 12 }, null, 2)} />
+      </div>
+    </div>
+    <Caption text={V.streamsSteps[step]} />
+  </div>;
+}
 export function EcosystemVisual() {
   const [scenario, setScenario] = useState(0);
-  const loop = useLessonLoop(scenario === 0 ? 5 : 4, `ecosystem-${scenario}`, 1800);
+  const loop = useLessonLoop(scenario === 0 ? 5 : 4, `ecosystem-${scenario}`, scenario === 1 ? 2600 : 1800);
   return <Visual name="ecosystem" title={V.ecosystemTitle} help={V.ecosystemHelp} loop={loop}>
     <ScenarioTabs label={V.ecosystemTitle} options={V.ecosystemCases} selected={scenario} onChange={setScenario}>
-      {scenario === 0 ? <Path titles={[V.source, V.connectSource, V.cluster1, V.connectSink, V.target]} brands={['postgresql', 'kafka', 'kafka', 'kafka', 'snowflake']} step={loop.step} /> : scenario === 1 ? <div className="def-stream-orbit"><div className="def-orbit-system"><FrameworkLogo brand="kafka" /><strong>{V.cluster1}</strong></div><div className="def-stream-arcs" aria-hidden="true"><span>→</span><i /><span>←</span></div><div className="def-stream-app"><span className="mono">{'f(event)'}</span><strong>{V.streams}</strong><small>{V.streamsRole}</small></div></div> : <div className="def-mirror-map"><div className="def-cluster-stack"><FrameworkLogo brand="kafka" /><strong>{V.cluster1}</strong><div aria-hidden="true"><i /><i /><i /></div></div><div className="def-mirror-transfer"><strong>{V.mirror}</strong><span aria-hidden="true"><i />→</span><small>{V.mirrorRole}</small></div><div className="def-cluster-stack"><FrameworkLogo brand="kafka" /><strong>{V.cluster2}</strong><div aria-hidden="true"><i /><i /><i /></div></div></div>}
-    </ScenarioTabs><LoopProgress step={loop.step} length={scenario === 0 ? 5 : 4} /><p className="def-small">{scenario === 0 ? V.workers : scenario === 1 ? V.streamsRole : V.mirrorRole}</p>
+      {scenario === 0 ? <Path titles={[V.source, V.connectSource, V.cluster1, V.connectSink, V.target]} brands={['postgresql', 'kafka', 'kafka', 'kafka', 'snowflake']} step={loop.step} /> : scenario === 1 ? <StreamsDiagram step={loop.step} /> : <div className="def-mirror-map"><div className="def-cluster-stack"><FrameworkLogo brand="kafka" /><strong>{V.cluster1}</strong><div aria-hidden="true"><i /><i /><i /></div></div><div className="def-mirror-transfer"><strong>{V.mirror}</strong><span aria-hidden="true"><i />→</span><small>{V.mirrorRole}</small></div><div className="def-cluster-stack"><FrameworkLogo brand="kafka" /><strong>{V.cluster2}</strong><div aria-hidden="true"><i /><i /><i /></div></div></div>}
+    </ScenarioTabs><LoopProgress step={loop.step} length={scenario === 0 ? 5 : 4} /><p className="def-small">{scenario === 0 ? V.workers : scenario === 1 ? V.streamsNote : V.mirrorRole}</p>
   </Visual>;
 }
 const OFFSET_TRACE = [{read:0, commit:0}, {read:1, commit:0}, {read:2, commit:0}, {read:2, commit:2}, {read:2, commit:2}];

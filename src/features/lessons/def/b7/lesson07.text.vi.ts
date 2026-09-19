@@ -1,4 +1,174 @@
 export const VI = {
+  "world": {
+    "eyebrow": "BẢN ĐỒ DỮ LIỆU · 3D",
+    "title": "Theo một đơn hàng qua thành phố dữ liệu trên không",
+    "intro": "Sáu khu phố, một bản ghi để theo dấu. Nhìn tuyến đường được đánh số: cầu trên không sáng nhất là lượt truyền hiện tại; bản ghi chỉ đổi khi một trạm xử lý nó.",
+    "scenarios": [
+      "CDC trực tiếp",
+      "Xử lý luồng",
+      "Batch theo lịch"
+    ],
+    "scenarioLabel": "Chọn hành trình dữ liệu",
+    "landmarkLabel": "Khám phá các trạm",
+    "sceneLabel": "Thành phố dữ liệu 3D trên không. Dùng phím mũi tên để xoay, dấu cộng hoặc trừ để thu phóng, phím Home để về góc nhìn ban đầu.",
+    "hint": "Kéo để xoay · chọn trạm để khám phá",
+    "keys": "Phím mũi tên để xoay · + / − để thu phóng",
+    "live": "Theo dấu một bản ghi",
+    "static": "Toàn bộ hành trình · bản tĩnh",
+    "zoomIn": "Phóng to",
+    "zoomOut": "Thu nhỏ",
+    "rotateLeft": "Xoay trái",
+    "rotateRight": "Xoay phải",
+    "home": "Góc nhìn toàn thành phố",
+    "loading": "Đang dựng thành phố trên không…",
+    "fallback": "Góc nhìn 3D không khả dụng trên thiết bị này. Bạn vẫn có thể chọn trạm và theo sơ đồ hành trình bên dưới.",
+    "dataLegend": "Bản ghi",
+    "controlLegend": "Tín hiệu điều phối",
+    "inspect": "TRẠM ĐANG KHÁM PHÁ",
+    "active": "Có trong hành trình",
+    "inactive": "Ngoài hành trình đang chọn",
+    "routeLabel": "ĐƯỜNG ĐI CỦA DỮ LIỆU",
+    "notes": [
+      "Debezium đọc thay đổi đã commit từ WAL của PostgreSQL. Sự kiện đi vào Kafka, rồi connector đích nạp vào Snowflake. Bước MERGE phía sau áp dụng cập nhật lên dòng đích.",
+      "Ứng dụng Kafka Streams đọc topic đầu vào, xử lý rồi ghi kết quả vào topic đầu ra trong Kafka. Connector đích đưa kết quả sang Snowflake.",
+      "Airflow lên lịch tác vụ lấy dữ liệu từ PostgreSQL và tải vào Snowflake. Đường vàng là tín hiệu điều phối; dữ liệu không cần đi qua Airflow."
+    ],
+    "takeaways": [
+      "Đọc sự kiện không xóa bản ghi trong Kafka.",
+      "Kafka Streams là thư viện trong ứng dụng; kết quả quay lại Kafka trước khi tới kho.",
+      "Điều phối quyết định lúc chạy; tác vụ đảm nhận việc chuyển dữ liệu."
+    ],
+    "modelNote": "Thành phố là mô hình giải thích, không phải bản đồ triển khai. Một ví dụ đi qua các chặng được đánh số; sau khi giữ kết quả cuối, lượt minh họa mới bắt đầu. Vòng lặp không xóa dữ liệu thật.",
+    "stations": [
+      {
+        "name": "PostgreSQL",
+        "role": "Nguồn giao dịch",
+        "detail": "Đơn hàng được ghi ở đây. WAL ghi lại thay đổi để connector CDC theo dõi; với batch, tác vụ đọc dữ liệu trực tiếp từ nguồn."
+      },
+      {
+        "name": "Debezium",
+        "role": "Trạm thu thay đổi",
+        "detail": "Connector theo dõi log thay đổi của cơ sở dữ liệu và phát sự kiện vào Kafka. Minh họa này tập trung vào thay đổi đã commit, sau giai đoạn snapshot ban đầu."
+      },
+      {
+        "name": "Apache Kafka",
+        "role": "Trung tâm sự kiện",
+        "detail": "Broker lưu sự kiện trong các partition. Consumer giữ tiến độ đọc riêng; đọc không xóa log. Các tháp chỉ gợi hình một cụm, không mô phỏng replication."
+      },
+      {
+        "name": "Kafka Streams",
+        "role": "Xưởng xử lý luồng",
+        "detail": "Thư viện chạy bên trong ứng dụng. Ứng dụng đọc từ Kafka, biến đổi hoặc tổng hợp rồi ghi kết quả vào một topic Kafka khác."
+      },
+      {
+        "name": "Snowflake",
+        "role": "Kho phân tích",
+        "detail": "Đích nhận dữ liệu để truy vấn phân tích. Connector đích hoặc tác vụ batch tải dữ liệu vào kho; đường sáng lược bớt các bước trung gian."
+      },
+      {
+        "name": "Apache Airflow",
+        "role": "Đài điều phối",
+        "detail": "DAG mô tả quan hệ phụ thuộc và lịch chạy. Scheduler điều phối tác vụ; đường vàng biểu diễn lệnh chạy, không phải dòng bản ghi."
+      }
+    ],
+    "edition": "PHỐ DỮ LIỆU",
+    "traceTitle": "THEO DÕI TUYẾN ĐƯỜNG",
+    "stageLabel": "Chặng",
+    "allStages": "Toàn bộ hành trình",
+    "payloadLabel": "BẢN GHI Ở CHẶNG NÀY",
+    "packetTag": "Đơn #42",
+    "batchTag": "3 dòng",
+    "controlTag": "Chạy tác vụ",
+    "processedLegend": "Bản ghi đã xử lý",
+    "routeHelp": "Tuyến sáng nhất đang hoạt động. Mũi tên chỉ hướng; tuyến đã đi qua giữ ánh sáng dịu. Cung nét đứt màu vàng mang lệnh điều phối.",
+    "packetNames": {
+      "row": "Dòng dữ liệu / thay đổi WAL",
+      "event": "Sự kiện CDC",
+      "result": "Kết quả đã xử lý",
+      "batch": "Nhóm dòng dữ liệu",
+      "control": "Lệnh chạy tác vụ"
+    },
+    "stageCopy": [
+      [
+        {
+          "title": "Commit thay đổi",
+          "detail": "Đơn 42 đổi amount từ 10 thành 12. PostgreSQL commit giao dịch và ghi thay đổi vào WAL."
+        },
+        {
+          "title": "Bắt thay đổi từ WAL",
+          "detail": "Debezium đọc thay đổi đã commit. Theo đơn 42 từ nguồn đến khu thu thay đổi."
+        },
+        {
+          "title": "Phát sự kiện CDC",
+          "detail": "Debezium chuyển thay đổi thành sự kiện và phát vào topic orders trong Kafka."
+        },
+        {
+          "title": "Tải vào đích",
+          "detail": "Connector đích nạp sự kiện vào Snowflake, rồi bước MERGE phía sau áp dụng cập nhật lên dòng đích. Cây cầu đại diện cho cả hai bước; chỉ nạp sự kiện chưa đủ để áp dụng cập nhật CDC."
+        },
+        {
+          "title": "Giữ kết quả",
+          "detail": "Snowflake đã có amount 12 cho đơn 42. Sự kiện Kafka vẫn còn cho tới khi retention hoặc compaction loại bỏ nó."
+        }
+      ],
+      [
+        {
+          "title": "Commit thay đổi",
+          "detail": "Đơn 42 đã có amount 12. Thay đổi đã commit của nó là đầu vào cho ví dụ này."
+        },
+        {
+          "title": "Bắt thay đổi",
+          "detail": "Debezium theo WAL của PostgreSQL để bắt cập nhật đã commit."
+        },
+        {
+          "title": "Ghi topic đầu vào",
+          "detail": "Sự kiện CDC đi vào topic đầu vào của Kafka. Tiếp tục theo cùng một order_id."
+        },
+        {
+          "title": "Đọc trong ứng dụng",
+          "detail": "Ứng dụng Kafka Streams đọc sự kiện đầu vào. Bản ghi đi sang khu xử lý."
+        },
+        {
+          "title": "Biến đổi giá trị",
+          "detail": "Trong ví dụ này, ứng dụng đổi amount 12 thành amount_cents 1200. order_id vẫn là 42."
+        },
+        {
+          "title": "Ghi topic đầu ra",
+          "detail": "Kết quả màu tím quay về một topic Kafka khác. Theo làn quay về, không phải làn đầu vào."
+        },
+        {
+          "title": "Tải kết quả đã xử lý",
+          "detail": "Connector đích đọc topic đầu ra và tải amount_cents 1200 vào Snowflake."
+        },
+        {
+          "title": "Giữ kết quả",
+          "detail": "Kho lưu kết quả đã xử lý. Đọc một trong hai topic Kafka không xóa bản ghi của nó."
+        }
+      ],
+      [
+        {
+          "title": "Lên lịch trích xuất",
+          "detail": "Airflow gửi lệnh chạy tới worker trích xuất, được đặt tại nguồn trong hình. Tín hiệu vàng không mang dữ liệu đơn hàng."
+        },
+        {
+          "title": "Trích xuất một batch",
+          "detail": "Tác vụ trích xuất đọc 3 dòng nguồn, có cả đơn 42. Gói gom nhóm đại diện cho các dòng này cùng nhau."
+        },
+        {
+          "title": "Lên lịch tải dữ liệu",
+          "detail": "Sau khi trích xuất xong, Airflow lên lịch tác vụ tải, được đặt tại kho trong hình. Đây vẫn là tín hiệu điều khiển."
+        },
+        {
+          "title": "Chuyển các dòng",
+          "detail": "Tác vụ tải chuyển 3 dòng đã trích xuất vào Snowflake. Theo cầu dữ liệu nét liền từ nguồn đến đích."
+        },
+        {
+          "title": "Giữ batch đã tải",
+          "detail": "Kho đã có 3 dòng. Airflow điều phối các tác vụ; bản ghi không đi qua scheduler của nó."
+        }
+      ]
+    ]
+  },
   badge: "TUẦN 7 · DEF",
   title: "Ingestion — hành trình bắt đầu",
   cover: "Bìa",
@@ -88,6 +258,13 @@ export const VI = {
     "cluster2": "Kafka · cụm 2",
     "streams": "Ứng dụng Kafka Streams",
     "streamsRole": "Đọc → biến đổi → ghi vào cụm 1",
+    "streamsStages": ["Đọc", "Biến đổi", "Ghi", "Đã lưu"],
+    "streamsInput": "Topic đầu vào",
+    "streamsOutput": "Topic đầu ra",
+    "streamsOutside": "Chạy bên ngoài các Kafka broker",
+    "streamsWaiting": "Đang chờ kết quả mới",
+    "streamsNote": "Hai topic trong cùng một cụm Kafka. Đầu vào vẫn ở orders; ví dụ này ghi giá trị đã quy đổi vào orders_cents. Mỗi vòng bắt đầu một minh họa mới.",
+    "streamsSteps": ["Đọc đơn hàng 42 từ orders. Bản ghi xanh đi từ Kafka đến ứng dụng Streams.", "Bên trong ứng dụng, quy đổi amount 12 thành amount_cents 1200. Bản ghi đang được biến đổi tại đây.", "Ghi bản ghi đã biến đổi trở lại Kafka. Luồng tím quay về một topic khác: orders_cents.", "Kết quả mới được lưu trong orders_cents. Đầu vào gốc vẫn nằm trong orders; thao tác đọc không xóa bản ghi."],
     "mirror": "MirrorMaker",
     "mirrorRole": "Cụm 1 → cụm 2",
     "connectSource": "Kafka Connect · Source",

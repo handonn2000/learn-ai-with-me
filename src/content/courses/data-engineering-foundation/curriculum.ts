@@ -8,6 +8,6 @@ export function curriculum(locale: 'vi' | 'en'): Pick<Course, 'parts' | 'session
   const text: typeof VI = locale === 'en' ? EN : VI;
   return {
     parts: STRUCTURE.parts.map((p) => ({ ...p, ...text.parts[p.id] })),
-    sessions: STRUCTURE.sessions.map((s) => ({ ...s, prerequisiteIds: [...s.prerequisiteIds], links: [], ...(s.id === 'b7' ? { lessonPath: '/courses/data-engineering-foundation/lessons/b7' } : {}), ...text.sessions[s.id] })),
+    sessions: STRUCTURE.sessions.map((s) => ({ ...s, prerequisiteIds: [...s.prerequisiteIds], links: [], ...(['b7', 'b8', 'b12'].includes(s.id) ? { lessonPath: `/courses/data-engineering-foundation/lessons/${s.id}` } : {}), ...text.sessions[s.id] })),
   };
 }

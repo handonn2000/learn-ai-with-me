@@ -57,17 +57,79 @@
 .def-signal-path .def-v-arrow { position: relative; }
 .def-signal-path .def-v-arrow i { position: absolute; width: 5px; height: 5px; border-radius: 50%; top: 50%; left: 0; background: var(--cyan); animation: def-path-signal 2s linear infinite; }
 @keyframes def-path-signal { from { transform: translateX(0); opacity: .2; } 50% { opacity: 1; } to { transform: translateX(23px); opacity: .2; } }
-.def-stream-orbit { display: grid; grid-template-columns: 1fr 130px 1fr; align-items: center; min-height: 240px; padding: 12px 30px; }
-.def-orbit-system { width: 185px; height: 185px; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 18px; border: 1px solid var(--cyan); border-radius: 50%; background: radial-gradient(circle, color-mix(in srgb, var(--cyan) 12%, var(--panel)), var(--panel)); justify-self: center; }
-.def-orbit-system > strong { font-size: 12px; }
-.def-stream-arcs { position: relative; display: flex; flex-direction: column; justify-content: space-between; height: 94px; color: var(--cyan); border-top: 2px dashed var(--border-3); border-bottom: 2px dashed var(--border-3); }
-.def-stream-arcs > span { text-align: center; font-size: 22px; line-height: 1; }
-.def-stream-arcs > i { position: absolute; width: 8px; height: 8px; background: var(--cyan); border-radius: 50%; animation: def-stream-roundtrip 4s linear infinite; }
-@keyframes def-stream-roundtrip { 0% { left:0; top:-5px; } 45% {left:95%;top:-5px;} 50% {left:95%;top:87px;} 95% {left:0;top:87px;} 100% {left:0;top:-5px;} }
-.def-stream-app { border: 1px solid var(--purple); border-radius: 18px; min-height: 154px; padding: 20px; display: flex; flex-direction: column; gap: 12px; background: color-mix(in srgb, var(--purple) 5%, var(--panel)); }
-.def-stream-app > .mono { color: var(--purple); font-size: 21px; }
-.def-stream-app strong { font-size: 14px; }
-.def-stream-app small { color: var(--text-2); line-height: 1.6; font-size: 12px; }
+/* Tracks touch both system boundaries. Their labels, direction and packets share the lesson clock. */
+.def-streams { container-type: inline-size; }
+.def-stream-steps { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 8px; margin: 0 0 24px; padding: 0; list-style: none; }
+.def-stream-steps li { display: flex; align-items: center; gap: 7px; min-width: 0; font-size: 12px; color: var(--muted); }
+.def-stream-steps li > span { display: grid; place-items: center; flex: 0 0 24px; height: 24px; border: 1px solid var(--border-3); border-radius: 50%; font: 11px var(--font-mono); }
+.def-stream-steps [aria-current='step'] { color: var(--text-hi); font-weight: 600; }
+.def-stream-steps [aria-current='step'] > span { color: var(--cyan-hi); border-color: var(--cyan); background: color-mix(in srgb, var(--cyan) 10%, var(--panel)); }
+.def-stream-orbit { display: grid; grid-template-columns: minmax(0, 1fr) minmax(90px, .45fr) minmax(0, 1fr); align-items: stretch; padding: 0; }
+.def-orbit-system { display: grid; grid-template-rows: 62px 106px 106px; gap: 16px; min-width: 0; padding: 0 16px 16px; border: 1px solid var(--border-3); border-radius: 16px; background: var(--panel); }
+.def-stream-cluster-heading { display: flex; align-items: center; gap: 10px; min-width: 0; }
+.def-stream-cluster-heading .def-brand-art { width: 38px; height: 38px; border-radius: 9px; }
+.def-stream-cluster-heading > strong { font-size: 13px; line-height: 1.5; }
+.def-stream-topic { display: flex; flex-direction: column; justify-content: center; gap: 8px; min-width: 0; padding: 12px; border: 1px solid var(--border-3); border-left: 3px solid var(--cyan); border-radius: 7px; background: var(--panel-2); transition: background .3s, border-color .3s; }
+.def-stream-topic > small { font-size: 10px; color: var(--muted); }
+.def-stream-topic > strong { font-size: 13px; overflow-wrap: anywhere; color: var(--cyan-hi); }
+.def-stream-topic > code { font: 11px var(--font-mono); overflow-wrap: anywhere; color: var(--text-2); }
+.def-stream-topic code > span { color: var(--cyan-hi); }
+.def-stream-topic code > b { color: var(--num); font-weight: 500; }
+.def-stream-topic code > .def-stream-awaiting { color: var(--muted); font: 11px var(--font-body); }
+.def-stream-topic--output { border-left-color: var(--purple); }
+.def-stream-topic--output > strong { color: var(--purple); }
+.def-stream-topic.is-current { border-color: var(--cyan); background: color-mix(in srgb, var(--cyan) 8%, var(--panel)); }
+.def-stream-topic--output.is-current { border-color: var(--purple); background: color-mix(in srgb, var(--purple) 8%, var(--panel)); }
+.def-stream-arcs { display: grid; grid-template-rows: 106px 106px; gap: 16px; padding: 79px 0 17px; }
+.def-stream-lane { display: flex; flex-direction: column; justify-content: center; position: relative; color: var(--cyan); }
+.def-stream-lane > strong { position: absolute; left: 0; right: 0; bottom: calc(50% + 12px); font-size: 11px; line-height: 1.4; text-align: center; }
+.def-stream-lane > div { height: 2px; position: relative; background: currentColor; opacity: .4; }
+.def-stream-lane > div::before, .def-stream-lane > div::after { content: ''; position: absolute; width: 6px; height: 6px; top: -2px; border-radius: 50%; background: currentColor; }
+.def-stream-lane > div::before { left: -3px; }
+.def-stream-lane > div::after { right: -3px; }
+.def-stream-lane b { position: absolute; top: -4px; right: 4px; width: 10px; height: 10px; border-top: 2px solid currentColor; border-right: 2px solid currentColor; transform: rotate(45deg); }
+.def-stream-lane--write { color: var(--purple); }
+.def-stream-lane--write b { left: 4px; right: auto; transform: rotate(-135deg); }
+.def-stream-lane i { display: none; position: absolute; top: -4px; width: 10px; height: 10px; border-radius: 3px; background: currentColor; box-shadow: 0 0 12px currentColor; }
+.def-stream-lane.is-current > div { opacity: 1; }
+.def-stream-lane.is-current i { display: block; animation: def-stream-read 2.6s linear both; }
+.def-stream-lane--write.is-current i { animation-direction: reverse; }
+@keyframes def-stream-read { from { left: 0; } to { left: calc(100% - 10px); } }
+.def-stream-app { display: flex; flex-direction: column; justify-content: center; min-width: 0; padding: 20px 16px; border: 1px solid var(--border-3); border-radius: 16px; background: var(--panel); transition: border-color .3s, background .3s; }
+.def-stream-app > strong { font-size: 14px; line-height: 1.5; }
+.def-stream-app > small { color: var(--muted); line-height: 1.6; font-size: 11px; margin-top: 4px; }
+.def-stream-transform { display: flex; flex-direction: column; gap: 8px; padding: 15px 0; margin-top: 12px; border-top: 1px solid var(--border-3); }
+.def-stream-transform > span { color: var(--purple); font-size: 11px; }
+.def-stream-transform > code { color: var(--text-2); font-size: 14px; }
+.def-stream-transform b { color: var(--purple); font-weight: 500; }
+.def-stream-app.is-transforming { border-color: var(--purple); background: color-mix(in srgb, var(--purple) 7%, var(--panel)); }
+.def-stream-app .def-syntax { margin: 0; border-radius: 8px; }
+.def-stream-app .def-syntax-label { padding: 7px 10px; font-size: 10px; }
+.def-stream-app .def-syntax pre { padding: 10px; font-size: 10px; line-height: 1.65; }
+.def-streams .def-loop-caption { min-height: 64px; font-size: 13px; line-height: 1.75; margin: 20px 0 0; }
+@container (max-width: 570px) {
+  .def-stream-steps { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px; }
+  .def-stream-orbit { grid-template-columns: minmax(0, 1fr); }
+  .def-orbit-system { grid-template-columns: repeat(2, minmax(0, 1fr)); grid-template-rows: 54px 106px; gap: 10px; padding: 0 10px 10px; }
+  .def-stream-cluster-heading { grid-column: 1 / -1; }
+  .def-stream-topic { padding: 8px; gap: 7px; }
+  .def-stream-topic > strong { font-size: 11px; }
+  .def-stream-topic > code { font-size: 10px; }
+  .def-stream-arcs { grid-template-columns: repeat(2, minmax(0, 1fr)); grid-template-rows: 100px; padding: 0 10px; gap: 10px; }
+  .def-stream-lane { align-items: center; }
+  .def-stream-lane > strong { left: calc(50% + 10px); right: 0; top: 34px; bottom: auto; text-align: left; font-size: 10px; }
+  .def-stream-lane > div { width: 2px; height: 100%; }
+  .def-stream-lane > div::before { left: -2px; top: -3px; }
+  .def-stream-lane > div::after { left: -2px; right: auto; top: auto; bottom: -3px; }
+  .def-stream-lane b { top: auto; bottom: 5px; right: -4px; transform: rotate(135deg); }
+  .def-stream-lane--write b { top: 5px; bottom: auto; left: -4px; transform: rotate(-45deg); }
+  .def-stream-lane i { left: -4px; top: 0; }
+  .def-stream-lane.is-current i { animation-name: def-stream-down; }
+  .def-stream-app { padding: 18px; }
+  .def-stream-app .def-syntax pre { font-size: 12px; }
+  .def-streams .def-loop-caption { min-height: 112px; }
+}
+@keyframes def-stream-down { from { top: 0; } to { top: calc(100% - 10px); } }
 .def-mirror-map { display: grid; grid-template-columns: 1fr 1fr 1fr; align-items: center; gap: 20px; padding: 36px 20px; }
 .def-cluster-stack { padding: 16px; display: flex; flex-direction: column; align-items: center; gap: 18px; }
 .def-cluster-stack > strong { font-size: 13px; }
@@ -128,9 +190,6 @@
   .def-branch-targets { gap: 14px; width: 100%; border-left: 1px solid var(--border-3); padding-left: 18px; }
   .def-branch-targets > div { width: 100%; }
   .def-signal-path .def-v-arrow i { display: none; }
-  .def-stream-orbit { grid-template-columns: 1fr; padding: 0; gap: 18px; }
-  .def-stream-arcs { width: 120px; justify-self: center; }
-  .def-orbit-system { width: 170px; height: 170px; }
   .def-mirror-map { grid-template-columns: 1fr; padding: 0; gap: 10px; }
   .def-mirror-transfer { width: 180px; justify-self: center; gap: 8px; }
   .def-isometric-brokers { transform: none; gap: 22px 18px; padding: 10px 0; }
@@ -142,5 +201,5 @@
 @media (prefers-reduced-motion: reduce) {
   .def-animation-observer *, .def-animation-observer *::before, .def-animation-observer *::after { animation: none !important; transition: none !important; }
   .def-isometric-brokers { transform: none; }
-  .def-transit-rail i { display: none; }
+  .def-transit-rail i, .def-stream-lane i { display: none !important; }
 }

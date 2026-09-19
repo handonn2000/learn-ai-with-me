@@ -4,8 +4,9 @@ Sổ tay tự học AI (CSC14003 · HCMUS) dạng web app — port từ bộ thi
 Lộ trình 11 tuần với lịch ôn ngắt quãng, bài học tương tác (canvas lab chạy từng bước 7 thuật toán tìm kiếm), quiz chấm theo chủ đề. Kiến trúc data-driven, sẵn đường mở rộng thành blog/portfolio nhiều khóa học.
 
 Khóa **Data Engineering Foundation** có baseline và lộ trình song ngữ: 12 buổi, 4 phần,
-12 tuần đề xuất, khoảng 72–96 giờ theo baseline. Tuần 7 — Ingestion đã có bài học VI/EN,
-3 lab mô phỏng và quiz 8 câu; các tuần khác vẫn là khung học, chưa có bộ đề tổng hợp.
+12 tuần đề xuất, khoảng 72–96 giờ theo baseline. Tuần 7 — Ingestion, Tuần 8 — Storage và Tuần 12 — Orchestration đã có bài học VI/EN, lab mô phỏng và quiz.
+Tuần 8 gồm 10 chương, storage/HDFS/schema explorer, lab governance và medallion, cùng quiz 10 câu;
+Tuần 12 gồm 10 chương về Airflow và chất lượng dữ liệu, lab dependency/rerun, concurrency và validation gate, cùng quiz 10 câu; các tuần khác vẫn là khung học, chưa có bộ đề tổng hợp.
 Xem [curriculum và roadmap](docs/courses/data-engineering-foundation/curriculum.md) cùng
 [phân tích 12 bộ slide nguồn](docs/courses/data-engineering-foundation/source-analysis.md).
 
@@ -72,6 +73,8 @@ Các đường dẫn dưới đây tính từ gốc ứng dụng `/learn-ai-with
 | `/courses` | Danh sách khóa học |
 | `/courses/csc14003` | Lộ trình AI — 11 tuần |
 | `/courses/data-engineering-foundation/lessons/b7` | Tuần 7 — Ingestion, Kafka và CDC (VI/EN) |
+| `/courses/data-engineering-foundation/lessons/b8` | Tuần 8 — Storage, modeling và lakehouse (VI/EN) |
+| `/courses/data-engineering-foundation/lessons/b12` | Tuần 12 — Orchestration, Airflow và chất lượng dữ liệu (VI/EN) |
 | `/courses/data-engineering-foundation` | Lộ trình Data Engineering Foundation và kiến thức đầu vào |
 | `/courses/csc14003/tests` | Kiểm tra tổng hợp; `#p1`, `#p2`, `#p3`, `#p4` chọn phần |
 | `/courses/csc14003/lessons/b1` | Buổi 1 — Nhập môn AI |

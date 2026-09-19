@@ -2,9 +2,9 @@
 
 Baseline v1 · 2026-09-06 · Course code: DEF · Slug: `data-engineering-foundation`
 
-This is the original course baseline, curriculum, and roadmap. Status update 2026-09-08: Week 7 now has a bilingual Ingestion lesson, three browser simulations, a formative quiz, and practice prompts. Other detailed lessons and course assessments remain deferred. The baseline hour estimates have not been revalidated for the expanded all-slide-detail scope. The accompanying [source analysis](source-analysis.md) maps all 12 source PDFs to this plan and records coverage gaps.
+This is the original course baseline, curriculum, and roadmap. Status update 2026-09-15: Weeks 7–8 now have bilingual Ingestion and Storage lessons, browser simulations, formative quizzes, and practice prompts. Week 8 adds ten chapters, storage/HDFS/schema explorers, governance and medallion labs, and a ten-question quiz. Week 12 was added on 2026-09-16 with ten orchestration/quality chapters, three lab themes, a rerun/backfill exercise and ten-question quiz. Other detailed lessons and course assessments remain deferred. The baseline hour estimates have not been revalidated for the expanded all-slide-detail scope. The accompanying [source analysis](source-analysis.md) maps all 12 source PDFs to this plan and records coverage gaps.
 
-**Authoring update · 2026-09-07:** the user has requested lessons 7–12 (Parts III and IV) first, with every substantive slide detail, documentary narration, visual interactions, and both Vietnamese and English. The [lesson design review](lesson-design/README.md) supersedes the later authoring order below for this work and expands those six lessons beyond the lighter foundation treatment. Its outlines are ready for review; implementation is pending.
+**Authoring update · 2026-09-07:** the user has requested lessons 7–12 (Parts III and IV) first, with every substantive slide detail, documentary narration, visual interactions, and both Vietnamese and English. The [lesson design review](lesson-design/README.md) supersedes the later authoring order below for this work and expands those six lessons beyond the lighter foundation treatment. Weeks 7, 8, and 12 have implementations; weeks 9–11 remain planned.
 
 ## Baseline
 

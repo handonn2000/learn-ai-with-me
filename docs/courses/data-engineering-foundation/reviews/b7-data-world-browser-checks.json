@@ -1,0 +1,48 @@
+{
+  "checks": [
+    "deck keyboard and simulated touch gesture stay on chapter 1",
+    "hidden deck slide does not redraw",
+    "SPA navigation disposes the scene and removes canvas",
+    "final label collision placement: 12 angles at 1440/760/470/375/320px",
+    "real WebGL context loss preserves usable HTML fallback",
+    "unavailable WebGL at startup has scenario and station fallback",
+    "VI phone UI works"
+  ],
+  "errors": [],
+  "warnings": [
+    "[.WebGL-0x10c00485c00]GL Driver Message (OpenGL, Performance, GL_CLOSE_PATH_NV, High): GPU stall due to ReadPixels",
+    "[.WebGL-0x10c00485c00]GL Driver Message (OpenGL, Performance, GL_CLOSE_PATH_NV, High): GPU stall due to ReadPixels",
+    "[.WebGL-0x10c00485c00]GL Driver Message (OpenGL, Performance, GL_CLOSE_PATH_NV, High): GPU stall due to ReadPixels",
+    "[.WebGL-0x10c00485c00]GL Driver Message (OpenGL, Performance, GL_CLOSE_PATH_NV, High): GPU stall due to ReadPixels (this message will no longer repeat)"
+  ],
+  "revision": "DEF Week 7 interactive Data Island, 2026-09-09",
+  "initial_suite_completed_checks": [
+    "WebGL lazy-loads only when the island enters the viewport",
+    "CDC: all active paths animate for at least two packet cycles",
+    "Stream processing: all active paths animate for at least two packet cycles",
+    "Batch: all active data/control paths animate for at least two packet cycles",
+    "Camera buttons and arrow/plus/minus/Home shortcuts rotate, zoom and reset correctly",
+    "Pointer drag rotates the actual camera",
+    "All six station selectors and projected labels open the correct inspector",
+    "Scenario tabs respond to arrow keys",
+    "Offscreen suspension and synthetic document-hidden event suspend rendering",
+    "Reduced motion stops automatic frames while explicit camera controls redraw",
+    "All six markers remain separate at eight angles across 1440/375/320px",
+    "All authentic framework logos load"
+  ],
+  "initial_suite_limit": "Ended at a later deck initialization timeout. Remaining cases passed in the focused final suite. Completed initial assertions are preserved from the tool output; no whole-suite success is inferred.",
+  "additional_check": "Final light-theme scene-hint contrast verified after CSS specificity fix.",
+  "limits": [
+    "Chromium headless with software WebGL; not a physical-device GPU benchmark",
+    "Touch propagation and document visibility tested using synthetic browser events",
+    "No whole-PDF coverage review or full-lesson translation certification"
+  ],
+  "source_sha256": {
+    "src/features/lessons/def/b7/DataWorld.tsx": "82626f169b9f6186f9d113ebfd59a55177cd408e5137c570d200b3e059838d8c",
+    "src/features/lessons/def/b7/DataWorld.css": "7818702ca16841349629f8a1ccda9e56af64c1971f835b8fd39670065ea61cb6",
+    "src/features/lessons/def/b7/data-world.scene.ts": "eb4a75cd05df6acbdf3d615cd4c099787ea78d7c6ceac1a2468f72249e4559d5",
+    "src/features/lessons/def/b7/Lesson07Ingestion.tsx": "630e365bf669bfdea0641be3f44dba72ba74fba35eab9a924cfa7a1eb54795c2",
+    "src/features/lessons/def/b7/lesson07.text.vi.ts": "117de7232397c24b8fe44f6fc5abe27fa55807d28f8457f687abfa38657d6694",
+    "src/features/lessons/def/b7/lesson07.text.en.ts": "c812aa35a10e6c39429fd1648be9248dadf9e0c35b9c9151dae9ca9cab768784"
+  }
+}

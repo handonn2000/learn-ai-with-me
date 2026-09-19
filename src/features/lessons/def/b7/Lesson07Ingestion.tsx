@@ -6,6 +6,7 @@ import { SessionQuiz } from '@/components/SessionQuiz';
 import { Html } from '@/components/Html';
 import { RoutingLab, CrashLab, CdcLab } from './IngestionLabs';
 import { T } from './lesson07.text';
+import { DataWorld } from './DataWorld';
 import { SyntaxCode } from './SyntaxCode';
 import { ChapterVisual, FrameworkLogo } from './IngestionVisuals';
 
@@ -32,7 +33,7 @@ export default function Lesson07Ingestion() {
       <section id="toan" className="lesson-section lesson-section--first"><SectionHead no="↳" title={T.readyTitle} lead={T.readyLead} /><div className="def-grid">{T.terms.map(([term, text]) => <div className="card" key={term}><h3>{term}</h3><p>{text}</p></div>)}</div></section>
       {T.chapters.map((c, i) => <section key={c.title} id={`ch${String(i + 1).padStart(2, '0')}`} className="lesson-section">
         <SectionHead no={String(i + 1).padStart(2, '0')} title={c.title} lead={c.lead} color="var(--cyan)" />
-        <ChapterVisual chapter={i} />
+        {i === 0 ? <DataWorld /> : <ChapterVisual chapter={i} />}
         {![0, 3, 9].includes(i) && c.flow.length > 0 && <ol className="def-flow" aria-label={T.diagramLabel}>{c.flow.map((s) => <li key={s}>{s}</li>)}</ol>}
         <aside className="def-key-idea"><span>{T.visuals.keyIdea}</span><p>{T.visuals.callouts[i]}</p></aside>
         <div className="def-prose">{c.body.map((p) => <Html as="p" t={p} key={p} />)}</div>

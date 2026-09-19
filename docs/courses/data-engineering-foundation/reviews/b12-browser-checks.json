@@ -1,0 +1,23 @@
+{
+  "date": "2026-09-16",
+  "browser": "Isolated headless Chrome via Playwright",
+  "results": [
+    "EN route, 10 chapters, all sections and anchor targets render",
+    "All 7 injected faults block publication; repair/revalidation/publication work; changing input invalidates pass",
+    "Pool controls distinguish run admission, global capacity and resource limits",
+    "Rerun preserves 3 rows; a second interval increases total to 6",
+    "Cron only: observed every frame and 2 complete cycle resets",
+    "Dependency-aware: observed every frame and 2 complete cycle resets",
+    "Keyboard tabs, reduced-motion static table, viewport pause, and simulated document visibility events pass",
+    "10-question quiz scores 100 and saves only DEF b12; checklist is interactive",
+    "All 16 presentation slides are mapped; chapter navigation works",
+    "All sections at 375px in VI/EN and dark/light have no page overflow; logos load",
+    "Focused follow-up: keyboard scenario tabs do not change deck slide; JSON keys have distinct syntax class; code stays dark in light theme"
+  ],
+  "errors": [],
+  "failedResponses": [],
+  "limits": [
+    "Document-hidden pause exercised with synthetic visibilitychange and overridden document.hidden; real background tab behavior not observed.",
+    "Shared application build still blocked by pre-existing b7/b8 errors."
+  ]
+}

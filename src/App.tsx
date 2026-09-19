@@ -12,6 +12,8 @@ const NotFoundPage = lazy(() => import('./pages/NotFoundPage'));
 const RoadmapPage = lazy(() => import('./features/roadmap/RoadmapPage'));
 const PartTestPage = lazy(() => import('./features/tests/PartTestPage'));
 const DefLesson07 = lazy(() => import('./features/lessons/def/b7/Lesson07Ingestion'));
+const DefLesson12 = lazy(() => import('./features/lessons/def/b12/Lesson12Orchestration'));
+const DefLesson08 = lazy(() => import('./features/lessons/def/b8/Lesson08Storage'));
 const Lesson01 = lazy(() => import('./features/lessons/b1/Lesson01Intro'));
 const Lesson02 = lazy(() => import('./features/lessons/b2/Lesson02Agents'));
 const Lesson03 = lazy(() => import('./features/lessons/b3/Lesson03Search'));
@@ -71,6 +73,8 @@ export default function App() {
           <Route path="/courses/csc14003/lessons/b2" element={<Lesson02 />} />
           <Route path="/courses/csc14003/lessons/b3" element={<Lesson03 />} />
           <Route path="/courses/data-engineering-foundation/lessons/b7" element={<DefLesson07 />} />
+          <Route path="/courses/data-engineering-foundation/lessons/b8" element={<DefLesson08 />} />
+          <Route path="/courses/data-engineering-foundation/lessons/b12" element={<DefLesson12 />} />
           {/* Các trang còn lại dùng header chung */}
           <Route
             path="*"

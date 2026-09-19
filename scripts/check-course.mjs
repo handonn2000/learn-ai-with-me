@@ -76,11 +76,11 @@ try {
       for (const key of ['title', 'topics', 'math', 'outcome', 'practice']) assert(s[key]?.length > 15, `${s.id}.${key}`);
     }
   });
-  check('only implemented DEF week 7 links to a lesson; no active DEF part tests', () => {
+  check('only implemented DEF weeks 7, 8, and 12 link to lessons; no active DEF part tests', () => {
     assert(!vi.roadmapOnly && !en.roadmapOnly);
     assert.equal(vi.hasPartTests, false);
     assert.equal(en.hasPartTests, false);
-    for (const c of [vi, en]) for (const s of c.sessions) { assert.equal(s.lessonPath, s.id === 'b7' ? '/courses/data-engineering-foundation/lessons/b7' : undefined); assert.deepEqual(s.links, []); }
+    for (const c of [vi, en]) for (const s of c.sessions) { assert.equal(s.lessonPath, ['b7', 'b8', 'b12'].includes(s.id) ? `/courses/data-engineering-foundation/lessons/${s.id}` : undefined); assert.deepEqual(s.links, []); }
     assert.equal(ai.hasPartTests, true);
   });
   check('weekly workload reconciles to 72–96 hours', () => {

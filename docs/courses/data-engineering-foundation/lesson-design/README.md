@@ -1,15 +1,15 @@
-> Implementation update · 2026-09-08: the user approved starting Week 7. b7 is implemented at `/courses/data-engineering-foundation/lessons/b7`; b8–b12 remain planned. The files below preserve the original writing plan; actual b7 coverage is audited in `../reviews/b7-quality.md` and its ledger.
+> Implementation update · 2026-09-15: b7 and b8 are implemented at `/courses/data-engineering-foundation/lessons/b7` and `/courses/data-engineering-foundation/lessons/b8`; b9–b11 remain planned; b12 was implemented on 2026-09-16 at `/courses/data-engineering-foundation/lessons/b12`. The files below preserve the original writing plan; actual b7 coverage is audited in `../reviews/b7-quality.md` and its ledger.
 
 # Part III & IV — lesson design review
 
-Status: Week 7 implemented; the remaining five lesson outlines are retained for later implementation.
+Status: Weeks 7, 8, and 12 have implementations; outlines for weeks 9–11 remain planned. Lesson 12 validation and source corrections are recorded in `../reviews/b12-source-audit.md` and companion review reports.
 
 The requested lessons are **b7–b12**: ingestion, storage, Spark batch processing, Flink streaming, consumption, and orchestration. The design covers **396 source pages**, organized into **60 chapters** with **18 interaction specifications**.
 
 - [English storyboards](storyboards.en.md): chapter scope, documentary narration samples, interaction behavior, numerical examples, and practice targets.
 - [Kịch bản tiếng Việt](storyboards.vi.md): cùng phạm vi, mẫu lời dẫn và thiết kế tương tác bằng tiếng Việt.
 - [Readiness glossary / Thuật ngữ đầu vào](readiness.md): short bilingual definitions and their role in each lesson.
-- [Slide coverage map](slide-coverage.csv): one row per PDF page, including covers, agendas, dividers, references, and closing pages. Week 7 rows are linked to the implemented lesson and its review ledger; b8–b12 rows remain **planned**.
+- [Slide coverage map](slide-coverage.csv): one row per PDF page, including covers, agendas, dividers, references, and closing pages. Week 7 rows are linked to the implemented lesson and its review ledger; b8 coverage is recorded in `../reviews/b8-quality.md`; b12 implementation is mapped to the lesson and its source audit; b9–b11 rows remain **planned**.
 - [Source corrections and authoring checks](source-corrections.md): confirmed corrections, incomplete examples, and version-sensitive claims to verify during implementation.
 
 | Part | Lesson | Source pages | Main interaction |

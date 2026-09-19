@@ -1,5 +1,175 @@
 import type { VI } from './lesson07.text.vi';
 export const EN = {
+  "world": {
+    "eyebrow": "DATA ATLAS · 3D",
+    "title": "Follow one order through a floating data city",
+    "intro": "Six districts, one record to follow. Watch the numbered route: each bright skybridge shows the current transfer, and the record changes only when a district processes it.",
+    "scenarios": [
+      "Live CDC",
+      "Stream processing",
+      "Scheduled batch"
+    ],
+    "scenarioLabel": "Choose a data journey",
+    "landmarkLabel": "Explore the stations",
+    "sceneLabel": "3D floating data city. Use arrow keys to rotate, plus or minus to zoom, and Home to return to the starting view.",
+    "hint": "Drag to orbit · select a station to explore",
+    "keys": "Arrow keys to orbit · + / − to zoom",
+    "live": "Following one record",
+    "static": "Complete route · static view",
+    "zoomIn": "Zoom in",
+    "zoomOut": "Zoom out",
+    "rotateLeft": "Rotate left",
+    "rotateRight": "Rotate right",
+    "home": "Whole-city view",
+    "loading": "Building the floating city…",
+    "fallback": "The 3D view is unavailable on this device. You can still select stations and follow the journey diagram below.",
+    "dataLegend": "Records",
+    "controlLegend": "Orchestration signals",
+    "inspect": "EXPLORING THIS STATION",
+    "active": "In this journey",
+    "inactive": "Outside the selected journey",
+    "routeLabel": "THE DATA ROUTE",
+    "notes": [
+      "Debezium reads committed changes from the PostgreSQL WAL. Events enter Kafka, then a sink connector ingests them into Snowflake. A downstream MERGE applies the row update.",
+      "A Kafka Streams application reads an input topic, processes records, and writes results to an output topic in Kafka. A sink connector delivers those results to Snowflake.",
+      "Airflow schedules tasks to extract data from PostgreSQL and load it into Snowflake. Gold paths carry orchestration signals; the data does not need to pass through Airflow."
+    ],
+    "takeaways": [
+      "Reading an event does not delete its record in Kafka.",
+      "Kafka Streams is an application library; results return to Kafka before reaching the warehouse.",
+      "Orchestration decides when to run; tasks do the data transfer."
+    ],
+    "modelNote": "The city is an explanatory model, not a deployment map. One example travels through the numbered stages; a new illustration starts after the final hold. Repeating the scene does not delete real data.",
+    "stations": [
+      {
+        "name": "PostgreSQL",
+        "role": "Transaction source",
+        "detail": "Orders are written here. The WAL records changes for a CDC connector to follow; in batch mode, a task reads data directly from the source."
+      },
+      {
+        "name": "Debezium",
+        "role": "Change capture station",
+        "detail": "The connector follows the database change log and emits events to Kafka. This illustration focuses on committed changes after the initial snapshot."
+      },
+      {
+        "name": "Apache Kafka",
+        "role": "Event hub",
+        "detail": "Brokers store events in partitions. Consumers track their own read positions; reading does not delete the log. The towers suggest a cluster without simulating replication."
+      },
+      {
+        "name": "Kafka Streams",
+        "role": "Stream workshop",
+        "detail": "The library runs inside an application. That application reads from Kafka, transforms or aggregates records, then writes results to another Kafka topic."
+      },
+      {
+        "name": "Snowflake",
+        "role": "Analytics warehouse",
+        "detail": "The destination holds data for analytical queries. A sink connector or batch task loads the warehouse; the glowing path omits intermediate steps."
+      },
+      {
+        "name": "Apache Airflow",
+        "role": "Orchestration observatory",
+        "detail": "A DAG describes dependencies and schedules. The scheduler coordinates tasks; gold paths represent instructions to run, not a stream of records."
+      }
+    ],
+    "edition": "DATA CITY",
+    "traceTitle": "FOLLOW THE ROUTE",
+    "stageLabel": "Stage",
+    "allStages": "Complete route",
+    "payloadLabel": "RECORD AT THIS STAGE",
+    "packetTag": "Order #42",
+    "batchTag": "3 rows",
+    "controlTag": "Run task",
+    "processedLegend": "Processed record",
+    "routeHelp": "The bright route is active now. Arrows show direction; completed links stay softly lit. Gold dashed arcs carry scheduling instructions.",
+    "packetNames": {
+      "row": "Row / WAL change",
+      "event": "CDC event",
+      "result": "Processed result",
+      "batch": "Batch of rows",
+      "control": "Task instruction"
+    },
+    "stageCopy": [
+      [
+        {
+          "title": "Commit the change",
+          "detail": "Order 42 changes from amount 10 to 12. PostgreSQL commits the transaction and records the change in its WAL."
+        },
+        {
+          "title": "Capture from the WAL",
+          "detail": "Debezium reads the committed change. Follow order 42 from the source to the capture district."
+        },
+        {
+          "title": "Publish the CDC event",
+          "detail": "Debezium turns the change into an event and publishes it to the orders topic in Kafka."
+        },
+        {
+          "title": "Load the destination",
+          "detail": "A sink connector ingests the event into Snowflake, then a downstream MERGE applies the update to the target row. This bridge represents both steps; ingestion alone does not apply CDC updates."
+        },
+        {
+          "title": "Keep the result",
+          "detail": "Snowflake now holds amount 12 for order 42. The Kafka event remains available until retention or compaction removes it."
+        }
+      ],
+      [
+        {
+          "title": "Commit the change",
+          "detail": "Order 42 now has amount 12. Its committed change becomes the input for this example."
+        },
+        {
+          "title": "Capture the change",
+          "detail": "Debezium follows the PostgreSQL WAL to capture the committed update."
+        },
+        {
+          "title": "Write the input topic",
+          "detail": "The CDC event enters the Kafka input topic. Keep following the same order_id."
+        },
+        {
+          "title": "Read in the application",
+          "detail": "The Kafka Streams application reads the input event. The record crosses into the processing district."
+        },
+        {
+          "title": "Transform the value",
+          "detail": "For this example, the application converts amount 12 into amount_cents 1200. The order_id stays 42."
+        },
+        {
+          "title": "Write the output topic",
+          "detail": "The purple result returns to a different Kafka topic. Follow the return lane, not the input lane."
+        },
+        {
+          "title": "Load the processed result",
+          "detail": "A sink connector reads the output topic and loads amount_cents 1200 into Snowflake."
+        },
+        {
+          "title": "Keep the result",
+          "detail": "The warehouse holds the processed result. Reading either Kafka topic does not delete its records."
+        }
+      ],
+      [
+        {
+          "title": "Schedule extraction",
+          "detail": "Airflow sends a task instruction to the extraction worker, shown at the source. The gold signal carries no order data."
+        },
+        {
+          "title": "Extract a batch",
+          "detail": "The extraction task reads 3 source rows, including order 42. The grouped packet represents those rows together."
+        },
+        {
+          "title": "Schedule the load",
+          "detail": "After extraction completes, Airflow schedules the loading task, shown at the warehouse. This is another control signal."
+        },
+        {
+          "title": "Transfer the rows",
+          "detail": "The loading task moves the 3 extracted rows into Snowflake. Follow the solid data bridge from source to destination."
+        },
+        {
+          "title": "Keep the loaded batch",
+          "detail": "The warehouse now holds the 3 rows. Airflow coordinated the tasks; the records did not travel through its scheduler."
+        }
+      ]
+    ]
+  },
   badge: "WEEK 7 · DEF",
   title: "Ingestion — the journey begins",
   cover: "Cover",
@@ -89,6 +259,13 @@ export const EN = {
     "cluster2": "Kafka · cluster 2",
     "streams": "Kafka Streams application",
     "streamsRole": "Read → transform → write to cluster 1",
+    "streamsStages": ["Read", "Transform", "Write", "Stored"],
+    "streamsInput": "Input topic",
+    "streamsOutput": "Output topic",
+    "streamsOutside": "Runs outside the Kafka brokers",
+    "streamsWaiting": "Awaiting the new result",
+    "streamsNote": "Two topics in the same Kafka cluster. The input stays in orders; this example writes the converted value to orders_cents. Each loop starts a fresh illustration.",
+    "streamsSteps": ["Read order 42 from orders. The cyan record travels from Kafka to the Streams application.", "Inside the application, convert amount 12 into amount_cents 1200. The record is being transformed here.", "Write the transformed record back to Kafka. The purple return lane leads to a different topic: orders_cents.", "The new result is stored in orders_cents. The original input remains in orders; reading it does not remove it."],
     "mirror": "MirrorMaker",
     "mirrorRole": "Cluster 1 → cluster 2",
     "connectSource": "Kafka Connect · Source",

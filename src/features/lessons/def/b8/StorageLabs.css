@@ -1,0 +1,156 @@
+.def8-lab { margin: 28px 0; padding: clamp(18px, 3vw, 28px); border: 1px solid var(--border-3); border-radius: 16px; background: var(--panel); color: var(--text-2); min-width: 0; }
+.def8-lab h3 { color: var(--text-hi); font-size: clamp(21px, 3vw, 28px); line-height: 1.3; margin: 12px 0; }
+.def8-lab h4 { color: var(--text-hi); margin: 0 0 12px; font-size: 14px; }
+.def8-lab p { line-height: 1.75; }
+.def8-fixture { display: block; color: var(--muted); font-size: 11px; letter-spacing: .03em; }
+.def8-lab .def8-small, .def8-loop-note { font-size: 12px; color: var(--muted); line-height: 1.7; }
+.def8-loop-note { border-top: 1px dashed var(--border-3); padding-top: 10px; }
+.def8-tabs { display: flex; flex-wrap: wrap; gap: 7px; margin: 22px 0; }
+.def8-tabs button, .def8-lab-controls button { min-height: 44px; border: 1px solid var(--border-3); border-radius: 8px; padding: 10px 15px; background: var(--panel-2); color: var(--text-2); font: inherit; font-size: 12px; cursor: pointer; text-align: left; }
+.def8-tabs button[aria-selected="true"], .def8-lab-controls button:first-child { color: var(--cyan); border-color: var(--cyan); background: color-mix(in srgb, var(--cyan) 8%, var(--panel)); }
+.def8-lab button:focus-visible, .def8-lab input:focus-visible, .def8-lab summary:focus-visible { outline: 3px solid var(--cyan); outline-offset: 3px; }
+.def8-lab-controls button:disabled { opacity: .4; cursor: default; }
+.def8-caption { background: color-mix(in srgb, var(--cyan) 6%, var(--panel)); border-left: 3px solid var(--cyan); padding: 13px 16px; border-radius: 0 8px 8px 0; font-size: 13px; min-height: 72px; }
+.def8-static-phases { padding-left: 24px; font-size: 12px; line-height: 1.7; }
+.def8-static-phases li { padding: 5px 8px; border-left: 2px solid transparent; }
+.def8-static-phases li.is-current { border-color: var(--cyan); color: var(--text-hi); background: color-mix(in srgb, var(--cyan) 5%, transparent); }
+.def8-explanations { margin: 18px 0; display: grid; gap: 12px; }
+.def8-explanations > div { display: grid; grid-template-columns: 110px 1fr; gap: 14px; font-size: 13px; line-height: 1.65; }
+.def8-explanations dt { font-weight: 600; color: var(--text-hi); }
+.def8-explanations dd { margin: 0; }
+/* Address, physical representation and returned bytes tell different parts of access. */
+.def8-storage-scene { display: grid; grid-template-columns: minmax(0, 1.25fr) minmax(0, 1fr); gap: 14px; }
+.def8-access-card { grid-column: 1 / -1; border: 1px solid var(--border-3); padding: 15px; border-radius: 10px; }
+.def8-access-card > span, .def8-payload > span { font-size: 11px; color: var(--muted); display: block; margin-bottom: 8px; }
+.def8-access-card > code { color: var(--cyan); font-size: 14px; overflow-wrap: anywhere; }
+.def8-storage-device { min-height: 164px; padding: 20px; background: var(--panel-2); border-radius: 10px; display: grid; align-items: center; }
+.def8-file-tree { font: 13px var(--font-mono); display: grid; gap: 15px; }
+.def8-file-tree span:nth-child(2) { padding-left: 15px; }
+.def8-file-tree strong { margin-left: 30px; border: 1px solid var(--border-3); padding: 8px; border-radius: 6px; }
+.def8-block-grid { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 6px; }
+.def8-block-grid span { border: 1px solid var(--border-3); border-radius: 3px; padding: 9px 3px; text-align: center; font: 11px var(--font-mono); }
+.def8-object-bucket { border: 2px solid var(--border-3); border-top: 4px double var(--border-3); border-radius: 5px 5px 28px 28px; padding: 12px; text-align: center; }
+.def8-object-bucket > span { font: 11px var(--font-mono); }
+.def8-object-bucket > div { margin: 12px 0; padding: 14px 8px; border: 1px solid var(--border-3); border-radius: 8px; }
+.def8-object-bucket strong { font: 12px var(--font-mono); overflow-wrap: anywhere; }
+.def8-object-bucket small { display: block; margin-top: 8px; font-size: 10px; }
+.def8-payload { padding: 16px; border: 1px solid var(--border-3); border-radius: 10px; background: var(--panel-2); }
+.def8-payload pre { margin: 14px 0; font: 12px/1.8 var(--font-mono); white-space: pre-wrap; overflow-wrap: anywhere; }
+.def8-code-key { color: var(--cyan); }
+.def8-code-number { color: var(--yellow); }
+.def8-storage-scene .is-active { border-color: var(--cyan); box-shadow: inset 0 0 0 1px var(--cyan); }
+/* HDFS routes keep metadata separate from replica bytes. */
+.def8-hdfs-scene { display: grid; grid-template-columns: minmax(100px, .9fr) minmax(80px, .6fr) minmax(0, 1.8fr); grid-template-rows: auto auto; gap: 20px 10px; padding: 20px 0; align-items: center; }
+.def8-hdfs-client { grid-row: 1 / 3; min-width: 0; display: grid; gap: 15px; justify-items: center; text-align: center; padding: 24px 12px; border: 2px solid var(--border-3); border-radius: 12px; }
+.def8-hdfs-client code { font-size: 11px; overflow-wrap: anywhere; }
+.def8-hdfs-client small { color: var(--muted); font-size: 11px; }
+.def8-client-bytes { border: 1px dashed var(--border-3); border-radius: 6px; padding: 9px 5px; font: 11px var(--font-mono); color: var(--green); }
+.def8-hdfs-client.is-received { border-color: var(--green); }
+.def8-metadata-wire, .def8-data-wire { text-align: center; color: var(--muted); }
+.def8-metadata-wire > span, .def8-data-wire > span { display: block; font-size: 35px; line-height: 1.2; }
+.def8-metadata-wire small, .def8-data-wire small { display: block; font-size: 10px; line-height: 1.6; }
+.def8-data-wire { grid-column: 2; grid-row: 2; }
+.def8-metadata-wire.is-active { color: var(--purple); }
+.def8-data-wire.is-active { color: var(--cyan); }
+.def8-namenode { grid-column: 3; grid-row: 1; display: grid; gap: 8px; padding: 18px; border: 1px solid var(--border-3); border-radius: 12px; background: color-mix(in srgb, var(--purple) 5%, var(--panel)); }
+.def8-namenode strong { color: var(--purple); font-size: 13px; }
+.def8-namenode code { font-size: 12px; }
+.def8-namenode small { font-size: 10px; color: var(--muted); }
+.def8-namenode.is-active { border-color: var(--purple); }
+.def8-hdfs-racks { grid-column: 3; grid-row: 2; display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+.def8-rack { min-width: 0; padding: 13px 8px; border: 1px dashed var(--border-3); border-radius: 9px; text-align: center; }
+.def8-rack > span { color: var(--muted); font-size: 10px; }
+.def8-rack > strong { display: block; font-size: 11px; margin: 7px 0; }
+.def8-rack > small { display: block; color: var(--muted); font-size: 10px; }
+.def8-rack.is-active { border-style: solid; border-color: var(--cyan); background: color-mix(in srgb, var(--cyan) 6%, var(--panel)); }
+.def8-rack.is-unavailable { border-color: var(--red); background: color-mix(in srgb, var(--red) 6%, var(--panel)); }
+.def8-rack.is-unavailable > small { color: var(--red); }
+.def8-block-replica { margin: 12px 0; padding: 10px 4px; border: 1px solid var(--border-3); background: var(--panel-2); border-radius: 5px; }
+.def8-block-replica small, .def8-block-replica code { display: block; font-size: 10px; }
+/* The fact is the root; a snowflake adds a genuine dimension-to-dimension join. */
+.def8-model-scene { display: grid; grid-template-columns: minmax(150px, .9fr) minmax(0, 2.3fr); align-items: center; gap: 8px; padding: 10px 0; }
+.def8-model-table { border: 1px solid var(--border-3); background: var(--panel-2); border-radius: 9px; padding: 13px; min-width: 0; flex: 1; }
+.def8-model-table > span { color: var(--muted); display: block; font-size: 10px; }
+.def8-model-table > strong { font-size: 12px; display: block; color: var(--cyan); margin-top: 6px; overflow-wrap: anywhere; }
+.def8-model-table ul { list-style: none; padding: 8px 0 0; margin: 8px 0 0; border-top: 1px solid var(--border-3); }
+.def8-model-table li { font-size: 10px; line-height: 1.9; overflow-wrap: anywhere; }
+.def8-model-fact { border-color: var(--yellow); padding: 18px; }
+.def8-model-fact > strong { color: var(--yellow); }
+.def8-dimension-branches { display: grid; gap: 14px; }
+.def8-dimension-branch { display: flex; align-items: center; min-width: 0; gap: 6px; }
+.def8-join-label { display: grid; justify-items: center; min-width: 68px; color: var(--muted); }
+.def8-join-label > span { font-size: 27px; color: var(--cyan); }
+.def8-join-label > code { font-size: 9px; }
+.def8-category-table { border-color: var(--purple); }
+.def8-category-table > strong { color: var(--purple); }
+/* Each policy exposes its exact effect. No synthetic quality score hides failures. */
+.def8-governance-controls { border: 0; padding: 0; margin: 20px 0; display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px; }
+.def8-governance-controls legend { padding: 0 0 12px; font-size: 12px; color: var(--muted); }
+.def8-governance-controls label { display: grid; grid-template-columns: 20px 1fr; gap: 7px 10px; align-content: start; padding: 15px; border: 1px solid var(--border-3); border-radius: 9px; cursor: pointer; min-height: 44px; }
+.def8-governance-controls input { margin: 2px 0 0; width: 17px; height: 17px; accent-color: var(--cyan); }
+.def8-governance-controls strong { font-size: 13px; }
+.def8-governance-controls label span { grid-column: 2; font-size: 11px; line-height: 1.7; color: var(--muted); }
+.def8-governance-controls label.is-enabled { border-color: var(--cyan); background: color-mix(in srgb, var(--cyan) 5%, var(--panel)); }
+.def8-issue-list { display: grid; gap: 10px; }
+.def8-issue { display: grid; grid-template-columns: minmax(0, .9fr) minmax(0, 1.4fr); gap: 20px; padding: 15px; border: 1px solid var(--border-3); border-left: 3px solid var(--red); border-radius: 6px; }
+.def8-issue.is-fixed { border-left-color: var(--green); }
+.def8-issue.is-detected { border-left-color: var(--yellow); }
+.def8-issue h4 { font-size: 13px; margin: 7px 0; }
+.def8-issue code { font-size: 10px; color: var(--muted); overflow-wrap: anywhere; }
+.def8-issue p { margin: 0; font-size: 12px; }
+.def8-issue-status { font-size: 10px; color: var(--red); }
+.def8-issue.is-fixed .def8-issue-status { color: var(--green); }
+.def8-issue.is-detected .def8-issue-status { color: var(--yellow); }
+/* Medallion is an active lab; each table is an inspectable ledger. */
+.def8-lab-controls { display: flex; flex-wrap: wrap; gap: 8px; margin: 20px 0; }
+.def8-pipeline-metrics { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 9px; margin: 20px 0; }
+.def8-pipeline-metrics > div { padding: 13px; border: 1px solid var(--border-3); border-radius: 9px; min-width: 0; }
+.def8-pipeline-metrics span { display: block; font-size: 11px; color: var(--muted); }
+.def8-pipeline-metrics strong { display: block; font: 500 27px var(--font-mono); color: var(--text-hi); margin-top: 8px; }
+.def8-pipeline-metrics .def8-gold-metric { grid-column: 1 / -1; border-color: var(--yellow); background: color-mix(in srgb, var(--yellow) 5%, var(--panel)); display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 10px; }
+.def8-gold-metric strong { margin: 0; color: var(--yellow); }
+.def8-gold-metric small { font-size: 12px; }
+.def8-bronze-panel, .def8-output-ledgers > div { border: 1px solid var(--border-3); padding: 15px; border-radius: 10px; min-width: 0; }
+.def8-output-ledgers { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px; margin: 14px 0; }
+.def8-output-ledgers > div:last-child { grid-column: 1 / -1; }
+.def8-table-wrap { overflow-x: auto; max-width: 100%; }
+.def8-table-wrap table { border-collapse: collapse; width: 100%; font-size: 11px; text-align: left; }
+.def8-table-wrap th { font-size: 10px; color: var(--muted); font-weight: 500; padding: 9px 10px; border-bottom: 1px solid var(--border-3); white-space: nowrap; }
+.def8-table-wrap td { padding: 10px; border-bottom: 1px solid var(--border); vertical-align: top; }
+.def8-table-wrap .mono { font-size: 10px; white-space: nowrap; }
+.def8-table-wrap .is-current td { background: color-mix(in srgb, var(--cyan) 10%, var(--panel)); }
+.def8-table-wrap .def8-invalid { color: var(--red); font-weight: 600; }
+.def8-table-wrap .def8-empty { color: var(--muted); text-align: center; padding: 25px 10px; }
+.def8-processing-ledger { display: flex; flex-wrap: wrap; gap: 12px; border: 1px dashed var(--border-3); padding: 14px; border-radius: 8px; font-size: 11px; }
+.def8-processing-ledger code { color: var(--cyan); overflow-wrap: anywhere; }
+.def8-processing-ledger > span { color: var(--muted); }
+.def8-trace summary { min-height: 44px; padding: 12px 0; cursor: pointer; color: var(--cyan); font-size: 13px; }
+@media (max-width: 640px) {
+  .def8-lab { padding: 17px; }
+  .def8-tabs button { flex: 1 1 140px; }
+  .def8-storage-scene { grid-template-columns: minmax(0, 1fr); }
+  .def8-explanations > div { grid-template-columns: 1fr; gap: 3px; }
+  .def8-hdfs-scene { grid-template-columns: minmax(75px, .65fr) minmax(45px, .4fr) minmax(0, 1.4fr); gap: 12px 5px; }
+  .def8-hdfs-client { padding: 20px 6px; }
+  .def8-hdfs-client strong { font-size: 12px; }
+  .def8-hdfs-client code { font-size: 9px; }
+  .def8-hdfs-client small, .def8-client-bytes { font-size: 9px; }
+  .def8-metadata-wire small, .def8-data-wire small { font-size: 8px; }
+  .def8-namenode { padding: 12px 8px; }
+  .def8-namenode strong { font-size: 11px; }
+  .def8-namenode code { font-size: 10px; }
+  .def8-hdfs-racks { gap: 6px; }
+  .def8-rack { padding: 10px 3px; }
+  .def8-rack > strong, .def8-rack > small { font-size: 9px; }
+  .def8-model-scene { grid-template-columns: 1fr; gap: 15px; }
+  .def8-model-fact { max-width: 240px; width: 100%; justify-self: center; }
+  .def8-dimension-branch { flex-wrap: wrap; }
+  .def8-dimension-branch > .def8-model-table { flex: 1 1 160px; }
+  .def8-join-label { min-width: 65px; }
+  .def8-governance-controls, .def8-issue { grid-template-columns: 1fr; }
+  .def8-issue { gap: 10px; }
+  .def8-output-ledgers { grid-template-columns: 1fr; }
+  .def8-pipeline-metrics { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .def8-lab-controls button { flex: 1 1 135px; }
+}
+@media (prefers-reduced-motion: reduce) { .def8-lab *, .def8-lab *::before, .def8-lab *::after { animation: none !important; transition: none !important; } }

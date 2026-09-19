@@ -49,3 +49,7 @@ These are a concrete verification backlog. Keep each original concept in the cor
 For each resolved item, record the lesson anchor, the source page, the tested version or reference, and the exact scope of the change. Update both languages and any affected simulation. Unresolved claims remain visibly qualified in the authoring audit; the final coverage report must disclose them.
 
 Với mỗi mục đã xử lý, ghi anchor bài, trang nguồn, phiên bản đã chạy hoặc tài liệu, cùng phạm vi sửa. Cập nhật cả hai ngôn ngữ và simulation liên quan. Báo cáo coverage cuối phải nêu các khẳng định chưa xác minh xong.
+
+## Lesson 12 implementation follow-up · 2026-09-16
+
+The b12 authoring backlog has been addressed in the bilingual lesson. See [source and correction audit](../reviews/b12-source-audit.md) for page-to-anchor corrections, primary references, examples, and verification limits. Exact provider-version source and full Airflow deployment were not executed; snippets are explicitly teaching examples. Gartner/Unity figures remain qualified, not confirmed statistics.
