@@ -3,7 +3,7 @@ export const EN = {
   "world": {
     "eyebrow": "DATA ATLAS · 3D",
     "title": "Follow one order through a floating data city",
-    "intro": "Six districts, one record to follow. Watch the numbered route: each bright skybridge shows the current transfer, and the record changes only when a district processes it.",
+    "intro": "Six districts, one record to follow. Watch the numbered route: the brightest skybridge is the current transfer, and the record changes only when a station processes it.",
     "scenarios": [
       "Live CDC",
       "Stream processing",
@@ -284,7 +284,7 @@ export const EN = {
     "logEnd": "Log end",
     "processed": "Processed",
     "pending": "Not processed",
-    "replicaTitle": "A leader fails. Its other partitions keep their leaders.",
+    "replicaTitle": "A leader fails. The other partitions keep theirs.",
     "replicaHelp": "Watch the four-broker example lose and replace its P0 leader. Replication factor is 3 per partition; remaining followers are eligible ISR replicas and clean election succeeds. The loop then restarts the example.",
     "replicaSteps": [
         "All brokers are online. P0 is led by broker 1, P1 by broker 2, and P2 by broker 3.",
@@ -925,7 +925,7 @@ export const EN = {
   ],
   practiceAnswer: "Open the review criteria",
   practiceGuide: "A sound design doesn’t equate CSV with unstructured data, treat a hard-deleted row as still visible to polling, assign two consumers the same partition within one modeled group, or infer exactly-once from acks. For a crash before the effect: commit-before gives 0, commit-after gives 10. For a crash after the effect: commit-before gives 10; commit-after gives 20 without deduplication or 10 with atomic sink deduplication.",
-  next: "Week 8 continues with storage: the data has arrived, and now its physical and logical shape must be chosen.",
+  next: "Week 8 picks up at storage: the data has landed, and now you decide what shape it lives in.",
   diagramLabel: "Illustrated path",
   codeTitle: "Simplified change event · illustrative JSON",
   lab: {
