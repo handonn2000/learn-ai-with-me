@@ -103,7 +103,7 @@ export const EN = {
     s14: "TWO PLACES THE LOGICIST ROAD TRIPS",
     s15: "<strong class='hl-red-soft'>1 ·</strong> Not every piece of intelligent behavior is willing to go through logic — you didn’t work a syllogism before dodging that car that cut in front of you.",
     s16: "<strong class='hl-red-soft'>2 ·</strong> “Solvable in principle” and “solved before the sun burns out” are two very different things.",
-    s17: "Hold on to these two. In Sessions 7 and 8 you’ll build exactly that kind of reasoning system — and you’ll trip over these same two again.",
+    s17: "Hold on to these two. In Sessions 9 and 10 you’ll build exactly that kind of reasoning system — and you’ll trip over these same two again.",
   },
   ch6: {
     s1: "What AI borrowed, and from whom",
@@ -192,7 +192,7 @@ export const EN = {
     s18: "Deep Blue beat Kasparov (1997)",
     s19: "AlphaGo beat Lee Sedol (2016)",
     s20: "Poker: DeepStack and Libratus (2017)",
-    s21: "Games are the cleanest laboratory AI has: rules are explicit and nobody argues about who won. In Session 5 I’ll open these up with you — minimax and α-β pruning.",
+    s21: "Games are the cleanest laboratory AI has: rules are explicit and nobody argues about who won. In Session 7 I’ll open these up with you — minimax and α-β pruning.",
     s22: "QUICK QUIZ — WHICH OF THESE CAN MACHINES DO TODAY?",
     s23: "tap the ones you think machines can do — no answer key, this is a place to argue with yourself",
     s24: "This list was written years ago. A game worth playing: guess how people would have answered in 2015, then compare it with your answer today. Wherever the two diverge, that’s where the field genuinely moved.",
@@ -205,7 +205,7 @@ export const EN = {
   },
   ch9: {
     s1: "Wrap-up — and where this course goes next",
-    s2: "🧭 One sentence for the whole session, if you only keep one: AI tries to build intelligent entities, there are four ways to define “intelligent”, and I pick the <strong class='hl-green'>acting rationally</strong> box to follow for all 11 sessions. Here is the map of the road ahead.",
+    s2: "🧭 One sentence for the whole session, if you only keep one: AI tries to build intelligent entities, there are four ways to define “intelligent”, and I pick the <strong class='hl-green'>acting rationally</strong> box to follow for all 13 sessions. Here is the map of the road ahead.",
     s3: "Four boxes, no peeking at the table",
     s4: "Name the four approaches to AI and say exactly what each one uses as its standard. Stuck on one? Go back to <a href=\"#ch2\">section 02</a> — but try to recall it first, because reaching for it and missing is what makes the lookup stick.",
     s5: "Where the Turing test goes wrong",

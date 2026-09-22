@@ -1,0 +1,165 @@
+{
+  "checks": [
+    {
+      "name": "VI route and all 12 anchors",
+      "data": 12
+    },
+    {
+      "name": "all 16 board/algorithm combinations, replay and restart success",
+      "data": 5
+    },
+    {
+      "name": "manual queen move starts new trace"
+    },
+    {
+      "name": "SA sliders and zero temperature"
+    },
+    {
+      "name": "fitness reveal, all 7 crossover cuts, mutation and reset"
+    },
+    {
+      "name": "all 3 rendered Python blocks preserve exact source text"
+    },
+    {
+      "name": "8-answer quiz saves score and stable topics under b6",
+      "data": {
+        "quizScore": 100,
+        "quizRight": [
+          "local-model",
+          "local-landscape",
+          "local-variants",
+          "local-restart",
+          "local-annealing",
+          "local-beam",
+          "local-genetic"
+        ],
+        "quizWrong": []
+      }
+    },
+    {
+      "name": "quiz and checklist persist on reload"
+    },
+    {
+      "name": "lab, sliders, comparison and code touch gestures stay inside the current slide"
+    },
+    {
+      "name": "deck navigation and arrow keys stay in tabs"
+    },
+    {
+      "name": "English route and cross-locale score"
+    },
+    {
+      "name": "all chapters at 1440/760/390/320 pixels in both themes, no page overflow"
+    },
+    {
+      "name": "two animation cycles ch2 mode 0",
+      "data": {
+        "resets": 2,
+        "frames": [
+          0,
+          1,
+          2,
+          3,
+          4,
+          5
+        ]
+      }
+    },
+    {
+      "name": "two animation cycles ch2 mode 1",
+      "data": {
+        "resets": 2,
+        "frames": [
+          0,
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7
+        ]
+      }
+    },
+    {
+      "name": "two animation cycles ch2 mode 2",
+      "data": {
+        "resets": 2,
+        "frames": [
+          0,
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8,
+          9,
+          10
+        ]
+      }
+    },
+    {
+      "name": "offscreen pause ch2"
+    },
+    {
+      "name": "two animation cycles ch5 mode 0",
+      "data": {
+        "resets": 2,
+        "frames": [
+          0,
+          1,
+          2,
+          3
+        ]
+      }
+    },
+    {
+      "name": "two animation cycles ch5 mode 1",
+      "data": {
+        "resets": 2,
+        "frames": [
+          0,
+          1,
+          2,
+          3
+        ]
+      }
+    },
+    {
+      "name": "offscreen pause ch5"
+    },
+    {
+      "name": "document-hidden pause (visibility signal simulated)"
+    },
+    {
+      "name": "reduced motion is static with complete HTML explanations"
+    },
+    {
+      "name": "no lesson console or page errors (unrelated favicon recorded separately)"
+    }
+  ],
+  "errors": [],
+  "knownUnrelated": [
+    "Root favicon.ico 404"
+  ],
+  "screenshots": [
+    "/tmp/ai-b6-hero.png",
+    "/tmp/ai-b6-queens-8.png",
+    "/tmp/ai-b6-annealing.png",
+    "/tmp/ai-b6-genetic.png",
+    "/tmp/ai-b6-python.png",
+    "/tmp/ai-b6-mobile-dark.png",
+    "/tmp/ai-b6-mobile-light.png",
+    "/tmp/ai-b6-ch2-case-0.png",
+    "/tmp/ai-b6-ch2-case-1.png",
+    "/tmp/ai-b6-ch2-case-2.png",
+    "/tmp/ai-b6-ch5-case-0.png",
+    "/tmp/ai-b6-ch5-case-1.png"
+  ],
+  "date": "2026-09-22",
+  "route": "/courses/csc14003/lessons/b6",
+  "browser": "Playwright with installed Google Chrome; temporary isolated profile",
+  "scope": "Desktop browser with emulated viewports/touch events; document-hidden signal simulated; not a physical mobile device."
+}

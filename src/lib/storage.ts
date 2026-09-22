@@ -4,6 +4,9 @@
 export interface ProgressDB {
   sessions: Record<string, SessionRecord>;
   partTests?: Record<string, PartTestRecord>; // khóa = Part.id
+  /* Mốc lược đồ. Vắng mặt = bản trước khi tách Buổi 3 (xem RENUMBER_2026_09 bên dưới).
+     Các migration khác tự nhiên chạy-lại-được nên không cần mốc; cái này thì KHÔNG. */
+  schema?: number;
 }
 export interface SessionRecord {
   status?: 'todo' | 'doing' | 'done';
@@ -86,6 +89,40 @@ const LEGACY_TOPICS: Record<string, string> = {
 // một ánh xạ. Không id nào là key của bảng nên chạy lại là no-op — an toàn để gọi mỗi lần nạp.
 const mapTopics = (a?: string[]): string[] | undefined => a?.map((t) => LEGACY_TOPICS[t] ?? t);
 
+/* Buổi 3 cũ (~6h, ba deck slide) tách thành Buổi 3 · 4 · 5, nên mọi buổi từ 4 trở đi dời lên 2.
+   Tiến độ của người học ghi theo Session.id nên phải dời theo, NGƯỢC TỪ CUỐI để không đè lên
+   khóa chưa dời. Bản ghi `b3` cũ giữ nguyên chỗ: nội dung của nó (phát biểu bài toán + toàn bộ
+   tìm kiếm) nằm gọn trong Buổi 3 mới ở phần mở đầu, nên để nguyên là đúng nhất trong ba lựa chọn.
+
+   KHÁC mọi migration khác trong file này: phép dời KHÔNG chạy lại được (b4→b6 lần hai thành b8),
+   nên nó bị khóa sau mốc `schema`. Đừng bỏ mốc đó đi. */
+const SCHEMA = 1;
+const RENUMBER_2026_09: [string, string][] = [
+  ['b11', 'b13'], ['b10', 'b12'], ['b9', 'b11'], ['b8', 'b10'],
+  ['b7', 'b9'], ['b6', 'b8'], ['b5', 'b7'], ['b4', 'b6'],
+];
+
+function renumber(db: ProgressDB): void {
+  const shift = new Map(RENUMBER_2026_09);
+  for (const [from, to] of RENUMBER_2026_09) {
+    const rec = db.sessions[from];
+    if (rec) {
+      db.sessions[to] = rec;
+      delete db.sessions[from];
+    }
+  }
+  // Câu hỏi kiểm tra tổng hợp gắn thẻ theo Session.id, nên điểm mạnh/yếu cũng phải dời.
+  const move = (a?: string[]): string[] | undefined => a?.map((t) => shift.get(t) ?? t);
+  for (const rec of Object.values(db.sessions)) {
+    rec.quizRight = move(rec.quizRight);
+    rec.quizWrong = move(rec.quizWrong);
+  }
+  for (const rec of Object.values(db.partTests ?? {})) {
+    rec.right = move(rec.right) ?? rec.right;
+    rec.wrong = move(rec.wrong) ?? rec.wrong;
+  }
+}
+
 function migrate(db: ProgressDB): ProgressDB {
   // Một chiều, không có bản đảo — cùng tinh thần với LEGACY_PART_IDS.
   if (db.partTests) {
@@ -102,6 +139,11 @@ function migrate(db: ProgressDB): ProgressDB {
   for (const rec of Object.values(db.partTests ?? {})) {
     rec.right = mapTopics(rec.right) ?? rec.right;
     rec.wrong = mapTopics(rec.wrong) ?? rec.wrong;
+  }
+  // SAU mapTopics: nhãn 'Buổi 7' phải thành 'b7' trước rồi mới dời được thành 'b9'.
+  if ((db.schema ?? 0) < SCHEMA) {
+    renumber(db);
+    db.schema = SCHEMA;
   }
   return db;
 }

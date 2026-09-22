@@ -1,6 +1,6 @@
 // Hai cảnh phụ của Buổi 3: vụ nổ hàm mũ & phong cảnh leo đồi — port nguyên logic vẽ.
 import { MONO, type SceneApi } from '@/components/CanvasScene';
-import { T as TXT } from './lesson03.text';
+import { T as TXT } from './lab.text';
 
 type Ctx = CanvasRenderingContext2D;
 

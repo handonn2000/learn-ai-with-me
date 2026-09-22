@@ -18,16 +18,26 @@ export const TOPIC_IDS = [
   // Buổi 2
   'agent-function', 'perf-measure', 'rational-not-omniscient', 'peas', 'env-dimensions',
   'lookup-table', 'five-architectures',
-  // Buổi 3
+  // Buổi 3 (phát biểu bài toán) · Buổi 4 (tìm kiếm mù) · Buổi 5 (có thông tin)
   'problem-statement', 'search-framework', 'uninformed', 'heuristic', 'admissible-consistent', 'astar',
+  // Buổi 6
+  'local-model', 'local-landscape', 'local-variants', 'local-restart', 'local-annealing', 'local-beam', 'local-genetic',
   // Kiểm tra tổng hợp chấm theo BUỔI — dùng luôn Session.id để báo cáo link thẳng về buổi được.
-  'b1', 'b2', 'b3', 'b4', 'b5', 'b6', 'b7', 'b8', 'b9', 'b10', 'b11',
+  'b1', 'b2', 'b3', 'b4', 'b5', 'b6', 'b7', 'b8', 'b9', 'b10', 'b11', 'b12', 'b13',
 ] as const;
 
 export type TopicId = (typeof TOPIC_IDS)[number];
 
 export const TOPIC_LABELS: Record<Locale, Record<TopicId, string>> = {
   vi: {
+    'local-model': 'Mô hình tối ưu',
+    'local-landscape': 'Địa hình & cực trị',
+    'local-variants': 'Biến thể leo đồi',
+    'local-restart': 'Random restart',
+    'local-annealing': 'Simulated annealing',
+    'local-beam': 'Local beam',
+    'local-genetic': 'Thuật toán di truyền',
+
     'four-approaches': 'Bốn hướng tiếp cận',
     'turing-test': 'Phép thử Turing',
     foundations: 'Nền tảng',
@@ -49,8 +59,17 @@ export const TOPIC_LABELS: Record<Locale, Record<TopicId, string>> = {
     astar: 'A*',
     b1: 'Buổi 1', b2: 'Buổi 2', b3: 'Buổi 3', b4: 'Buổi 4', b5: 'Buổi 5', b6: 'Buổi 6',
     b7: 'Buổi 7', b8: 'Buổi 8', b9: 'Buổi 9', b10: 'Buổi 10', b11: 'Buổi 11',
+    b12: 'Buổi 12', b13: 'Buổi 13',
   },
   en: {
+    'local-model': 'Optimization model',
+    'local-landscape': 'Landscape & optima',
+    'local-variants': 'Hill-climbing variants',
+    'local-restart': 'Random restart',
+    'local-annealing': 'Simulated annealing',
+    'local-beam': 'Local beam',
+    'local-genetic': 'Genetic algorithms',
+
     'four-approaches': 'Four approaches',
     'turing-test': 'The Turing test',
     foundations: 'Foundations',
@@ -72,7 +91,7 @@ export const TOPIC_LABELS: Record<Locale, Record<TopicId, string>> = {
     astar: 'A*',
     b1: 'Session 1', b2: 'Session 2', b3: 'Session 3', b4: 'Session 4', b5: 'Session 5',
     b6: 'Session 6', b7: 'Session 7', b8: 'Session 8', b9: 'Session 9', b10: 'Session 10',
-    b11: 'Session 11',
+    b11: 'Session 11', b12: 'Session 12', b13: 'Session 13',
   },
 };
 

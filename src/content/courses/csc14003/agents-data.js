@@ -124,7 +124,7 @@ export const ARCH_LEVELS = [
     n: 1, id: 'reflex', name: 'Phản xạ đơn giản', en: 'Simple reflex agent', color: 'var(--cyan)',
     adds: 'Luật điều kiện–hành động',
     body: 'Nhìn tri giác <em>hiện tại</em>, dò trong một mớ luật <span class="code-inline">NẾU… THÌ…</span>, thấy luật nào khớp thì làm theo. Cả quá khứ vứt đi hết. <strong class="hl">NẾU xe trước phanh THÌ đạp phanh</strong> — thế thôi, không cần biết mình đang ở đâu, đi đâu.',
-    limit: 'Hai chỗ, không phải một. <strong class="hl">Một:</strong> nó chỉ chạy được khi môi trường quan sát đầy đủ — thiếu một mẩu thông tin là nó mù, mà lại không có chỗ nào để cất mẩu thông tin đó. <strong class="hl">Hai:</strong> có những thứ bạn biết mà không viết ra thành luật <span class="code-inline">NẾU… THÌ…</span> được — thử viết luật cho “nhận ra khuôn mặt bạn mình” xem. Không phát biểu được thì không nhét vào kiến trúc này được, và đó là lý do buổi 10–11 phải để máy tự rút luật từ dữ liệu.',
+    limit: 'Hai chỗ, không phải một. <strong class="hl">Một:</strong> nó chỉ chạy được khi môi trường quan sát đầy đủ — thiếu một mẩu thông tin là nó mù, mà lại không có chỗ nào để cất mẩu thông tin đó. <strong class="hl">Hai:</strong> có những thứ bạn biết mà không viết ra thành luật <span class="code-inline">NẾU… THÌ…</span> được — thử viết luật cho “nhận ra khuôn mặt bạn mình” xem. Không phát biểu được thì không nhét vào kiến trúc này được, và đó là lý do buổi 12–13 phải để máy tự rút luật từ dữ liệu.',
   },
   {
     n: 2, id: 'model', name: 'Phản xạ có mô hình', en: 'Model-based reflex agent', color: 'var(--green)',
@@ -141,7 +141,7 @@ export const ARCH_LEVELS = [
   {
     n: 4, id: 'utility', name: 'Hướng thỏa dụng', en: 'Utility-based agent', color: 'var(--purple)',
     adds: 'Hàm thỏa dụng',
-    body: 'Thay câu hỏi “tới được không” bằng “tới thì <strong class="hl">sướng cỡ nào</strong>”. Hàm thỏa dụng chính là thước đo hiệu năng được nội hóa vào trong đầu agent. Nhờ có thang điểm chứ không phải cái công tắc, nó xử được hai chuyện mà mục tiêu chịu chết: cân giữa các mục tiêu đá nhau (nhanh vs an toàn), và cân giữa cái chắc ăn với cái đáng giá nhưng hên xui. Viết cho gọn thì agent duy lý ở nấc này chọn hành động <strong class="hl">tối đa thỏa dụng KỲ VỌNG</strong> của các kết cục — nhớ chữ “kỳ vọng” đó, buổi 5 và buổi 9 sẽ tính nó ra số thật.',
+    body: 'Thay câu hỏi “tới được không” bằng “tới thì <strong class="hl">sướng cỡ nào</strong>”. Hàm thỏa dụng chính là thước đo hiệu năng được nội hóa vào trong đầu agent. Nhờ có thang điểm chứ không phải cái công tắc, nó xử được hai chuyện mà mục tiêu chịu chết: cân giữa các mục tiêu đá nhau (nhanh vs an toàn), và cân giữa cái chắc ăn với cái đáng giá nhưng hên xui. Viết cho gọn thì agent duy lý ở nấc này chọn hành động <strong class="hl">tối đa thỏa dụng KỲ VỌNG</strong> của các kết cục — nhớ chữ “kỳ vọng” đó, buổi 7 và buổi 11 sẽ tính nó ra số thật.',
     limit: 'Vẫn phải có người ngồi viết sẵn cho nó mọi luật, mọi mô hình, mọi thang điểm. Lập trình xong là đứng yên đó mãi.',
   },
   {

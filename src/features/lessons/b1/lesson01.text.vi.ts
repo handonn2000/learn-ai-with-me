@@ -104,7 +104,7 @@ export const VI = {
     s14: "HAI CHỖ VẤP CỦA ĐƯỜNG LOGICIST",
     s15: "<strong class='hl-red-soft'>1 ·</strong> Không phải hành vi thông minh nào cũng chịu đi qua logic — bạn có giải tam đoạn luận nào đâu trước khi né cú xe tạt đầu.",
     s16: "<strong class='hl-red-soft'>2 ·</strong> “Trên nguyên tắc là giải được” và “giải xong trước khi mặt trời tắt” là hai chuyện rất khác nhau.",
-    s17: "Nhớ kỹ hai chỗ vấp này. Buổi 7 và 8 mình sẽ xây đúng loại hệ lập luận đó, và sẽ vấp lại đúng hai chỗ này.",
+    s17: "Nhớ kỹ hai chỗ vấp này. Buổi 9 và 10 mình sẽ xây đúng loại hệ lập luận đó, và sẽ vấp lại đúng hai chỗ này.",
   },
   ch6: {
     s1: "AI vay gì của ai",
@@ -193,7 +193,7 @@ export const VI = {
     s18: "Deep Blue thắng Kasparov (1997)",
     s19: "AlphaGo thắng Lee Sedol (2016)",
     s20: "Poker: DeepStack và Libratus (2017)",
-    s21: "Game là phòng thí nghiệm sạch nhất mà AI có: luật rõ ràng, thắng thua khỏi cãi. Buổi 5 mình sẽ mở nắp mấy con này ra xem bên trong — minimax và cắt tỉa α-β.",
+    s21: "Game là phòng thí nghiệm sạch nhất mà AI có: luật rõ ràng, thắng thua khỏi cãi. Buổi 7 mình sẽ mở nắp mấy con này ra xem bên trong — minimax và cắt tỉa α-β.",
     s22: "CÂU ĐỐ — HIỆN NAY MÁY LÀM ĐƯỢC VIỆC NÀO?",
     s23: "bấm chọn việc bạn nghĩ máy làm được — không có đáp án, đây là chỗ để tự cãi với chính mình",
     s24: "Danh sách này viết từ nhiều năm trước. Trò vui: thử đoán hồi 2015 người ta trả lời thế nào, rồi so với câu trả lời của bạn hôm nay. Chỗ nào lệch, chỗ đó là ngành vừa tiến được một bước thật.",
@@ -206,7 +206,7 @@ export const VI = {
   },
   ch9: {
     s1: "Tổng kết — và môn này sẽ đi đâu",
-    s2: "🧭 Một câu tóm cả buổi, nếu bạn chỉ nhớ được một câu: AI cố xây ra thực thể thông minh, có bốn cách định nghĩa “thông minh”, và mình chọn ô <strong class='hl-green'>hành động duy lý</strong> để bám theo suốt 11 buổi. Còn đây là bản đồ chặng đường phía trước.",
+    s2: "🧭 Một câu tóm cả buổi, nếu bạn chỉ nhớ được một câu: AI cố xây ra thực thể thông minh, có bốn cách định nghĩa “thông minh”, và mình chọn ô <strong class='hl-green'>hành động duy lý</strong> để bám theo suốt 13 buổi. Còn đây là bản đồ chặng đường phía trước.",
     s3: "Bốn ô, không nhìn bảng",
     s4: "Kể tên bốn hướng tiếp cận AI và nói rõ mỗi hướng lấy gì làm chuẩn chấm. Kẹt ô nào thì quay lại <a href=\"#ch2\">mục 02</a> — nhưng thử nhớ trước đã, nhớ hụt rồi tra mới dính lâu.",
     s5: "Phép thử Turing sai ở đâu",

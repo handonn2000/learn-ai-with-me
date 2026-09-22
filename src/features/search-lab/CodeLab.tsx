@@ -2,7 +2,7 @@
 import { useMemo, useState } from 'react';
 import { tokenize } from '@/features/search-lab/search-engine.js';
 import { ALGOS, HELPER_PY, MAIN_PY } from '@/content/courses/csc14003/lab-searching.locale';
-import { T } from './lesson03.text';
+import { T } from './lab.text';
 
 const MONO = "'JetBrains Mono',monospace";
 const TOKEN_COLORS: Record<string, string> = { kw: '#58C4DD', fn: '#F4D345', st: '#83C167', nu: '#FF9580', cm: '#7A8399', sy: '#58C4DD' };
@@ -22,9 +22,11 @@ export function Code({ src, style }: { src: string; style?: React.CSSProperties 
   );
 }
 
-export function CodeLab() {
-  const algos = ALGOS as Algo[];
-  const [id, setId] = useState('BFS');
+/* `only` giới hạn danh sách thuật toán, cùng lý do như SearchLab. */
+export function CodeLab({ only }: { only?: string[] } = {}) {
+  const all = ALGOS as Algo[];
+  const algos = only ? all.filter((a) => only.includes(a.id)) : all;
+  const [id, setId] = useState(algos[0].id);
   const cur = algos.find((a) => a.id === id) ?? algos[0];
   return (
     <div className="canvas-panel" style={{ borderRadius: 16 }}>

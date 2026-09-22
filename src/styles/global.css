@@ -463,3 +463,116 @@ body:has(.deck-bar) { padding-bottom: 92px; }
   .def-lesson .lesson-nav__grow { display: none; }
   .def-lesson .lesson-nav__row .deck-toggle, .def-lesson .lesson-nav__row .lang-toggle { min-height: 44px; }
 }
+
+/* Session 6: local search. All surfaces follow the existing light/dark tokens. */
+.ls-lesson { min-width: 0; }
+.ls-hero { background: radial-gradient(ellipse at 76% 25%, var(--bg-glow), transparent 65%); }
+.ls-hero-inner { max-width: 1120px; margin: auto; padding: 70px 24px 28px; display: grid; grid-template-columns: 1.35fr 1fr; align-items: center; gap: 36px; }
+.ls-eyebrow { color: var(--cyan); font-size: 11px; letter-spacing: .1em; }
+.ls-hero h1 { font-family: var(--font-serif); font-size: clamp(36px, 4.5vw, 56px); line-height: 1.14; margin: 18px 0; }
+.ls-hero h1 em { color: var(--cyan); }
+.ls-hero-lead { font-size: 15px; line-height: 1.85; color: var(--text-2); }
+.ls-hero-map { min-width: 0; padding: 18px 0; }
+.ls-hero-map svg { width: 100%; display: block; margin-top: 28px; overflow: visible; }
+.ls-hero-map text, .ls-landscape text { fill: var(--muted); font: 12px var(--font-mono); }
+.ls-hero-formula { color: var(--cyan); text-align: center; font-size: 28px; }
+.ls-chapter-body { display: grid; gap: 18px; margin-top: 22px; min-width: 0; }
+.ls-chapter-body > * { min-width: 0; }
+.ls-prose { font-size: 14.5px; color: var(--text-2); line-height: 1.85; margin: 0; }
+.ls-note { font-size: 12.5px; color: var(--muted); line-height: 1.8; margin: 12px 0 0; }
+.ls-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(285px, 100%), 1fr)); gap: 16px; min-width: 0; }
+.ls-grid > *, .ls-lab-grid > * { min-width: 0; }
+.ls-lesson h3 { font-size: 16px; line-height: 1.5; margin: 0 0 12px; }
+.ls-callout { padding: 18px 22px; border-left: 3px solid var(--yellow); border-radius: 0 12px 12px 0; background: color-mix(in srgb, var(--yellow) 5%, var(--panel)); }
+.ls-choices { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; margin: 16px 0; }
+.ls-choices .btn, .ls-controls .btn { min-height: 44px; }
+.ls-lesson button:focus-visible, .ls-lesson input:focus-visible, .ls-lesson select:focus-visible, .ls-lesson summary:focus-visible { outline: 3px solid var(--cyan); outline-offset: 3px; }
+.ls-visual { padding: 22px; }
+.ls-landscape { width: 100%; display: block; margin: 16px 0; }
+.ls-land-fill { fill: color-mix(in srgb, var(--cyan) 8%, transparent); }
+.ls-land-line { stroke: var(--muted-2); stroke-width: 2; fill: none; }
+.ls-gridline { stroke: var(--border-2); stroke-dasharray: 3 5; }
+.ls-trail { stroke: var(--cyan); stroke-width: 3; fill: none; }
+.ls-current { fill: var(--yellow); stroke: var(--bg); stroke-width: 2; }
+.ls-global { fill: none; stroke: var(--green); stroke-width: 2; stroke-dasharray: 3 3; }
+.ls-metrics { display: flex; flex-wrap: wrap; gap: 20px; font: 12px var(--font-mono); color: var(--muted); margin: 12px 0; }
+.ls-metrics strong { color: var(--text-hi); }
+.ls-queens { padding: 20px; }
+.ls-lab-grid { display: grid; grid-template-columns: minmax(0, 1.2fr) minmax(0, 1fr); gap: 24px; align-items: start; margin: 22px 0; }
+.ls-board-scroll { overflow-x: auto; padding: 4px; }
+.ls-board { display: grid; grid-template-columns: repeat(var(--queen-count), minmax(44px, 1fr)); width: 100%; min-width: calc(var(--queen-count) * 44px); border: 1px solid var(--border-3); }
+.ls-square { aspect-ratio: 1; border: 1px solid transparent; padding: 0; border-radius: 0; color: var(--muted); background: var(--panel); cursor: pointer; font: 12px var(--font-mono); min-height: 44px; position: relative; }
+.ls-square-alt { background: color-mix(in srgb, var(--cyan) 10%, var(--panel)); }
+.ls-best-move { box-shadow: inset 0 0 0 2px var(--green); color: var(--text-hi); }
+.ls-queen { font-size: clamp(27px, 3vw, 42px); line-height: 1; color: var(--cyan); }
+.ls-attacking .ls-queen { color: var(--red-soft); }
+.ls-board-string { color: var(--text-hi); font-size: 16px; margin-top: 10px; letter-spacing: .1em; }
+.ls-h { font-family: var(--font-serif); font-size: 40px; color: var(--yellow); margin: 10px 0; }
+.ls-solved { color: var(--green); }
+.ls-status { font-size: 14px; line-height: 1.7; min-height: 48px; color: var(--text-2); }
+.ls-facts { margin: 16px 0; font-size: 12px; }
+.ls-facts > div { display: flex; justify-content: space-between; gap: 15px; margin: 10px 0; }
+.ls-facts dt { color: var(--muted); }
+.ls-facts dd { font-family: var(--font-mono); margin: 0; }
+.ls-experiment { display: flex; flex-direction: column; gap: 10px; padding: 22px 0; font-size: 13px; color: var(--muted); }
+.ls-experiment strong { font: 48px var(--font-serif); color: var(--cyan); }
+.ls-formula { padding: 18px; color: var(--cyan); border: 1px solid var(--border-2); border-radius: 12px; text-align: center; font-size: clamp(13px, 2vw, 19px); }
+.ls-controls { display: flex; flex-direction: column; gap: 20px; }
+.ls-controls label, .ls-slider { display: flex; flex-direction: column; gap: 8px; color: var(--text-2); font-size: 13px; }
+.ls-controls label strong, .ls-slider strong { font: 20px var(--font-mono); color: var(--cyan); }
+.ls-controls input[type=range], .ls-slider input[type=range] { width: 100%; min-height: 44px; accent-color: var(--cyan); }
+.ls-controls select { background: var(--panel); color: var(--text-hi); border: 1px solid var(--border-3); padding: 10px; min-height: 44px; border-radius: 6px; }
+.ls-annealing { margin-top: 20px; align-items: center; }
+.ls-probability { border: 1px solid var(--border-2); border-radius: 12px; padding: 20px; text-align: center; }
+.ls-probability > strong { display: block; font: 48px var(--font-serif); color: var(--cyan); margin: 12px 0; }
+.ls-probability p { font-size: 13px; color: var(--text-2); line-height: 1.7; }
+.ls-probability code { color: var(--muted); font-size: 12px; }
+.ls-probability-bar { height: 16px; position: relative; background: var(--border-2); border-radius: 4px; margin: 18px 0; }
+.ls-probability-bar span { display: block; height: 100%; background: var(--cyan); border-radius: 4px; }
+.ls-probability-bar i { position: absolute; left: 30%; top: -5px; bottom: -5px; width: 2px; background: var(--text-hi); }
+.ls-phase { font: 12px var(--font-mono); color: var(--cyan); min-height: 34px; line-height: 1.7; }
+.ls-beam-stage { padding: 15px 0; }
+.ls-genes { display: flex; gap: 12px; margin-top: 12px; }
+.ls-genes b { border: 1px solid var(--border-3); padding: 10px 22px; border-radius: 8px; font: 18px var(--font-mono); color: var(--text-hi); background: var(--panel); }
+.ls-beam-pool { display: grid; grid-template-columns: repeat(6, minmax(0, 1fr)); gap: 8px; margin-top: 12px; }
+.ls-candidate { border: 1px dashed var(--border-3); border-radius: 8px; display: flex; flex-direction: column; align-items: center; padding: 10px; color: var(--muted); gap: 6px; }
+.ls-stage-active .ls-candidate { border-style: solid; }
+.ls-candidate strong { font: 24px var(--font-mono); }
+.ls-candidate.ls-selected { border: 2px solid var(--green); background: color-mix(in srgb, var(--green) 8%, transparent); color: var(--text-hi); }
+.ls-table-scroll { overflow-x: auto; }
+.ls-table-scroll table { width: 100%; }
+.ls-table-scroll th { font-size: 12px; color: var(--muted); text-align: left; padding: 14px 12px; }
+.ls-comparison { min-width: 700px; }
+.ls-genetic { padding: 22px; min-width: 0; }
+.ls-genetic > h3 { margin-top: 20px; }
+.ls-roulette { display: flex; width: 100%; min-height: 42px; margin: 18px 0; border-radius: 6px; overflow: hidden; }
+.ls-roulette > div { display: grid; place-items: center; color: var(--on-accent); font: 12px var(--font-mono); }
+.ls-roulette-0 { background: var(--cyan); }.ls-roulette-1 { background: var(--green); }.ls-roulette-2 { background: var(--yellow); }
+.ls-cross-workshop { display: grid; gap: 22px; padding-top: 26px; margin-top: 24px; border-top: 1px solid var(--border-2); }
+.ls-gene-row { display: grid; gap: 10px; font-size: 13px; color: var(--muted); }
+.ls-chromosome { display: flex; gap: 6px; max-width: 560px; }
+.ls-gene { display: flex; flex: 1; min-width: 0; flex-direction: column; align-items: center; border: 1px solid var(--border-3); padding: 8px 0; border-radius: 6px; background: var(--panel); }
+.ls-gene small { font: 10px var(--font-mono); margin-bottom: 6px; }
+.ls-gene strong { font: 22px var(--font-mono); color: var(--text-hi); }
+.ls-gene-A { border-color: var(--cyan); color: var(--cyan); }.ls-gene-B { border-color: var(--purple); color: var(--purple); }.ls-gene-M { border-color: var(--yellow); color: var(--yellow); }
+.ls-gene.ls-cut { margin-right: 12px; border-right-width: 3px; }
+.ls-controls-row { flex-direction: row; flex-wrap: wrap; align-items: end; }
+.ls-python { --canvas-text: #e6eaf2; --canvas-cyan: #58c4dd; --canvas-yellow: #f4d345; --canvas-green: #a9d896; --canvas-orange: #ff9580; --canvas-muted: #97a0b5; max-height: 640px; font-size: 12px; line-height: 1.75; color: var(--canvas-text); }
+.ls-python .ls-token-kw, .ls-python .ls-token-sy { color: var(--canvas-cyan); }
+.ls-python .ls-token-fn { color: var(--canvas-yellow); }
+.ls-python .ls-token-st { color: var(--canvas-green); }
+.ls-python .ls-token-nu { color: var(--canvas-orange); }
+.ls-python .ls-token-cm { color: var(--canvas-muted); font-style: italic; }
+.ls-coloring { max-width: 350px; width: 100%; display: block; margin: 14px auto; }
+.ls-graph-edge { stroke: var(--muted); stroke-width: 2; }.ls-graph-conflict { stroke: var(--red-soft); stroke-width: 3; stroke-dasharray: 5 4; }
+.ls-graph-node { stroke: var(--text-2); stroke-width: 1; }.ls-color-0 { fill: var(--red-soft); }.ls-color-1 { fill: var(--cyan); }.ls-color-2 { fill: var(--yellow); }
+.ls-coloring text { fill: var(--on-accent); font: bold 14px var(--font-mono); }
+.ls-lesson details { margin-top: 18px; border-top: 1px solid var(--border-2); padding-top: 10px; }
+.ls-lesson summary { cursor: pointer; min-height: 44px; display: list-item; padding: 12px 0; font-size: 13px; color: var(--cyan); }
+@media (max-width: 760px) { .ls-hero-inner { grid-template-columns: 1fr; gap: 10px; padding-top: 44px; }.ls-hero-map { max-width: 460px; width: 100%; margin: auto; }.ls-lab-grid { grid-template-columns: 1fr; } }
+@media (max-width: 640px) { .ls-visual, .ls-queens, .ls-genetic { padding: 14px; }.ls-beam-pool { grid-template-columns: repeat(3, 1fr); }.ls-choices .btn { font-size: 11px; padding: 9px 11px; }.ls-chromosome { gap: 3px; }.ls-gene strong { font-size: 17px; }.ls-gene.ls-cut { margin-right: 5px; }.ls-hero-inner { padding-left: 20px; padding-right: 20px; } }
+@media (max-width: 480px) {
+  .ls-lesson .lesson-nav__row { flex-wrap: wrap; padding-inline: 16px; gap: 8px; }
+  .ls-lesson .lesson-nav__grow { display: none; }
+  .ls-lesson .lesson-nav__row .deck-toggle, .ls-lesson .lesson-nav__row .lang-toggle { min-height: 44px; }
+}

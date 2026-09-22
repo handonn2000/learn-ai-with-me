@@ -154,10 +154,10 @@ export const EN = {
     s11: "Fully observable · deterministic · episodic · static · discrete · single agent. Land this set and you are in paradise.",
     s12: "AND MOST REAL-WORLD SITUATIONS",
     s13: "Partially observable · stochastic · sequential · dynamic · continuous · multi-agent. The full right-hand set. Click “Taxi driving” in the table above and see — that is this row exactly.",
-    s14: "TWO THINGS PEOPLE MIX UP — AND ONE MARKED FOR SESSION 5",
+    s14: "TWO THINGS PEOPLE MIX UP — AND ONE MARKED FOR SESSION 7",
     s15: "<strong class='hl'>Episodic ≠ static.</strong> Episodic is about whether the decision you make now affects later decisions; static is about whether the environment changes while you sit thinking. A part-picking robot is episodic and still dynamic.",
     s16: "<strong class='hl'>Stochastic ≠ multi-agent.</strong> Medical diagnosis is full of surprises but has a single agent — the bacterium isn’t calculating how to beat you. Just ask: is the other entity’s behavior aimed at maximizing a measure that depends on my behavior? Only then is it an agent.",
-    s17: "And once there are several agents, they split again by how their measures relate. <strong class='hl-red'>Competitive</strong>: my point is your lost point — chess, you win and I lose, no other arrangement. <strong class='hl-green'>Cooperative</strong>: sharing a road, everyone wants to get home and <em>nobody wants a collision</em>, so your measure and mine mostly point the same way. Hold on to the word competitive — session 5 renames it “adversarial search”, and the whole of minimax grows out of exactly this spot.",
+    s17: "And once there are several agents, they split again by how their measures relate. <strong class='hl-red'>Competitive</strong>: my point is your lost point — chess, you win and I lose, no other arrangement. <strong class='hl-green'>Cooperative</strong>: sharing a road, everyone wants to get home and <em>nobody wants a collision</em>, so your measure and mine mostly point the same way. Hold on to the word competitive — session 7 renames it “adversarial search”, and the whole of minimax grows out of exactly this spot.",
   },
   ch7: {
     s1: "Why not just precompute <em class='hl-red'>every answer</em> into a table?",
@@ -207,7 +207,7 @@ export const EN = {
     s28: "Level 4 is shaky. It rarely has an explicit <em>scale</em> for weighing speed against safety, or a sure thing against a valuable gamble — that scale usually lives in your head rather than in the program. Level 5 is nearly absent: the model <strong class='hl-red'>does not correct itself after each complaint</strong>. Learning happens on a completely different cycle, run by other people, months apart. The critic → learner → problem generator loop you just watched at level 5 is still empty.",
     s29: "None of that is to sneer. It is to give you a ruler: next time you read an advert for an “autonomous agent”, you can ask the right question — <em>which level is it on, and who is holding the three boxes of level 5?</em>",
     s30: "THE THREAD — EVERY LEVEL IS A LATER SESSION",
-    s31: "Don’t read these five as a list to memorize. They are the table of contents for the course: <strong class='hl'>level 3</strong> gives you sessions 3–6, where you find a route to a goal with search and constraints. <strong class='hl'>Level 4</strong> is the scale session 5 uses to compare two chess moves and session 9 uses to weigh probabilities. <strong class='hl'>Level 5</strong> is sessions 10 and 11 — the learner there has names of its own, ID3 and neural networks. And <strong class='hl'>level 2</strong>, the world model, is what sessions 7 and 8 write out in logic.",
+    s31: "Don’t read these five as a list to memorize. They are the table of contents for the course: <strong class='hl'>level 3</strong> gives you sessions 3–8, where you find a route to a goal with search and constraints. <strong class='hl'>Level 4</strong> is the scale session 7 uses to compare two chess moves and session 11 uses to weigh probabilities. <strong class='hl'>Level 5</strong> is sessions 12 and 13 — the learner there has names of its own, ID3 and neural networks. And <strong class='hl'>level 2</strong>, the world model, is what sessions 9 and 10 write out in logic.",
   },
   ch9: {
     s1: "One page of wrap-up",
@@ -240,7 +240,7 @@ export const EN = {
     s3: "✏️ Four questions, two games played outdoors. I hinted at these in session 1 and said they could wait — now you have the tools to do them properly. Use pen and paper, not your head: the sticking points show up the moment you have to write the P column down.",
     s4: "A FIFTH QUESTION, NOT ON THE SHEET, AND THE ONE MOST WORTH DOING",
     s5: "Go back to the two tennis tasks in section <a href='#ch5'>05</a> — playing a match and hitting a ball against a wall — and place both on the seven dimensions. You’ll find they differ on <strong class='hl'>the number of agents</strong> and on the <strong class='hl'>episodic / sequential</strong> dimension. Then ask yourself: is the wall an agent? Answering that means you have genuinely understood the criterion separating an agent from an object, rather than merely memorizing it.",
-    s6: "Next up: <strong class='hl'>Session 3 — Solving Problems by Searching</strong>. There you build exactly the level-3 agent from section 08: it has a goal, and it has to find its own way there.",
+    s6: "Next up: <strong class='hl'>Session 3 — Problem Solving by Searching</strong>. There you build exactly the level-3 agent from section 08: it has a goal, and it has to find its own way there.",
     s7: "← Back to the roadmap",
   },
   agentarchdiagram: {

@@ -244,7 +244,7 @@ py:`def hc(arr, source, destination, heuristic):
         visited[better] = node
         node = better
     return visited, reconstruct(visited, destination)`,
-note:'Không frontier, không quay lui: bộ nhớ O(1) mà kẹt như chơi. Buổi 4 (Local Search) sẽ chữa cho nó.'}
+note:'Không frontier, không quay lui: bộ nhớ O(1) mà kẹt như chơi. Buổi 6 (Local Search) sẽ chữa cho nó.'}
 ];
 
 export const MAIN_PY = `import time, tracemalloc

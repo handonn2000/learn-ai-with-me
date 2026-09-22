@@ -1,8 +1,8 @@
 // Manim Lab — trình chạy từng bước 7 thuật toán tìm kiếm trên canvas.
 // Engine sinh trace nằm ở search-engine.js (module JS thuần, thay được bằng WASM sau).
 import { useEffect, useMemo, useRef, useState } from 'react';
-import { PRESETS, runTrace } from '@/features/search-lab/search-engine.js';
-import { T } from './lesson03.text';
+import { PRESETS, runTrace } from './search-engine.js';
+import { T } from './lab.text';
 
 const MONO = "'JetBrains Mono',monospace";
 
@@ -24,8 +24,11 @@ const FT_MAP: Record<string, string> = {
   HC: T.searchlab.s8,
 };
 
-export function SearchLab() {
-  const [algo, setAlgo] = useState('BFS');
+/* `only` giới hạn danh sách thuật toán hiện trên thanh công cụ. Buổi 4 chỉ dạy nhóm mù, Buổi 5
+   chỉ dạy nhóm có thông tin — cùng một lab, hai phạm vi. Bỏ trống thì hiện đủ bảy như cũ. */
+export function SearchLab({ only }: { only?: string[] } = {}) {
+  const algos = only ? AL.filter(([id]) => only.includes(id)) : AL;
+  const [algo, setAlgo] = useState(algos[0][0]);
   const [preset, setPreset] = useState('lab');
   const [step, setStep] = useState(0);
   const [playing, setPlaying] = useState(true);
@@ -102,7 +105,7 @@ export function SearchLab() {
   return (
     <div className="canvas-panel" style={{ borderRadius: 16 }}>
       <div style={{ padding: '13px 16px', borderBottom: '1px solid #1E2430', display: 'flex', gap: 8, flexWrap: 'wrap', alignItems: 'center' }}>
-        {AL.map(([id, tag]) => (
+        {algos.map(([id, tag]) => (
           <button key={id} onClick={() => setAlgo(id)} style={btnStyle(algo === id)}>
             {id === 'ASTAR' ? 'A*' : id}
             <span style={{ fontSize: 9.5, opacity: 0.65, fontWeight: 400 }}>{tag}</span>

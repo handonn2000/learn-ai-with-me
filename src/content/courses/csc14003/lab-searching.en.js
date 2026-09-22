@@ -107,7 +107,7 @@ py:`def ucs(arr, source, destination):
     return visited, []`,
 note:'Complete (steps ≥ ε) and OPTIMAL for any cost function. Watch the two common mistakes: stop on REMOVAL, and remember decrease-key.'},
 {
-id:'IDS', name:'Iterative deepening search', vn:'Iterative deepening (with DLS)', frontier:'Stack + increasing depth limit ℓ', stop:'Stop when the goal is GENERATED (inside DLS)',
+id:'IDS', name:'Iterative deepening search', vn:'Depth-limited runs with ℓ rising (uses DLS)', frontier:'Stack + increasing depth limit ℓ', stop:'Stop when the goal is GENERATED (inside DLS)',
 pseudo:`function IDS(problem) returns solution / failure
   for depth = 0 to ∞ do
     result ← DLS(problem, depth)
@@ -244,7 +244,7 @@ py:`def hc(arr, source, destination, heuristic):
         visited[better] = node
         node = better
     return visited, reconstruct(visited, destination)`,
-note:'No frontier, no backtracking: O(1) memory, but it gets stuck easily. Session 4 (Local Search) tackles that.'}
+note:'No frontier, no backtracking: O(1) memory, but it gets stuck easily. Session 6 (Local Search) tackles that.'}
 ];
 
 export const MAIN_PY = `import time, tracemalloc

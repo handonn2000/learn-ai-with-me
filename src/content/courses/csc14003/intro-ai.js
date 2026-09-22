@@ -105,9 +105,9 @@ export const CANDO = [
 ];
 
 export const TOPICS = [
-  { t: 'Tìm kiếm (kể cả chơi game)', n: 'Buổi 3–6', c: '#58C4DD', d: 'Món nền nhất trong các món. Mọi câu trả lời, mọi quyết định, mọi chuỗi hành động khả dĩ — nhét hết vào một không gian trừu tượng rồi đi tìm trong đó. Tìm mò (uninformed) hay tìm có la bàn (informed): Buổi 3 bạn sẽ tự tay cài cả bảy cách.' },
-  { t: 'Biểu diễn tri thức và lập luận', n: 'Buổi 7–9', c: '#C792EA', d: 'Muốn hành động cho đúng thì trước hết phải mô tả được thế giới đang thế nào, rồi suy ra những thứ mình chưa nhìn thấy. Mô tả bằng gì, mô tả sao cho gọn, moi đúng mảnh tri thức cần dùng ra sao — và làm gì khi chính tri thức đó cũng không chắc chắn.' },
-  { t: 'Học máy', n: 'Buổi 10–11', c: '#83C167', d: 'Tới đây agent thôi ăn sẵn code bạn viết: nó tự đổi hành vi theo kinh nghiệm. Suy ra sự kiện mới từ cái cũ, tự đẻ ra khái niệm, tự học cách phân biệt những tình huống chưa từng gặp.' },
+  { t: 'Tìm kiếm (kể cả chơi game)', n: 'Buổi 3–8', c: '#58C4DD', d: 'Món nền nhất trong các món. Mọi câu trả lời, mọi quyết định, mọi chuỗi hành động khả dĩ — nhét hết vào một không gian trừu tượng rồi đi tìm trong đó. Tìm mò (uninformed) hay tìm có la bàn (informed): Buổi 4 và 5 bạn sẽ tự tay cài cả bảy cách.' },
+  { t: 'Biểu diễn tri thức và lập luận', n: 'Buổi 9–11', c: '#C792EA', d: 'Muốn hành động cho đúng thì trước hết phải mô tả được thế giới đang thế nào, rồi suy ra những thứ mình chưa nhìn thấy. Mô tả bằng gì, mô tả sao cho gọn, moi đúng mảnh tri thức cần dùng ra sao — và làm gì khi chính tri thức đó cũng không chắc chắn.' },
+  { t: 'Học máy', n: 'Buổi 12–13', c: '#83C167', d: 'Tới đây agent thôi ăn sẵn code bạn viết: nó tự đổi hành vi theo kinh nghiệm. Suy ra sự kiện mới từ cái cũ, tự đẻ ra khái niệm, tự học cách phân biệt những tình huống chưa từng gặp.' },
   { t: 'Lập kế hoạch · Xử lý ngôn ngữ tự nhiên · Hệ chuyên gia · Tương tác với môi trường (thị giác, nhận dạng tiếng nói, robot)…', n: 'ngoài phạm vi môn', c: '#7A8399', d: 'Một học kỳ không đủ cho tất cả. Tin vui: xong bốn phần trên rồi thì mấy nhánh này bạn đọc là hiểu, không cần ai dắt nữa.' }
 ];
 

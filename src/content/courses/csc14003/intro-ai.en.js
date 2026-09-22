@@ -106,9 +106,9 @@ export const CANDO = [
 ];
 
 export const TOPICS = [
-  { t: 'Search (games included)', n: 'Sessions 3–6', c: '#58C4DD', d: 'The most foundational of the lot. Every possible answer, every decision, every sequence of actions — pack them all into one abstract space and go looking inside it. Searching blind (uninformed) or searching with a compass (informed): in Session 3 you implement all seven yourself.' },
-  { t: 'Knowledge representation and reasoning', n: 'Sessions 7–9', c: '#C792EA', d: 'To act correctly you first have to describe the state of the world, then infer the parts you cannot see. What to describe it with, how to keep the description compact, how to pull out the exact piece of knowledge you need — and what to do when that knowledge is itself uncertain.' },
-  { t: 'Machine learning', n: 'Sessions 10–11', c: '#83C167', d: 'Here the agent stops living off the code you wrote: it changes its own behavior from experience. Deriving new facts from old, forming its own concepts, learning to tell apart situations it has never met.' },
+  { t: 'Search (games included)', n: 'Sessions 3–8', c: '#58C4DD', d: 'The most foundational of the lot. Every possible answer, every decision, every sequence of actions — pack them all into one abstract space and go looking inside it. Searching blind (uninformed) or searching with a compass (informed): in Sessions 4 and 5 you implement all seven yourself.' },
+  { t: 'Knowledge representation and reasoning', n: 'Sessions 9–11', c: '#C792EA', d: 'To act correctly you first have to describe the state of the world, then infer the parts you cannot see. What to describe it with, how to keep the description compact, how to pull out the exact piece of knowledge you need — and what to do when that knowledge is itself uncertain.' },
+  { t: 'Machine learning', n: 'Sessions 12–13', c: '#83C167', d: 'Here the agent stops living off the code you wrote: it changes its own behavior from experience. Deriving new facts from old, forming its own concepts, learning to tell apart situations it has never met.' },
   { t: 'Planning · Natural language processing · Expert systems · Interacting with the environment (vision, speech recognition, robotics)…', n: 'outside this course', c: '#7A8399', d: 'One semester cannot hold all of it. The good news: once the four parts above are done, you can read these branches on your own, no guide needed.' }
 ];
 

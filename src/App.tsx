@@ -16,7 +16,10 @@ const DefLesson12 = lazy(() => import('./features/lessons/def/b12/Lesson12Orches
 const DefLesson08 = lazy(() => import('./features/lessons/def/b8/Lesson08Storage'));
 const Lesson01 = lazy(() => import('./features/lessons/b1/Lesson01Intro'));
 const Lesson02 = lazy(() => import('./features/lessons/b2/Lesson02Agents'));
-const Lesson03 = lazy(() => import('./features/lessons/b3/Lesson03Search'));
+const Lesson03 = lazy(() => import('./features/lessons/b3/Lesson03Problem'));
+const Lesson04 = lazy(() => import('./features/lessons/b4/Lesson04Uninformed'));
+const Lesson05 = lazy(() => import('./features/lessons/b5/Lesson05Informed'));
+const Lesson06 = lazy(() => import('./features/lessons/b6/Lesson06LocalSearch'));
 
 // Lên đầu trang khi đổi route; tôn trọng #anchor trong cùng trang.
 function ScrollToTop() {
@@ -72,6 +75,9 @@ export default function App() {
           <Route path="/courses/csc14003/lessons/b1" element={<Lesson01 />} />
           <Route path="/courses/csc14003/lessons/b2" element={<Lesson02 />} />
           <Route path="/courses/csc14003/lessons/b3" element={<Lesson03 />} />
+          <Route path="/courses/csc14003/lessons/b4" element={<Lesson04 />} />
+          <Route path="/courses/csc14003/lessons/b5" element={<Lesson05 />} />
+          <Route path="/courses/csc14003/lessons/b6" element={<Lesson06 />} />
           <Route path="/courses/data-engineering-foundation/lessons/b7" element={<DefLesson07 />} />
           <Route path="/courses/data-engineering-foundation/lessons/b8" element={<DefLesson08 />} />
           <Route path="/courses/data-engineering-foundation/lessons/b12" element={<DefLesson12 />} />

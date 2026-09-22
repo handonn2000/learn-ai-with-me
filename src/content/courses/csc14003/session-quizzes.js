@@ -51,7 +51,7 @@ export const SESSION_QUIZZES = {
         'Machine learning ra đời trước AI',
       ],
       a: 1,
-      ex: 'Búp bê Nga: lớp nào cũng nằm gọn trong lớp ngoài. Chỗ hay bị quên là mấy nhánh AI <em>không</em> học gì hết — tìm kiếm, logic, CSP đều nằm ở buổi 3 tới 8, và không cái nào cần một dòng dữ liệu huấn luyện.',
+      ex: 'Búp bê Nga: lớp nào cũng nằm gọn trong lớp ngoài. Chỗ hay bị quên là mấy nhánh AI <em>không</em> học gì hết — tìm kiếm, logic, CSP đều nằm ở buổi 3 tới 10, và không cái nào cần một dòng dữ liệu huấn luyện.',
     },
     {
       topicId: 'history',
@@ -213,6 +213,44 @@ export const SESSION_QUIZZES = {
       ex: 'FIFO queue → BFS · LIFO stack → DFS · hàng đợi ưu tiên theo g → UCS. Một vòng lặp, ba tính cách. Nhớ được chỗ này là nhớ được cả nửa buổi — và cũng là lý do Lab chỉ cần đổi một dòng để chuyển thuật toán.',
     },
     {
+      topicId: 'problem-statement',
+      q: 'Trừu tượng hóa một bài toán là bỏ bớt chi tiết. Bỏ tới đâu thì được coi là bỏ ĐÚNG?',
+      opts: [
+        'Bỏ tới khi trạng thái chỉ còn một con số',
+        'Bỏ tới khi mỗi hành động trừu tượng vẫn thực hiện được ngoài đời, dù phức tạp cách mấy',
+        'Bỏ tới khi không gian trạng thái còn dưới một triệu',
+        'Bỏ hết mọi thứ không xuất hiện trong goal test',
+      ],
+      a: 1,
+      ex: 'Phép thử là <strong class="hl">có đi được thật không</strong>: “Go(Sibiu)” bỏ qua thời tiết, bạn đồng hành, bài hát đang bật — bỏ được, vì tài xế nào cũng lái từ Arad tới Sibiu được bất kể mấy thứ đó. Trừu tượng hóa sai là khi nó bỏ mất một thứ khiến hành động không còn thực hiện nổi. Kích thước không gian là <em>hệ quả</em> của việc bỏ đúng, không phải tiêu chí.',
+    },
+    {
+      topicId: 'search-framework',
+      q: 'Nút (node) và trạng thái (state) khác nhau ở chỗ nào?',
+      opts: [
+        'Không khác gì, hai tên gọi của cùng một thứ',
+        'Trạng thái là cấu hình của thế giới; nút là một mắt trong cây tìm kiếm, mang thêm cha, hành động và g(n)',
+        'Nút là trạng thái đã được mở, trạng thái là cái chưa mở',
+        'Trạng thái chỉ có trong graph-search, nút chỉ có trong tree-search',
+      ],
+      a: 1,
+      ex: 'Một trạng thái có thể xuất hiện ở <em>nhiều</em> nút khác nhau, vì tới nó bằng nhiều đường. Chính vì vậy hai nút cùng trạng thái có g(n) khác nhau mà h(n) thì bằng nhau — h chỉ nhìn trạng thái, g nhìn cả đường đã đi. Nhớ chỗ này thì decrease-key trong UCS mới hết bí ẩn.',
+    },
+    {
+      topicId: 'search-framework',
+      q: 'Vì sao graph-search phải giữ tập explored, trong khi tree-search thì không?',
+      opts: [
+        'Để tiết kiệm bộ nhớ',
+        'Để đường đi tìm được ngắn hơn',
+        'Vì không có nó, đường đi dư thừa làm cây phình theo hàm mũ dù số trạng thái thật rất nhỏ',
+        'Vì tree-search không dùng được với đồ thị có trọng số',
+      ],
+      a: 2,
+      ex: 'Ngược đời một chút: explored set <em>tốn</em> bộ nhớ chứ không tiết kiệm — nó đánh đổi bộ nhớ lấy thời gian. Lý do là đường dư thừa: cùng một trạng thái tới được bằng vô số đường, nên cây tìm kiếm có thể vô hạn ngay cả khi không gian trạng thái hữu hạn. Bản đồ Romania có 20 thành phố mà cây tìm kiếm của nó không đáy.',
+    },
+  ],
+  b4: [
+    {
       topicId: 'uninformed',
       q: 'BFS đảm bảo tìm được đường tối ưu khi nào?',
       opts: [
@@ -249,6 +287,44 @@ export const SESSION_QUIZZES = {
       ex: 'Cây phân nhánh thì tầng cuối đông hơn tất cả các tầng trên cộng lại — nên chạy lại mấy tầng nông gần như miễn phí. Đổi lại bạn được bộ nhớ của DFS cùng với tính đầy đủ và tối ưu của BFS. Còn chi phí cạnh khác nhau thì IDS chịu, đó là việc của UCS.',
     },
     {
+      topicId: 'uninformed',
+      q: 'DFS tốn O(bm) bộ nhớ còn BFS tốn O(b^d). Vì sao chênh nhau xa tới vậy?',
+      opts: [
+        'Vì DFS không lưu tập explored',
+        'Vì BFS phải giữ cả một tầng đáy trong frontier, còn DFS chỉ giữ một nhánh đang đi',
+        'Vì DFS dùng đệ quy nên bộ nhớ nằm ở stack hệ thống, không tính',
+        'Vì BFS nhân đôi mỗi nút để lưu đường đi',
+      ],
+      a: 1,
+      ex: 'Hình dung frontier của BFS: nó phải nhớ TOÀN BỘ tầng cuối cùng cùng lúc, mà tầng cuối chiếm gần hết số nút của cây. DFS thì chỉ cần nhớ một đường từ gốc xuống, cộng các anh em chưa duyệt dọc đường — tuyến tính theo độ sâu. Đây chính là lý do IDS tồn tại: mượn bộ nhớ của DFS mà vẫn giữ tính tối ưu của BFS.',
+    },
+    {
+      topicId: 'uninformed',
+      q: 'DLS chạm trần độ sâu ℓ thì trả về <em>cutoff</em>. Vì sao phải phân biệt nó với <em>failure</em>?',
+      opts: [
+        'Chỉ là quy ước đặt tên, không ảnh hưởng gì',
+        'cutoff nghĩa là “có thể còn nghiệm sâu hơn, chưa biết”; failure nghĩa là “hết đường thật” — IDS dựa vào đó để quyết định có tăng ℓ nữa không',
+        'cutoff dùng cho đồ thị có hướng, failure cho vô hướng',
+        'failure nghĩa là gặp vòng lặp, cutoff nghĩa là hết bộ nhớ',
+      ],
+      a: 1,
+      ex: 'Gộp hai thứ này làm một là bug kinh điển. Nếu DLS trả failure khi thực ra chỉ là chạm trần, IDS sẽ kết luận bài toán vô nghiệm và dừng — trong khi nghiệm đang nằm ngay tầng dưới. Ngược lại, trả cutoff khi thực sự hết đường thì IDS lặp mãi không thôi.',
+    },
+    {
+      topicId: 'uninformed',
+      q: 'Khi mọi cạnh có cùng chi phí, UCS hành xử thế nào?',
+      opts: [
+        'Trùng với DFS',
+        'Trùng với BFS',
+        'Trùng với IDS',
+        'Vẫn khác cả ba, vì UCS luôn dùng hàng đợi ưu tiên',
+      ],
+      a: 1,
+      ex: 'Chi phí bằng nhau thì g(n) chỉ còn là số cạnh nhân hằng số, nên “rẻ nhất” cũng chính là “nông nhất” — đúng thứ tự BFS mở nút. Cấu trúc dữ liệu vẫn là hàng đợi ưu tiên, nhưng <em>thứ tự</em> sinh ra thì trùng BFS. Một chi tiết nhỏ vẫn khác: UCS dừng khi đích được LẤY RA, BFS dừng khi đích được SINH RA.',
+    },
+  ],
+  b5: [
+    {
       topicId: 'heuristic',
       q: 'Với h admissible, phát biểu nào SAI?',
       opts: [
@@ -284,5 +360,139 @@ export const SESSION_QUIZZES = {
       a: 1,
       ex: 'h = 0 thì f = g, viền là những vòng tròn đồng tâm quanh điểm xuất phát — A* thoái hóa đúng thành UCS, loang cả về hướng ngược với đích. h càng sát chi phí thật, viền càng bị kéo dài về phía đích và bó sát đường tối ưu. Mở Lab chạy hai bên trên preset Romania rồi đếm số nút xám là thấy ngay.',
     },
+    {
+      topicId: 'heuristic',
+      q: 'Trên bản đồ Romania, GBFS trả về đường dài 450 km còn A* trả về 418 km. 32 km đó đi đâu mất?',
+      opts: [
+        'GBFS dùng heuristic không admissible',
+        'GBFS chỉ nhìn h(n) — phần đường còn lại — nên bỏ qua chi phí đã đi và chọn nhầm nhánh trông gần đích',
+        'GBFS dừng quá sớm, chưa mở hết frontier',
+        'Hai thuật toán dùng hai bảng heuristic khác nhau',
+      ],
+      a: 1,
+      ex: 'Cùng một h, cùng một bản đồ. Khác biệt duy nhất là GBFS bỏ mất vế g(n): nó lao về phía trông gần đích nhất mà không hỏi “tới được đây tôi đã tốn bao nhiêu rồi?”. Tham lam theo nghĩa đen — chọn tốt trước mắt, trả giá ở cuối đường. A* cộng lại cả hai vế nên không bị lừa.',
+    },
+    {
+      topicId: 'admissible-consistent',
+      q: 'Điều kiện consistent viết là h(n) ≤ c(n, a, n′) + h(n′). Nó chính là bất đẳng thức gì, và nói lên điều gì?',
+      opts: [
+        'Bất đẳng thức Cauchy — h bị chặn bởi trung bình cộng',
+        'Bất đẳng thức tam giác — đi thẳng tới đích không thể đắt hơn vòng qua một nút trung gian',
+        'Bất đẳng thức Markov — xác suất sai của h giảm dần',
+        'Không phải bất đẳng thức nào cả, chỉ là định nghĩa thuần quy ước',
+      ],
+      a: 1,
+      ex: 'Đúng hình tam giác: ước lượng từ n thẳng tới đích không được vượt quá (chi phí n → n′) cộng (ước lượng từ n′ tới đích). Hệ quả là f không bao giờ giảm dọc một đường đi, nên nút vừa được lấy ra khỏi frontier lần đầu là đã tối ưu — đó mới là thứ cho phép A* dùng graph-search mà vẫn tối ưu.',
+    },
+    {
+      topicId: 'astar',
+      q: 'A* có đầy đủ (complete) vô điều kiện không?',
+      opts: [
+        'Có, miễn heuristic admissible',
+        'Không — còn cần b hữu hạn và mọi chi phí bước ≥ một ε > 0, y hệt điều kiện của UCS',
+        'Có, vì f = g + h luôn tăng nên chắc chắn chạm đích',
+        'Không — A* chỉ đầy đủ trên đồ thị vô hướng',
+      ],
+      a: 1,
+      ex: 'Chỗ này dễ gật đầu cho qua. Admissible lo phần <em>tối ưu</em>, không lo phần <em>đầy đủ</em>. Nếu chi phí bước tiến dần về 0, A* có thể đi mãi trên một đường vô hạn mà tổng chi phí vẫn hữu hạn, không bao giờ chạm tới đích. Đúng bẫy đã gặp ở UCS — slide còn ghi thẳng “xem lại điều kiện đầy đủ của UCS”.',
+    },
   ],
+  b6: [
+  {
+    topicId: "local-model",
+    q: "Với mô hình 8-hậu, mỗi cột có đúng một hậu và một nước chỉ đổi hàng của một hậu. Có bao nhiêu trạng thái và hàng xóm của mỗi trạng thái?",
+    opts: [
+      "8! trạng thái, 28 hàng xóm",
+      "8⁸ trạng thái, 56 hàng xóm",
+      "64 trạng thái, 8 hàng xóm",
+      "2⁸ trạng thái, 64 hàng xóm"
+    ],
+    a: 1,
+    ex: "Mỗi cột chọn độc lập 1 trong 8 hàng nên có 8⁸ trạng thái. Chọn 1 trong 8 hậu rồi 1 trong 7 hàng khác tạo 8 × 7 = 56 hàng xóm. Chuỗi hàng cho phép lặp, không phải hoán vị."
+  },
+  {
+    topicId: "local-landscape",
+    q: "Ở bài giảm chi phí, một trạng thái h = 1 có mọi hàng xóm h ≥ 2. Cho phép đi ngang có cứu được ngay không?",
+    opts: [
+      "Có, vì đi ngang luôn tìm được đích",
+      "Không, vì không có hàng xóm bằng điểm để đi ngang",
+      "Có, vì h = 1 đã là nghiệm",
+      "Không, vì cần tăng số quân hậu"
+    ],
+    a: 1,
+    ex: "Đây là cực tiểu cục bộ nghiêm ngặt: đi ngang không có đất dùng. Bạn cần cơ chế khác như khởi động lại hoặc nhận một bước xấu. h = 1 vẫn còn một cặp xung đột."
+  },
+  {
+    topicId: "local-variants",
+    q: "First-choice khác steepest-ascent ở đâu?",
+    opts: [
+      "Nhận ngay hàng xóm đầu tiên dù xấu hơn",
+      "Giữ toàn bộ frontier",
+      "Thử theo thứ tự ngẫu nhiên và nhận nước tốt đầu tiên, không cần chấm hết",
+      "Luôn chọn nước có mức cải thiện lớn nhất"
+    ],
+    a: 2,
+    ex: "Tôi chỉ cần một nước cải thiện để tiến lên, không nhất thiết nước tốt nhất. Stochastic hill-climbing chọn trong nhóm nước tốt; first-choice có thể ngừng việc tìm hàng xóm sớm."
+  },
+  {
+    topicId: "local-restart",
+    q: "Mỗi lượt độc lập có p = 0,25 thành công. Kỳ vọng số lượt chạy tính cả lượt đầu là bao nhiêu?",
+    opts: [
+      "3",
+      "4",
+      "0,25",
+      "25"
+    ],
+    a: 1,
+    ex: "1/p = 4 lượt tính cả lượt đầu; số lần khởi động lại sau lần đầu có kỳ vọng 3. Đổi cách gọi mà quên đổi cách đếm là lệch một lượt ngay."
+  },
+  {
+    topicId: "local-annealing",
+    q: "SA đang giảm chi phí: C(current) = 5, C(next) = 7, T = 2. Xác suất nhận nước này là gì?",
+    opts: [
+      "1, vì 7 lớn hơn 5",
+      "e¹ > 1",
+      "e⁻¹ ≈ 0,368",
+      "0, mọi bước xấu đều bị loại"
+    ],
+    a: 2,
+    ex: "ΔC = 7 − 5 = 2 > 0, nên P = exp(−2/2) = e⁻¹. Phải là dấu âm cho phần tăng chi phí; xác suất không được vượt 1."
+  },
+  {
+    topicId: "local-beam",
+    q: "Beam k = 2 cực đại hóa điểm. Con của A có điểm 9, 8; con của B có 6, 5. Giữ những con nào?",
+    opts: [
+      "A:9 và B:6",
+      "A:8 và B:5",
+      "A:9 và A:8",
+      "Giữ cả bốn"
+    ],
+    a: 2,
+    ex: "Beam tuyển từ danh sách chung nên cả hai suất có thể về cùng một cha. A:9 và B:6 là cách giữ nhánh độc lập; chính khác biệt này cũng tạo nguy cơ mất đa dạng."
+  },
+  {
+    topicId: "local-genetic",
+    q: "Quần thể 4-hậu có fitness 2, 3, 1, 0. P chọn cá thể fitness = 3 theo roulette là bao nhiêu?",
+    opts: [
+      "3/4",
+      "1/3",
+      "1/2",
+      "1"
+    ],
+    a: 2,
+    ex: "Tổng fitness là 6 nên 3/6 = 1/2. Đây là xác suất của mỗi lượt chọn, không phải lời hứa đúng nửa số cha mẹ trong một thế hệ nhỏ sẽ là cá thể đó."
+  },
+  {
+    topicId: "local-genetic",
+    q: "Sau crossover của hai cá thể hợp lệ, khẳng định nào đúng?",
+    opts: [
+      "Con chắc chắn có fitness cao hơn cả hai cha mẹ",
+      "Mọi biểu diễn đều bảo đảm con hợp lệ",
+      "Không cần đột biến nữa",
+      "Phải chấm lại fitness và kiểm tra các ràng buộc của biểu diễn"
+    ],
+    a: 3,
+    ex: "Chuỗi hàng N-hậu vẫn giữ một hậu mỗi cột nhưng có thể tăng xung đột. Chuỗi hoán vị TSP còn có thể lặp hoặc mất thành phố. Tên “lai ghép” không thay thế được phép kiểm tra."
+  }
+],
 };

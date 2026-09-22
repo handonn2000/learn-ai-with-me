@@ -1,7 +1,7 @@
 # learn-ai-with-me
 
 Sổ tay tự học AI (CSC14003 · HCMUS) dạng web app — port từ bộ thiết kế HTML sang React.
-Lộ trình 11 tuần với lịch ôn ngắt quãng, bài học tương tác (canvas lab chạy từng bước 7 thuật toán tìm kiếm), quiz chấm theo chủ đề. Kiến trúc data-driven, sẵn đường mở rộng thành blog/portfolio nhiều khóa học.
+Lộ trình 13 tuần với lịch ôn ngắt quãng, bài học tương tác (canvas lab chạy từng bước 7 thuật toán tìm kiếm), quiz chấm theo chủ đề. Kiến trúc data-driven, sẵn đường mở rộng thành blog/portfolio nhiều khóa học.
 
 Khóa **Data Engineering Foundation** có baseline và lộ trình song ngữ: 12 buổi, 4 phần,
 12 tuần đề xuất, khoảng 72–96 giờ theo baseline. Tuần 7 — Ingestion, Tuần 8 — Storage và Tuần 12 — Orchestration đã có bài học VI/EN, lab mô phỏng và quiz.
@@ -58,7 +58,10 @@ src/
     tests/               kiểm tra tổng hợp từng phần (KaTeX cho công thức)
     lessons/b1/          Buổi 1 — Nhập môn AI (3 cảnh canvas + quiz 4 ô)
     lessons/b2/          Buổi 2 — Tác tử thông minh (Vacuum Lab + môi trường + kiến trúc agent)
-    lessons/b3/          Buổi 3 — Tìm kiếm (Manim Lab + Code Lab)
+    lessons/b3/          Buổi 3 — Mô hình hóa bài toán tìm kiếm
+    lessons/b4/          Buổi 4 — Tìm kiếm không có thông tin
+    lessons/b5/          Buổi 5 — Tìm kiếm có thông tin
+    lessons/b6/          Buổi 6 — Tìm kiếm cục bộ (N-hậu, annealing, beam, di truyền)
     search-lab/          search-engine.js — engine sinh trace 7 thuật toán
 ```
 
@@ -71,7 +74,7 @@ Các đường dẫn dưới đây tính từ gốc ứng dụng `/learn-ai-with
 |---|---|
 | `/` | Trang chủ |
 | `/courses` | Danh sách khóa học |
-| `/courses/csc14003` | Lộ trình AI — 11 tuần |
+| `/courses/csc14003` | Lộ trình AI — 13 tuần |
 | `/courses/data-engineering-foundation/lessons/b7` | Tuần 7 — Ingestion, Kafka và CDC (VI/EN) |
 | `/courses/data-engineering-foundation/lessons/b8` | Tuần 8 — Storage, modeling và lakehouse (VI/EN) |
 | `/courses/data-engineering-foundation/lessons/b12` | Tuần 12 — Orchestration, Airflow và chất lượng dữ liệu (VI/EN) |
@@ -79,13 +82,20 @@ Các đường dẫn dưới đây tính từ gốc ứng dụng `/learn-ai-with
 | `/courses/csc14003/tests` | Kiểm tra tổng hợp; `#p1`, `#p2`, `#p3`, `#p4` chọn phần |
 | `/courses/csc14003/lessons/b1` | Buổi 1 — Nhập môn AI |
 | `/courses/csc14003/lessons/b2` | Buổi 2 — Tác tử thông minh |
-| `/courses/csc14003/lessons/b3` | Buổi 3 — Giải bài toán bằng tìm kiếm |
+| `/courses/csc14003/lessons/b3` | Buổi 3 — Mô hình hóa bài toán tìm kiếm |
+| `/courses/csc14003/lessons/b4` | Buổi 4 — Tìm kiếm không có thông tin |
+| `/courses/csc14003/lessons/b5` | Buổi 5 — Tìm kiếm có thông tin |
+| `/courses/csc14003/lessons/b6` | Buổi 6 — Tìm kiếm cục bộ và tối ưu hóa (VI/EN) |
 | `/blog` | Trang giữ chỗ cho blog |
 | Đường dẫn không khớp | Trang không tìm thấy |
 
 Router dùng `/courses/:slug` và `/courses/:slug/tests`; khóa chưa có bộ đề, như
 Data Engineering Foundation, hiển thị thông báo chưa có kiểm tra. Slug không tồn tại
-hiển thị trang không tìm thấy. CSC14003 hiện có bài học tương tác cho buổi 1–3.
+hiển thị trang không tìm thấy. CSC14003 hiện có bài học tương tác cho buổi 1–6.
+Buổi 6 có lab N-hậu với 4 thuật toán, mô phỏng địa hình và local beam tự lặp,
+thí nghiệm xác suất simulated annealing, xưởng lai/đột biến, 3 ví dụ Python chạy được
+và quiz 8 câu. Kiểm thuật toán và ví dụ bằng `node scripts/check-ai-b6.mjs`;
+xem [review nội dung và coverage](docs/courses/csc14003/reviews/b6-quality.md).
 
 ## Dữ liệu người học
 

@@ -156,10 +156,10 @@ export const VI = {
     s11: "Quan sát đầy đủ · tất định · từng hồi · tĩnh · rời rạc · một agent. Gặp được bộ này thì bạn đang ở thiên đường.",
     s12: "VÀ HẦU HẾT TÌNH HUỐNG ĐỜI THỰC",
     s13: "Quan sát một phần · ngẫu nhiên · tuần tự · động · liên tục · nhiều agent. Đủ bộ vế phải. Bấm lại “Lái taxi” ở bảng trên mà xem — nó chính là hàng này.",
-    s14: "HAI CHỖ HAY BỊ LẪN — VÀ MỘT CHỖ ĐÁNH DẤU SẴN CHO BUỔI 5",
+    s14: "HAI CHỖ HAY BỊ LẪN — VÀ MỘT CHỖ ĐÁNH DẤU SẴN CHO BUỔI 7",
     s15: "<strong class='hl'>Từng hồi ≠ tĩnh.</strong> Từng hồi nói về việc quyết định bây giờ có ảnh hưởng quyết định sau không; tĩnh nói về việc môi trường có tự đổi trong lúc bạn ngồi nghĩ không. Robot gắp linh kiện là từng hồi mà vẫn động.",
     s16: "<strong class='hl'>Ngẫu nhiên ≠ nhiều agent.</strong> Chẩn đoán y khoa đầy bất ngờ nhưng chỉ một agent — con vi khuẩn không tính toán để hạ bạn. Cứ hỏi: hành vi của thực thể kia có nhằm tối đa một thước đo phụ thuộc vào hành vi của tôi không? Có thì mới là agent.",
-    s17: "Và khi đã có nhiều agent thì còn chia tiếp làm hai loại, tùy vào thước đo của họ ăn nhau thế nào. <strong class='hl-red'>Cạnh tranh</strong>: tôi được điểm nghĩa là bạn mất điểm — cờ vua, bạn thắng thì tôi thua, không có đường nào khác. <strong class='hl-green'>Hợp tác</strong>: cùng lái xe trên đường, ai cũng muốn về nhà và <em>không ai muốn đâm nhau cả</em>, nên thước đo của tôi và của bạn phần lớn cùng chiều. Nhớ chữ cạnh tranh — buổi 5 gọi tên nó thành “tìm kiếm đối kháng”, và toàn bộ minimax mọc ra từ đúng chỗ này.",
+    s17: "Và khi đã có nhiều agent thì còn chia tiếp làm hai loại, tùy vào thước đo của họ ăn nhau thế nào. <strong class='hl-red'>Cạnh tranh</strong>: tôi được điểm nghĩa là bạn mất điểm — cờ vua, bạn thắng thì tôi thua, không có đường nào khác. <strong class='hl-green'>Hợp tác</strong>: cùng lái xe trên đường, ai cũng muốn về nhà và <em>không ai muốn đâm nhau cả</em>, nên thước đo của tôi và của bạn phần lớn cùng chiều. Nhớ chữ cạnh tranh — buổi 7 gọi tên nó thành “tìm kiếm đối kháng”, và toàn bộ minimax mọc ra từ đúng chỗ này.",
   },
   ch7: {
     s1: "Sao không nhét sẵn <em class='hl-red'>mọi đáp án</em> vào một cái bảng?",
@@ -209,7 +209,7 @@ export const VI = {
     s28: "Nấc 4 thì lỏng lẻo. Nó hiếm khi có một <em>thang điểm</em> tường minh để cân nhanh với an toàn, hay cân cái chắc ăn với cái đáng giá mà hên xui — thứ đó thường nằm trong đầu bạn chứ không nằm trong chương trình. Còn nấc 5 thì gần như không có: mô hình <strong class='hl-red'>không tự sửa mình sau mỗi lần bị chê</strong>. Việc học xảy ra ở một chu kỳ khác hẳn, do người khác chạy, cách nhau hàng tháng. Cái vòng phê bình → học → sinh vấn đề mà bạn vừa xem ở nấc 5 vẫn còn để trống.",
     s29: "Nói vậy không phải để dìm. Nói vậy để bạn có một cái thước: lần tới đọc quảng cáo về “agent tự chủ”, bạn hỏi được đúng câu — <em>nó đang ở nấc mấy, và ba cái hộp của nấc 5 ai đang cầm?</em>",
     s30: "MÓC NỐI — MỖI NẤC LÀ MỘT BUỔI SAU",
-    s31: "Đừng đọc năm nấc này như một danh sách để thuộc lòng. Chúng là mục lục của cả khóa: <strong class='hl'>nấc 3</strong> đẻ ra buổi 3–6, nơi bạn đi tìm đường tới mục tiêu bằng tìm kiếm và ràng buộc. <strong class='hl'>Nấc 4</strong> là cái thang điểm mà buổi 5 dùng để so hai nước cờ và buổi 9 dùng để cân xác suất. <strong class='hl'>Nấc 5</strong> chính là buổi 10 và 11 — bộ học ở đó có tên riêng là ID3, là mạng nơ-ron. Còn <strong class='hl'>nấc 2</strong>, cái mô hình thế giới, là thứ buổi 7 và 8 sẽ viết ra bằng logic.",
+    s31: "Đừng đọc năm nấc này như một danh sách để thuộc lòng. Chúng là mục lục của cả khóa: <strong class='hl'>nấc 3</strong> đẻ ra buổi 3–8, nơi bạn đi tìm đường tới mục tiêu bằng tìm kiếm và ràng buộc. <strong class='hl'>Nấc 4</strong> là cái thang điểm mà buổi 7 dùng để so hai nước cờ và buổi 11 dùng để cân xác suất. <strong class='hl'>Nấc 5</strong> chính là buổi 12 và 13 — bộ học ở đó có tên riêng là ID3, là mạng nơ-ron. Còn <strong class='hl'>nấc 2</strong>, cái mô hình thế giới, là thứ buổi 9 và 10 sẽ viết ra bằng logic.",
   },
   ch9: {
     s1: "Tổng kết một trang",
@@ -242,7 +242,7 @@ export const VI = {
     s3: "✏️ Bốn câu, hai trò chơi ngoài sân. Buổi 1 tôi có nhá qua mấy câu này rồi bảo để dành — giờ thì bạn có đủ đồ nghề để làm thật. Làm bằng giấy bút, đừng làm trong đầu: chỗ bí sẽ lộ ra ngay khi phải viết cột P xuống.",
     s4: "CÂU THỨ NĂM, KHÔNG CÓ TRONG ĐỀ NHƯNG ĐÁNG LÀM NHẤT",
     s5: "Quay lại hai việc tennis ở mục <a href='#ch5'>05</a> — đánh giải và đập bóng vào tường — rồi xếp cả hai vào bảy chiều. Bạn sẽ thấy chúng lệch nhau ở <strong class='hl'>số agent</strong> và ở chiều <strong class='hl'>từng hồi / tuần tự</strong>. Rồi tự hỏi tiếp: cái tường có phải một agent không? Trả lời được câu đó là bạn đã thật sự hiểu tiêu chí phân biệt agent với đồ vật, chứ không chỉ thuộc nó.",
-    s6: "Tiếp theo: <strong class='hl'>Buổi 3 — Giải bài toán bằng Tìm kiếm</strong>. Ở đó bạn dựng đúng con agent nấc 3 của mục 08: có mục tiêu, và phải tự tìm đường tới đó.",
+    s6: "Tiếp theo: <strong class='hl'>Buổi 3 — Phát biểu bài toán tìm kiếm</strong>. Ở đó bạn dựng đúng con agent nấc 3 của mục 08: có mục tiêu, và phải tự tìm đường tới đó.",
     s7: "← Về Lộ trình",
   },
   agentarchdiagram: {

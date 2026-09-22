@@ -126,7 +126,7 @@ export const ARCH_LEVELS = [
     n: 1, id: 'reflex', name: 'Simple reflex', en: 'Phản xạ đơn giản', color: 'var(--cyan)',
     adds: 'Condition–action rules',
     body: 'Look at the <em>current</em> percept, scan a pile of <span class="code-inline">IF… THEN…</span> rules, and do whatever matches. The past is thrown away entirely. <strong class="hl">IF the car in front brakes THEN brake</strong> — that’s it, no need to know where you are or where you’re going.',
-    limit: 'Two problems, not one. <strong class="hl">One:</strong> it only works when the environment is fully observable — one missing piece of information and it is blind, with nowhere to store that piece anyway. <strong class="hl">Two:</strong> some things you know cannot be written as <span class="code-inline">IF… THEN…</span> rules at all — try writing the rule for “recognize a friend’s face”. If you can’t state it, you can’t fit it into this architecture, and that is why sessions 10–11 have to let the machine extract rules from data itself.',
+    limit: 'Two problems, not one. <strong class="hl">One:</strong> it only works when the environment is fully observable — one missing piece of information and it is blind, with nowhere to store that piece anyway. <strong class="hl">Two:</strong> some things you know cannot be written as <span class="code-inline">IF… THEN…</span> rules at all — try writing the rule for “recognize a friend’s face”. If you can’t state it, you can’t fit it into this architecture, and that is why sessions 12–13 have to let the machine extract rules from data itself.',
   },
   {
     n: 2, id: 'model', name: 'Model-based reflex', en: 'Phản xạ có mô hình', color: 'var(--green)',
@@ -143,7 +143,7 @@ export const ARCH_LEVELS = [
   {
     n: 4, id: 'utility', name: 'Utility-based', en: 'Hướng thỏa dụng', color: 'var(--purple)',
     adds: 'A utility function',
-    body: 'Replace “can I get there” with “<strong class="hl">how happy will I be</strong> when I do”. The utility function is the performance measure internalized inside the agent’s head. Having a scale rather than a switch lets it handle two things a goal cannot: weighing conflicting goals against each other (fast vs safe), and weighing the sure thing against the valuable gamble. Put compactly, a rational agent at this level picks the action that <strong class="hl">maximizes the EXPECTED utility</strong> of the outcomes — hold on to that word “expected”, sessions 5 and 9 turn it into actual numbers.',
+    body: 'Replace “can I get there” with “<strong class="hl">how happy will I be</strong> when I do”. The utility function is the performance measure internalized inside the agent’s head. Having a scale rather than a switch lets it handle two things a goal cannot: weighing conflicting goals against each other (fast vs safe), and weighing the sure thing against the valuable gamble. Put compactly, a rational agent at this level picks the action that <strong class="hl">maximizes the EXPECTED utility</strong> of the outcomes — hold on to that word “expected”, sessions 7 and 11 turn it into actual numbers.',
     limit: 'Somebody still has to sit down and write out every rule, every model, every scale for it. Once programmed, it stays exactly where it was.',
   },
   {

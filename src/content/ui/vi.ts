@@ -201,7 +201,7 @@ export const VI = {
   },
 
   test: {
-    back: '← Lộ trình 11 tuần',
+    back: '← Lộ trình 13 tuần',
     closedBook: 'ĐÓNG SÁCH LẠI · ĐỪNG XEM LẠI BÀI TRƯỚC KHI LÀM',
     titleA: 'Kiểm tra ',
     titleAccent: 'tổng hợp',
