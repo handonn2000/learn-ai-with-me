@@ -1,0 +1,50 @@
+{
+  "at": "2026-09-26T07:03:34.850Z",
+  "checks": [
+    "b9/vi/1440/dark: anchors, full-page width, images, code contrast roles",
+    "b9/vi/1440/light: anchors, full-page width, images, code contrast roles",
+    "b9/vi/375/dark: anchors, full-page width, images, code contrast roles",
+    "b9/vi/375/light: anchors, full-page width, images, code contrast roles",
+    "b9/vi: three labs, keyboard selects, ten-answer quiz=100, isolated storage/checklist, 16-slide deck, reduced motion, selectable code",
+    "b9/en/1440/dark: anchors, full-page width, images, code contrast roles",
+    "b9/en/1440/light: anchors, full-page width, images, code contrast roles",
+    "b9/en/375/dark: anchors, full-page width, images, code contrast roles",
+    "b9/en/375/light: anchors, full-page width, images, code contrast roles",
+    "b9/en: three labs, keyboard selects, ten-answer quiz=100, isolated storage/checklist, 16-slide deck, reduced motion, selectable code",
+    "b10/vi/1440/dark: anchors, full-page width, images, code contrast roles",
+    "b10/vi/1440/light: anchors, full-page width, images, code contrast roles",
+    "b10/vi/375/dark: anchors, full-page width, images, code contrast roles",
+    "b10/vi/375/light: anchors, full-page width, images, code contrast roles",
+    "b10/vi: three labs, keyboard selects, ten-answer quiz=100, isolated storage/checklist, 16-slide deck, reduced motion, selectable code",
+    "b10/en/1440/dark: anchors, full-page width, images, code contrast roles",
+    "b10/en/1440/light: anchors, full-page width, images, code contrast roles",
+    "b10/en/375/dark: anchors, full-page width, images, code contrast roles",
+    "b10/en/375/light: anchors, full-page width, images, code contrast roles",
+    "b10/en: three labs, keyboard selects, ten-answer quiz=100, isolated storage/checklist, 16-slide deck, reduced motion, selectable code",
+    "b11/vi/1440/dark: anchors, full-page width, images, code contrast roles",
+    "b11/vi/1440/light: anchors, full-page width, images, code contrast roles",
+    "b11/vi/375/dark: anchors, full-page width, images, code contrast roles",
+    "b11/vi/375/light: anchors, full-page width, images, code contrast roles",
+    "b11/vi: three labs, keyboard selects, ten-answer quiz=100, isolated storage/checklist, 16-slide deck, reduced motion, selectable code",
+    "b11/en/1440/dark: anchors, full-page width, images, code contrast roles",
+    "b11/en/1440/light: anchors, full-page width, images, code contrast roles",
+    "b11/en/375/dark: anchors, full-page width, images, code contrast roles",
+    "b11/en/375/light: anchors, full-page width, images, code contrast roles",
+    "b11/en: three labs, keyboard selects, ten-answer quiz=100, isolated storage/checklist, 16-slide deck, reduced motion, selectable code",
+    "b11: observed two cycles (3 phases), cycle reset, viewport suspension and stable offscreen frame",
+    "b9: observed two cycles (4 phases), cycle reset, viewport suspension and stable offscreen frame"
+  ],
+  "errors": [],
+  "screenshots": [
+    "b9-vi-hero.png",
+    "b9-en-hero.png",
+    "b10-vi-hero.png",
+    "b10-en-hero.png",
+    "b11-vi-hero.png",
+    "b11-en-hero.png"
+  ],
+  "limits": [
+    "No live Spark, Flink, Feast, Kafka or JDBC services executed.",
+    "Document-hidden lifecycle and unmount cleanup inspected in the shared hook; viewport pause observed in browser."
+  ]
+}

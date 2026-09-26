@@ -4,9 +4,10 @@ Sổ tay tự học AI (CSC14003 · HCMUS) dạng web app — port từ bộ thi
 Lộ trình 13 tuần với lịch ôn ngắt quãng, bài học tương tác (canvas lab chạy từng bước 7 thuật toán tìm kiếm), quiz chấm theo chủ đề. Kiến trúc data-driven, sẵn đường mở rộng thành blog/portfolio nhiều khóa học.
 
 Khóa **Data Engineering Foundation** có baseline và lộ trình song ngữ: 12 buổi, 4 phần,
-12 tuần đề xuất, khoảng 72–96 giờ theo baseline. Tuần 7 — Ingestion, Tuần 8 — Storage và Tuần 12 — Orchestration đã có bài học VI/EN, lab mô phỏng và quiz.
+12 tuần đề xuất, khoảng 72–96 giờ theo baseline. Các tuần 7–12 đã có bài học VI/EN, lab mô phỏng và quiz.
 Tuần 8 gồm 10 chương, storage/HDFS/schema explorer, lab governance và medallion, cùng quiz 10 câu;
-Tuần 12 gồm 10 chương về Airflow và chất lượng dữ liệu, lab dependency/rerun, concurrency và validation gate, cùng quiz 10 câu; các tuần khác vẫn là khung học, chưa có bộ đề tổng hợp.
+Tuần 12 gồm 10 chương về Airflow và chất lượng dữ liệu, lab dependency/rerun, concurrency và validation gate, cùng quiz 10 câu.
+Tuần 9 — Spark/batch, Tuần 10 — Flink/stream và Tuần 11 — Consumption đều có 10 chương, 3 lab tương tác, quiz 10 câu và chế độ trình chiếu. Tuần 1–6 vẫn là khung học, chưa có bộ đề tổng hợp.
 Xem [curriculum và roadmap](docs/courses/data-engineering-foundation/curriculum.md) cùng
 [phân tích 12 bộ slide nguồn](docs/courses/data-engineering-foundation/source-analysis.md).
 

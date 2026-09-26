@@ -111,7 +111,7 @@ export const EN = {
       topics: "Drivers/executors, partitions, jobs/stages/tasks · lazy evaluation · RDDs/DataFrames · serialization, cache/persist · shuffle, skew, cardinality, schema evolution · Catalyst/Tungsten/AQE · Spark UI and compaction.",
       math: "Python, SQL, and storage models; review partitioning, aggregation, and data-movement costs.",
       outcome: "You can explain a batch job and recognize shuffle costs, skewed data, or unnecessary reads.",
-      practice: "Planned: a small DataFrame transformation with reconciled output and an execution-plan observation; advanced tuning is an extension."
+      practice: "Labs compare filter placement, cache capacity, and skew; a PySpark example includes reconciled output and an execution plan."
     },
     b10: {
       title: "Session 10 · Stream Transformation with Flink",
@@ -120,7 +120,7 @@ export const EN = {
       topics: "JobManager/TaskManager, slots, parallelism · event time and watermarks · windows, triggers, late data · DataStream/Table/SQL · state, checkpoints, recovery · chaining, backpressure · deployment modes.",
       math: "Kafka, partitioning, and distributed processing; review timestamps, intervals, and per-key state.",
       outcome: "You can predict window results for out-of-order events and explain the role of state and checkpoints.",
-      practice: "Planned: an event timeline, expected window results, a late-data policy, and a recovery scenario."
+      practice: "Labs explore event-time timelines, late-data policies, checkpoint/replay, and a backpressure queue."
     },
     b11: {
       title: "Session 11 · Consumption & Analytical Models",
@@ -129,7 +129,7 @@ export const EN = {
       topics: "ER/3NF and dimensional modeling · facts/dimensions, star/snowflake · SCD · Data Vault · Inmon/Kimball · ClickHouse/Pinot · feature stores, offline/online access, and training-serving skew.",
       math: "SQL, storage layers, and batch/stream processing; review record grain, aggregation, and change history.",
       outcome: "You can design a model for business questions and choose a dimension-history policy.",
-      practice: "Planned: fact grain, dimensions, an SCD policy, and business queries. Feature-store design is an extension; a Feast lab will be written later."
+      practice: "Labs explore fact grain, six SCD policies, and point-in-time/TTL lookup; the Feast example needs a separate project and data source."
     },
     b12: {
       title: "Session 12 · Orchestration & Data Quality",

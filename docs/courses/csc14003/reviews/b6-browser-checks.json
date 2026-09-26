@@ -161,5 +161,9 @@
   "date": "2026-09-22",
   "route": "/courses/csc14003/lessons/b6",
   "browser": "Playwright with installed Google Chrome; temporary isolated profile",
-  "scope": "Desktop browser with emulated viewports/touch events; document-hidden signal simulated; not a physical mobile device."
+  "scope": "Desktop browser with emulated viewports/touch events; document-hidden signal simulated; not a physical mobile device.",
+  "focusedRetest": [
+    "Visible reduced-motion scenes hold their final explanatory frames after 2.2s (landscape 5, beam 3).",
+    "Five final-state screenshots and detailed mobile board/genetic/code screenshots inspected in both themes."
+  ]
 }

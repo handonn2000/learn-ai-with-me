@@ -111,7 +111,7 @@ export const VI = {
       topics: "Driver/executor, partition, job/stage/task · lazy evaluation · RDD/DataFrame · serialization, cache/persist · shuffle, skew, cardinality, schema evolution · Catalyst/Tungsten/AQE · Spark UI và compaction.",
       math: "Python, SQL và mô hình lưu trữ; ôn phân vùng, tổng hợp và chi phí di chuyển dữ liệu.",
       outcome: "Bạn giải thích được một job batch và nhận ra khi chi phí đến từ shuffle, dữ liệu lệch hoặc đọc thừa.",
-      practice: "Dự kiến: phép biến đổi DataFrame nhỏ có đối chiếu kết quả và quan sát execution plan; tuning nâng cao là phần mở rộng."
+      practice: "Lab so sánh vị trí filter, bộ nhớ cache và skew; ví dụ PySpark có kết quả đối chiếu và execution plan."
     },
     b10: {
       title: "Buổi 10 · Xử lý stream với Flink",
@@ -120,7 +120,7 @@ export const VI = {
       topics: "JobManager/TaskManager, slot, parallelism · event time và watermark · window, trigger, late data · DataStream/Table/SQL · state, checkpoint, recovery · chaining, backpressure · deployment modes.",
       math: "Kafka, phân vùng và xử lý phân tán; ôn timestamp, khoảng thời gian và trạng thái theo khóa.",
       outcome: "Bạn dự đoán được kết quả cửa sổ khi sự kiện đến sai thứ tự và giải thích vai trò của state/checkpoint.",
-      practice: "Dự kiến: timeline sự kiện, kết quả window mong đợi, chính sách late data và một tình huống phục hồi."
+      practice: "Lab timeline event-time, chính sách late data, checkpoint/replay và hàng đợi backpressure."
     },
     b11: {
       title: "Buổi 11 · Consumption & mô hình phân tích",
@@ -129,7 +129,7 @@ export const VI = {
       topics: "ER/3NF và dimensional modeling · fact/dimension, star/snowflake · SCD · Data Vault · Inmon/Kimball · ClickHouse/Pinot · feature store, offline/online và training-serving skew.",
       math: "SQL, các lớp lưu trữ và batch/stream; ôn mức chi tiết của bản ghi, tổng hợp và lịch sử thay đổi.",
       outcome: "Bạn thiết kế được mô hình trả lời câu hỏi nghiệp vụ và chọn chính sách lưu lịch sử của dimension.",
-      practice: "Dự kiến: fact grain, dimension, chính sách SCD và truy vấn nghiệp vụ. Thiết kế feature store là mở rộng; bài thực hành Feast sẽ viết sau."
+      practice: "Lab fact grain, sáu chính sách SCD và point-in-time/TTL; ví dụ Feast cần dự án và nguồn dữ liệu riêng."
     },
     b12: {
       title: "Buổi 12 · Orchestration & chất lượng dữ liệu",

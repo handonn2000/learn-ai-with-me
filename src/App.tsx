@@ -13,6 +13,9 @@ const RoadmapPage = lazy(() => import('./features/roadmap/RoadmapPage'));
 const PartTestPage = lazy(() => import('./features/tests/PartTestPage'));
 const DefLesson07 = lazy(() => import('./features/lessons/def/b7/Lesson07Ingestion'));
 const DefLesson12 = lazy(() => import('./features/lessons/def/b12/Lesson12Orchestration'));
+const DefLesson09 = lazy(() => import('./features/lessons/def/b9/Lesson09'));
+const DefLesson10 = lazy(() => import('./features/lessons/def/b10/Lesson10'));
+const DefLesson11 = lazy(() => import('./features/lessons/def/b11/Lesson11'));
 const DefLesson08 = lazy(() => import('./features/lessons/def/b8/Lesson08Storage'));
 const Lesson01 = lazy(() => import('./features/lessons/b1/Lesson01Intro'));
 const Lesson02 = lazy(() => import('./features/lessons/b2/Lesson02Agents'));
@@ -80,6 +83,9 @@ export default function App() {
           <Route path="/courses/csc14003/lessons/b6" element={<Lesson06 />} />
           <Route path="/courses/data-engineering-foundation/lessons/b7" element={<DefLesson07 />} />
           <Route path="/courses/data-engineering-foundation/lessons/b8" element={<DefLesson08 />} />
+          <Route path="/courses/data-engineering-foundation/lessons/b9" element={<DefLesson09 />} />
+          <Route path="/courses/data-engineering-foundation/lessons/b10" element={<DefLesson10 />} />
+          <Route path="/courses/data-engineering-foundation/lessons/b11" element={<DefLesson11 />} />
           <Route path="/courses/data-engineering-foundation/lessons/b12" element={<DefLesson12 />} />
           {/* Các trang còn lại dùng header chung */}
           <Route

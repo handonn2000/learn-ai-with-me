@@ -20,7 +20,8 @@ dữ liệu tiến độ cá nhân. Kết quả máy chi tiết: [b6-browser-che
   Bàn 8-hậu, bảng so sánh và code dài vẫn có cuộn ngang bên trong khối.
 - Mỗi trường hợp của 3 landscape + 2 beam chạy đủ hai lần reset, nhận đủ frame và
   có dwell kết thúc; offscreen không tăng frame. Signal document-hidden được mô phỏng,
-  frame dừng rồi khôi phục signal visible. Reduced motion có giải thích HTML tĩnh.
+  frame dừng rồi khôi phục signal visible. Reduced motion có giải thích HTML tĩnh. Kiểm tập trung bổ sung đã đưa hai cảnh
+  vào viewport: vẫn suspended ở frame cuối (landscape 5, beam 3) sau 2,2 giây.
 
 ## Lỗi đã sửa và kiểm lại
 
@@ -37,7 +38,7 @@ Không còn lỗi console/page của bài. Chrome có một yêu cầu tự đ�
 ## Quan sát bằng mắt và giới hạn
 
 Đã xem screenshot hero, N-hậu, probability, xưởng di truyền, code, toàn bộ 5 use-case
-animation, mobile VI/EN và hai theme. Tên/gene/fitness đọc được; code giữ nền tối,
+animation ở đầu và cuối chu kỳ, mobile VI/EN và hai theme. Tên/gene/fitness đọc được; code giữ nền tối,
 syntax có màu; gene có nhãn A/B/M ngoài màu; số h và viền ô không lệch engine.
 Screenshot mobile 8-hậu cho thấy khung giữ ô 44px, cột ngoài viewport nằm trong vùng
 cuộn ngang của bàn, không kéo rộng trang. Ảnh QA là scratch `/tmp/ai-b6-*.png`.

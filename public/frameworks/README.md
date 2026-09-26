@@ -23,3 +23,5 @@ Apache trademark policy: https://www.apache.org/foundation/marks/
 Debezium artwork: https://github.com/debezium/debezium.github.io/tree/develop/assets/images
 Debezium trademark policy: https://www.commonhaus.org/policies/trademark-policy/
 Snowflake uses the original monochrome brand shape from Simple Icons.
+
+Added 2026-09-25: spark.svg and flink.svg are unmodified Simple Icons 15.0.0 marks (CC0 code/artwork; Apache trademark rules still apply). Sources: https://raw.githubusercontent.com/simple-icons/simple-icons/15.0.0/icons/apachespark.svg and https://raw.githubusercontent.com/simple-icons/simple-icons/15.0.0/icons/apacheflink.svg.

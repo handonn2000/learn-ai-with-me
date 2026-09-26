@@ -1,0 +1,22 @@
+{
+  "src/features/lessons/def/b10/Lesson10.tsx": "6fff587bb86a0754f6a254af43636960fd7ab4f92e039cd275d669c90b8b7eb3",
+  "src/features/lessons/def/b10/lesson10.code.ts": "cd058d1b53d2858aa8c2b5ff93951cd0b8538e3cf7ae998b2bb28d7e59df761a",
+  "src/features/lessons/def/b10/lesson10.text.en.ts": "b42e59881e2c55326d38245d3859f2d7e582d7f9cfed232fffa358ceb65fd649",
+  "src/features/lessons/def/b10/lesson10.text.ts": "8d0a7fda9fbe58b3a39b39e44f2626de526bde070a62d4ccacec1971ae25eb1f",
+  "src/features/lessons/def/b10/lesson10.text.vi.ts": "b116d8e305765d4df6e4809fc2f49892f8327ffc1f6e9b9fc51d4abf5bab2375",
+  "src/features/lessons/def/b10/stream-engine.js": "62882ce1ecf58bc0ed6e28c549fdd02d61318063da8212e44962f780dd0f14b6",
+  "src/features/lessons/def/b11/Lesson11.tsx": "c6eca99ae41a77f54e734f10caf7ab68418caf6d2f62f0f01a112c3e2be19751",
+  "src/features/lessons/def/b11/consumption-engine.js": "58699c20eeee7df9f87cff1ce888d615ae85f92324bd3c83badb2dd4386af386",
+  "src/features/lessons/def/b11/lesson11.code.ts": "cca61efeb5aa46ad321d18a1c812ffac215eb9138b27c3d5b315420913c20198",
+  "src/features/lessons/def/b11/lesson11.text.en.ts": "22afc4f6043c3d0fe4ec73813f6ab9774ea30de4c396484d53aeb050a0cf7c6e",
+  "src/features/lessons/def/b11/lesson11.text.ts": "bd9476a084bd3050ab273b57a9ac2faf4caac1da2d5b1bf1f36d6ee79d58c3a8",
+  "src/features/lessons/def/b11/lesson11.text.vi.ts": "7bcbfe066dd22733bd49271e4d134786737860dac827dbdd6be449823b113687",
+  "src/features/lessons/def/b9/Lesson09.tsx": "58bb18174e4678f0477e00af688918adf0b4ff475633aa77fbfe6def9bec413f",
+  "src/features/lessons/def/b9/batch-engine.js": "2ceb14d48a5abc6b02659306884f3fc2b54806c07169ba311a02284ec31ebe86",
+  "src/features/lessons/def/b9/lesson09.code.ts": "49077c2197dc0ad56b5303bf09683a61941ed4a2f18a20a3b545977e44f6e116",
+  "src/features/lessons/def/b9/lesson09.text.en.ts": "9c9375712d64d78de1e7a98ef99a14842a577d744927d785366c197f8a91702a",
+  "src/features/lessons/def/b9/lesson09.text.ts": "5507347108cccffa50fbc4ba7065a389581d94574ecbd03a37170da642751371",
+  "src/features/lessons/def/b9/lesson09.text.vi.ts": "5f54c51ac098d42ad4169d17668e00075773770bbdf54ffd1b4770ac1cab7679",
+  "src/features/lessons/def/shared/DataLesson.css": "fa591c734f7ff81ae37a94fe816c2f4bc7a54f999a770dfe9cde0c67ed2e3a89",
+  "src/features/lessons/def/shared/DataLesson.tsx": "386a6a0c27b07c00648850882d2eed2c2bb9cdc5952bc886145a1030e4acde57"
+}
