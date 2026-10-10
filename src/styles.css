@@ -1,0 +1,152 @@
+@import 'tailwindcss';
+@import '@fontsource/be-vietnam-pro/400.css';
+@import '@fontsource/be-vietnam-pro/500.css';
+@import '@fontsource/be-vietnam-pro/600.css';
+@import '@fontsource/be-vietnam-pro/700.css';
+@import '@fontsource/ibm-plex-mono/400.css';
+@import '@fontsource/ibm-plex-mono/500.css';
+@import 'katex/dist/katex.min.css';
+
+@custom-variant dark (&:where([data-theme='dark'], [data-theme='dark'] *));
+
+/* Token: xem docs/DESIGN.md § Token */
+:root {
+  --paper: #eef1f4;
+  --surface: #ffffff;
+  --ink: #18212c;
+  --muted: #5b6776;
+  --line: #d5dbe2;
+  --route: #0f7b6c;
+  --route-soft: #d7efe9;
+  --signal: #e0a400;
+  --signal-soft: #fbf0cc;
+  --stop: #c8432b;
+  --stop-soft: #f8e0da;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme='light']) {
+    --paper: #11161d;
+    --surface: #18202a;
+    --ink: #e4e9ef;
+    --muted: #93a0af;
+    --line: #2b3542;
+    --route: #3cc3a8;
+    --route-soft: #173a35;
+    --signal: #f2c230;
+    --signal-soft: #3a3217;
+    --stop: #f06a52;
+    --stop-soft: #3d221d;
+  }
+}
+:root[data-theme='dark'] {
+  --paper: #11161d;
+  --surface: #18202a;
+  --ink: #e4e9ef;
+  --muted: #93a0af;
+  --line: #2b3542;
+  --route: #3cc3a8;
+  --route-soft: #173a35;
+  --signal: #f2c230;
+  --signal-soft: #3a3217;
+  --stop: #f06a52;
+  --stop-soft: #3d221d;
+}
+
+@theme inline {
+  --color-paper: var(--paper);
+  --color-surface: var(--surface);
+  --color-ink: var(--ink);
+  --color-muted: var(--muted);
+  --color-line: var(--line);
+  --color-route: var(--route);
+  --color-route-soft: var(--route-soft);
+  --color-signal: var(--signal);
+  --color-signal-soft: var(--signal-soft);
+  --color-stop: var(--stop);
+  --color-stop-soft: var(--stop-soft);
+  --font-sans: 'Be Vietnam Pro', system-ui, sans-serif;
+  --font-mono: 'IBM Plex Mono', ui-monospace, monospace;
+  --text-sm: 14px;
+  --text-base: 17px;
+  --text-lg: 21px;
+  --text-xl: 28px;
+  --text-2xl: 40px;
+}
+
+html {
+  background: var(--paper);
+  color: var(--ink);
+  font-family: var(--font-sans);
+  font-size: 17px;
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+}
+body {
+  background: var(--paper);
+  margin: 0;
+}
+
+:focus-visible {
+  outline: 3px solid var(--signal);
+  outline-offset: 2px;
+  border-radius: 6px;
+}
+
+/* Văn bản bài giảng (MDX) */
+.prose-lesson {
+  max-width: 64ch;
+}
+.prose-lesson > * + * {
+  margin-top: 0.9em;
+}
+.prose-lesson p {
+  text-wrap: pretty;
+}
+.prose-lesson strong {
+  font-weight: 600;
+}
+.prose-lesson em {
+  font-style: normal;
+  background: linear-gradient(transparent 62%, var(--signal-soft) 62%);
+}
+.prose-lesson ul,
+.prose-lesson ol {
+  padding-left: 1.25em;
+}
+.prose-lesson ul {
+  list-style: disc;
+}
+.prose-lesson ol {
+  list-style: decimal;
+}
+.prose-lesson li + li {
+  margin-top: 0.35em;
+}
+.prose-lesson li::marker {
+  color: var(--muted);
+}
+.prose-lesson code {
+  font-family: var(--font-mono);
+  font-size: 0.9em;
+  background: var(--paper);
+  border: 1px solid var(--line);
+  padding: 0.05em 0.35em;
+  border-radius: 5px;
+}
+
+/* chuỗi HTML inline trong đề bài */
+.rich b {
+  font-weight: 600;
+}
+.rich i {
+  font-style: italic;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
+  }
+}

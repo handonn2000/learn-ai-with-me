@@ -22,13 +22,11 @@ jobs:
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v4
         with:
-          node-version: 20
+          node-version: 22
           cache: npm
       - run: npm ci
+      - run: npm test
       - run: npm run build
-      # BrowserRouter + Pages: gõ thẳng /roadmap thì server không có file đó.
-      # 404.html là bản sao index.html — Pages trả nó về, router tự đọc đường dẫn và dựng đúng trang.
-      - run: cp dist/index.html dist/404.html
       - uses: actions/configure-pages@v5
       - uses: actions/upload-pages-artifact@v3
         with:

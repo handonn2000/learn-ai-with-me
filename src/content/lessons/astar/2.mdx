@@ -1,0 +1,15 @@
+import { SearchPlayer } from '@/widgets/SearchPlayer'
+import { Deep } from '@/ui/Deep'
+import { city } from '@/content/graphs'
+
+Chạy A\* trên cùng bản đồ. Frontier ghi f của từng nút.
+
+<SearchPlayer problem={city} algo="astar" showH />
+
+A\* ra cùng đường với UCS, S → A → C → E → G, tốn 12 phút. Nhưng nó chỉ mở rộng 7 nút thay vì 9. F không bao giờ được mở rộng, vì f(F) = 13 lớn hơn 12, nên G được lấy ra trước. H thậm chí còn chưa được sinh ra.
+
+Trên bản đồ nhỏ, chênh 2 nút trông chẳng đáng là bao. Trên bản đồ thật với hàng triệu ngã tư, đó là khác biệt giữa tìm trong vài phần trăm bản đồ và tìm trên cả bản đồ.
+
+<Deep title="nếu chỉ dùng h thì sao">
+Lấy nút có h nhỏ nhất, bỏ hẳn g, gọi là tìm kiếm tham lam (greedy best-first search). Trên bản đồ này nó đi S → A → E → G, tốn 13 phút, vì E trông rất gần trường nên nó lao thẳng tới E qua cạnh đắt 7 phút. Nhanh, nhưng không rẻ nhất. A\* giữ lại g để không bị hấp dẫn bởi những lối tắt đắt.
+</Deep>

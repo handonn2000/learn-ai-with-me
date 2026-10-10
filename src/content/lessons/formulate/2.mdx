@@ -1,0 +1,15 @@
+import { Deep } from '@/ui/Deep'
+
+Năm thành phần này dùng được cho rất nhiều bài toán, không riêng gì tìm đường. Lấy trò xếp số 8 ô: một khung 3×3 có 8 ô số và 1 ô trống, bạn đẩy dần các ô cho tới khi đúng thứ tự.
+
+- Trạng thái: vị trí của 8 ô số và ô trống.
+- Hành động: đẩy ô trống lên, xuống, trái hoặc phải.
+- Kết quả: khung mới sau khi đẩy.
+- Kiểm tra đích: khung đã đúng thứ tự chưa?
+- Chi phí: mỗi lần đẩy tính 1.
+
+Để ý là tôi không ghi màu của các ô hay ai đang chơi. Những thứ đó có thật, nhưng không làm đổi lời giải. Bỏ bớt chi tiết như vậy gọi là **trừu tượng hóa**. Mô tả tốt là mô tả bỏ được nhiều nhất mà vẫn giải đúng bài.
+
+<Deep title="bài toán này lớn cỡ nào">
+Trò 8 ô có 9!/2 = 181.440 trạng thái đi tới được, máy giải trong chớp mắt. Bản 15 ô có khoảng 10<sup>13</sup> trạng thái, bản 24 ô khoảng 10<sup>25</sup>. Cách bạn chọn trạng thái quyết định bài toán to hay nhỏ.
+</Deep>

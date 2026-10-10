@@ -1,0 +1,15 @@
+import { Deep } from '@/ui/Deep'
+
+Muốn A\* luôn ra đường rẻ nhất, h không được phép nói quá. Một heuristic là **admissible** (chấp nhận được) nếu với mọi nút n:
+
+**h(n) ≤ h\*(n)**
+
+trong đó h\*(n) là chi phí thật rẻ nhất từ n tới đích. Nói cách khác: h được phép đoán hụt, không được đoán lố. Một heuristic admissible luôn _lạc quan_.
+
+Đường chim bay là admissible, vì không đường nào ngắn hơn đường thẳng. h = 0 ở mọi nút cũng admissible (khi đó A\* chính là UCS). h(A) = 6 ở ví dụ trước thì không, vì h\*(A) chỉ là 1.
+
+Vì sao điều kiện này là đủ? Gọi C\* là chi phí của đường rẻ nhất. Giả sử có một đích tệ hơn, chi phí lớn hơn C\*, đang nằm trong frontier. Trên đường rẻ nhất luôn có một nút n nằm trong frontier, với f(n) = g(n) + h(n) ≤ g(n) + h\*(n) = C\*. Nên n luôn có f nhỏ hơn đích tệ kia và được lấy ra trước. Lần lượt như vậy cho tới khi đích tốt được lấy ra.
+
+<Deep title="điều kiện mạnh hơn: nhất quán">
+Với graph search (có explored), sách dùng một điều kiện chặt hơn gọi là **nhất quán** (consistent): với mọi cạnh từ n sang n′ có chi phí c, h(n) ≤ c + h(n′). Nó giống bất đẳng thức tam giác: đoán từ n không được lớn hơn đi một bước rồi đoán tiếp. Mọi heuristic nhất quán đều admissible. Khi h nhất quán, f không bao giờ giảm dọc một đường đi, nên lần đầu A\* lấy một trạng thái ra cũng là lúc đã có đường rẻ nhất tới nó. Heuristic trên bản đồ đi học của chúng ta là nhất quán.
+</Deep>

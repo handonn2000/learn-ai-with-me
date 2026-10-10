@@ -1,0 +1,18 @@
+import { Deep } from '@/ui/Deep'
+
+Ở bài trước, mở rộng A sinh lại S. Nếu cứ để vậy, thuật toán có thể đi S → A → S → A… mãi không dứt. Ngay cả khi không lặp vô hạn, nó vẫn phí công đi lại những chỗ đã đi.
+
+Mức phí công lớn hơn bạn nghĩ. Trên một lưới ô vuông đi được bốn hướng, cây tìm kiếm sâu 20 bước có khoảng một nghìn tỷ nút ở tầng cuối, trong khi chỉ có khoảng 800 ô khác nhau trong phạm vi 20 bước. Gần như toàn bộ là đi lại đường cũ.
+
+Cách sửa là thêm một danh sách thứ hai, gọi là **explored**: những trạng thái đã được mở rộng. Vòng lặp đổi ở hai chỗ:
+
+1. Lấy một nút ra khỏi frontier xong, ghi trạng thái của nó vào explored.
+2. Khi mở rộng sinh ra nút con: nếu trạng thái đó _đã ở explored_ hoặc _đang ở frontier_ thì bỏ, không thêm nữa.
+
+Bản có explored gọi là **tìm kiếm trên đồ thị** (graph search). Bản không có gọi là **tìm kiếm trên cây** (tree search). Từ giờ ta dùng graph search.
+
+Khi học UCS, bạn sẽ gặp một ngoại lệ cho quy tắc "đang ở frontier thì bỏ": nếu đường mới rẻ hơn thì giữ đường mới.
+
+<Deep title="vì sao frontier không bỏ sót chỗ nào">
+Frontier luôn ngăn cách vùng đã khám phá với vùng chưa khám phá: mọi đường từ S tới một trạng thái chưa khám phá đều phải đi qua một nút trong frontier. Vì vậy bỏ trạng thái đã ở explored không làm mất đường nào cả. Mỗi bước, thuật toán đẩy mép frontier ra thêm một chút.
+</Deep>

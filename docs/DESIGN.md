@@ -1,0 +1,122 @@
+# learn-ai-with-me v2 — Thiết kế
+
+Bản viết lại từ đầu. Bản cũ (nhánh `main`) dạy bằng những trang dài 2–3 giờ, không nói rõ mục tiêu,
+giả định người học đã biết trước và nhồi quá nhiều thứ lên một màn hình. Bản này đổi cả cách học lẫn giao diện.
+
+## 1. Cách học
+
+### Đồ thị kỹ năng (backward chaining)
+
+- **Nút = một kỹ năng làm được**, viết bằng động từ: "Chạy tay UCS và chỉ ra nút được lấy ra tiếp theo",
+  không phải "UCS". Mỗi nút có 1–3 câu kiểm tra.
+- **Cạnh = tiên quyết thật**: B cần A khi không hiểu A thì *không thể* làm B. Không nối vì "cùng chương".
+- **Mục tiêu** là một nút đích. App lần ngược từ đích qua các cạnh tiên quyết, dừng ở những nút bạn đã nắm,
+  rồi sắp xếp topo để ra lộ trình.
+- **Kiểm tra xếp lớp** cũng chạy ngược: hỏi câu kiểm tra của đích; trả lời đúng thì coi như nắm cả nhánh
+  dưới; sai thì hỏi tiếp các nút tiên quyết của nó.
+
+### Lesson (học theo nhịp DataCamp)
+
+Mỗi lesson dạy đúng **một nút**:
+
+| Quy tắc | Giới hạn |
+|---|---|
+| Thời lượng | 8–12 phút |
+| Phần giải thích | tối đa 3 bước, tổng ≤ 550 từ |
+| Bài tập | 2–4, ngay sau phần giải thích |
+| Kiến thức mới trong bài tập | **không có** — bài tập chỉ áp dụng điều vừa dạy hoặc nút tiên quyết |
+| Câu trắc nghiệm | tối đa 1 mỗi lesson; ưu tiên bài "làm thật" (chạy tay thuật toán, điền số) |
+
+Mở đầu lesson: **"Học xong bạn làm được"** (một câu, chính là kỹ năng của nút) và **"Cần biết trước"**
+(các nút tiên quyết, mỗi nút một dòng, có trạng thái).
+Kết thúc: đối chiếu lại mục tiêu và cho biết kết quả vào lịch ôn.
+
+### Cách viết
+
+1. Ý chính bằng lời thường → ví dụ cụ thể → rồi mới thuật ngữ và ký hiệu.
+2. Thuật ngữ được định nghĩa ngay lần đầu xuất hiện. Một đoạn chỉ đưa thêm tối đa một khái niệm mới.
+3. Câu ngắn. Không rào đón; chi tiết nâng cao để trong khối "Đào sâu" (thu gọn sẵn).
+4. Xưng tôi/bạn, ví von khi nó giúp hiểu cơ chế — gia vị, không phải món chính.
+5. Không giả định đã học buổi trước: cần gì thì nút tiên quyết lo, lesson chỉ nhắc một dòng.
+
+### Thang trợ giúp và mức thành thạo
+
+- Mỗi bài tập: **Gợi ý** (đi được nửa đường) → **Xem lời giải**.
+- Kết quả lesson quy ra điểm FSRS cho nút, lấy mức tệ nhất trong các bài tập: tự làm đúng hết → *Good*;
+  có dùng gợi ý hoặc sai từ 2 lần → *Hard*; xem lời giải → *Again*. Lịch ôn (ts-fsrs) tính **theo từng nút**.
+- Xếp lớp: vượt câu kiểm tra → *Easy* (đánh dấu "Đã biết", vẫn vào lịch ôn).
+- **Ôn hôm nay**: tối đa 5 câu, rút từ các nút đến hạn.
+
+## 2. Giao diện
+
+**Ý tưởng chủ đạo: tuyến đường.** Khóa học dạy tìm đường đi; người học cũng đang đi một con đường từ thứ
+mình đã biết tới mục tiêu. Mọi thứ về tiến độ được vẽ bằng một ngôn ngữ duy nhất: **đường tuyến + các ga**.
+
+- Thanh tiến độ trong lesson = một đoạn tuyến, mỗi bước là một ga.
+- Trang mục tiêu = sơ đồ tuyến dọc từ ga đầu tới ga đích; muốn xem toàn mạng thì bật "Bản đồ đầy đủ".
+- Mỗi màn hình **một tiêu điểm**: một bước giải thích hoặc một bài tập. Nút chính luôn ở cùng một chỗ.
+
+### Token
+
+| Tên | Sáng | Tối | Dùng cho |
+|---|---|---|---|
+| `paper` | `#EEF1F4` | `#11161D` | nền |
+| `surface` | `#FFFFFF` | `#18202A` | khối nội dung |
+| `ink` | `#18212C` | `#E4E9EF` | chữ |
+| `muted` | `#5B6776` | `#93A0AF` | chữ phụ |
+| `route` | `#0F7B6C` | `#3CC3A8` | tuyến đã đi, hành động chính, đúng |
+| `signal` | `#E0A400` | `#F2C230` | ga hiện tại, điểm nhấn, frontier |
+| `stop` | `#C8432B` | `#F06A52` | sai, cảnh báo |
+
+- Chữ: **Be Vietnam Pro** (thiết kế cho tiếng Việt) cho mọi chữ; **IBM Plex Mono** chỉ cho cấu trúc dữ liệu
+  thật (hàng đợi, frontier, giá trị g/h/f).
+- Cỡ chữ: 17px thân bài, dòng ≤ 68 ký tự; thang 14 / 17 / 21 / 28 / 40.
+- Chuyển động: chỉ khi trả lời hành động của người học (chuyển bước, mở rộng nút, đúng/sai) và trong
+  minh họa thuật toán. Tôn trọng `prefers-reduced-motion`.
+
+## 3. Kỹ thuật
+
+| Việc | Chọn |
+|---|---|
+| Nền | Vite + React 19 + TypeScript, deploy GitHub Pages |
+| Giao diện | Tailwind CSS v4 + Radix primitives |
+| Animation | Motion |
+| Bản đồ kỹ năng | React Flow (@xyflow/react) + dagre (xếp tầng). elkjs bị loại: 1,3 MB cho một đồ thị vài chục nút là quá nặng |
+| Đồ thị bài toán | SVG tự vẽ + Motion (`widgets/GraphView`): cần điều khiển từng nút, màu trạng thái và cỡ chữ trên mobile |
+| Công thức | KaTeX |
+| Nội dung | MDX cho phần giải thích, TypeScript cho bài tập và đồ thị kỹ năng |
+| Tiến độ | Zustand (persist localStorage, key `learn-ai-v2`) + ts-fsrs, tắt bước học ngắn hạn: thẻ mới Again → 1 ngày, Hard → 2, Good → 3, Easy → 8 |
+| Định tuyến | React Router, hash router — GitHub Pages không cần trang 404 giả |
+| Kiểm thử | Vitest — engine thuật toán, đồ thị kỹ năng, chấm bài |
+
+Thêm khi có bài cần: D3 (biểu đồ), React Three Fiber (3D), Shiki (code).
+
+### Cấu trúc
+
+```
+src/
+  app/            router, layout, các trang (Home, Goal, Lesson, Review, Map)
+  ui/             component dùng chung (Button, RouteBar, Station…)
+  learning/       đồ thị kỹ năng, backward chaining, lộ trình, store tiến độ, FSRS
+  exercises/      các dạng bài tập + bộ chấm
+  algorithms/     engine tìm kiếm sinh trace (BFS, UCS, GBFS, A*)
+  widgets/        minh họa tương tác (GraphView, SearchPlayer…)
+  content/
+    graphs/       bài toán mẫu (đồ thị, chi phí, heuristic)
+    skills.ts     các nút kỹ năng + cạnh tiên quyết + câu kiểm tra
+    goals.ts      mục tiêu
+    lessons/<id>/ index.ts (meta + bài tập) và các bước giải thích *.mdx (tải lười)
+```
+
+## 4. Thêm một kỹ năng / lesson
+
+1. Thêm nút vào `content/skills.ts`: `can` bắt đầu bằng động từ, `prereqs` là tiên quyết thật, 1–3 `checks`.
+2. Tạo `content/lessons/<id>/`: `1.mdx`… cho phần giải thích, `index.ts` khai báo các bước và bài tập.
+   Trong MDX, dấu `{ }` trong văn bản phải viết `\{ \}`.
+3. Đăng ký trong `content/lessons/index.ts`, trỏ `lesson` của kỹ năng về id đó.
+4. `npm test` kiểm: đồ thị không chu trình, lesson trên tuyến đủ bài, ≤ 550 từ, 2–4 bài tập,
+   ≤ 1 trắc nghiệm, đáp án hợp lệ, không có `{ }` trần trong MDX.
+5. Bài tập dùng bản đồ: đáp án trace được engine tính, không gõ tay. Ví dụ mới thì viết test cho kết quả
+   mong đợi trong `algorithms/search.test.ts`.
+
+`content/` không import UI ngoài các widget được nhúng vào MDX. Engine thuật toán thuần, có test.

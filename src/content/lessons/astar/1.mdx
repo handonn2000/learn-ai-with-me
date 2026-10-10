@@ -1,0 +1,16 @@
+import { Formula } from '@/ui/Formula'
+
+UCS biết quãng đã đi. Heuristic đoán quãng còn lại. **A\*** (đọc là "A sao") cộng hai thứ đó lại:
+
+<Formula block tex="f(n) = g(n) + h(n)" />
+
+**f(n)** là ước lượng chi phí của cả hành trình nếu đi qua n: phần đã đi cộng phần đoán còn lại. A\* luôn lấy ra nút có **f nhỏ nhất**.
+
+Mọi thứ khác giữ nguyên như UCS: frontier là hàng đợi ưu tiên (giờ theo f), có explored, gặp đường rẻ hơn thì thay, và chỉ dừng khi lấy đích ra.
+
+Xem lúc vừa mở rộng S. Cả A và F đều có g = 3, nên với UCS hai nút này ngang nhau. A\* thì phân biệt được:
+
+- A: f = 3 + 6 = **9**
+- F: f = 3 + 10 = **13**
+
+F nằm ngược hướng với trường nên h lớn, kéo f lên theo. A\* sẽ ưu tiên A.

@@ -1,0 +1,13 @@
+Xếp hàng mua cơm là một **hàng đợi** bình thường: ai đến trước được phục vụ trước.
+
+Phòng cấp cứu thì khác. Người nặng được khám trước, dù đến sau. Đó là một **hàng đợi ưu tiên** (priority queue): mỗi phần tử đi kèm một con số gọi là **khóa** (key), và lần lấy ra nào cũng lấy phần tử có khóa nhỏ nhất. Ai vào lúc nào không quan trọng.
+
+Bạn chỉ cần ba thao tác:
+
+- **Thêm** một phần tử kèm khóa của nó.
+- **Lấy ra** phần tử có khóa nhỏ nhất.
+- **Cập nhật**: một phần tử đang trong hàng mà tìm được khóa nhỏ hơn thì thay khóa cũ.
+
+Ví dụ: thêm `C:6`, `E:10`, `B:3`. Lấy ra lần lượt được B, rồi C, rồi E. Nếu trước khi lấy E ra, bạn cập nhật E thành 5, thì E được lấy ra trước C.
+
+Hai phần tử bằng khóa thì sao? Trong khóa học này ta theo quy ước của slide: _hòa khóa thì chữ cái đứng trước ra trước_. Nhờ vậy mọi người chạy tay ra cùng một kết quả.

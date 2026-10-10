@@ -1,0 +1,17 @@
+import { SearchPlayer } from '@/widgets/SearchPlayer'
+import { Deep } from '@/ui/Deep'
+import { city } from '@/content/graphs'
+
+Bấm **Bước tiếp** để chạy UCS từng bước. Để ý ba lúc:
+
+- Bước 5: mở rộng C, thấy đường tới E chỉ tốn 9 thay vì 10. E được cập nhật.
+- Cũng ở bước 5: G vào frontier với g = 13, nhưng UCS chưa dừng.
+- Bước 8: qua E, đường tới G chỉ còn 12. G được cập nhật, rồi bước 9 mới lấy G ra.
+
+<SearchPlayer problem={city} algo="ucs" />
+
+UCS cũng mở rộng cả F và H, dù hai nút này nằm ngược hướng với trường. Nó không biết trường ở đâu, chỉ biết đường nào rẻ hơn. Bài heuristic sẽ cho nó thêm thông tin đó.
+
+<Deep title="vì sao UCS luôn ra đường rẻ nhất">
+Giả sử mọi cạnh đều có chi phí dương. Khi UCS lấy một nút ra, mọi đường khác tới nút đó đều phải đi qua một nút đang nằm trong frontier, mà các nút đó có g lớn hơn hoặc bằng. Đi thêm thì chỉ tốn thêm. Vậy đường vừa lấy ra là đường rẻ nhất. Áp vào lúc lấy G ra, ta được lời giải tối ưu.
+</Deep>

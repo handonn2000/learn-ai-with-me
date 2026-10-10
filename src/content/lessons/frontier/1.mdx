@@ -1,0 +1,14 @@
+Thuật toán tìm kiếm không thấy cả bản đồ một lúc như bạn. Nó lần từng bước, bắt đầu từ S.
+
+**Mở rộng** (expand) một nút nghĩa là tìm mọi trạng thái kế tiếp của nó và tạo một nút mới cho mỗi trạng thái. Các nút đã được tạo ra mà chưa được mở rộng nằm trong một danh sách chờ, gọi là **frontier**. Hãy hình dung frontier là mép của vùng đã khám phá: bên trong là chỗ đã đi qua, bên ngoài là chỗ chưa biết.
+
+Mọi thuật toán trong chuỗi bài này đều chạy cùng một vòng lặp:
+
+1. Frontier rỗng thì dừng: không có đường tới đích.
+2. Chọn một nút trong frontier và lấy nó ra.
+3. Nút đó là đích thì dừng: đã tìm thấy.
+4. Mở rộng nút đó, đưa các nút mới vào frontier. Quay lại bước 1.
+
+Lúc đầu frontier chỉ có S. Lấy S ra, mở rộng, frontier thành \{A, B, F\}.
+
+Các thuật toán chỉ khác nhau ở _bước 2: chọn nút nào để lấy ra_. Cách chọn đó gọi là **chiến lược tìm kiếm**. UCS và A* mà bạn sắp học chính là hai chiến lược khác nhau.
