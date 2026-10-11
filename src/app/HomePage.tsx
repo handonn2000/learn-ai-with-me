@@ -1,118 +1,211 @@
+import { useMemo } from 'react'
 import { Link } from 'react-router'
 import { goals, skillIndex } from '@/content/skills'
 import { lessons } from '@/content/lessons'
+import { todayMock } from '@/content/mock/today'
 import { useDue, useGoalRoute } from '@/learning/hooks'
-import { useProgress } from '@/learning/progress'
+import { retrievability, useProgress } from '@/learning/progress'
 import { ButtonLink } from '@/ui/Button'
+import { Chip } from '@/ui/Chip'
+import { MemoryBar } from '@/ui/MemoryBar'
+import { StationStrip, type StripState } from '@/ui/StationStrip'
+import { CalendarIcon, ChevronRightIcon } from '@/ui/icons'
 
-function MiniRoute({ goalId }: { goalId: string }) {
-  const { stations } = useGoalRoute(goalId)
-  return (
-    <div className="flex items-center" aria-hidden>
-      {stations.map((s, i) => (
-        <span key={s.id} className={`flex items-center ${i === 0 ? '' : 'flex-1'}`}>
-          {i > 0 && <span className={`h-1 flex-1 ${stations[i - 1].status !== 'new' ? 'bg-route' : 'bg-line'}`} />}
-          <span
-            className={`block size-3 rounded-full border-[3px] ${
-              s.status !== 'new' ? 'border-route bg-route' : s.next ? 'border-signal bg-surface' : 'border-line bg-surface'
-            }`}
-          />
-        </span>
-      ))}
-    </div>
-  )
+const WEEKDAYS = ['Chủ nhật', 'Thứ hai', 'Thứ ba', 'Thứ tư', 'Thứ năm', 'Thứ sáu', 'Thứ bảy']
+const lower = (s: string) => s.charAt(0).toLowerCase() + s.slice(1)
+
+interface Step {
+  title: string
+  phoneTitle?: string
+  minutes: number
 }
+
+const card = 'rounded-card bg-surface'
+const h2 = 'm-0 font-display text-[22px] font-bold tracking-[-0.01em]'
 
 export function HomePage() {
   const goalId = goals[0].id
-  const { goal, nextId, done, total } = useGoalRoute(goalId)
+  const { goal, stations, nextId, done, total } = useGoalRoute(goalId)
   const due = useDue()
+  const skills = useProgress((s) => s.skills)
   const lessonStep = useProgress((s) => s.lessonStep)
+  const now = new Date()
+
   const next = nextId ? skillIndex[nextId] : null
   const lesson = next?.lesson ? lessons[next.lesson] : null
-  const resuming = lesson && (lessonStep[lesson.id] ?? 0) > 0
+  const resuming = !!lesson && (lessonStep[lesson.id] ?? 0) > 0
+  const hasAfter = stations.some((s) => s.status === 'new' && !s.next)
+
+  const minutesLeft = stations
+    .filter((s) => s.status === 'new')
+    .reduce((n, s) => n + (lessons[skillIndex[s.id].lesson ?? '']?.minutes ?? 0), 0)
+
+  // Buổi học hôm nay: bước nào không có việc thì bỏ. Hai bước cuối chưa dựng nên dùng số phút mẫu.
+  const steps: Step[] = []
+  if (due.length > 0) steps.push({ title: `Ôn ${due.length} kỹ năng sắp quên`, minutes: Math.ceil(due.length * 1.5) })
+  if (next && lesson) steps.push({ title: `Ga mới: ${next.title}`, phoneTitle: `Ga mới: ${next.title}`, minutes: lesson.minutes })
+  if (next && hasAfter) steps.push({ title: 'Đoán trước cho ga sau', minutes: todayMock.guessMinutes })
+  if (next) steps.push({ title: 'Hệ thống lại trên giấy', minutes: todayMock.paperMinutes })
+  const totalMinutes = steps.reduce((n, s) => n + s.minutes, 0)
+
+  const memory = useMemo(
+    () =>
+      Object.entries(skills)
+        .map(([id, rec]) => ({ id, value: retrievability(rec, now) }))
+        .sort((a, b) => a.value - b.value),
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    [skills],
+  )
+  const lowCount = memory.filter((m) => m.value < 0.9).length
+
+  const startTo = due.length > 0 ? '/review' : lesson ? `/learn/${lesson.id}` : '/review'
+  const strip: StripState[] = stations.map((s) => (s.status !== 'new' ? 'done' : s.next ? 'today' : 'todo'))
+  const { calibration, notebook, nextGoal } = todayMock
 
   return (
-    <div className="grid gap-10 pt-6 sm:pt-12">
-      {/* Một tiêu điểm: việc nên làm ngay bây giờ */}
-      <section aria-labelledby="next-h">
-        {next && lesson ? (
-          <div className="rounded-3xl border border-line bg-surface p-6 sm:p-10">
-            <p className="text-[15px] text-muted">
-              {resuming ? 'Bạn đang học dở' : done === 0 ? 'Ga đầu tiên của bạn' : 'Ga tiếp theo'} trên tuyến{' '}
-              <Link to={`/goal/${goalId}`} className="font-medium text-ink underline decoration-line underline-offset-4 hover:decoration-ink">
-                {goal.title}
-              </Link>
+    <div className="flex flex-wrap items-start gap-6">
+      <div className="flex min-w-0 flex-[999_1_600px] flex-col gap-3.5 min-[720px]:gap-6">
+        <section aria-labelledby="today" className="rounded-[22px] border-2 border-ink bg-surface p-[18px] pb-5 shadow-[0_5px_0_var(--color-ink)] min-[720px]:rounded-card-lg min-[720px]:p-[30px] min-[720px]:pb-8 min-[720px]:shadow-block-lg">
+          <div className="flex flex-wrap items-baseline justify-between gap-3">
+            <p className="m-0 text-sm font-semibold text-muted min-[720px]:text-[17px]">
+              <span className="min-[720px]:hidden">{totalMinutes > 0 ? `Khoảng ${totalMinutes} phút` : 'Hôm nay nhẹ nhàng'}</span>
+              <span className="hidden min-[720px]:inline">
+                {WEEKDAYS[now.getDay()]} {now.getDate()}/{now.getMonth() + 1}
+                {totalMinutes > 0 && ` · khoảng ${totalMinutes} phút`}
+              </span>
             </p>
-            <h1 id="next-h" className="mt-3 max-w-[22ch] text-[34px] leading-[1.15] font-bold tracking-tight sm:text-[44px]">
-              {next.title}
-            </h1>
-            <p className="mt-4 max-w-[58ch] text-lg leading-snug text-muted">
-              Học xong, bạn {next.can.charAt(0).toLowerCase() + next.can.slice(1)}
+            <p className="m-0 hidden items-center gap-1.5 font-bold min-[720px]:flex">
+              <CalendarIcon width={18} height={18} />
+              {todayMock.streakDays} ngày học liền
             </p>
-            <div className="mt-8 flex flex-wrap items-center gap-x-5 gap-y-3">
-              <ButtonLink to={`/learn/${lesson.id}`} className="h-12 px-6 text-base">
-                {resuming ? 'Học tiếp' : 'Bắt đầu'}
-              </ButtonLink>
-              <span className="text-[15px] text-muted">khoảng {lesson.minutes} phút</span>
-            </div>
-            {done === 0 && (
-              <p className="mt-8 border-t border-line pt-5 text-[15px] text-muted">
-                Đã biết một phần rồi?{' '}
-                <Link to={`/check/${goalId}`} className="font-medium text-route underline-offset-4 hover:underline">
-                  Trả lời vài câu để bỏ qua những ga bạn đã nắm
-                </Link>
-              </p>
-            )}
           </div>
-        ) : (
-          <div className="rounded-3xl border border-line bg-surface p-6 sm:p-10">
-            <p className="text-[15px] text-muted">Tuyến {goal.title}</p>
-            <h1 id="next-h" className="mt-3 text-[34px] leading-tight font-bold tracking-tight sm:text-[44px]">
-              Bạn đã tới ga cuối.
-            </h1>
-            <p className="mt-4 max-w-[58ch] text-lg text-muted">Giờ việc chính là ôn đúng hạn để không quên.</p>
-          </div>
-        )}
-      </section>
+          <h1 id="today" className="mt-1 mb-0 text-[32px] leading-none font-extrabold tracking-[-0.03em] min-[720px]:mt-2 min-[720px]:text-[46px] min-[720px]:leading-[1.02]">
+            Buổi học hôm nay
+          </h1>
 
-      <div className="grid gap-4 sm:grid-cols-2">
-        <section className="rounded-2xl border border-line bg-surface p-5" aria-labelledby="review-h">
-          <h2 id="review-h" className="font-semibold">
-            Ôn tập
-          </h2>
-          {due.length > 0 ? (
+          {steps.length > 0 ? (
             <>
-              <p className="mt-1 text-[15px] text-muted">
-                {due.length} kỹ năng đến hạn. Mỗi kỹ năng một câu, chưa tới 5 phút.
-              </p>
-              <ButtonLink to="/review" variant="secondary" className="mt-4">
-                Ôn ngay
-              </ButtonLink>
+              <ol className="m-0 mt-4 grid list-none gap-2 p-0 text-[15px] min-[720px]:mt-6 min-[720px]:grid-cols-[repeat(auto-fit,minmax(min(150px,100%),1fr))] min-[720px]:gap-2.5 min-[720px]:text-[17px]">
+                {steps.map((st, i) => (
+                  <li
+                    key={st.title}
+                    className={`flex items-center justify-between gap-2.5 rounded-xl px-3 py-2.5 min-[720px]:flex-col min-[720px]:items-stretch min-[720px]:justify-start min-[720px]:gap-1.5 min-[720px]:rounded-2xl min-[720px]:p-3.5 ${
+                      i === 0 ? 'border-2 border-ink bg-sun-soft' : st.title.startsWith('Ga mới') ? 'bg-violet-soft' : 'bg-bg'
+                    }`}
+                  >
+                    <span className={`order-2 font-mono text-[13px] font-bold min-[720px]:order-1 ${st.title.startsWith('Ga mới') ? 'text-violet' : i === 0 ? '' : 'text-muted'}`}>
+                      <span className="min-[720px]:hidden">{st.minutes}′</span>
+                      <span className="hidden min-[720px]:inline">
+                        {i + 1} · {st.minutes} phút
+                      </span>
+                    </span>
+                    <b className="order-1 leading-tight font-bold min-[720px]:order-2 min-[720px]:leading-[1.25]">{st.title}</b>
+                  </li>
+                ))}
+              </ol>
+              <div className="mt-[18px] flex flex-wrap items-center gap-x-[18px] gap-y-3 min-[720px]:mt-[26px]">
+                <ButtonLink to={startTo} className="w-full min-[720px]:h-[58px] min-[720px]:w-auto min-[720px]:px-[34px] min-[720px]:text-[19px]">
+                  {resuming && due.length === 0 ? 'Học tiếp' : 'Bắt đầu buổi học'}
+                </ButtonLink>
+                {due.length > 0 && (
+                  <Link to="/review" className="hidden font-semibold text-muted underline min-[720px]:inline">
+                    Chỉ ôn thôi
+                  </Link>
+                )}
+                <Link to={`/goal/${goalId}`} className="hidden font-semibold text-muted underline min-[720px]:inline">
+                  Đổi ga mới
+                </Link>
+              </div>
             </>
           ) : (
-            <p className="mt-1 text-[15px] text-muted">Hôm nay không có gì đến hạn. Kỹ năng bạn học xong sẽ tự xuất hiện ở đây khi tới lúc ôn.</p>
+            <p className="mt-4 mb-0 max-w-[52ch] text-lg text-muted">Bạn đã tới ga cuối của tuyến này và không có kỹ năng nào đến hạn ôn. Quay lại khi có thẻ đến hạn.</p>
           )}
         </section>
 
-        <section className="rounded-2xl border border-line bg-surface p-5" aria-labelledby="goal-h">
-          <div className="flex items-baseline justify-between gap-3">
-            <h2 id="goal-h" className="font-semibold">
-              Mục tiêu: {goal.title}
-            </h2>
-            <span className="font-mono text-[14px] text-muted">
-              {done}/{total}
-            </span>
+        <section aria-labelledby="goal" className={`${card} flex flex-wrap items-center gap-x-7 gap-y-4 p-4 min-[720px]:px-[26px] min-[720px]:py-6`}>
+          <div className="min-w-0 flex-[999_1_300px]">
+            <div className="flex flex-wrap items-center gap-2.5">
+              <span className="hidden min-[720px]:inline-flex"><Chip tone="sun">Đang theo</Chip></span>
+              <h2 id="goal" className="m-0 text-xl font-extrabold tracking-[-0.02em] min-[720px]:text-[26px]">{goal.title}</h2>
+              <span className="ml-auto text-sm font-bold min-[720px]:hidden">{done}/{total} ga</span>
+            </div>
+            <StationStrip states={strip} size="md" label={`${done} trên ${total} ga đã qua`} className="mt-2.5 max-w-[460px] min-[720px]:mt-3.5" />
+            <p className="mt-2.5 mb-0 hidden text-[15px] text-muted min-[720px]:block">
+              {done} trên {total} ga{minutesLeft > 0 && ` · còn khoảng ${minutesLeft} phút`} · đích: {lower(goal.outcome)}
+            </p>
           </div>
-          <p className="mt-1 text-[15px] leading-snug text-muted">{goal.outcome}</p>
-          <div className="mt-4">
-            <MiniRoute goalId={goalId} />
+          <div className="hidden min-w-0 flex-[1_1_220px] flex-col gap-2 rounded-[14px] bg-subtle px-4 py-3.5 min-[720px]:flex">
+            <span className="text-[13px] text-muted">Mục tiêu gợi ý tiếp theo</span>
+            <Link to="/courses" className="font-bold leading-[1.3] text-ink no-underline">{nextGoal.title}</Link>
+            <Chip tone="violet" className="self-start text-[13px]">{done} ga đã xong</Chip>
           </div>
-          <Link to={`/goal/${goalId}`} className="mt-4 inline-block text-[15px] font-medium text-route underline-offset-4 hover:underline">
-            Xem cả tuyến
-          </Link>
         </section>
+
+        {/* Điện thoại: Sức nhớ gọn thành một hàng */}
+        <Link to="/review" className="flex items-center justify-between gap-2.5 rounded-[18px] bg-surface px-4 py-3.5 text-ink no-underline min-[720px]:hidden">
+          <span className="flex flex-col">
+            <b>Sức nhớ</b>
+            <span className={`text-sm ${lowCount > 0 ? 'text-wrong-ink' : 'text-muted'}`}>{lowCount > 0 ? `${lowCount} kỹ năng dưới 90%` : 'Chưa có kỹ năng nào dưới 90%'}</span>
+          </span>
+          <ChevronRightIcon width={18} height={18} />
+        </Link>
       </div>
+
+      <aside className="hidden min-w-0 flex-[1_1_320px] flex-col gap-5 min-[720px]:flex">
+        <section aria-labelledby="mem" className={`${card} p-[22px]`}>
+          <div className="flex items-baseline justify-between gap-2.5">
+            <h2 id="mem" className={h2}>Sức nhớ</h2>
+            <Link to={`/goal/${goalId}`} className="text-sm font-bold text-violet">Bảng kỹ năng</Link>
+          </div>
+          {memory.length > 0 ? (
+            <>
+              <ul className="m-0 mt-3.5 flex list-none flex-col gap-3 p-0">
+                {memory.slice(0, 5).map((m) => (
+                  <li key={m.id}>
+                    <MemoryBar label={skillIndex[m.id]?.title ?? m.id} value={m.value} />
+                  </li>
+                ))}
+              </ul>
+              <p className="mt-3 mb-0 text-[13px] text-muted">
+                Ước tính từ lịch ôn.{lowCount > 0 && ` ${lowCount} kỹ năng màu cam nên được ôn sớm.`}
+              </p>
+            </>
+          ) : (
+            <p className="mt-3 mb-0 text-[15px] text-muted">Chưa có kỹ năng nào để nhớ. Học xong ga đầu tiên, sức nhớ của nó sẽ hiện ở đây.</p>
+          )}
+        </section>
+
+        {/* Dữ liệu mẫu: xem src/content/mock/today.ts */}
+        <section aria-labelledby="cal" className={`${card} p-[22px]`}>
+          <h2 id="cal" className={h2}>Chắc chắn có đúng không</h2>
+          <p className="mt-2.5 mb-0 text-[15px] text-muted">Tuần này bạn chọn <b className="text-ink">Rất chắc</b> {calibration.sure} lần.</p>
+          <div aria-hidden className="mt-2.5 grid gap-1" style={{ gridTemplateColumns: `repeat(${calibration.sure}, minmax(0, 1fr))` }}>
+            {Array.from({ length: calibration.sure }, (_, i) => (
+              <span key={i} className={`h-[18px] rounded-[5px] ${i < calibration.right ? 'bg-correct' : 'box-border border-2 border-wrong bg-surface'}`} />
+            ))}
+          </div>
+          <p className="mt-2.5 mb-0 text-[15px]">Đúng {calibration.right}, sai {calibration.wrong}. Cả {calibration.wrong} lần sai đều ở chỗ <b>{calibration.weakSpot}</b>.</p>
+        </section>
+
+        <section aria-labelledby="nb" className={`${card} p-[22px]`}>
+          <div className="flex items-baseline justify-between gap-2.5">
+            <h2 id="nb" className={h2}>Sổ tay</h2>
+            <Link to="/notebook" className="text-sm font-bold text-violet">Mở sổ tay</Link>
+          </div>
+          <div className="mt-3 grid grid-cols-2 gap-2.5">
+            <Link
+              to="/notebook"
+              className="grid aspect-[4/3] place-items-center rounded-xl border-2 border-ink bg-lined p-2 text-center font-hand text-sm font-bold text-ink no-underline"
+              style={{ backgroundImage: 'linear-gradient(var(--color-lined-rule) 1px, transparent 1px)', backgroundSize: '100% 14px' }}
+            >
+              {notebook.sketchTitle}
+            </Link>
+            <Link to="/notebook" className="grid aspect-[4/3] place-items-center rounded-xl border-2 border-dashed border-disabled-line bg-subtle p-2 text-center text-[13px] text-muted no-underline">
+              {notebook.photoLabel}
+            </Link>
+          </div>
+        </section>
+      </aside>
     </div>
   )
 }

@@ -3,7 +3,8 @@ import { createRoot } from 'react-dom/client'
 import { createHashRouter, RouterProvider } from 'react-router'
 import { MotionConfig } from 'motion/react'
 import './styles.css'
-import { Layout } from '@/app/Layout'
+import { AppShell } from '@/ui/AppShell'
+import { ComingSoon } from '@/app/ComingSoon'
 import { HomePage } from '@/app/HomePage'
 import { GoalPage } from '@/app/GoalPage'
 import { LessonPage } from '@/app/LessonPage'
@@ -18,7 +19,7 @@ const DevUi = lazy(() => import('@/app/DevUi'))
 // Hash router: GitHub Pages không cần trang 404 giả để giữ route.
 const router = createHashRouter([
   {
-    element: <Layout />,
+    element: <AppShell />,
     children: [
       { index: true, element: <HomePage /> },
       { path: 'goal/:goalId', element: <GoalPage /> },
@@ -31,6 +32,8 @@ const router = createHashRouter([
         ),
       },
       { path: 'review', element: <ReviewPage /> },
+      { path: 'courses', element: <ComingSoon title="Khóa học" /> },
+      { path: 'notebook', element: <ComingSoon title="Sổ tay" /> },
       { path: '*', element: <NotFound /> },
     ],
   },

@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest'
-import { dueLabel, dueSkills, outcomeToRating, useProgress, worstOutcome } from './progress'
+import { dueLabel, dueSkills, outcomeToRating, retrievability, useProgress, worstOutcome } from './progress'
 import { Rating } from 'ts-fsrs'
 
 describe('tiến độ', () => {
@@ -31,5 +31,16 @@ describe('tiến độ', () => {
     expect(s.ucs).toBe(before)
     expect(s.formulate.via).toBe('placement')
     expect(dueLabel(s.formulate, now)).toBe('sau 8 ngày')
+  })
+
+  it('sức nhớ giảm dần theo thời gian và nằm trong 0..1', () => {
+    const now = new Date('2026-10-10T08:00:00')
+    const rec = useProgress.getState().skills.ucs
+    const soon = retrievability(rec, now)
+    const later = retrievability(rec, new Date('2026-11-10T08:00:00'))
+    expect(soon).toBeGreaterThan(0.9)
+    expect(soon).toBeLessThanOrEqual(1)
+    expect(later).toBeLessThan(soon)
+    expect(later).toBeGreaterThanOrEqual(0)
   })
 })

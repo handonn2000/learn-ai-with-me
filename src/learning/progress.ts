@@ -102,3 +102,8 @@ export function dueLabel(rec: SkillRecord, now = new Date()): string {
   const diff = day(new Date(rec.card.due)) - day(now)
   return diff <= 0 ? 'hôm nay' : diff === 1 ? 'ngày mai' : `sau ${diff} ngày`
 }
+
+/** Xác suất nhớ (0..1) của một kỹ năng tại thời điểm `now`, ước tính từ thẻ FSRS. */
+export function retrievability(rec: SkillRecord, now = new Date()): number {
+  return scheduler.get_retrievability(revive(rec.card), now, false)
+}
