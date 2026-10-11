@@ -8,6 +8,7 @@ import { ComingSoon } from '@/app/ComingSoon'
 import { HomePage } from '@/app/HomePage'
 import { GoalPage } from '@/app/GoalPage'
 import { LessonPage } from '@/app/LessonPage'
+import { SessionPage } from '@/app/SessionPage'
 import { ReviewPage } from '@/app/ReviewPage'
 import { PlacementPage } from '@/app/PlacementPage'
 import { NotFound } from '@/app/NotFound'
@@ -46,6 +47,7 @@ const router = createHashRouter([
     ),
   },
   // Màn học và kiểm tra: không có thanh điều hướng, chỉ một tiêu điểm.
+  { path: 'session', element: <SessionPage /> },
   { path: 'learn/:lessonId', element: <LessonPage /> },
   { path: 'check/:goalId', element: <PlacementPage /> },
 ])

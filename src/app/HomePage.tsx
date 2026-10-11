@@ -1,10 +1,10 @@
 import { useMemo } from 'react'
 import { Link } from 'react-router'
-import { goals, skillIndex } from '@/content/skills'
+import { skillIndex } from '@/content/skills'
 import { lessons } from '@/content/lessons'
 import { todayMock } from '@/content/mock/today'
-import { useDue, useGoalRoute } from '@/learning/hooks'
 import { retrievability, useProgress } from '@/learning/progress'
+import { useTodayPlan } from './useTodayPlan'
 import { ButtonLink } from '@/ui/Button'
 import { Chip } from '@/ui/Chip'
 import { MemoryBar } from '@/ui/MemoryBar'
@@ -14,39 +14,20 @@ import { CalendarIcon, ChevronRightIcon } from '@/ui/icons'
 const WEEKDAYS = ['Chủ nhật', 'Thứ hai', 'Thứ ba', 'Thứ tư', 'Thứ năm', 'Thứ sáu', 'Thứ bảy']
 const lower = (s: string) => s.charAt(0).toLowerCase() + s.slice(1)
 
-interface Step {
-  title: string
-  phoneTitle?: string
-  minutes: number
-}
-
 const card = 'rounded-card bg-surface'
 const h2 = 'm-0 font-display text-[22px] font-bold tracking-[-0.01em]'
 
 export function HomePage() {
-  const goalId = goals[0].id
-  const { goal, stations, nextId, done, total } = useGoalRoute(goalId)
-  const due = useDue()
+  const { goalId, goal, stations, done, total, due, lesson, segments, totalMinutes } = useTodayPlan()
   const skills = useProgress((s) => s.skills)
   const lessonStep = useProgress((s) => s.lessonStep)
   const now = new Date()
 
-  const next = nextId ? skillIndex[nextId] : null
-  const lesson = next?.lesson ? lessons[next.lesson] : null
   const resuming = !!lesson && (lessonStep[lesson.id] ?? 0) > 0
-  const hasAfter = stations.some((s) => s.status === 'new' && !s.next)
-
   const minutesLeft = stations
     .filter((s) => s.status === 'new')
     .reduce((n, s) => n + (lessons[skillIndex[s.id].lesson ?? '']?.minutes ?? 0), 0)
-
-  // Buổi học hôm nay: bước nào không có việc thì bỏ. Hai bước cuối chưa dựng nên dùng số phút mẫu.
-  const steps: Step[] = []
-  if (due.length > 0) steps.push({ title: `Ôn ${due.length} kỹ năng sắp quên`, minutes: Math.ceil(due.length * 1.5) })
-  if (next && lesson) steps.push({ title: `Ga mới: ${next.title}`, phoneTitle: `Ga mới: ${next.title}`, minutes: lesson.minutes })
-  if (next && hasAfter) steps.push({ title: 'Đoán trước cho ga sau', minutes: todayMock.guessMinutes })
-  if (next) steps.push({ title: 'Hệ thống lại trên giấy', minutes: todayMock.paperMinutes })
-  const totalMinutes = steps.reduce((n, s) => n + s.minutes, 0)
+  const steps = segments
 
   const memory = useMemo(
     () =>
@@ -58,7 +39,6 @@ export function HomePage() {
   )
   const lowCount = memory.filter((m) => m.value < 0.9).length
 
-  const startTo = due.length > 0 ? '/review' : lesson ? `/learn/${lesson.id}` : '/review'
   const strip: StripState[] = stations.map((s) => (s.status !== 'new' ? 'done' : s.next ? 'today' : 'todo'))
   const { calibration, notebook, nextGoal } = todayMock
 
@@ -90,10 +70,10 @@ export function HomePage() {
                   <li
                     key={st.title}
                     className={`flex items-center justify-between gap-2.5 rounded-xl px-3 py-2.5 min-[720px]:flex-col min-[720px]:items-stretch min-[720px]:justify-start min-[720px]:gap-1.5 min-[720px]:rounded-2xl min-[720px]:p-3.5 ${
-                      i === 0 ? 'border-2 border-ink bg-sun-soft' : st.title.startsWith('Ga mới') ? 'bg-violet-soft' : 'bg-bg'
+                      i === 0 ? 'border-2 border-ink bg-sun-soft' : st.kind === 'lesson' ? 'bg-violet-soft' : 'bg-bg'
                     }`}
                   >
-                    <span className={`order-2 font-mono text-[13px] font-bold min-[720px]:order-1 ${st.title.startsWith('Ga mới') ? 'text-violet' : i === 0 ? '' : 'text-muted'}`}>
+                    <span className={`order-2 font-mono text-[13px] font-bold min-[720px]:order-1 ${st.kind === 'lesson' ? 'text-violet' : i === 0 ? '' : 'text-muted'}`}>
                       <span className="min-[720px]:hidden">{st.minutes}′</span>
                       <span className="hidden min-[720px]:inline">
                         {i + 1} · {st.minutes} phút
@@ -104,8 +84,8 @@ export function HomePage() {
                 ))}
               </ol>
               <div className="mt-[18px] flex flex-wrap items-center gap-x-[18px] gap-y-3 min-[720px]:mt-[26px]">
-                <ButtonLink to={startTo} className="w-full min-[720px]:h-[58px] min-[720px]:w-auto min-[720px]:px-[34px] min-[720px]:text-[19px]">
-                  {resuming && due.length === 0 ? 'Học tiếp' : 'Bắt đầu buổi học'}
+                <ButtonLink to="/session" className="w-full min-[720px]:h-[58px] min-[720px]:w-auto min-[720px]:px-[34px] min-[720px]:text-[19px]">
+                  {resuming && steps[0]?.kind === 'lesson' ? 'Học tiếp' : 'Bắt đầu buổi học'}
                 </ButtonLink>
                 {due.length > 0 && (
                   <Link to="/review" className="hidden font-semibold text-muted underline min-[720px]:inline">

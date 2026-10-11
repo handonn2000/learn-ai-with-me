@@ -27,7 +27,17 @@ export function LessonPage() {
 
 type Screen = { at: 'intro' } | { at: 'step'; i: number } | { at: 'finish' }
 
-function LessonPlayer({ lesson }: { lesson: Lesson }) {
+/**
+ * Có `embedded` thì đang nằm trong buổi học: nút đóng gọi `embedded.onExit`, thanh trên dính dưới
+ * thanh buổi học (`stickyTop`), và màn "Qua ga" kết thúc bằng nút "Tiếp tục" gọi `embedded.onComplete`.
+ */
+export interface LessonEmbed {
+  onExit: () => void
+  onComplete: () => void
+  stickyTop: number
+}
+
+export function LessonPlayer({ lesson, embedded }: { lesson: Lesson; embedded?: LessonEmbed }) {
   const saved = useProgress((s) => s.lessonStep[lesson.id] ?? 0)
   const setLessonStep = useProgress((s) => s.setLessonStep)
   const record = useProgress((s) => s.record)
@@ -64,10 +74,10 @@ function LessonPlayer({ lesson }: { lesson: Lesson }) {
 
   return (
     <div className="min-h-dvh">
-      <header className="sticky top-0 z-30 border-b border-line bg-paper/95 backdrop-blur">
+      <header className="sticky z-30 border-b border-line bg-paper/95 backdrop-blur" style={{ top: embedded?.stickyTop ?? 0 }}>
         <div className="mx-auto flex max-w-3xl items-center gap-4 px-4 py-3 sm:px-6">
           <button
-            onClick={() => navigate(`/goal/${goalId}`)}
+            onClick={() => (embedded ? embedded.onExit() : navigate(`/goal/${goalId}`))}
             className="grid size-9 shrink-0 place-items-center rounded-full text-muted hover:bg-surface hover:text-ink"
             aria-label="Thoát bài học"
           >
@@ -132,7 +142,7 @@ function LessonPlayer({ lesson }: { lesson: Lesson }) {
                 />
               )
             })()}
-          {screen.at === 'finish' && <Finish lesson={lesson} outcomes={outcomes.current} goalId={goalId} />}
+          {screen.at === 'finish' && <Finish lesson={lesson} outcomes={outcomes.current} goalId={goalId} onNext={embedded?.onComplete} />}
         </motion.div>
       </AnimatePresence>
     </div>
@@ -200,7 +210,7 @@ const resultText: Record<Outcome, string> = {
   revealed: 'Có bài bạn phải xem lời giải, nên kỹ năng này sẽ quay lại sớm để bạn làm lại.',
 }
 
-function Finish({ lesson, outcomes, goalId }: { lesson: Lesson; outcomes: Outcome[]; goalId: string }) {
+function Finish({ lesson, outcomes, goalId, onNext }: { lesson: Lesson; outcomes: Outcome[]; goalId: string; onNext?: () => void }) {
   const skill = skillIndex[lesson.skill]
   const rec = useProgress((s) => s.skills[lesson.skill])
   const { nextId } = useGoalRoute(goalId)
@@ -210,6 +220,12 @@ function Finish({ lesson, outcomes, goalId }: { lesson: Lesson; outcomes: Outcom
   return (
     <StepFrame
       footer={
+        onNext ? (
+          <>
+            <span />
+            <Button onClick={onNext}>Tiếp tục</Button>
+          </>
+        ) : (
         <>
           <ButtonLink to={`/goal/${goalId}`} variant="ghost">
             Về tuyến
@@ -220,6 +236,7 @@ function Finish({ lesson, outcomes, goalId }: { lesson: Lesson; outcomes: Outcom
             <ButtonLink to="/">Xong</ButtonLink>
           )}
         </>
+        )
       }
     >
       <motion.div

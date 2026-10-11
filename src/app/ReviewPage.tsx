@@ -5,10 +5,9 @@ import { useDue } from '@/learning/hooks'
 import { useProgress, type Outcome } from '@/learning/progress'
 import type { Exercise } from '@/exercises/types'
 import { ExerciseView } from '@/exercises/ExerciseView'
-import { ButtonLink } from '@/ui/Button'
+import { Button, ButtonLink } from '@/ui/Button'
 import { RouteBar } from '@/ui/RouteBar'
-
-const MAX = 5
+import { MAX_REVIEW } from '@/learning/session'
 
 /** Câu ôn cho một kỹ năng: xoay vòng giữa câu kiểm tra và bài tập của lesson. */
 function pickExercise(skillId: string, reps: number): Exercise {
@@ -22,9 +21,17 @@ function pickExercise(skillId: string, reps: number): Exercise {
 
 export function ReviewPage() {
   const due = useDue()
-  const skills = useProgress((s) => s.skills)
   // Chốt danh sách lúc mở trang để không nhảy khi vừa ghi kết quả
-  const [queue] = useState(() => due.slice(0, MAX))
+  const [queue] = useState(() => due.slice(0, MAX_REVIEW))
+  return <ReviewRun queue={queue} />
+}
+
+/**
+ * Chạy một loạt câu ôn. Có `onFinish` thì đang nhúng trong buổi học: không có lề của AppShell,
+ * và màn kết thúc là nút "Tiếp tục" thay vì "Về trang chính".
+ */
+export function ReviewRun({ queue, onFinish }: { queue: string[]; onFinish?: () => void }) {
+  const skills = useProgress((s) => s.skills)
   const items = useMemo(() => queue.map((id) => ({ id, ex: pickExercise(id, skills[id]?.card.reps ?? 0) })), [queue]) // eslint-disable-line react-hooks/exhaustive-deps
   const [i, setI] = useState(0)
   const [results, setResults] = useState<Outcome[]>([])
@@ -50,21 +57,27 @@ export function ReviewPage() {
   if (i >= items.length) {
     const ok = results.filter((r) => r === 'clean').length
     return (
-      <div className="pt-12">
+      <div className={onFinish ? 'mx-auto max-w-3xl px-4 pt-12' : 'pt-12'}>
         <h1 className="text-[34px] font-bold tracking-tight">Ôn xong.</h1>
         <p className="mt-3 max-w-[56ch] text-lg text-muted">
           {ok}/{results.length} câu tự làm đúng. Câu nào cần trợ giúp sẽ quay lại sớm hơn.
         </p>
-        <ButtonLink to="/" className="mt-8">
-          Về trang chính
-        </ButtonLink>
+        {onFinish ? (
+          <Button onClick={onFinish} className="mt-8">
+            Tiếp tục
+          </Button>
+        ) : (
+          <ButtonLink to="/" className="mt-8">
+            Về trang chính
+          </ButtonLink>
+        )}
       </div>
     )
   }
 
   const item = items[i]
   return (
-    <div className="-mx-4 sm:-mx-6">
+    <div className={onFinish ? '' : '-mx-4 sm:-mx-6'}>
       <div className="mx-auto max-w-3xl px-4 pt-2 sm:px-6">
         <RouteBar
           stations={items.map((_, k) => ({ kind: 'exercise', state: k < i ? 'done' : k === i ? 'current' : 'todo', label: `Câu ${k + 1}` }))}

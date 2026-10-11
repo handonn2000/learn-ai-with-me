@@ -1,5 +1,5 @@
 import type { ComponentType, SVGProps } from 'react'
-import { Link, NavLink, Outlet } from 'react-router'
+import { Link, NavLink, Outlet, useLocation } from 'react-router'
 import { todayMock } from '@/content/mock/today'
 import { useDue } from '@/learning/hooks'
 import { HomeIcon, NotebookIcon, ReviewIcon, TargetIcon } from './icons'
@@ -23,6 +23,7 @@ function Badge({ n }: { n: number }) {
 /** Khung chung: thanh trên (máy tính) và tab đáy (dưới 720px). Màn học và kiểm tra không dùng khung này. */
 export function AppShell() {
   const due = useDue().length
+  const onToday = useLocation().pathname === '/'
   return (
     <div className="min-h-dvh">
       <header className="mx-auto flex max-w-[1236px] items-center justify-between gap-4 px-4 py-4 min-[720px]:px-7 min-[720px]:py-5">
@@ -44,7 +45,7 @@ export function AppShell() {
             </NavLink>
           ))}
         </nav>
-        <span className="text-sm font-bold min-[720px]:hidden">{todayMock.streakDays} ngày liền</span>
+        {onToday && <span className="text-sm font-bold min-[720px]:hidden">{todayMock.streakDays} ngày liền</span>}
       </header>
 
       <main className="mx-auto max-w-[1236px] px-4 pt-1.5 pb-28 min-[720px]:px-7 min-[720px]:pt-2 min-[720px]:pb-18">
