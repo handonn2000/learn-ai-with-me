@@ -14,13 +14,14 @@ Xem [curriculum và roadmap](docs/courses/data-engineering-foundation/curriculum
 ## Chạy
 
 ```bash
-npm install
-npm run dev      # http://localhost:5173/learn-ai-with-me/
-npm run build    # tsc -b && vite build → dist/
-npm run preview  # xem thử bản build
+make start       # npm ci nếu lockfile đổi, rồi Vite — http://localhost:5173/learn-ai-with-me/
+make build       # tsc -b && vite build → dist/ (+ 404.html cho SPA)
+make preview     # xem thử bản build
 ```
 
-Yêu cầu Node 18+.
+Cùng việc đó bằng npm: `npm ci` / `npm run dev` / `npm run build` / `npm run preview`.
+
+Yêu cầu Node 18+. `make` in danh sách lệnh khi không truyền target.
 
 ## Ngôn ngữ
 
@@ -87,12 +88,14 @@ Các đường dẫn dưới đây tính từ gốc ứng dụng `/learn-ai-with
 | `/courses/csc14003/lessons/b4` | Buổi 4 — Tìm kiếm không có thông tin |
 | `/courses/csc14003/lessons/b5` | Buổi 5 — Tìm kiếm có thông tin |
 | `/courses/csc14003/lessons/b6` | Buổi 6 — Tìm kiếm cục bộ và tối ưu hóa (VI/EN) |
+| `/courses/csc14003/lessons/b7` | Buổi 7 — Tìm kiếm đối kháng, minimax và α–β (VI/EN) |
+| `/courses/csc14003/lessons/b9` | Buổi 9 — Tác tử logic, logic mệnh đề (VI/EN) |
 | `/blog` | Trang giữ chỗ cho blog |
 | Đường dẫn không khớp | Trang không tìm thấy |
 
 Router dùng `/courses/:slug` và `/courses/:slug/tests`; khóa chưa có bộ đề, như
 Data Engineering Foundation, hiển thị thông báo chưa có kiểm tra. Slug không tồn tại
-hiển thị trang không tìm thấy. CSC14003 hiện có bài học tương tác cho buổi 1–6.
+hiển thị trang không tìm thấy. CSC14003 hiện có bài học tương tác cho buổi 1–7 và 9 (buổi 8 CSP chưa dựng). Buổi 9 có hang Wumpus, tám mô hình và chaining trên đồ thị AND-OR tự lặp, Logic Lab chạy sáu cách suy luận trên ví dụ hoặc KB tự nhập; kiểm engine bằng `node scripts/check-ai-b9.mjs`. Buổi 7 có cây minimax/α–β tự lặp, lab chỉnh điểm và thứ tự duyệt, minh họa kỳ vọng, quiz và bài tập có gợi ý.
 Buổi 6 có lab N-hậu với 4 thuật toán, mô phỏng địa hình và local beam tự lặp,
 thí nghiệm xác suất simulated annealing, xưởng lai/đột biến, 3 ví dụ Python chạy được
 và quiz 8 câu. Kiểm thuật toán và ví dụ bằng `node scripts/check-ai-b6.mjs`;
@@ -113,7 +116,12 @@ kể cả khi trùng ID buổi như `b1`. Kiểm hợp đồng khóa học và l
 
 Site: **https://handonn2000.github.io/learn-ai-with-me/**
 
-Push lên `main` là GitHub Actions tự build và deploy (`.github/workflows/deploy.yml`).
+```bash
+make deploy      # build local, rồi push main (hoặc dispatch workflow nếu origin đã up to date)
+```
+
+Chỉ chạy được trên `main` với working tree sạch. GitHub Actions (`.github/workflows/deploy.yml`) nhận push hoặc `workflow_dispatch` rồi publish Pages. Push `main` trực tiếp cũng deploy như trước. `gh` chỉ cần khi muốn rebuild mà không có commit mới.
+
 App chạy ở subpath `/learn-ai-with-me/` nên `vite.config.ts` khai `base` tương ứng và `BrowserRouter` nhận `basename={LOCALE_BASENAME}` (gốc ứng dụng, thêm `/en` khi đọc tiếng Anh). Nếu đổi tên repo hoặc gắn domain riêng thì phải sửa `base` (domain riêng → để `'/'`).
 
 Route nội bộ đi qua `<Link to>` (Router tự cộng basename). Thẻ `<a>` thô dẫn tới trang nội bộ dùng `localeBase`; asset và tài liệu dùng `import.meta.env.BASE_URL` vì được chia sẻ giữa hai ngôn ngữ.

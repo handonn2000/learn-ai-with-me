@@ -194,61 +194,66 @@ export const SESSION_QUIZZES = {
 
   b3: [
     {
-      topicId: 'problem-statement',
-      q: 'Năm thành phần của một bài toán tìm kiếm là gì?',
-      opts: [
-        'Trạng thái đầu · hành động · mô hình chuyển · phép thử đích · chi phí đường đi',
-        'Trạng thái đầu · đích · heuristic · frontier · explored set',
-        'Đỉnh · cạnh · trọng số · đường đi · chu trình',
-        'Trạng thái đầu · hành động · heuristic · phép thử đích · chi phí',
-      ],
-      a: 0,
-      ex: 'Heuristic <em>không</em> nằm trong phát biểu bài toán — nó là thứ bạn thêm vào để giải nhanh hơn, và cùng một bài toán gắn heuristic khác nhau vẫn là một bài toán. Frontier với explored set thì càng không: chúng là đồ nghề của thuật toán, không phải mô tả đề bài.',
+        "topicId": "problem-statement",
+        "q": "Trên bản đồ hai chiều có các cạnh A–B, A–C, B–C, B–D, C–D, Actions(B) là gì?",
+        "opts": [
+            "{Đi D}",
+            "{Đi A, Đi C, Đi D}",
+            "{A, B, C, D}",
+            "Result(A, Đi B) = B"
+        ],
+        "a": 1,
+        "ex": "B nối trực tiếp với A, C và D nên cả ba hành động đều hợp lệ. Đích là D không có nghĩa Actions(B) chỉ được chứa Đi D. Result mô tả kết quả của một hành động, không phải danh sách hành động."
     },
     {
-      topicId: 'search-framework',
-      q: 'BFS, DFS và UCS dùng chung một vòng lặp graph-search. Khác biệt DUY NHẤT nằm ở đâu?',
-      opts: ['Cách kiểm tra đích', 'Cấu trúc dữ liệu của frontier', 'Cách sinh trạng thái kế tiếp', 'Cách lưu explored set'],
-      a: 1,
-      ex: 'FIFO queue → BFS · LIFO stack → DFS · hàng đợi ưu tiên theo g → UCS. Một vòng lặp, ba tính cách. Nhớ được chỗ này là nhớ được cả nửa buổi — và cũng là lý do Lab chỉ cần đổi một dòng để chuyển thuật toán.',
+        "topicId": "problem-statement",
+        "q": "A–B dài 2 km, B–C dài 1 km, C–D dài 2 km. Đường A → B → C → D có chi phí bao nhiêu?",
+        "opts": [
+            "3 km vì đi 3 bước",
+            "2 km vì đó là cạnh cuối",
+            "5 km",
+            "Không tính được nếu chưa biết thuật toán"
+        ],
+        "a": 2,
+        "ex": "Chi phí đường đi là tổng chi phí bước: 2 + 1 + 2 = 5 km. Ba bước là độ dài tính theo số hành động, không phải số km. Bạn không cần biết thuật toán để tính chi phí một đường đã cho."
     },
     {
-      topicId: 'problem-statement',
-      q: 'Trừu tượng hóa một bài toán là bỏ bớt chi tiết. Bỏ tới đâu thì được coi là bỏ ĐÚNG?',
-      opts: [
-        'Bỏ tới khi trạng thái chỉ còn một con số',
-        'Bỏ tới khi mỗi hành động trừu tượng vẫn thực hiện được ngoài đời, dù phức tạp cách mấy',
-        'Bỏ tới khi không gian trạng thái còn dưới một triệu',
-        'Bỏ hết mọi thứ không xuất hiện trong goal test',
-      ],
-      a: 1,
-      ex: 'Phép thử là <strong class="hl">có đi được thật không</strong>: “Go(Sibiu)” bỏ qua thời tiết, bạn đồng hành, bài hát đang bật — bỏ được, vì tài xế nào cũng lái từ Arad tới Sibiu được bất kể mấy thứ đó. Trừu tượng hóa sai là khi nó bỏ mất một thứ khiến hành động không còn thực hiện nổi. Kích thước không gian là <em>hệ quả</em> của việc bỏ đúng, không phải tiêu chí.',
+        "topicId": "problem-statement",
+        "q": "Xe có thể hết xăng và không có trạm tiếp nhiên liệu. Hai xe cùng ở B nhưng còn lượng xăng khác nhau. Vì sao trạng thái chỉ ghi B có thể chưa đủ?",
+        "opts": [
+            "Vì mọi trạng thái phải có ít nhất hai biến",
+            "Vì phải lưu toàn bộ lịch sử chuyến đi",
+            "Vì màu xe chưa được ghi lại",
+            "Vì lượng xăng quyết định những đường còn đi được"
+        ],
+        "a": 3,
+        "ex": "Cùng vị trí nhưng khác nhiên liệu có thể dẫn tới tập hành động khả dụng khác nhau. Cần giữ ít nhất vị trí và nhiên liệu còn lại theo mô hình tiêu hao đã chọn. Không nhất thiết phải lưu toàn bộ lịch sử."
     },
     {
-      topicId: 'search-framework',
-      q: 'Nút (node) và trạng thái (state) khác nhau ở chỗ nào?',
-      opts: [
-        'Không khác gì, hai tên gọi của cùng một thứ',
-        'Trạng thái là cấu hình của thế giới; nút là một mắt trong cây tìm kiếm, mang thêm cha, hành động và g(n)',
-        'Nút là trạng thái đã được mở, trạng thái là cái chưa mở',
-        'Trạng thái chỉ có trong graph-search, nút chỉ có trong tree-search',
-      ],
-      a: 1,
-      ex: 'Một trạng thái có thể xuất hiện ở <em>nhiều</em> nút khác nhau, vì tới nó bằng nhiều đường. Chính vì vậy hai nút cùng trạng thái có g(n) khác nhau mà h(n) thì bằng nhau — h chỉ nhìn trạng thái, g nhìn cả đường đã đi. Nhớ chỗ này thì decrease-key trong UCS mới hết bí ẩn.',
+        "topicId": "search-framework",
+        "q": "n2 ghi đường A → C giá 5; n3 ghi A → B → C giá 3. Nhận xét nào đúng?",
+        "opts": [
+            "Cùng STATE = C, khác PARENT và g",
+            "Cùng trạng thái nên là cùng một nút",
+            "n3 có g = 2 vì đi hai bước",
+            "n2 chưa phải trạng thái vì đắt hơn"
+        ],
+        "a": 0,
+        "ex": "STATE của cả hai là C. n2 có cha là nút ở A và g = 5; n3 có cha là nút ở B và g = 3. Nút lưu thông tin về đường đi ngoài trạng thái cuối."
     },
     {
-      topicId: 'search-framework',
-      q: 'Vì sao graph-search phải giữ tập explored, trong khi tree-search thì không?',
-      opts: [
-        'Để tiết kiệm bộ nhớ',
-        'Để đường đi tìm được ngắn hơn',
-        'Vì không có nó, đường đi dư thừa làm cây phình theo hàm mũ dù số trạng thái thật rất nhỏ',
-        'Vì tree-search không dùng được với đồ thị có trọng số',
-      ],
-      a: 2,
-      ex: 'Ngược đời một chút: explored set <em>tốn</em> bộ nhớ chứ không tiết kiệm — nó đánh đổi bộ nhớ lấy thời gian. Lý do là đường dư thừa: cùng một trạng thái tới được bằng vô số đường, nên cây tìm kiếm có thể vô hạn ngay cả khi không gian trạng thái hữu hạn. Bản đồ Romania có 20 thành phố mà cây tìm kiếm của nó không đáy.',
-    },
-  ],
+        "topicId": "search-framework",
+        "q": "Đang tìm đường rẻ nhất: frontier đã có C với g = 5. Sau đó tìm được đường tới C với g = 3. Nên làm gì?",
+        "opts": [
+            "Bỏ đường mới vì đã thấy C",
+            "Dừng vì vừa tìm được đường rẻ hơn",
+            "Cập nhật đường tới C cùng chi phí và nút cha",
+            "Chỉ đổi số 5 thành 3, giữ nguyên nút cha cũ"
+        ],
+        "a": 2,
+        "ex": "Phải giữ đường rẻ hơn và cập nhật thông tin để khôi phục đúng đường ấy. Chỉ đổi g mà không đổi cha sẽ khiến đường được trả về không khớp chi phí. Đây là lý do chống lặp đơn thuần chưa đủ cho tìm kiếm theo chi phí."
+    }
+],
   b4: [
     {
       topicId: 'uninformed',
@@ -495,4 +500,27 @@ export const SESSION_QUIZZES = {
     ex: "Chuỗi hàng N-hậu vẫn giữ một hậu mỗi cột nhưng có thể tăng xung đột. Chuỗi hoán vị TSP còn có thể lặp hoặc mất thành phố. Tên “lai ghép” không thay thế được phép kiểm tra."
   }
 ],
+  b7: [
+    { topicId: 'game-model', q: 'Trong mô hình minimax tổng bằng không, utility dương thường biểu diễn điều gì?', opts: ['Kết cục tốt cho MAX', 'Kết cục tốt cho MIN', 'Một xác suất', 'Một nước đi hợp lệ'], a: 0, ex: 'Bạn giữ góc nhìn của MAX: điểm cao tốt cho MAX và xấu cho MIN.' },
+    { topicId: 'minimax', q: 'Một nút MIN có các giá trị con 4, −1 và 2. Nó truyền giá trị nào lên?', opts: ['4', '2', '−1', '5'], a: 2, ex: 'MIN chọn nhánh có giá trị nhỏ nhất đối với MAX.' },
+    { topicId: 'minimax', q: 'Gốc MAX có hai con MIN lần lượt mang giá trị 3 và 0. MAX chọn nhánh nào?', opts: ['Nhánh 0', 'Nhánh 3', 'Ngẫu nhiên', 'Không thể xác định'], a: 1, ex: 'MAX tối đa hóa điểm bảo đảm, nên chọn 3.' },
+    { topicId: 'minimax', q: 'Minimax chọn nước đi dựa trên giả định nào?', opts: ['Đối thủ chơi tối ưu', 'Đối thủ luôn mắc lỗi', 'Mọi nước có xác suất bằng nhau', 'Trò chơi không có trạng thái kết thúc'], a: 0, ex: 'Minimax chống lại phản hồi tốt nhất của đối thủ.' },
+    { topicId: 'alpha-beta', q: 'α biểu diễn điều gì trong alpha-beta pruning?', opts: ['Giá trị tốt nhất MIN đã thấy', 'Cận dưới: lựa chọn tốt nhất MAX đã biết', 'Độ sâu hiện tại', 'Xác suất thắng'], a: 1, ex: 'α là cận dưới cho kết quả MAX có thể bảo đảm được.' },
+    { topicId: 'alpha-beta', q: 'Khi nào có thể cắt tỉa phần cây còn lại?', opts: ['α ≥ β', 'α = 0', 'β = 0', 'Khi gặp lá đầu tiên'], a: 0, ex: 'Nếu α ≥ β, nhánh này không thể thay đổi quyết định của tổ tiên.' },
+    { topicId: 'depth-limited-games', q: 'Tìm kiếm trò chơi dừng ở giới hạn độ sâu cần gì để đánh giá trạng thái chưa kết thúc?', opts: ['Hàm đánh giá tĩnh', 'Bảng chân trị', 'Hàm băm duy nhất', 'Hàng đợi FIFO'], a: 0, ex: 'Hàm đánh giá ước lượng utility của trạng thái chưa kết thúc; đó chỉ là xấp xỉ.' },
+    { topicId: 'chance-nodes', q: 'Nút CHANCE có kết quả 8 (xác suất 1/4) và 0 (xác suất 3/4). Giá trị kỳ vọng là?', opts: ['8', '4', '2', '6'], a: 2, ex: 'Kỳ vọng = 1/4 × 8 + 3/4 × 0 = 2.' },
+  ],
+  b9: [
+    { topicId: 'kb-agent', q: 'Trong hàm KB-AGENT, phần suy diễn nằm ở đâu?', opts: ['Ẩn bên trong TELL và ASK', 'Trong bộ đếm thời gian t', 'Trong MAKE-PERCEPT-SENTENCE', 'Agent dựa trên tri thức không cần suy diễn'], a: 0, ex: 'Vòng lặp của agent chỉ có ba việc: TELL điều vừa thấy, ASK nên làm gì, TELL việc đã làm. Toàn bộ chuyện “từ câu cũ ra câu mới” được giấu trong <strong class="hl">TELL và ASK</strong> — nên thay bộ suy diễn mà không phải viết lại agent.' },
+    { topicId: 'entailment', q: 'KB ⊨ α nghĩa là gì?', opts: ['α đúng trong ít nhất một mô hình của KB', 'α đúng trong mọi mô hình mà KB đúng, tức M(KB) ⊆ M(α)', 'KB đúng trong mọi mô hình của α', 'α được viết nguyên văn trong KB'], a: 1, ex: 'Hệ quả logic là quan hệ tập con: <strong class="hl">mọi</strong> thế giới còn sống sót sau khi lọc bằng KB đều làm α đúng. Một mô hình là chưa đủ, và α cũng không cần nằm sẵn trong KB.' },
+    { topicId: 'entailment', q: 'Agent đã đi [1,1] → [2,1] và cảm thấy gió ở [2,1]. KB của nó không suy ra được ¬P₂,₂. Kết luận nào đúng?', opts: ['Chắc chắn có hố ở [2,2]', 'Chắc chắn không có hố ở [2,2]', 'Chưa biết: KB có mô hình có hố ở [2,2] và cũng có mô hình không có', 'KB đang mâu thuẫn'], a: 2, ex: 'KB ⊭ ¬P₂,₂ <strong>không</strong> có nghĩa là KB ⊨ P₂,₂. Trong ba mô hình của KB, hai mô hình có hố ở [2,2], một mô hình thì không. Agent cẩn thận sẽ tránh ô đó cho tới khi có thêm cảm nhận.' },
+    { topicId: 'pl-semantics', q: 'Câu P ⇒ Q sai trong trường hợp nào?', opts: ['P sai, Q đúng', 'P sai, Q sai', 'P đúng, Q sai', 'P đúng, Q đúng'], a: 2, ex: 'Kéo theo là một lời hứa: nó chỉ bị phá khi điều kiện xảy ra mà kết quả không tới. P sai thì lời hứa chưa bị thử thách, nên câu vẫn <strong class="hl">đúng</strong>.' },
+    { topicId: 'validity-sat', q: 'Câu (A ∧ B) ⇒ (A ∨ C) thuộc loại nào?', opts: ['Hằng đúng (valid)', 'Thỏa được nhưng không hằng đúng', 'Không thỏa được', 'Chưa xác định được vì không biết C'], a: 0, ex: 'Muốn câu sai thì A ∧ B phải đúng — mà khi đó A đúng nên A ∨ C cũng đúng. Không dòng nào làm câu sai, nên nó <strong class="hl">hằng đúng</strong>, bất kể C.' },
+    { topicId: 'validity-sat', q: 'Muốn chứng minh α ⊨ β bằng phản chứng, bạn kiểm điều gì?', opts: ['α ∨ β thỏa được', 'α ∧ ¬β không thỏa được', '¬α ∧ β là hằng đúng', 'β ⇒ α là hằng đúng'], a: 1, ex: 'α ⊨ β khi và chỉ khi không có thế giới nào vừa làm α đúng vừa làm β sai, tức <strong class="hl">α ∧ ¬β không thỏa được</strong>. Resolution và DPLL đều chạy trên đúng câu này.' },
+    { topicId: 'resolution', q: 'Hợp giải (A ∨ B) với (¬B ∨ C) cho ra mệnh đề nào?', opts: ['A ∨ C', 'A ∧ C', 'B ∨ ¬B', '□ (mệnh đề rỗng)'], a: 0, ex: 'B và ¬B là cặp bù nhau, bỏ đi và gộp phần còn lại: <strong class="hl">A ∨ C</strong>. Lý do: nếu B sai thì vế đầu buộc A; nếu B đúng thì vế sau buộc C — kiểu gì cũng A hoặc C.' },
+    { topicId: 'horn-chaining', q: 'Câu nào là mệnh đề xác định (definite clause)?', opts: ['¬P ∨ Q ∨ R', '¬P ∨ ¬Q ∨ R', '¬P ∨ ¬Q', 'P ∨ Q'], a: 1, ex: 'Mệnh đề xác định có <strong class="hl">đúng một</strong> literal dương: ¬P ∨ ¬Q ∨ R ≡ P ∧ Q ⇒ R. Câu ¬P ∨ ¬Q không có literal dương nào — nó là goal clause, vẫn là Horn nhưng không xác định.' },
+    { topicId: 'horn-chaining', q: 'KB có hàng nghìn luật xác định, bạn chỉ cần biết một câu hỏi cụ thể. Cách nào thường làm ít việc thừa hơn?', opts: ['Forward chaining, vì nó tự động', 'Backward chaining, vì nó chỉ lần những luật có liên quan tới câu hỏi', 'Bảng chân trị, vì nó đầy đủ', 'Cả hai chaining luôn tốn như nhau'], a: 1, ex: 'Forward chaining là hướng dữ liệu: bắn mọi luật đủ điều kiện, kể cả những luật chẳng dính gì tới câu hỏi. Backward chaining là <strong class="hl">hướng mục tiêu</strong>, nên chi phí thường nhỏ hơn hẳn kích thước KB.' },
+    { topicId: 'sat-solvers', q: 'Với (A ∨ ¬B), (¬B ∨ ¬C), (A ∨ C), ký hiệu nào thuần (pure)?', opts: ['Chỉ A', 'A và B', 'B và C', 'Cả A, B và C'], a: 1, ex: 'A chỉ xuất hiện dạng dương, B chỉ xuất hiện dạng ¬B — hai ký hiệu thuần. C có cả ¬C lẫn C nên không thuần. DPLL gán A = đúng, B = sai mà không sợ làm sai mệnh đề nào.' },
+    { topicId: 'sat-solvers', q: 'WalkSAT chạy hết max_flips trên KB ∧ ¬α và trả failure. Bạn kết luận được gì?', opts: ['KB ⊨ α', 'KB ⊭ α', 'Chưa kết luận được: có thể vô nghiệm, cũng có thể cần thêm thời gian', 'KB mâu thuẫn'], a: 2, ex: 'WalkSAT <strong class="hl">không đầy đủ</strong>: tìm ra mô hình thì chắc chắn thỏa được, nhưng không tìm ra thì chưa chứng minh được gì. Nó chỉ nói được “tôi nghĩ cả giờ mà không thấy thế giới nào như vậy”.' },
+  ],
 };

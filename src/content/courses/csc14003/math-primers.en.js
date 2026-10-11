@@ -45,28 +45,30 @@ export const MATH_PRIMERS = {
     ],
   },
   b3: {
-    minutes: 4,
-    lead: 'This session has almost no formulas, but there are three things you need to recognize first, because everything rests on them. <strong class="hl">Whichever one feels shaky, read that one properly.</strong>',
-    terms: [
+    "minutes": 4,
+    "lead": "Session 3 needs intuition about graphs and trees. Big-O is optional preparation for session 4.",
+    "terms": [
         {
-        en: 'Graph', vn: 'đồ thị',
-        what: 'A set of vertices connected by edges. An edge may carry a <strong class="hl">weight</strong> (the cost of crossing it) and may allow travel in only one direction.',
-        why: 'In section 02, you’ll turn every problem — maps, sliding puzzles, vacuum worlds — into this structure.',
-        note: 'V vertices · E edges',
-      },
+            "en": "Graph",
+            "vn": "graph",
+            "what": "Vertices together with edges connecting them. On the A–B–C–D map, locations are vertices, roads are edges, and distances are weights.",
+            "why": "Describes states and legal transitions."
+        },
         {
-        en: 'Tree · branching factor b', vn: 'cây · hệ số phân nhánh',
-        what: 'A tree is a graph with no cycles. <strong class="hl">b</strong> is the average number of children per node.',
-        why: 'b = 10 at depth 6 gives 10⁶ nodes. That’s why memory matters throughout this session.',
-        note: 'level d has b^d nodes',
-      },
+            "en": "Tree · branching factor b",
+            "vn": "tree · branching factor",
+            "what": "A tree is a connected graph without cycles. For upper-bound analysis, b is the maximum number of children of a node.",
+            "why": "A search tree records paths being tried. Several nodes can contain the same state.",
+            "note": "At most b^d nodes at depth d; equality for uniform branching."
+        },
         {
-        en: 'Big-O', vn: 'ký hiệu O lớn',
-        what: 'A compact way to describe how cost grows with input size, ignoring constants and smaller terms.',
-        why: 'You’ll compare O(b^d) with O(bm) all session. That difference decides which algorithm can run on an actual machine.',
-      },
-      ],
+            "en": "Big-O",
+            "vn": "optional reading",
+            "what": "An upper bound on how costs grow with problem size, ignoring constant factors.",
+            "why": "Session 4 uses it to compare time and memory. It is not needed to write the five components."
   },
+    ]
+},
   b4: {
     minutes: 5,
     lead: 'Three data structures and two counting tools. Sounds dry, except <strong class="hl">the only difference between today’s five algorithms is the first one</strong> — which node comes out first is the structure’s call.',
@@ -148,6 +150,27 @@ export const MATH_PRIMERS = {
       what: "An ordering of all elements, with each element appearing exactly once.",
       why: "TSP often uses a permutation; N-queens row strings allow repeats, so they are not permutations. Crossover that ignores representation can produce invalid children."
     }
-  ]
-},
+  ],
+  },
+  b7: {
+    minutes: 4,
+    lead: 'Four ideas are enough to follow a game tree: who chooses, who benefits, how outcomes are compared, and how uncertainty is handled.',
+    terms: [
+      { en: 'Zero-sum game', vn: 'trò chơi tổng bằng không', what: 'One player’s gain is the other’s loss; one utility can represent both sides with opposite signs.', why: 'Minimax assumes two opposing objectives.' },
+      { en: 'Utility', vn: 'độ hữu dụng', what: 'A number representing how desirable an outcome is for the player being evaluated.', why: 'All scores in this minimax tree keep MAX’s perspective: positive helps MAX, negative helps MIN. Do not flip signs with turns.', note: 'win = +1 · draw = 0 · loss = −1' },
+      { en: 'Recursion', vn: 'đệ quy', what: 'Solving a problem by applying the same rule to smaller subproblems.', why: 'Minimax passes values from child states to parents; finite games end at terminal leaves.' },
+      { en: 'Expected value', vn: 'giá trị kỳ vọng', what: 'A probability-weighted average: Σ pᵢvᵢ, where Σpᵢ = 1.', why: 'In dice games, MAX/MIN cannot choose the roll; you calculate expectation at a chance node.' }
+    ]
+  },
+  b9: {
+    minutes: 6,
+    lead: 'This session is pure discrete math, but just five pieces of it. Every one gets used for real in the lesson — especially the third, where <strong class="hl">implication ⇒ trips up beginners</strong>.',
+    terms: [
+      { en: 'Proposition', vn: 'mệnh đề', what: 'A statement that can only be <strong class="hl">true or false</strong>, nothing in between: “there’s a pit in [1,2]” is a proposition, “which room has a pit?” isn’t.', why: 'The whole Wumpus world gets written with symbols like P₁,₂ — each one a proposition the agent doesn’t yet know to be true or false.', note: 'P₁,₂ : “pit in [1,2]”' },
+      { en: 'Truth table', vn: 'bảng chân trị', what: 'A table listing every true/false assignment to the symbols, then the sentence’s value in each row. n symbols give 2ⁿ rows.', why: 'Model checking is exactly flipping through this table. 7 symbols is 128 rows — still doable by hand; 64 symbols isn’t.', note: '2⁷ = 128' },
+      { en: 'Connectives ¬ ∧ ∨ ⇒ ⇔', vn: 'phép nối', what: 'Five ways to combine sentences: not, and, or, implies, if and only if. P ⇒ Q <strong class="hl">is false only when P is true and Q is false</strong>; if P is false, the whole sentence is automatically true.', why: 'Every rule in the KB is written with these five. Resolution, DPLL and WalkSAT also start by rewriting sentences into CNF — only ¬ ∧ ∨ left — so P ⇒ Q ≡ ¬P ∨ Q has to be second nature.', note: 'P ⇒ Q ≡ ¬P ∨ Q' },
+      { en: 'Tautology', vn: 'hằng đúng', what: 'A sentence that’s true in <strong>every</strong> row of the truth table, whatever values the symbols take. For example P ∨ ¬P.', why: 'The deduction theorem says α ⊨ β exactly when α ⇒ β is a tautology — turning “can I derive it?” into “is it true everywhere?”.' },
+      { en: 'Proof by contradiction', vn: 'chứng minh phản chứng', what: 'To prove α, assume ¬α and show that the assumption leads to a contradiction.', why: 'Resolution and DPLL both prove KB ⊨ α this way: add ¬α to the KB, then look for a contradiction (the empty clause □, or “no model at all”).', note: 'KB ⊨ α  if and only if  KB ∧ ¬α is unsatisfiable' },
+    ],
+  },
 };

@@ -49,28 +49,30 @@ export const MATH_PRIMERS = {
   },
 
   b3: {
-    minutes: 4,
-    lead: 'Buổi này gần như không có công thức, nhưng có ba thứ bạn phải quen mặt trước — vì cả bài đứng trên chúng. <strong class="hl">Chưa vững chỗ nào thì đọc kỹ chỗ đó.</strong>',
-    terms: [
+    "minutes": 4,
+    "lead": "Buổi 3 dùng trực giác về đồ thị và cây. Big-O là phần chuẩn bị tùy chọn cho buổi 4.",
+    "terms": [
         {
-        en: 'Graph', vn: 'đồ thị',
-        what: 'Một tập đỉnh nối với nhau bằng cạnh. Cạnh có thể mang <strong class="hl">trọng số</strong> (chi phí đi qua) và có thể chỉ đi được một chiều.',
-        why: 'Ở mục 02 bạn sẽ nén mọi đề bài — bản đồ, xếp hình, hút bụi — về đúng cái dạng này.',
-        note: 'V đỉnh · E cạnh',
-      },
+            "en": "Graph",
+            "vn": "đồ thị",
+            "what": "Tập đỉnh và các cạnh nối chúng. Trên bản đồ A–B–C–D, địa điểm là đỉnh, đường là cạnh, số km là trọng số.",
+            "why": "Dùng để mô tả các trạng thái và những bước chuyển hợp lệ."
+        },
         {
-        en: 'Tree · branching factor b', vn: 'cây · hệ số phân nhánh',
-        what: 'Cây là đồ thị không có chu trình. <strong class="hl">b</strong> là trung bình mỗi nút đẻ ra bao nhiêu nút con.',
-        why: 'b = 10 mà sâu 6 tầng là 10⁶ nút. Con số đó chính là lý do cả buổi phải lo chuyện bộ nhớ.',
-        note: 'tầng d có b^d nút',
-      },
+            "en": "Tree · branching factor b",
+            "vn": "cây · hệ số phân nhánh",
+            "what": "Cây là đồ thị liên thông không có chu trình. Trong phân tích cận trên, b là số nút con tối đa của một nút.",
+            "why": "Cây tìm kiếm ghi những đường đang thử. Nhiều nút có thể chứa cùng trạng thái.",
+            "note": "Tầng d có tối đa b^d nút; bằng nhau khi phân nhánh đều."
+        },
         {
-        en: 'Big-O', vn: 'ký hiệu O lớn',
-        what: 'Cách nói gọn “khi dữ liệu lớn dần thì chi phí phình theo kiểu gì”, bỏ qua hằng số và các số hạng nhỏ.',
-        why: 'Cả buổi bạn sẽ so O(b^d) với O(bm). Khác nhau ở chỗ đó quyết định thuật toán nào chạy nổi trên máy thật.',
-      },
-      ],
-  },
+            "en": "Big-O",
+            "vn": "ký hiệu O lớn · đọc thêm",
+            "what": "Mô tả cận trên cho mức tăng chi phí khi kích thước bài toán tăng, bỏ qua hằng số.",
+            "why": "Sẽ dùng ở buổi 4 để so sánh thời gian và bộ nhớ của thuật toán; chưa cần để viết năm thành phần."
+        }
+    ]
+},
   b4: {
     minutes: 5,
     lead: 'Ba cấu trúc dữ liệu và hai công cụ đếm. Nghe khô, nhưng <strong class="hl">khác biệt duy nhất giữa năm thuật toán hôm nay nằm ở cái đầu tiên</strong> — lấy nút nào ra trước là do cấu trúc quyết.',
@@ -154,4 +156,25 @@ export const MATH_PRIMERS = {
     }
   ]
 },
+  b7: {
+    minutes: 4,
+    lead: 'Bốn ý đủ để theo dõi trò chơi: ai chọn nước, ai được lợi, cách so kết quả và cách xử lý bất định.',
+    terms: [
+      { en: 'Zero-sum game', vn: 'trò chơi tổng bằng không', what: 'Phần lợi của một bên là phần thiệt của bên kia; một utility duy nhất có thể biểu diễn cả hai phía bằng hai dấu đối nhau.', why: 'Minimax dựa trên giả định hai bên có mục tiêu đối nghịch.' },
+      { en: 'Utility', vn: 'độ hữu dụng', what: 'Một con số biểu diễn mức độ mong muốn của kết cục cho người chơi đang xét.', why: 'Trong cây minimax này, mọi điểm giữ góc nhìn MAX: dương tốt cho MAX, âm tốt cho MIN. Không đổi dấu theo lượt.', note: 'win = +1 · draw = 0 · loss = −1' },
+      { en: 'Recursion', vn: 'đệ quy', what: 'Giải một bài toán bằng cách gọi cùng quy tắc trên các bài toán con nhỏ hơn.', why: 'Minimax truyền giá trị từ các trạng thái con lên cha; trò chơi hữu hạn kết thúc ở trạng thái lá.' },
+      { en: 'Expected value', vn: 'giá trị kỳ vọng', what: 'Trung bình có trọng số theo xác suất: Σ pᵢvᵢ, với Σpᵢ = 1.', why: 'Ở trò chơi có xúc xắc, MAX/MIN không điều khiển được kết quả gieo; bạn tính kỳ vọng tại nút ngẫu nhiên.' }
+    ]
+  },
+  b9: {
+    minutes: 6,
+    lead: 'Buổi này là toán rời rạc thuần chất, nhưng đúng năm món. Món nào cũng sẽ được dùng thật trong bài — đặc biệt là món thứ ba, chỗ <strong class="hl">phép kéo theo ⇒ hay lừa người mới</strong>.',
+    terms: [
+      { en: 'Proposition', vn: 'mệnh đề', what: 'Một câu khẳng định chỉ có thể <strong class="hl">đúng hoặc sai</strong>, không có nửa vời: “ô [1,2] có hố” là mệnh đề, “ô nào có hố?” thì không.', why: 'Cả thế giới Wumpus sẽ được viết bằng các ký hiệu như P₁,₂ — mỗi ký hiệu là một mệnh đề agent chưa biết đúng hay sai.', note: 'P₁,₂ : “có hố ở [1,2]”' },
+      { en: 'Truth table', vn: 'bảng chân trị', what: 'Bảng liệt kê mọi cách gán đúng/sai cho các ký hiệu, rồi tính giá trị của câu ở từng dòng. n ký hiệu cho 2ⁿ dòng.', why: 'Kiểm mô hình (model checking) chính là lật hết bảng này. 7 ký hiệu là 128 dòng — vẫn lật tay được; 64 ký hiệu thì không.', note: '2⁷ = 128' },
+      { en: 'Connectives ¬ ∧ ∨ ⇒ ⇔', vn: 'phép nối', what: 'Năm cách ghép câu: phủ định, và, hoặc, kéo theo, tương đương. P ⇒ Q <strong class="hl">chỉ sai khi P đúng mà Q sai</strong>; P sai thì cả câu tự động đúng.', why: 'Mọi luật trong KB đều viết bằng năm phép này. Hợp giải, DPLL và WalkSAT còn bắt đầu bằng việc đổi câu về CNF — chỉ còn ¬ ∧ ∨ — nên phải thuộc P ⇒ Q ≡ ¬P ∨ Q.', note: 'P ⇒ Q ≡ ¬P ∨ Q' },
+      { en: 'Tautology', vn: 'hằng đúng', what: 'Câu đúng trong <strong>mọi</strong> dòng của bảng chân trị, bất kể các ký hiệu mang giá trị gì. Ví dụ P ∨ ¬P.', why: 'Định lý suy diễn nói α ⊨ β đúng khi và chỉ khi α ⇒ β là hằng đúng — biến câu hỏi “suy ra được không” thành câu hỏi “có đúng mọi nơi không”.' },
+      { en: 'Proof by contradiction', vn: 'chứng minh phản chứng', what: 'Muốn chứng minh α, giả sử ¬α rồi chỉ ra giả sử đó dẫn tới mâu thuẫn.', why: 'Resolution, DPLL đều chứng minh KB ⊨ α theo đúng kiểu này: thêm ¬α vào KB, rồi đi tìm mâu thuẫn (mệnh đề rỗng □ hoặc “không có mô hình nào”).', note: 'KB ⊨ α  khi và chỉ khi  KB ∧ ¬α không thỏa được' },
+    ],
+  },
 };

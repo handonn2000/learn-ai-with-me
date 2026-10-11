@@ -190,61 +190,66 @@ export const SESSION_QUIZZES = {
   ],
   b3: [
     {
-      topicId: 'problem-statement',
-      q: 'What are the five components of a search problem?',
-      opts: [
-        'Initial state · actions · transition model · goal test · path cost',
-        'Initial state · goal · heuristic · frontier · explored set',
-        'Vertices · edges · weights · path · cycle',
-        'Initial state · actions · heuristic · goal test · cost',
-      ],
-      a: 0,
-      ex: 'A heuristic is <em>not</em> part of the problem formulation. You add it to solve the problem faster; changing the heuristic doesn’t change the problem. Frontier and explored set don’t belong either: they’re the algorithm’s tools, not the problem description.',
+        "topicId": "problem-statement",
+        "q": "A two-way map has edges A–B, A–C, B–C, B–D and C–D. What is Actions(B)?",
+        "opts": [
+            "{Go D}",
+            "{Go A, Go C, Go D}",
+            "{A, B, C, D}",
+            "Result(A, Go B) = B"
+        ],
+        "a": 1,
+        "ex": "B directly connects to A, C and D, so all three actions are legal. Having D as the goal does not restrict Actions(B) to Go D. Result describes an action’s outcome, not the set of available actions."
     },
     {
-      topicId: 'search-framework',
-      q: 'BFS, DFS, and UCS share a graph-search loop. Where is the ONLY difference?',
-      opts: ['The goal test', 'The frontier data structure', 'How successor states are generated', 'How the explored set is stored'],
-      a: 1,
-      ex: 'FIFO queue → BFS · LIFO stack → DFS · priority queue by g → UCS. One loop, three personalities. Remember this and you’ve got half the session — and the reason the Lab can switch algorithms by changing a line.',
+        "topicId": "problem-statement",
+        "q": "A–B is 2 km, B–C is 1 km, C–D is 2 km. What does A → B → C → D cost?",
+        "opts": [
+            "3 km because there are 3 steps",
+            "2 km because that is the last edge",
+            "5 km",
+            "You need to know the search algorithm first"
+        ],
+        "a": 2,
+        "ex": "Path cost adds step costs: 2 + 1 + 2 = 5 km. Three steps count actions, not kilometres. You do not need an algorithm to cost a given path."
     },
     {
-      topicId: 'problem-statement',
-      q: 'Abstracting a problem means dropping detail. How far can you drop and still be dropping the RIGHT things?',
-      opts: [
-        'Until the state is a single number',
-        'Until every abstract action can still be carried out in the real world, however messy that turns out to be',
-        'Until the state space is under a million',
-        'Drop everything that does not appear in the goal test',
-      ],
-      a: 1,
-      ex: 'The test is <strong class="hl">can you actually do it</strong>: “Go(Sibiu)” ignores the weather, who is in the car, what is on the radio — all droppable, because any driver can get from Arad to Sibiu regardless. A bad abstraction is one that drops something that makes the action impossible to carry out. State-space size is a <em>consequence</em> of abstracting well, not the criterion.',
+        "topicId": "problem-statement",
+        "q": "Cars can run out of fuel and there are no refuelling stations. Two cars at B have different fuel levels. Why might state B alone be insufficient?",
+        "opts": [
+            "Every state must have at least two variables",
+            "The entire trip history must be stored",
+            "The car colour has not been recorded",
+            "Remaining fuel determines which roads are still feasible"
+        ],
+        "a": 3,
+        "ex": "The same location with different remaining fuel can give different available actions. Keep at least location and remaining fuel under your consumption model. The entire history is not necessarily needed."
     },
     {
-      topicId: 'search-framework',
-      q: 'What is the difference between a node and a state?',
-      opts: [
-        'None — two names for the same thing',
-        'A state is a configuration of the world; a node is a spot in the search tree that also carries a parent, an action and g(n)',
-        'A node is an expanded state, a state is one not yet expanded',
-        'States exist only in graph-search, nodes only in tree-search',
-      ],
-      a: 1,
-      ex: 'One state can sit under <em>many</em> different nodes, because many paths reach it. That is exactly why two nodes holding the same state have different g(n) but identical h(n) — h looks only at the state, g looks at the path you took. Get this straight and decrease-key in UCS stops being mysterious.',
+        "topicId": "search-framework",
+        "q": "n2 records A → C at cost 5; n3 records A → B → C at cost 3. Which statement is correct?",
+        "opts": [
+            "Same STATE = C, different PARENT and g",
+            "Same state means the same node",
+            "n3 has g = 2 because it takes two steps",
+            "n2 is not a state because it is more expensive"
+        ],
+        "a": 0,
+        "ex": "Both contain state C. n2 has the A node as parent and g = 5; n3 has the B node as parent and g = 3. Nodes retain path information in addition to the final state."
     },
     {
-      topicId: 'search-framework',
-      q: 'Why does graph-search need an explored set when tree-search does not?',
-      opts: [
-        'To save memory',
-        'To make the path it returns shorter',
-        'Because without it, redundant paths blow the tree up exponentially even when the real state count is tiny',
-        'Because tree-search cannot handle weighted graphs',
-      ],
-      a: 2,
-      ex: 'Slightly backwards from what you might guess: the explored set <em>spends</em> memory rather than saving it — it trades memory for time. The reason is redundant paths: one state is reachable by endlessly many routes, so the search tree can be infinite even when the state space is finite. Romania has 20 cities and a bottomless search tree.',
-    },
-  ],
+        "topicId": "search-framework",
+        "q": "In least-cost search, C is already in the frontier with g = 5. A new path reaches C with g = 3. What should happen?",
+        "opts": [
+            "Discard the new path because C was already seen",
+            "Stop because a cheaper path was found",
+            "Update the path to C, including its cost and parent",
+            "Change 5 to 3 but retain the old parent"
+        ],
+        "a": 2,
+        "ex": "Keep the cheaper path and update the information needed to reconstruct it. Changing g without the parent can return a path that does not match its stated cost. Repeated-state blocking alone is insufficient for cost-based search."
+    }
+],
   b4: [
     {
       topicId: 'uninformed',
@@ -491,4 +496,27 @@ export const SESSION_QUIZZES = {
     ex: "An N-queens row string still has one queen per column, but conflicts can increase. A TSP permutation can even repeat or omit cities. Calling it “crossover” is not a substitute for checking."
   }
 ],
+  b7: [
+    { topicId: 'game-model', q: 'In a zero-sum minimax model, what does positive utility usually represent?', opts: ['An outcome good for MAX', 'An outcome good for MIN', 'A probability', 'A legal move'], a: 0, ex: 'Keep MAX’s perspective: a high score is good for MAX and bad for MIN.' },
+    { topicId: 'minimax', q: 'A MIN node has child values 4, −1 and 2. Which value does it return?', opts: ['4', '2', '−1', '5'], a: 2, ex: 'MIN selects the smallest value for MAX.' },
+    { topicId: 'minimax', q: 'A MAX root has two MIN children valued 3 and 0. Which branch does MAX choose?', opts: ['The 0 branch', 'The 3 branch', 'Randomly', 'Cannot determine'], a: 1, ex: 'MAX maximizes the guaranteed value, so it chooses 3.' },
+    { topicId: 'minimax', q: 'What assumption does minimax make about the opponent?', opts: ['They play optimally', 'They always blunder', 'All moves are equally likely', 'The game has no terminal states'], a: 0, ex: 'Minimax protects against the opponent’s strongest response.' },
+    { topicId: 'alpha-beta', q: 'What does α represent in alpha-beta pruning?', opts: ['The best value MIN has seen', 'A lower bound: MAX’s best option so far', 'Current depth', 'Win probability'], a: 1, ex: 'α is a lower bound on what MAX can guarantee.' },
+    { topicId: 'alpha-beta', q: 'When can the rest of a branch be pruned?', opts: ['α ≥ β', 'α = 0', 'β = 0', 'At the first leaf'], a: 0, ex: 'When α ≥ β, this branch cannot change an ancestor’s decision.' },
+    { topicId: 'depth-limited-games', q: 'What is needed to evaluate a nonterminal state when game search reaches its depth limit?', opts: ['A static evaluation function', 'A truth table', 'A unique hash', 'A FIFO queue'], a: 0, ex: 'An evaluation function estimates utility for a nonterminal state; it is only an approximation.' },
+    { topicId: 'chance-nodes', q: 'A CHANCE node yields 8 (probability 1/4) or 0 (probability 3/4). What is its expected value?', opts: ['8', '4', '2', '6'], a: 2, ex: 'Expected value = 1/4 × 8 + 3/4 × 0 = 2.' },
+  ],
+  b9: [
+    { topicId: 'kb-agent', q: 'In the KB-AGENT function, where does the inference happen?', opts: ['Hidden inside TELL and ASK', 'In the time counter t', 'In MAKE-PERCEPT-SENTENCE', 'A knowledge-based agent doesn’t need inference'], a: 0, ex: 'The agent’s loop does only three things: TELL what it just perceived, ASK what to do, TELL what it did. All the “new sentences from old ones” work is tucked inside <strong class="hl">TELL and ASK</strong> — so you can swap the inference engine without rewriting the agent.' },
+    { topicId: 'entailment', q: 'What does KB ⊨ α mean?', opts: ['α is true in at least one model of the KB', 'α is true in every model where the KB is true, i.e. M(KB) ⊆ M(α)', 'The KB is true in every model of α', 'α appears word for word in the KB'], a: 1, ex: 'Entailment is a subset relationship: <strong class="hl">every</strong> world that survives the KB’s filter makes α true. One model isn’t enough, and α doesn’t have to be sitting in the KB already.' },
+    { topicId: 'entailment', q: 'The agent has gone [1,1] → [2,1] and felt a breeze in [2,1]. Its KB doesn’t entail ¬P₂,₂. Which conclusion is right?', opts: ['[2,2] definitely has a pit', '[2,2] definitely has no pit', 'Unknown: the KB has models with a pit in [2,2] and models without one', 'The KB is contradictory'], a: 2, ex: 'KB ⊭ ¬P₂,₂ does <strong>not</strong> mean KB ⊨ P₂,₂. Of the KB’s three models, two have a pit in [2,2] and one doesn’t. A careful agent avoids that room until it gets more percepts.' },
+    { topicId: 'pl-semantics', q: 'When is P ⇒ Q false?', opts: ['P false, Q true', 'P false, Q false', 'P true, Q false', 'P true, Q true'], a: 2, ex: 'Implication is a promise: it’s only broken when the condition happens and the result doesn’t. If P is false, the promise hasn’t been tested, so the sentence is still <strong class="hl">true</strong>.' },
+    { topicId: 'validity-sat', q: 'What kind of sentence is (A ∧ B) ⇒ (A ∨ C)?', opts: ['Valid', 'Satisfiable but not valid', 'Unsatisfiable', 'Can’t tell without knowing C'], a: 0, ex: 'For the sentence to be false, A ∧ B has to be true — but then A is true, so A ∨ C is true too. No row makes it false, so it’s <strong class="hl">valid</strong>, whatever C is.' },
+    { topicId: 'validity-sat', q: 'To prove α ⊨ β by contradiction, what do you check?', opts: ['α ∨ β is satisfiable', 'α ∧ ¬β is unsatisfiable', '¬α ∧ β is valid', 'β ⇒ α is valid'], a: 1, ex: 'α ⊨ β exactly when no world makes α true and β false, i.e. <strong class="hl">α ∧ ¬β is unsatisfiable</strong>. Resolution and DPLL both run on exactly that sentence.' },
+    { topicId: 'resolution', q: 'What does resolving (A ∨ B) with (¬B ∨ C) give?', opts: ['A ∨ C', 'A ∧ C', 'B ∨ ¬B', '□ (the empty clause)'], a: 0, ex: 'B and ¬B are a complementary pair; drop them and merge the rest: <strong class="hl">A ∨ C</strong>. Why: if B is false the first clause forces A; if B is true the second forces C — either way, A or C.' },
+    { topicId: 'horn-chaining', q: 'Which of these is a definite clause?', opts: ['¬P ∨ Q ∨ R', '¬P ∨ ¬Q ∨ R', '¬P ∨ ¬Q', 'P ∨ Q'], a: 1, ex: 'A definite clause has <strong class="hl">exactly one</strong> positive literal: ¬P ∨ ¬Q ∨ R ≡ P ∧ Q ⇒ R. ¬P ∨ ¬Q has no positive literal at all — it’s a goal clause, Horn but not definite.' },
+    { topicId: 'horn-chaining', q: 'Your KB has thousands of definite clauses and you only need one specific query answered. Which approach usually does less wasted work?', opts: ['Forward chaining, because it’s automatic', 'Backward chaining, because it only follows rules relevant to the query', 'A truth table, because it’s complete', 'Both kinds of chaining always cost the same'], a: 1, ex: 'Forward chaining is data-driven: it fires every rule whose premises hold, including ones that have nothing to do with the query. Backward chaining is <strong class="hl">goal-driven</strong>, so its cost is often far below the size of the KB.' },
+    { topicId: 'sat-solvers', q: 'In (A ∨ ¬B), (¬B ∨ ¬C), (A ∨ C), which symbols are pure?', opts: ['Only A', 'A and B', 'B and C', 'A, B and C'], a: 1, ex: 'A only appears positive, B only appears as ¬B — two pure symbols. C shows up as both ¬C and C, so it isn’t pure. DPLL can set A = true and B = false without any risk of falsifying a clause.' },
+    { topicId: 'sat-solvers', q: 'WalkSAT uses up max_flips on KB ∧ ¬α and returns failure. What can you conclude?', opts: ['KB ⊨ α', 'KB ⊭ α', 'Nothing yet: it may be unsatisfiable, or it may just need more time', 'The KB is contradictory'], a: 2, ex: 'WalkSAT is <strong class="hl">incomplete</strong>: finding a model proves satisfiability, but not finding one proves nothing. The most it can say is “I thought about it for an hour and found no such world.”' },
+  ],
 };

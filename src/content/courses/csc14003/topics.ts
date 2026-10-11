@@ -22,6 +22,10 @@ export const TOPIC_IDS = [
   'problem-statement', 'search-framework', 'uninformed', 'heuristic', 'admissible-consistent', 'astar',
   // Buổi 6
   'local-model', 'local-landscape', 'local-variants', 'local-restart', 'local-annealing', 'local-beam', 'local-genetic',
+  // Buổi 7
+  'game-model', 'minimax', 'alpha-beta', 'depth-limited-games', 'chance-nodes',
+  // Buổi 9
+  'kb-agent', 'entailment', 'pl-semantics', 'validity-sat', 'resolution', 'horn-chaining', 'sat-solvers',
   // Kiểm tra tổng hợp chấm theo BUỔI — dùng luôn Session.id để báo cáo link thẳng về buổi được.
   'b1', 'b2', 'b3', 'b4', 'b5', 'b6', 'b7', 'b8', 'b9', 'b10', 'b11', 'b12', 'b13',
 ] as const;
@@ -37,6 +41,8 @@ export const TOPIC_LABELS: Record<Locale, Record<TopicId, string>> = {
     'local-annealing': 'Simulated annealing',
     'local-beam': 'Local beam',
     'local-genetic': 'Thuật toán di truyền',
+    'game-model': 'Mô hình trò chơi', minimax: 'Minimax', 'alpha-beta': 'Cắt tỉa α–β', 'depth-limited-games': 'Giới hạn thời gian', 'chance-nodes': 'Nút ngẫu nhiên',
+    'kb-agent': 'Agent dựa trên tri thức', entailment: 'Hệ quả logic', 'pl-semantics': 'Ngữ nghĩa logic mệnh đề', 'validity-sat': 'Hằng đúng & thỏa được', resolution: 'Hợp giải', 'horn-chaining': 'Horn & chaining', 'sat-solvers': 'DPLL & WalkSAT',
 
     'four-approaches': 'Bốn hướng tiếp cận',
     'turing-test': 'Phép thử Turing',
@@ -69,6 +75,8 @@ export const TOPIC_LABELS: Record<Locale, Record<TopicId, string>> = {
     'local-annealing': 'Simulated annealing',
     'local-beam': 'Local beam',
     'local-genetic': 'Genetic algorithms',
+    'game-model': 'Game model', minimax: 'Minimax', 'alpha-beta': 'α–β pruning', 'depth-limited-games': 'Time limits', 'chance-nodes': 'Chance nodes',
+    'kb-agent': 'Knowledge-based agent', entailment: 'Entailment', 'pl-semantics': 'Propositional semantics', 'validity-sat': 'Validity & satisfiability', resolution: 'Resolution', 'horn-chaining': 'Horn clauses & chaining', 'sat-solvers': 'DPLL & WalkSAT',
 
     'four-approaches': 'Four approaches',
     'turing-test': 'The Turing test',
