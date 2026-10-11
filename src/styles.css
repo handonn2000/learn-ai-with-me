@@ -1,93 +1,105 @@
 @import 'tailwindcss';
-@import '@fontsource/be-vietnam-pro/400.css';
-@import '@fontsource/be-vietnam-pro/500.css';
-@import '@fontsource/be-vietnam-pro/600.css';
-@import '@fontsource/be-vietnam-pro/700.css';
-@import '@fontsource/ibm-plex-mono/400.css';
-@import '@fontsource/ibm-plex-mono/500.css';
+@import '@fontsource/bricolage-grotesque/700.css';
+@import '@fontsource/bricolage-grotesque/800.css';
+@import '@fontsource/onest/400.css';
+@import '@fontsource/onest/500.css';
+@import '@fontsource/onest/600.css';
+@import '@fontsource/onest/700.css';
+@import '@fontsource/jetbrains-mono/500.css';
+@import '@fontsource/jetbrains-mono/700.css';
+@import '@fontsource/playpen-sans/400.css';
+@import '@fontsource/playpen-sans/600.css';
 @import 'katex/dist/katex.min.css';
 
+/* Mẫu B chỉ có nền sáng. Giữ variant dark để code cũ biên dịch được, nhưng không có gì bật nó. */
 @custom-variant dark (&:where([data-theme='dark'], [data-theme='dark'] *));
 
-/* Token: xem docs/DESIGN.md § Token */
-:root {
-  --paper: #eef1f4;
-  --surface: #ffffff;
-  --ink: #18212c;
-  --muted: #5b6776;
-  --line: #d5dbe2;
-  --route: #0f7b6c;
-  --route-soft: #d7efe9;
-  --signal: #e0a400;
-  --signal-soft: #fbf0cc;
-  --stop: #c8432b;
-  --stop-soft: #f8e0da;
-}
-@media (prefers-color-scheme: dark) {
-  :root:not([data-theme='light']) {
-    --paper: #11161d;
-    --surface: #18202a;
-    --ink: #e4e9ef;
-    --muted: #93a0af;
-    --line: #2b3542;
-    --route: #3cc3a8;
-    --route-soft: #173a35;
-    --signal: #f2c230;
-    --signal-soft: #3a3217;
-    --stop: #f06a52;
-    --stop-soft: #3d221d;
-  }
-}
-:root[data-theme='dark'] {
-  --paper: #11161d;
-  --surface: #18202a;
-  --ink: #e4e9ef;
-  --muted: #93a0af;
-  --line: #2b3542;
-  --route: #3cc3a8;
-  --route-soft: #173a35;
-  --signal: #f2c230;
-  --signal-soft: #3a3217;
-  --stop: #f06a52;
-  --stop-soft: #3d221d;
+/* Token mẫu B: xem docs/design/HANDOFF.md §1 */
+@theme static {
+  --color-ink: #14162b;
+  --color-bg: #eef0f7;
+  --color-surface: #ffffff;
+  --color-muted: #3f4560;
+  --color-line: #cdd2de;
+  --color-fill: #e3e6ee;
+  --color-track: #dadeea;
+  --color-violet: #4a33c9;
+  --color-violet-soft: #ece8ff;
+  --color-sun: #ffc94a;
+  --color-sun-soft: #fff4d6;
+  --color-sun-mark: #ffe58a;
+  --color-correct: #1d63d6;
+  --color-correct-soft: #e3edff;
+  --color-correct-ink: #123f8c;
+  --color-wrong: #c2560a;
+  --color-wrong-soft: #ffe9da;
+  --color-wrong-ink: #8a3a00;
+  --color-g: #0e7c7b;
+  --color-h: #b0306f;
+  --color-paper: #fbf7ec;
+  --color-paper-dot: #e6ddc8;
+  --color-lined: #fcfcfe;
+  --color-lined-rule: #e9ecf4;
+  --color-subtle: #f6f7fb;
+  --color-disabled-line: #9aa1b5;
+  --color-disabled-ink: #555b72;
+
+  /* Tên cũ của v2 trước mẫu B, trỏ sang token mới cho tới khi từng màn được dựng lại */
+  --color-route: var(--color-violet);
+  --color-route-soft: var(--color-violet-soft);
+  --color-signal: var(--color-sun);
+  --color-signal-soft: var(--color-sun-soft);
+  --color-stop: var(--color-wrong);
+  --color-stop-soft: var(--color-wrong-soft);
+
+  --font-display: 'Bricolage Grotesque', system-ui, sans-serif;
+  --font-sans: 'Onest', system-ui, sans-serif;
+  --font-mono: 'JetBrains Mono', ui-monospace, monospace;
+  --font-hand: 'Playpen Sans', cursive;
+
+  --radius-card: 20px;
+  --radius-card-lg: 24px;
+  --shadow-block: 0 5px 0 var(--color-ink);
+  --shadow-block-lg: 0 6px 0 var(--color-ink);
+  --radius-sketch: 255px 15px 225px 15px / 15px 225px 15px 255px;
 }
 
-@theme inline {
-  --color-paper: var(--paper);
-  --color-surface: var(--surface);
-  --color-ink: var(--ink);
-  --color-muted: var(--muted);
-  --color-line: var(--line);
-  --color-route: var(--route);
-  --color-route-soft: var(--route-soft);
-  --color-signal: var(--signal);
-  --color-signal-soft: var(--signal-soft);
-  --color-stop: var(--stop);
-  --color-stop-soft: var(--stop-soft);
-  --font-sans: 'Be Vietnam Pro', system-ui, sans-serif;
-  --font-mono: 'IBM Plex Mono', ui-monospace, monospace;
-  --text-sm: 14px;
-  --text-base: 17px;
-  --text-lg: 21px;
-  --text-xl: 28px;
-  --text-2xl: 40px;
+/* Biến CSS thô cho code đã viết var(--route) v.v. */
+:root {
+  color-scheme: light;
+  --paper: var(--color-bg);
+  --surface: var(--color-surface);
+  --ink: var(--color-ink);
+  --muted: var(--color-muted);
+  --line: var(--color-line);
+  --route: var(--color-violet);
+  --route-soft: var(--color-violet-soft);
+  --signal: var(--color-sun);
+  --signal-soft: var(--color-sun-soft);
+  --stop: var(--color-wrong);
+  --stop-soft: var(--color-wrong-soft);
 }
 
 html {
-  background: var(--paper);
-  color: var(--ink);
+  background: var(--color-bg);
+  color: var(--color-ink);
   font-family: var(--font-sans);
   font-size: 17px;
-  line-height: 1.6;
+  line-height: 1.5;
   -webkit-font-smoothing: antialiased;
 }
 body {
-  background: var(--paper);
+  background: var(--color-bg);
   margin: 0;
+}
+h1,
+h2,
+h3 {
+  font-family: var(--font-display);
 }
 
 :focus-visible {
-  outline: 3px solid var(--signal);
+  outline: 3px solid var(--color-violet);
   outline-offset: 2px;
   border-radius: 6px;
 }

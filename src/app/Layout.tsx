@@ -1,14 +1,11 @@
 import { NavLink, Outlet, Link } from 'react-router'
-import { Moon, Sun } from 'lucide-react'
 import { BrandMark } from '@/ui/Brand'
-import { useTheme } from '@/ui/theme'
 import { useDue } from '@/learning/hooks'
 
 const navCls = ({ isActive }: { isActive: boolean }) =>
   `rounded-full px-3 py-1.5 text-[15px] font-medium transition-colors ${isActive ? 'bg-surface text-ink shadow-[0_0_0_1px_var(--line)]' : 'text-muted hover:text-ink'}`
 
 export function Layout() {
-  const { isDark, toggle } = useTheme()
   const due = useDue()
   return (
     <div className="min-h-dvh">
@@ -32,9 +29,6 @@ export function Layout() {
               </span>
             )}
           </NavLink>
-          <button onClick={toggle} className="ml-1 grid size-9 place-items-center rounded-full text-muted hover:bg-surface hover:text-ink" aria-label={isDark ? 'Chuyển sang nền sáng' : 'Chuyển sang nền tối'}>
-            {isDark ? <Sun size={18} /> : <Moon size={18} />}
-          </button>
         </nav>
       </header>
       <main className="mx-auto max-w-5xl px-4 pb-20 sm:px-6">

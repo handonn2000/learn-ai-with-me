@@ -1,0 +1,136 @@
+<!doctype html>
+<html lang="vi">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Hệ thống thiết kế mẫu B</title>
+<!-- Thiết kế mẫu B · màn "Hệ thống thiết kế" · khung 1280×1800 · dữ liệu trong màn là dữ liệu mẫu -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,700;12..96,800&amp;family=Onest:wght@400;500;600;700&amp;family=JetBrains+Mono:wght@500;700&amp;family=Playpen+Sans:wght@400;700&amp;display=swap" rel="stylesheet">
+<style>
+body{margin:0;background:#EEF0F7}
+a{color:#4A33C9}a:hover{color:#14162B}
+</style>
+</head>
+<body>
+<div style="min-height: 100vh; background: #EEF0F7; color: #14162B; font-family: 'Onest', system-ui, sans-serif; font-size: 16px; line-height: 1.5">
+  <main style="max-width: 1180px; margin: 0 auto; padding: 48px 28px 72px; display: flex; flex-direction: column; gap: 24px">
+    <div>
+      <h1 style="margin: 0; font-family: 'Bricolage Grotesque', system-ui, sans-serif; font-weight: 800; font-size: 48px; line-height: 1; letter-spacing: -0.035em">Hệ thống thiết kế</h1>
+      <p style="margin: 12px 0 0; font-size: 18px; color: #3F4560; max-width: 44em">Mỗi màu chỉ mang một nghĩa. Mỗi màn chỉ có một nút chính. Đúng và sai luôn đi kèm icon và chữ, không chỉ dựa vào màu.</p>
+    </div>
+
+    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(min(520px, 100%), 1fr)); gap: 20px; align-items: start">
+      <section aria-labelledby="c" style="background: #FFFFFF; border-radius: 20px; padding: 24px">
+        <h2 id="c" style="margin: 0 0 16px; font-family: 'Bricolage Grotesque', sans-serif; font-weight: 800; font-size: 24px; letter-spacing: -0.01em">Màu</h2>
+        <ul style="list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px 16px; font-size: 14px">
+          <li style="display: flex; gap: 12px; align-items: center"><span style="width: 44px; height: 44px; border-radius: 12px; background: #14162B; flex: none"></span><span><b>Mực</b> · #14162B<br><span style="color: #3F4560">chữ, viền, bóng nút</span></span></li>
+          <li style="display: flex; gap: 12px; align-items: center"><span style="width: 44px; height: 44px; border-radius: 12px; background: #EEF0F7; border: 1px solid #CDD2DE; box-sizing: border-box; flex: none"></span><span><b>Nền</b> · #EEF0F7<br><span style="color: #3F4560">nền trang</span></span></li>
+          <li style="display: flex; gap: 12px; align-items: center"><span style="width: 44px; height: 44px; border-radius: 12px; background: #4A33C9; flex: none"></span><span><b>Tím</b> · #4A33C9<br><span style="color: #3F4560">hành động chính, tiến độ</span></span></li>
+          <li style="display: flex; gap: 12px; align-items: center"><span style="width: 44px; height: 44px; border-radius: 12px; background: #FFC94A; flex: none"></span><span><b>Vàng</b> · #FFC94A<br><span style="color: #3F4560">hôm nay, đoán trước, ý cần nhớ</span></span></li>
+          <li style="display: flex; gap: 12px; align-items: center"><span style="width: 44px; height: 44px; border-radius: 12px; background: #1D63D6; flex: none"></span><span><b>Đúng</b> · #1D63D6<br><span style="color: #3F4560">nền nhạt #E3EDFF</span></span></li>
+          <li style="display: flex; gap: 12px; align-items: center"><span style="width: 44px; height: 44px; border-radius: 12px; background: #C2560A; flex: none"></span><span><b>Sai</b> · #C2560A<br><span style="color: #3F4560">nền nhạt #FFE9DA</span></span></li>
+          <li style="display: flex; gap: 12px; align-items: center"><span style="width: 44px; height: 44px; border-radius: 12px; background: #0E7C7B; flex: none"></span><span><b>g(n)</b> · #0E7C7B<br><span style="color: #3F4560">quãng đã đi, ở mọi bài</span></span></li>
+          <li style="display: flex; gap: 12px; align-items: center"><span style="width: 44px; height: 44px; border-radius: 12px; background: #B0306F; flex: none"></span><span><b>h(n)</b> · #B0306F<br><span style="color: #3F4560">quãng đoán còn lại</span></span></li>
+        </ul>
+      </section>
+
+      <section aria-labelledby="t" style="background: #FFFFFF; border-radius: 20px; padding: 24px">
+        <h2 id="t" style="margin: 0 0 16px; font-family: 'Bricolage Grotesque', sans-serif; font-weight: 800; font-size: 24px; letter-spacing: -0.01em">Chữ</h2>
+        <div style="display: flex; flex-direction: column; gap: 14px">
+          <div style="display: grid; grid-template-columns: 120px minmax(0, 1fr); gap: 12px; align-items: baseline"><span style="font-size: 13px; color: #3F4560">Tiêu đề · 48/34/24</span><span style="font-family: 'Bricolage Grotesque', sans-serif; font-weight: 800; font-size: 34px; letter-spacing: -0.03em; line-height: 1.05">Buổi học hôm nay</span></div>
+          <div style="display: grid; grid-template-columns: 120px minmax(0, 1fr); gap: 12px; align-items: baseline"><span style="font-size: 13px; color: #3F4560">Thân · 17/15</span><span style="font-size: 17px">Onest đọc rõ tiếng Việt ở cỡ nhỏ, dấu không dính dòng trên.</span></div>
+          <div style="display: grid; grid-template-columns: 120px minmax(0, 1fr); gap: 12px; align-items: baseline"><span style="font-size: 13px; color: #3F4560">Số liệu</span><span style="font-family: 'JetBrains Mono', monospace; font-size: 16px"><span style="color: #0E7C7B">g=6</span> + <span style="color: #B0306F">h=4</span> = 10</span></div>
+          <div style="display: grid; grid-template-columns: 120px minmax(0, 1fr); gap: 12px; align-items: baseline"><span style="font-size: 13px; color: #3F4560">Sketch</span><span style="font-family: 'Playpen Sans', cursive; font-size: 18px">UCS trên một trang</span></div>
+        </div>
+      </section>
+
+      <section aria-labelledby="btn" style="background: #FFFFFF; border-radius: 20px; padding: 24px">
+        <h2 id="btn" style="margin: 0 0 16px; font-family: 'Bricolage Grotesque', sans-serif; font-weight: 800; font-size: 24px; letter-spacing: -0.01em">Nút</h2>
+        <div style="display: flex; flex-wrap: wrap; gap: 16px; align-items: center">
+          <button type="button" style="height: 56px; padding: 0 28px; border-radius: 16px; border: 2px solid #14162B; background: #4A33C9; color: #FFFFFF; box-shadow: 0 5px 0 #14162B; font: 700 18px 'Onest', sans-serif">Nút chính</button>
+          <button type="button" style="height: 56px; padding: 0 28px; border-radius: 16px; border: 2px solid #14162B; background: #4A33C9; color: #FFFFFF; box-shadow: 0 0 0 #14162B; transform: translateY(5px); font: 700 18px 'Onest', sans-serif">Đang nhấn</button>
+          <button type="button" style="height: 48px; padding: 0 20px; border-radius: 14px; border: 2px solid #14162B; background: #FFFFFF; color: #14162B; font: 700 16px 'Onest', sans-serif">Nút phụ</button>
+          <a href="#" style="font-weight: 700">Liên kết</a>
+          <button type="button" disabled="" style="height: 56px; padding: 0 28px; border-radius: 16px; border: 2px solid #9AA1B5; background: #DADDEA; color: #555B72; font: 700 18px 'Onest', sans-serif">Chưa bấm được</button>
+        </div>
+        <p style="margin: 14px 0 0; font-size: 14px; color: #3F4560">Nút chính luôn nằm góc phải dưới. Bấm thì lún xuống 5px, bóng biến mất.</p>
+      </section>
+
+      <section aria-labelledby="chip" style="background: #FFFFFF; border-radius: 20px; padding: 24px">
+        <h2 id="chip" style="margin: 0 0 16px; font-family: 'Bricolage Grotesque', sans-serif; font-weight: 800; font-size: 24px; letter-spacing: -0.01em">Nhãn</h2>
+        <div style="display: flex; flex-wrap: wrap; gap: 10px">
+          <span style="padding: 5px 13px; border-radius: 999px; background: #FFC94A; border: 2px solid #14162B; font-weight: 700; font-size: 14px">Đoán trước</span>
+          <span style="padding: 5px 13px; border-radius: 999px; background: #FFC94A; border: 2px solid #14162B; font-weight: 700; font-size: 14px">Đang theo</span>
+          <span style="padding: 5px 13px; border-radius: 999px; background: #14162B; color: #FFFFFF; font-weight: 700; font-size: 14px; display: inline-flex; gap: 6px; align-items: center"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 20l4-1 11-11-3-3L5 16l-1 4z"></path></svg>Làm trên giấy</span>
+          <span style="padding: 5px 13px; border-radius: 999px; background: #ECE8FF; color: #4A33C9; font-weight: 700; font-size: 14px">5 ga đã xong</span>
+          <span style="padding: 5px 13px; border-radius: 999px; background: #FFE9DA; color: #8A3A00; font-weight: 700; font-size: 14px">Sắp quên</span>
+          <span style="padding: 5px 13px; border-radius: 999px; background: #EEF0F7; color: #3F4560; font-weight: 600; font-size: 14px">Tìm kiếm</span>
+        </div>
+      </section>
+
+      <section aria-labelledby="tile" style="background: #FFFFFF; border-radius: 20px; padding: 24px; grid-column: 1 / -1">
+        <h2 id="tile" style="margin: 0 0 16px; font-family: 'Bricolage Grotesque', sans-serif; font-weight: 800; font-size: 24px; letter-spacing: -0.01em">Ô trả lời</h2>
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(min(190px, 100%), 1fr)); gap: 14px">
+          <div style="display: flex; flex-direction: column; gap: 8px"><span style="font-size: 13px; color: #3F4560">Mặc định</span><span style="min-height: 64px; padding: 12px 16px; border-radius: 16px; border: 2px solid #CDD2DE; box-shadow: 0 4px 0 #CDD2DE; font-weight: 700; display: flex; align-items: center">Chưa dừng</span></div>
+          <div style="display: flex; flex-direction: column; gap: 8px"><span style="font-size: 13px; color: #3F4560">Đang chọn</span><span style="min-height: 64px; padding: 12px 16px; border-radius: 16px; border: 2px solid #4A33C9; background: #ECE8FF; box-shadow: 0 4px 0 #4A33C9; font-weight: 700; display: flex; align-items: center">Chưa dừng</span></div>
+          <div style="display: flex; flex-direction: column; gap: 8px"><span style="font-size: 13px; color: #3F4560">Đúng</span><span style="min-height: 64px; padding: 12px 16px; border-radius: 16px; border: 2px solid #1D63D6; background: #E3EDFF; font-weight: 700; display: flex; gap: 10px; align-items: center"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#1D63D6" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12l5 5L20 7"></path></svg>Chưa dừng</span></div>
+          <div style="display: flex; flex-direction: column; gap: 8px"><span style="font-size: 13px; color: #3F4560">Sai</span><span style="min-height: 64px; padding: 12px 16px; border-radius: 16px; border: 2px solid #C2560A; font-weight: 700; display: flex; gap: 10px; align-items: center"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#C2560A" stroke-width="3" stroke-linecap="round" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"></path></svg>Dừng</span></div>
+          <div style="display: flex; flex-direction: column; gap: 8px"><span style="font-size: 13px; color: #3F4560">Đã khóa</span><span style="min-height: 64px; padding: 12px 16px; border-radius: 16px; border: 2px solid #E3E6EE; color: #9AA1B5; font-weight: 700; display: flex; align-items: center">Dừng</span></div>
+        </div>
+        <div style="margin-top: 20px; display: flex; flex-wrap: wrap; gap: 24px; align-items: center">
+          <div style="display: flex; flex-direction: column; gap: 8px"><span style="font-size: 13px; color: #3F4560">Mức chắc chắn</span>
+            <span style="display: inline-flex; border: 2px solid #14162B; border-radius: 14px; overflow: hidden; font-weight: 600; font-size: 15px"><span style="padding: 10px 16px; border-right: 2px solid #14162B">Đoán thôi</span><span style="padding: 10px 16px; border-right: 2px solid #14162B">Khá chắc</span><span style="padding: 10px 16px; background: #14162B; color: #FFFFFF; font-weight: 700">Rất chắc</span></span>
+          </div>
+          <div style="display: flex; flex-direction: column; gap: 8px"><span style="font-size: 13px; color: #3F4560">Ô nhập số</span>
+            <span style="display: inline-flex; align-items: center; gap: 10px"><span style="width: 96px; height: 52px; box-sizing: border-box; border: 2px solid #14162B; border-radius: 14px; display: grid; place-items: center; font-family: 'JetBrains Mono', monospace; font-weight: 700; font-size: 22px">12</span><span style="color: #3F4560">phút</span></span>
+          </div>
+          <div style="display: flex; flex-direction: column; gap: 8px"><span style="font-size: 13px; color: #3F4560">Ô che chữ trong sketch</span>
+            <span style="display: inline-flex; gap: 10px; align-items: center"><span style="min-width: 96px; height: 32px; border: 2px dashed #4A33C9; border-radius: 8px; background: #ECE8FF; color: #4A33C9; font-weight: 700; display: grid; place-items: center">?</span><span style="font-family: 'Playpen Sans', cursive; background: #FFE58A; padding: 0 4px">thay g và cha</span></span>
+          </div>
+        </div>
+      </section>
+
+      <section aria-labelledby="fb" style="background: #FFFFFF; border-radius: 20px; padding: 24px">
+        <h2 id="fb" style="margin: 0 0 16px; font-family: 'Bricolage Grotesque', sans-serif; font-weight: 800; font-size: 24px; letter-spacing: -0.01em">Phản hồi</h2>
+        <div style="display: flex; flex-direction: column; gap: 10px; font-size: 15px">
+          <div style="display: flex; gap: 10px; padding: 12px 14px; border-radius: 14px; background: #E3EDFF; border-top: 2px solid #1D63D6"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#1D63D6" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="flex: none; margin-top: 2px"><path d="M5 12l5 5L20 7"></path></svg><span><b>Đúng rồi.</b> Lời giải thích một câu, nói vì sao đúng.</span></div>
+          <div style="display: flex; gap: 10px; padding: 12px 14px; border-radius: 14px; background: #FFE9DA; border-top: 2px solid #C2560A"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#C2560A" stroke-width="3" stroke-linecap="round" aria-hidden="true" style="flex: none; margin-top: 2px"><path d="M6 6l12 12M18 6L6 18"></path></svg><span><b>Chưa đúng.</b> Chỉ ra chỗ sai, mời thử lại hoặc mở gợi ý.</span></div>
+          <div style="display: flex; gap: 10px; padding: 12px 14px; border-radius: 14px; background: #FFF4D6; border-top: 2px solid #14162B"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#14162B" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="flex: none; margin-top: 2px"><path d="M9 18h6M10 21h4M12 3a6 6 0 0 0-3.5 10.9V16h7v-2.1A6 6 0 0 0 12 3z"></path></svg><span><b>Gợi ý.</b> Đưa bạn đi được nửa đường.</span></div>
+          <div style="display: flex; gap: 10px; padding: 12px 14px; border-radius: 14px; background: #EEF0F7; border-top: 2px solid #9AA1B5"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#3F4560" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="flex: none; margin-top: 2px"><path d="M4 5h16v14H4z"></path><path d="M8 9h8M8 13h6"></path></svg><span><b>Lời giải.</b> Xem được, nhưng kỹ năng sẽ quay lại sớm hơn.</span></div>
+        </div>
+        <p style="margin: 12px 0 0; font-size: 14px; color: #3F4560">Phản hồi trượt lên từ đáy màn hình, nằm ngay trên nút chính.</p>
+      </section>
+
+      <section aria-labelledby="pr" style="background: #FFFFFF; border-radius: 20px; padding: 24px">
+        <h2 id="pr" style="margin: 0 0 16px; font-family: 'Bricolage Grotesque', sans-serif; font-weight: 800; font-size: 24px; letter-spacing: -0.01em">Tiến độ và độ nhớ</h2>
+        <div style="display: flex; flex-direction: column; gap: 18px">
+          <div style="display: flex; flex-direction: column; gap: 6px"><span style="font-size: 13px; color: #3F4560">Thanh buổi học</span><span aria-hidden="true" style="height: 16px; border-radius: 8px; background: #DADDEA; overflow: hidden"><span style="display: block; width: 45%; height: 16px; background: #4A33C9; border-radius: 8px"></span></span></div>
+          <div style="display: flex; flex-direction: column; gap: 6px"><span style="font-size: 13px; color: #3F4560">Ga trên tuyến: xong · hôm nay · chưa học</span>
+            <span aria-hidden="true" style="display: grid; grid-template-columns: repeat(9, minmax(0, 1fr)); gap: 5px"><span style="height: 26px; border-radius: 7px; background: #4A33C9"></span><span style="height: 26px; border-radius: 7px; background: #4A33C9"></span><span style="height: 26px; border-radius: 7px; background: #4A33C9"></span><span style="height: 26px; border-radius: 7px; background: #4A33C9"></span><span style="height: 26px; border-radius: 7px; background: #4A33C9"></span><span style="height: 26px; border-radius: 7px; background: #FFC94A; border: 2px solid #14162B; box-sizing: border-box"></span><span style="height: 26px; border-radius: 7px; background: #E3E6EE"></span><span style="height: 26px; border-radius: 7px; background: #E3E6EE"></span><span style="height: 26px; border-radius: 7px; background: #E3E6EE"></span></span>
+          </div>
+          <div style="display: flex; flex-direction: column; gap: 6px"><span style="font-size: 13px; color: #3F4560">Độ nhớ của một kỹ năng (ước tính từ lịch ôn)</span>
+            <span style="display: flex; gap: 10px; align-items: center"><span aria-hidden="true" style="flex: 1; height: 10px; border-radius: 5px; background: #E3E6EE; overflow: hidden"><span style="display: block; width: 82%; height: 10px; background: #C2560A"></span></span><span style="font-family: 'JetBrains Mono', monospace; font-size: 14px">82%</span></span>
+            <span style="display: flex; gap: 10px; align-items: center"><span aria-hidden="true" style="flex: 1; height: 10px; border-radius: 5px; background: #E3E6EE; overflow: hidden"><span style="display: block; width: 96%; height: 10px; background: #4A33C9"></span></span><span style="font-family: 'JetBrains Mono', monospace; font-size: 14px">96%</span></span>
+            <span style="font-size: 13px; color: #3F4560">Dưới 90% thì chuyển màu cam và vào danh sách ôn.</span>
+          </div>
+        </div>
+      </section>
+
+      <section aria-labelledby="map" style="background: #FFFFFF; border-radius: 20px; padding: 24px">
+        <h2 id="map" style="margin: 0 0 16px; font-family: 'Bricolage Grotesque', sans-serif; font-weight: 800; font-size: 24px; letter-spacing: -0.01em">Nút trên bản đồ</h2>
+        <svg viewBox="0 0 470 96" width="100%" role="img" aria-label="Năm trạng thái nút: chưa gặp, đang chờ, đang mở rộng, đã mở rộng, trên đường đi" style="display: block; max-width: 470px; overflow: visible">
+          <circle cx="40" cy="36" r="19" fill="#FFFFFF" stroke="#14162B" stroke-width="2.5"></circle><text x="40" y="42" text-anchor="middle" font-size="16" font-weight="700" fill="#14162B" font-family="Onest, sans-serif">A</text><text x="40" y="84" text-anchor="middle" font-size="12" fill="#3F4560" font-family="Onest, sans-serif">chưa gặp</text>
+          <circle cx="135" cy="36" r="19" fill="#EEEAFF" stroke="#4A33C9" stroke-width="3"></circle><text x="135" y="42" text-anchor="middle" font-size="16" font-weight="700" fill="#14162B" font-family="Onest, sans-serif">B</text><text x="113" y="18" text-anchor="end" font-size="12" fill="#0E7C7B" font-family="JetBrains Mono, monospace">g=3</text><text x="135" y="84" text-anchor="middle" font-size="12" fill="#3F4560" font-family="Onest, sans-serif">đang chờ</text>
+          <circle cx="235" cy="36" r="19" fill="#14162B" stroke="#14162B" stroke-width="3"></circle><text x="235" y="42" text-anchor="middle" font-size="16" font-weight="700" fill="#FFFFFF" font-family="Onest, sans-serif">C</text><text x="235" y="84" text-anchor="middle" font-size="12" fill="#3F4560" font-family="Onest, sans-serif">đang mở rộng</text>
+          <circle cx="335" cy="36" r="19" fill="#E3E6EE" stroke="#9AA1B5" stroke-width="2.5"></circle><text x="335" y="42" text-anchor="middle" font-size="16" font-weight="700" fill="#555B72" font-family="Onest, sans-serif">D</text><text x="335" y="84" text-anchor="middle" font-size="12" fill="#3F4560" font-family="Onest, sans-serif">đã mở rộng</text>
+          <line x1="395" y1="36" x2="455" y2="36" stroke="#14162B" stroke-width="5" stroke-linecap="round"></line><circle cx="430" cy="36" r="19" fill="#FFC94A" stroke="#14162B" stroke-width="3"></circle><text x="430" y="42" text-anchor="middle" font-size="16" font-weight="700" fill="#14162B" font-family="Onest, sans-serif">G</text><text x="430" y="84" text-anchor="middle" font-size="12" fill="#3F4560" font-family="Onest, sans-serif">trên đường đi</text>
+        </svg>
+        <p style="margin: 14px 0 0; font-size: 14px; color: #3F4560">Chuyển động chỉ xảy ra khi bạn bấm: nút đổi trạng thái 250ms, phản hồi trượt lên 200ms. Không có hiệu ứng tự chạy. Máy bật giảm chuyển động thì tắt hết.</p>
+      </section>
+    </div>
+  </main>
+</div>
+</body>
+</html>

@@ -1,0 +1,129 @@
+<!doctype html>
+<html lang="vi">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Hôm nay</title>
+<!-- Thiết kế mẫu B · màn "Hôm nay" · khung 1280×1150 · dữ liệu trong màn là dữ liệu mẫu -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,700;12..96,800&amp;family=Onest:wght@400;500;600;700&amp;family=JetBrains+Mono:wght@500;700&amp;family=Playpen+Sans:wght@400;700&amp;display=swap" rel="stylesheet">
+<style>
+body{margin:0;background:#EEF0F7}
+a{color:#4A33C9}a:hover{color:#14162B}
+</style>
+</head>
+<body>
+<div style="min-height: 100vh; background: #EEF0F7; color: #14162B; font-family: 'Onest', system-ui, sans-serif; font-size: 17px; line-height: 1.5">
+  <header style="max-width: 1180px; margin: 0 auto; padding: 20px 28px; display: flex; align-items: center; justify-content: space-between; gap: 16px; flex-wrap: wrap">
+    <a href="#" style="font-family: 'Bricolage Grotesque', system-ui, sans-serif; font-weight: 800; font-size: 24px; letter-spacing: -0.02em; text-decoration: none; color: #14162B">học AI cùng tôi</a>
+    <nav aria-label="Chính" style="display: flex; gap: 6px; align-items: center; flex-wrap: wrap">
+      <a href="#" aria-current="page" style="padding: 10px 16px; border-radius: 12px; text-decoration: none; font-weight: 700; color: #14162B; background: #FFFFFF; border: 2px solid #14162B">Hôm nay</a>
+      <a href="#" style="padding: 10px 16px; border-radius: 12px; text-decoration: none; font-weight: 600; color: #3F4560">Khóa học</a>
+      <a href="#" style="padding: 10px 16px; border-radius: 12px; text-decoration: none; font-weight: 600; color: #3F4560; display: flex; gap: 8px; align-items: center">Ôn tập <span style="min-width: 22px; height: 22px; border-radius: 11px; background: #FFC94A; border: 2px solid #14162B; box-sizing: border-box; display: grid; place-items: center; font-size: 12px; font-weight: 800; color: #14162B">2</span></a>
+      <a href="#" style="padding: 10px 16px; border-radius: 12px; text-decoration: none; font-weight: 600; color: #3F4560">Sổ tay</a>
+    </nav>
+  </header>
+
+  <main style="max-width: 1180px; margin: 0 auto; padding: 8px 28px 72px; display: flex; flex-wrap: wrap; gap: 24px; align-items: flex-start">
+    <div style="flex: 999 1 600px; min-width: 0; display: flex; flex-direction: column; gap: 24px">
+      <section aria-labelledby="today" style="background: #FFFFFF; border: 2px solid #14162B; border-radius: 24px; box-shadow: 0 6px 0 #14162B; padding: 30px 30px 32px">
+        <div style="display: flex; justify-content: space-between; align-items: baseline; gap: 12px; flex-wrap: wrap">
+          <p style="margin: 0; font-weight: 600; color: #3F4560">Chủ nhật 11/10 · khoảng 20 phút</p>
+          <p style="margin: 0; font-weight: 700; display: flex; align-items: center; gap: 6px"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#14162B" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="5" width="18" height="16" rx="3"></rect><path d="M3 10h18M8 3v4M16 3v4"></path></svg>5 ngày học liền</p>
+        </div>
+        <h1 id="today" style="margin: 8px 0 0; font-family: 'Bricolage Grotesque', system-ui, sans-serif; font-weight: 800; font-size: 46px; line-height: 1.02; letter-spacing: -0.03em">Buổi học hôm nay</h1>
+
+        <ol style="list-style: none; margin: 24px 0 0; padding: 0; display: grid; grid-template-columns: repeat(auto-fit, minmax(min(150px, 100%), 1fr)); gap: 10px">
+          <li style="padding: 14px; border-radius: 16px; background: #FFF4D6; border: 2px solid #14162B; display: flex; flex-direction: column; gap: 6px">
+            <span style="font-family: 'JetBrains Mono', monospace; font-weight: 700; font-size: 13px">1 · 3 phút</span>
+            <b style="font-weight: 700; line-height: 1.25">Ôn 2 kỹ năng sắp quên</b>
+          </li>
+          <li style="padding: 14px; border-radius: 16px; background: #ECE8FF; display: flex; flex-direction: column; gap: 6px">
+            <span style="font-family: 'JetBrains Mono', monospace; font-weight: 700; font-size: 13px; color: #4A33C9">2 · 12 phút</span>
+            <b style="font-weight: 700; line-height: 1.25">Ga mới: Tìm kiếm chi phí đều</b>
+          </li>
+          <li style="padding: 14px; border-radius: 16px; background: #EEF0F7; display: flex; flex-direction: column; gap: 6px">
+            <span style="font-family: 'JetBrains Mono', monospace; font-weight: 700; font-size: 13px; color: #3F4560">3 · 2 phút</span>
+            <b style="font-weight: 700; line-height: 1.25">Đoán trước cho ga sau</b>
+          </li>
+          <li style="padding: 14px; border-radius: 16px; background: #EEF0F7; display: flex; flex-direction: column; gap: 6px">
+            <span style="font-family: 'JetBrains Mono', monospace; font-weight: 700; font-size: 13px; color: #3F4560">4 · 3 phút</span>
+            <b style="font-weight: 700; line-height: 1.25">Hệ thống lại trên giấy</b>
+          </li>
+        </ol>
+
+        <div style="margin-top: 26px; display: flex; gap: 18px; align-items: center; flex-wrap: wrap">
+          <button type="button" style="height: 58px; padding: 0 34px; border-radius: 16px; border: 2px solid #14162B; background: #4A33C9; color: #FFFFFF; box-shadow: 0 5px 0 #14162B; font: 700 19px 'Onest', system-ui, sans-serif; cursor: pointer">Bắt đầu buổi học</button>
+          <a href="#" style="font-weight: 600; color: #3F4560">Chỉ ôn thôi</a>
+          <a href="#" style="font-weight: 600; color: #3F4560">Đổi ga mới</a>
+        </div>
+      </section>
+
+      <section aria-labelledby="goal" style="background: #FFFFFF; border-radius: 20px; padding: 24px 26px; display: flex; flex-wrap: wrap; gap: 18px 28px; align-items: center">
+        <div style="flex: 999 1 360px; min-width: 0">
+          <div style="display: flex; gap: 10px; align-items: center; flex-wrap: wrap">
+            <span style="padding: 3px 10px; border-radius: 999px; background: #FFC94A; border: 2px solid #14162B; font-weight: 700; font-size: 13px">Đang theo</span>
+            <h2 id="goal" style="margin: 0; font-family: 'Bricolage Grotesque', system-ui, sans-serif; font-weight: 800; font-size: 26px; letter-spacing: -0.02em">Hiểu A*</h2>
+          </div>
+          <ol aria-label="5 trên 9 ga đã qua, hôm nay ga 6" style="list-style: none; margin: 14px 0 0; padding: 0; display: grid; grid-template-columns: repeat(9, minmax(0, 1fr)); gap: 5px; max-width: 460px">
+            <li style="height: 22px; border-radius: 6px; background: #4A33C9"></li>
+            <li style="height: 22px; border-radius: 6px; background: #4A33C9"></li>
+            <li style="height: 22px; border-radius: 6px; background: #4A33C9"></li>
+            <li style="height: 22px; border-radius: 6px; background: #4A33C9"></li>
+            <li style="height: 22px; border-radius: 6px; background: #4A33C9"></li>
+            <li style="height: 22px; border-radius: 6px; background: #FFC94A; border: 2px solid #14162B; box-sizing: border-box"></li>
+            <li style="height: 22px; border-radius: 6px; background: #E3E6EE"></li>
+            <li style="height: 22px; border-radius: 6px; background: #E3E6EE"></li>
+            <li style="height: 22px; border-radius: 6px; background: #E3E6EE"></li>
+          </ol>
+          <p style="margin: 10px 0 0; font-size: 15px; color: #3F4560">5 trên 9 ga · còn khoảng 44 phút · ga cuối: biết khi nào A* chắc chắn ra đường rẻ nhất</p>
+        </div>
+        <div style="flex: 1 1 220px; min-width: 0; display: flex; flex-direction: column; gap: 8px; padding: 14px 16px; border-radius: 14px; background: #F6F7FB">
+          <span style="font-size: 13px; color: #3F4560">Mục tiêu gợi ý tiếp theo</span>
+          <a href="#" style="font-weight: 700; color: #14162B; text-decoration: none; line-height: 1.3">Chọn đúng thuật toán tìm kiếm</a>
+          <span style="align-self: flex-start; padding: 2px 9px; border-radius: 999px; background: #ECE8FF; color: #4A33C9; font-weight: 700; font-size: 13px">5 ga đã xong</span>
+        </div>
+      </section>
+    </div>
+
+    <aside style="flex: 1 1 320px; min-width: 0; display: flex; flex-direction: column; gap: 20px">
+      <section aria-labelledby="mem" style="background: #FFFFFF; border-radius: 20px; padding: 22px">
+        <div style="display: flex; justify-content: space-between; align-items: baseline; gap: 10px">
+          <h2 id="mem" style="margin: 0; font-family: 'Bricolage Grotesque', system-ui, sans-serif; font-weight: 700; font-size: 22px; letter-spacing: -0.01em">Sức nhớ</h2>
+          <a href="#" style="font-size: 14px; font-weight: 700">Bảng kỹ năng</a>
+        </div>
+        <ul style="list-style: none; margin: 14px 0 0; padding: 0; display: flex; flex-direction: column; gap: 12px; font-size: 15px">
+          <li style="display: flex; flex-direction: column; gap: 5px"><span style="display: flex; justify-content: space-between; gap: 8px"><span>Tránh lặp với tập explored</span><span style="font-family: 'JetBrains Mono', monospace; font-size: 13px; color: #8A3A00">80%</span></span><span aria-hidden="true" style="height: 8px; border-radius: 4px; background: #E3E6EE; overflow: hidden"><span style="display: block; width: 80%; height: 8px; background: #C2560A"></span></span></li>
+          <li style="display: flex; flex-direction: column; gap: 5px"><span style="display: flex; justify-content: space-between; gap: 8px"><span>Mở rộng nút và frontier</span><span style="font-family: 'JetBrains Mono', monospace; font-size: 13px; color: #8A3A00">84%</span></span><span aria-hidden="true" style="height: 8px; border-radius: 4px; background: #E3E6EE; overflow: hidden"><span style="display: block; width: 84%; height: 8px; background: #C2560A"></span></span></li>
+          <li style="display: flex; flex-direction: column; gap: 5px"><span style="display: flex; justify-content: space-between; gap: 8px"><span>Đọc bản đồ trạng thái</span><span style="font-family: 'JetBrains Mono', monospace; font-size: 13px">91%</span></span><span aria-hidden="true" style="height: 8px; border-radius: 4px; background: #E3E6EE; overflow: hidden"><span style="display: block; width: 91%; height: 8px; background: #4A33C9"></span></span></li>
+          <li style="display: flex; flex-direction: column; gap: 5px"><span style="display: flex; justify-content: space-between; gap: 8px"><span>Hàng đợi ưu tiên</span><span style="font-family: 'JetBrains Mono', monospace; font-size: 13px">95%</span></span><span aria-hidden="true" style="height: 8px; border-radius: 4px; background: #E3E6EE; overflow: hidden"><span style="display: block; width: 95%; height: 8px; background: #4A33C9"></span></span></li>
+          <li style="display: flex; flex-direction: column; gap: 5px"><span style="display: flex; justify-content: space-between; gap: 8px"><span>Mô hình hóa bài toán</span><span style="font-family: 'JetBrains Mono', monospace; font-size: 13px">96%</span></span><span aria-hidden="true" style="height: 8px; border-radius: 4px; background: #E3E6EE; overflow: hidden"><span style="display: block; width: 96%; height: 8px; background: #4A33C9"></span></span></li>
+        </ul>
+        <p style="margin: 12px 0 0; font-size: 13px; color: #3F4560">Ước tính từ lịch ôn. Hai kỹ năng màu cam đã nằm trong bước 1 của buổi hôm nay.</p>
+      </section>
+
+      <section aria-labelledby="cal" style="background: #FFFFFF; border-radius: 20px; padding: 22px">
+        <h2 id="cal" style="margin: 0; font-family: 'Bricolage Grotesque', system-ui, sans-serif; font-weight: 700; font-size: 22px; letter-spacing: -0.01em">Chắc chắn có đúng không</h2>
+        <p style="margin: 10px 0 0; font-size: 15px; color: #3F4560">Tuần này bạn chọn <b style="color: #14162B">Rất chắc</b> 10 lần.</p>
+        <div aria-hidden="true" style="margin-top: 10px; display: grid; grid-template-columns: repeat(10, minmax(0, 1fr)); gap: 4px">
+          <span style="height: 18px; border-radius: 5px; background: #1D63D6"></span><span style="height: 18px; border-radius: 5px; background: #1D63D6"></span><span style="height: 18px; border-radius: 5px; background: #1D63D6"></span><span style="height: 18px; border-radius: 5px; background: #1D63D6"></span><span style="height: 18px; border-radius: 5px; background: #1D63D6"></span><span style="height: 18px; border-radius: 5px; background: #1D63D6"></span><span style="height: 18px; border-radius: 5px; background: #1D63D6"></span><span style="height: 18px; border-radius: 5px; background: #FFFFFF; border: 2px solid #C2560A; box-sizing: border-box"></span><span style="height: 18px; border-radius: 5px; background: #FFFFFF; border: 2px solid #C2560A; box-sizing: border-box"></span><span style="height: 18px; border-radius: 5px; background: #FFFFFF; border: 2px solid #C2560A; box-sizing: border-box"></span>
+        </div>
+        <p style="margin: 10px 0 0; font-size: 15px">Đúng 7, sai 3. Cả 3 lần sai đều ở chỗ <b>UCS dừng khi nào</b>.</p>
+      </section>
+
+      <section aria-labelledby="nb" style="background: #FFFFFF; border-radius: 20px; padding: 22px">
+        <div style="display: flex; justify-content: space-between; align-items: baseline; gap: 10px">
+          <h2 id="nb" style="margin: 0; font-family: 'Bricolage Grotesque', system-ui, sans-serif; font-weight: 700; font-size: 22px; letter-spacing: -0.01em">Sổ tay</h2>
+          <a href="#" style="font-size: 14px; font-weight: 700">Mở sổ tay</a>
+        </div>
+        <div style="margin-top: 12px; display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px">
+          <a href="#" style="aspect-ratio: 4 / 3; border-radius: 12px; border: 2px solid #14162B; background-color: #FCFCFE; background-image: linear-gradient(#E9ECF4 1px, transparent 1px); background-size: 100% 14px; display: grid; place-items: center; text-decoration: none; color: #14162B; font-family: 'Playpen Sans', cursive; font-weight: 700; font-size: 14px; text-align: center; padding: 8px">Frontier và explored</a>
+          <a href="#" style="aspect-ratio: 4 / 3; border-radius: 12px; border: 2px dashed #9AA1B5; background: #F6F7FB; display: grid; place-items: center; text-decoration: none; color: #3F4560; font-size: 13px; text-align: center; padding: 8px">Ảnh trang giấy của bạn · 10/10</a>
+        </div>
+      </section>
+    </aside>
+  </main>
+</div>
+</body>
+</html>

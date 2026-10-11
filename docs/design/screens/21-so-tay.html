@@ -1,0 +1,133 @@
+<!doctype html>
+<html lang="vi">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Sổ tay</title>
+<!-- Thiết kế mẫu B · màn "Sổ tay · nhiều sketch mỗi ga" · khung 1280×1100 · dữ liệu trong màn là dữ liệu mẫu -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,700;12..96,800&amp;family=Onest:wght@400;500;600;700&amp;family=JetBrains+Mono:wght@500;700&amp;family=Playpen+Sans:wght@400;600&amp;display=swap" rel="stylesheet">
+<style>
+body{margin:0;background:#EEF0F7}
+a{color:#4A33C9}a:hover{color:#14162B}
+</style>
+</head>
+<body>
+<div style="min-height: 100vh; background: #EEF0F7; color: #14162B; font-family: 'Onest', system-ui, sans-serif; font-size: 16px; line-height: 1.5">
+  <header style="max-width: 1180px; margin: 0 auto; padding: 20px 28px; display: flex; align-items: center; justify-content: space-between; gap: 16px; flex-wrap: wrap">
+    <a href="#" style="font-family: 'Bricolage Grotesque', system-ui, sans-serif; font-weight: 800; font-size: 24px; letter-spacing: -0.02em; text-decoration: none; color: #14162B">học AI cùng tôi</a>
+    <nav aria-label="Chính" style="display: flex; gap: 6px; align-items: center; flex-wrap: wrap">
+      <a href="#" style="padding: 10px 16px; border-radius: 12px; text-decoration: none; font-weight: 600; color: #3F4560">Hôm nay</a>
+      <a href="#" style="padding: 10px 16px; border-radius: 12px; text-decoration: none; font-weight: 600; color: #3F4560">Khóa học</a>
+      <a href="#" style="padding: 10px 16px; border-radius: 12px; text-decoration: none; font-weight: 600; color: #3F4560; display: flex; gap: 8px; align-items: center">Ôn tập <span style="min-width: 22px; height: 22px; border-radius: 11px; background: #FFC94A; border: 2px solid #14162B; box-sizing: border-box; display: grid; place-items: center; font-size: 12px; font-weight: 800; color: #14162B">2</span></a>
+      <a href="#" aria-current="page" style="padding: 10px 16px; border-radius: 12px; text-decoration: none; font-weight: 700; color: #14162B; background: #FFFFFF; border: 2px solid #14162B">Sổ tay</a>
+    </nav>
+  </header>
+
+  <main style="max-width: 1180px; margin: 0 auto; padding: 8px 28px 48px">
+    <div style="display: flex; justify-content: space-between; align-items: flex-end; gap: 20px; flex-wrap: wrap">
+      <div>
+        <h1 style="margin: 0; font-family: 'Bricolage Grotesque', system-ui, sans-serif; font-weight: 800; font-size: 44px; line-height: 1; letter-spacing: -0.03em">Sổ tay</h1>
+        <p style="margin: 8px 0 0; max-width: 58ch; color: #3F4560">Mỗi ga có vài sketch, mở khi bạn qua ga. Cả mục tiêu cũng có sketch riêng, mở khi tới đích. <b style="color: #14162B">Hiểu A*: 14/23 sketch.</b></p>
+      </div>
+      <div style="display: flex; gap: 10px; align-items: center; flex-wrap: wrap">
+        <div role="tablist" aria-label="Khóa học" style="display: flex; padding: 4px; border-radius: 14px; background: #FFFFFF; border: 2px solid #14162B">
+          <button type="button" role="tab" aria-selected="true" style="height: 36px; padding: 0 14px; border: 0; border-radius: 10px; background: #14162B; color: #FFFFFF; font: 700 14px 'Onest', sans-serif">Hiểu A*</button>
+          <button type="button" role="tab" aria-selected="false" style="height: 36px; padding: 0 14px; border: 0; border-radius: 10px; background: transparent; color: #3F4560; font: 600 14px 'Onest', sans-serif">Data Engineering</button>
+        </div>
+        <label style="display: flex; align-items: center; gap: 8px; height: 44px; padding: 0 14px; border-radius: 14px; background: #FFFFFF; font-weight: 600; font-size: 14px; cursor: pointer"><input type="checkbox" role="switch" style="width: 18px; height: 18px; accent-color: #4A33C9">Che chữ</label>
+        <button type="button" style="height: 44px; padding: 0 16px; border-radius: 14px; border: 2px solid #14162B; background: #FFFFFF; box-shadow: 0 3px 0 #14162B; font: 700 14px 'Onest', sans-serif; color: #14162B; display: inline-flex; align-items: center; gap: 8px; cursor: pointer"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 9V3h10v6"></path><rect x="3" y="9" width="18" height="8" rx="2"></rect><path d="M7 14h10v7H7z"></path></svg>In cả tuyến · A4</button>
+      </div>
+    </div>
+
+    <div style="margin-top: 26px; display: flex; flex-wrap: wrap; gap: 24px; align-items: flex-start">
+      <section aria-label="Sketch theo ga" style="flex: 999 1 640px; min-width: 0">
+        <ol style="list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 16px">
+
+          <li style="background: #FFFFFF; border-radius: 20px; padding: 12px 12px 14px; display: flex; flex-direction: column; gap: 10px">
+            <div style="display: flex; justify-content: space-between; align-items: center; font-size: 13px"><span style="font-family: 'JetBrains Mono', monospace; font-weight: 700">Ga 1</span><span style="color: #3F4560">nhớ 96%</span></div>
+            <div style="margin: 0 5px 5px 0; border-radius: 12px; border: 2px solid #14162B; background-color: #FCFCFE; background-image: linear-gradient(#E9ECF4 1px, transparent 1px); background-size: 100% 16px; box-shadow: 5px 5px 0 -2px #FCFCFE, 5px 5px 0 0 #14162B">
+              <svg viewBox="0 0 240 150" width="100%" role="img" aria-label="Bài toán gồm trạng thái, hành động, đích, chi phí" style="display: block; font-family: 'Playpen Sans', cursive" fill="none" stroke="#14162B" stroke-width="1.6" stroke-linecap="round"><path d="M92 66L58 40M148 66L182 40M92 86L58 110M148 86L182 110"></path><ellipse cx="120" cy="76" rx="40" ry="18" fill="#FFF4D6"></ellipse><g fill="#14162B" stroke="none" font-size="13" text-anchor="middle"><text x="120" y="80" font-weight="600">bài toán</text><text x="48" y="32">trạng thái</text><text x="192" y="32">hành động</text><text x="48" y="128">đích</text><text x="192" y="128">chi phí</text></g></svg>
+            </div>
+            <div style="display: flex; justify-content: space-between; align-items: center; gap: 8px"><span style="font: 600 13px/1.25 'Playpen Sans', cursive; color: #3F4560">4 phần của bài toán</span><span aria-label="sketch 1 trên 2" style="flex: none; display: inline-flex; gap: 4px; align-items: center"><i style="width: 7px; height: 7px; border-radius: 50%; background: #4A33C9"></i><i style="width: 7px; height: 7px; border-radius: 50%; background: #CDD2DE"></i><span style="margin-left: 4px; font-size: 12px; font-weight: 700; color: #3F4560">1/2</span></span></div>
+            <b style="font-size: 15px; line-height: 1.3">Mô hình hóa bài toán</b>
+            <div style="display: flex; justify-content: space-between; align-items: center; font-size: 13px"><span style="display: flex; align-items: center; gap: 6px; color: #3F4560"><i aria-hidden="true" style="width: 26px; height: 20px; border-radius: 3px; border: 1.5px solid #9AA1B5; background: linear-gradient(135deg, #FFFDF6, #EDE6D2); transform: rotate(-6deg)"></i>1 ảnh</span><a href="#" style="font-weight: 700">Vẽ lại</a></div>
+          </li>
+
+          <li style="background: #FFFFFF; border-radius: 20px; padding: 12px 12px 14px; display: flex; flex-direction: column; gap: 10px">
+            <div style="display: flex; justify-content: space-between; align-items: center; font-size: 13px"><span style="font-family: 'JetBrains Mono', monospace; font-weight: 700">Ga 2</span><span style="color: #3F4560">nhớ 91%</span></div>
+            <div style="margin: 0 5px 5px 0; border-radius: 12px; border: 2px solid #14162B; background-color: #FCFCFE; background-image: linear-gradient(#E9ECF4 1px, transparent 1px); background-size: 100% 16px; box-shadow: 5px 5px 0 -2px #FCFCFE, 5px 5px 0 0 #14162B">
+              <svg viewBox="0 0 240 150" width="100%" role="img" aria-label="Nút là trạng thái, cạnh là hành động" style="display: block; font-family: 'Playpen Sans', cursive" fill="none" stroke="#14162B" stroke-width="1.6" stroke-linecap="round"><path d="M44 82L100 50M44 82L100 114M100 50L160 82M100 114L160 82M160 82L208 82"></path><g fill="#FFFFFF"><circle cx="44" cy="82" r="12"></circle><circle cx="100" cy="50" r="10"></circle><circle cx="100" cy="114" r="10"></circle><circle cx="160" cy="82" r="10"></circle><circle cx="208" cy="82" r="12"></circle></g><g fill="#14162B" stroke="none" font-size="12" text-anchor="middle"><text x="44" y="86" font-weight="600">S</text><text x="208" y="86" font-weight="600">G</text><text x="120" y="22">nút = trạng thái</text><text x="150" y="138">cạnh = hành động</text></g></svg>
+            </div>
+            <div style="display: flex; justify-content: space-between; align-items: center; gap: 8px"><span style="font: 600 13px/1.25 'Playpen Sans', cursive; color: #3F4560">Nút và cạnh</span><span aria-label="sketch 1 trên 2" style="flex: none; display: inline-flex; gap: 4px; align-items: center"><i style="width: 7px; height: 7px; border-radius: 50%; background: #4A33C9"></i><i style="width: 7px; height: 7px; border-radius: 50%; background: #CDD2DE"></i><span style="margin-left: 4px; font-size: 12px; font-weight: 700; color: #3F4560">1/2</span></span></div>
+            <b style="font-size: 15px; line-height: 1.3">Đọc bản đồ trạng thái</b>
+            <div style="display: flex; justify-content: space-between; align-items: center; font-size: 13px"><span style="color: #3F4560">Chưa có ảnh</span><a href="#" style="font-weight: 700">Vẽ lại</a></div>
+          </li>
+
+          <li style="background: #FFFFFF; border-radius: 20px; padding: 12px 12px 14px; display: flex; flex-direction: column; gap: 10px">
+            <div style="display: flex; justify-content: space-between; align-items: center; font-size: 13px"><span style="font-family: 'JetBrains Mono', monospace; font-weight: 700">Ga 3</span><span style="color: #8A3A00; font-weight: 700">nhớ 84%</span></div>
+            <div style="margin: 0 10px 10px 0; border-radius: 12px; border: 2px solid #14162B; background-color: #FCFCFE; background-image: linear-gradient(#E9ECF4 1px, transparent 1px); background-size: 100% 16px; box-shadow: 5px 5px 0 -2px #FCFCFE, 5px 5px 0 0 #14162B, 10px 10px 0 -2px #FCFCFE, 10px 10px 0 0 #14162B">
+              <svg viewBox="0 0 240 150" width="100%" role="img" aria-label="Chưa thấy, rồi vào frontier, rồi đã mở" style="display: block; font-family: 'Playpen Sans', cursive" fill="none" stroke="#14162B" stroke-width="1.6" stroke-linecap="round"><rect x="10" y="48" width="66" height="44" rx="12" stroke-dasharray="5 5"></rect><rect x="88" y="48" width="66" height="44" rx="12" stroke="#4A33C9" stroke-width="2.4" fill="#ECE8FF"></rect><rect x="166" y="48" width="66" height="44" rx="12" fill="#E3E6EE"></rect><path d="M77 70h8M155 70h8"></path><path d="M81 66l4 4-4 4M159 66l4 4-4 4"></path><g fill="#14162B" stroke="none" font-size="12" text-anchor="middle"><text x="43" y="74" font-size="11">chưa thấy</text><text x="121" y="74" font-size="11" font-weight="600">frontier</text><text x="199" y="74" font-size="11">đã mở</text><text x="120" y="122">mở 1 nút = lấy khỏi frontier,</text><text x="120" y="138">thêm hàng xóm vào</text></g></svg>
+            </div>
+            <div style="display: flex; justify-content: space-between; align-items: center; gap: 8px"><span style="font: 600 13px/1.25 'Playpen Sans', cursive; color: #3F4560">Ba vùng của nút</span><span aria-label="sketch 1 trên 3" style="flex: none; display: inline-flex; gap: 4px; align-items: center"><i style="width: 7px; height: 7px; border-radius: 50%; background: #4A33C9"></i><i style="width: 7px; height: 7px; border-radius: 50%; background: #CDD2DE"></i><i style="width: 7px; height: 7px; border-radius: 50%; background: #CDD2DE"></i><span style="margin-left: 4px; font-size: 12px; font-weight: 700; color: #3F4560">1/3</span></span></div>
+            <b style="font-size: 15px; line-height: 1.3">Mở rộng nút và frontier</b>
+            <div style="display: flex; justify-content: space-between; align-items: center; font-size: 13px"><span style="display: flex; align-items: center; gap: 6px; color: #3F4560"><i aria-hidden="true" style="width: 26px; height: 20px; border-radius: 3px; border: 1.5px solid #9AA1B5; background: linear-gradient(135deg, #FFFDF6, #EDE6D2); transform: rotate(-6deg)"></i><i aria-hidden="true" style="margin-left: -14px; width: 26px; height: 20px; border-radius: 3px; border: 1.5px solid #9AA1B5; background: linear-gradient(135deg, #FFFDF6, #EDE6D2); transform: rotate(5deg)"></i>2 ảnh</span><a href="#" style="font-weight: 700">Vẽ lại</a></div>
+          </li>
+
+          <li style="background: #FFFFFF; border-radius: 20px; padding: 12px 12px 14px; display: flex; flex-direction: column; gap: 10px">
+            <div style="display: flex; justify-content: space-between; align-items: center; font-size: 13px"><span style="font-family: 'JetBrains Mono', monospace; font-weight: 700">Ga 4</span><span style="color: #8A3A00; font-weight: 700">nhớ 80%</span></div>
+            <div style="margin: 0 5px 5px 0; border-radius: 12px; border: 2px solid #14162B; background-color: #FCFCFE; background-image: linear-gradient(#E9ECF4 1px, transparent 1px); background-size: 100% 16px; box-shadow: 5px 5px 0 -2px #FCFCFE, 5px 5px 0 0 #14162B">
+              <svg viewBox="0 0 240 150" width="100%" role="img" aria-label="Gặp một nút: đã mở rồi thì bỏ qua, chưa thì thêm vào frontier" style="display: block; font-family: 'Playpen Sans', cursive" fill="none" stroke="#14162B" stroke-width="1.6" stroke-linecap="round"><rect x="70" y="14" width="100" height="32" rx="10" fill="#FFFFFF"></rect><path d="M120 46v14"></path><path d="M120 60l-36 22M120 60l36 22"></path><rect x="20" y="86" width="96" height="44" rx="10" fill="#E3E6EE"></rect><rect x="126" y="86" width="100" height="44" rx="10" stroke="#4A33C9" stroke-width="2.4" fill="#ECE8FF"></rect><g fill="#14162B" stroke="none" font-size="12" text-anchor="middle"><text x="120" y="35" font-weight="600">gặp nút X</text><text x="68" y="105">đã mở rồi?</text><text x="68" y="121" font-weight="600">bỏ qua</text><text x="176" y="105">chưa</text><text x="176" y="121" font-weight="600">vào frontier</text></g></svg>
+            </div>
+            <div style="display: flex; justify-content: space-between; align-items: center; gap: 8px"><span style="font: 600 13px/1.25 'Playpen Sans', cursive; color: #3F4560">Gặp nút cũ thì sao</span><span aria-label="sketch 1 trên 2" style="flex: none; display: inline-flex; gap: 4px; align-items: center"><i style="width: 7px; height: 7px; border-radius: 50%; background: #4A33C9"></i><i style="width: 7px; height: 7px; border-radius: 50%; background: #CDD2DE"></i><span style="margin-left: 4px; font-size: 12px; font-weight: 700; color: #3F4560">1/2</span></span></div>
+            <b style="font-size: 15px; line-height: 1.3">Tránh lặp với tập explored</b>
+            <div style="display: flex; justify-content: space-between; align-items: center; font-size: 13px"><span style="display: flex; align-items: center; gap: 6px; color: #3F4560"><i aria-hidden="true" style="width: 26px; height: 20px; border-radius: 3px; border: 1.5px solid #9AA1B5; background: linear-gradient(135deg, #FFFDF6, #EDE6D2); transform: rotate(-6deg)"></i>1 ảnh</span><a href="#" style="font-weight: 700">Vẽ lại</a></div>
+          </li>
+
+          <li style="background: #FFFFFF; border-radius: 20px; padding: 12px 12px 14px; display: flex; flex-direction: column; gap: 10px">
+            <div style="display: flex; justify-content: space-between; align-items: center; font-size: 13px"><span style="font-family: 'JetBrains Mono', monospace; font-weight: 700">Ga 5</span><span style="color: #3F4560">nhớ 95%</span></div>
+            <div style="margin: 0 5px 5px 0; border-radius: 12px; border: 2px solid #14162B; background-color: #FCFCFE; background-image: linear-gradient(#E9ECF4 1px, transparent 1px); background-size: 100% 16px; box-shadow: 5px 5px 0 -2px #FCFCFE, 5px 5px 0 0 #14162B">
+              <svg viewBox="0 0 240 150" width="100%" role="img" aria-label="Hàng đợi ưu tiên: luôn lấy ra số nhỏ nhất" style="display: block; font-family: 'Playpen Sans', cursive" fill="none" stroke="#14162B" stroke-width="1.6" stroke-linecap="round"><rect x="22" y="22" width="80" height="24" rx="7" fill="#FFF4D6" stroke-width="2.2"></rect><rect x="22" y="52" width="80" height="24" rx="7" fill="#FFFFFF"></rect><rect x="22" y="82" width="80" height="24" rx="7" fill="#FFFFFF"></rect><rect x="22" y="112" width="80" height="24" rx="7" fill="#FFFFFF"></rect><path d="M108 34h34"></path><path d="M136 28l6 6-6 6"></path><g fill="#14162B" stroke="none" font-size="13" text-anchor="middle"><text x="62" y="39" font-weight="600">3</text><text x="62" y="69">5</text><text x="62" y="99">7</text><text x="62" y="129">9</text></g><g fill="#14162B" stroke="none" font-size="12" text-anchor="middle"><text x="190" y="30">lấy ra</text><text x="190" y="46">số nhỏ nhất</text></g></svg>
+            </div>
+            <div style="display: flex; justify-content: space-between; align-items: center; gap: 8px"><span style="font: 600 13px/1.25 'Playpen Sans', cursive; color: #3F4560">Lấy ra số nhỏ nhất</span><span aria-label="sketch 1 trên 2" style="flex: none; display: inline-flex; gap: 4px; align-items: center"><i style="width: 7px; height: 7px; border-radius: 50%; background: #4A33C9"></i><i style="width: 7px; height: 7px; border-radius: 50%; background: #CDD2DE"></i><span style="margin-left: 4px; font-size: 12px; font-weight: 700; color: #3F4560">1/2</span></span></div>
+            <b style="font-size: 15px; line-height: 1.3">Hàng đợi ưu tiên</b>
+            <div style="display: flex; justify-content: space-between; align-items: center; font-size: 13px"><span style="color: #3F4560">Chưa có ảnh</span><a href="#" style="font-weight: 700">Vẽ lại</a></div>
+          </li>
+
+          <li style="background: #FFFFFF; border: 2px solid #14162B; box-shadow: 0 5px 0 #14162B; border-radius: 20px; padding: 10px 10px 12px; display: flex; flex-direction: column; gap: 10px">
+            <div style="display: flex; justify-content: space-between; align-items: center; font-size: 13px"><span style="font-family: 'JetBrains Mono', monospace; font-weight: 700">Ga 6</span><span style="padding: 1px 8px; border-radius: 999px; background: #FFC94A; border: 1.5px solid #14162B; font-weight: 700">mới hôm nay</span></div>
+            <div style="margin: 0 10px 10px 0; border-radius: 12px; border: 2px solid #14162B; background-color: #FCFCFE; background-image: linear-gradient(#E9ECF4 1px, transparent 1px); background-size: 100% 16px; box-shadow: 5px 5px 0 -2px #FCFCFE, 5px 5px 0 0 #14162B, 10px 10px 0 -2px #FCFCFE, 10px 10px 0 0 #14162B">
+              <svg viewBox="0 0 240 150" width="100%" role="img" aria-label="UCS mỗi lượt: lấy g nhỏ nhất, là đích thì dừng, mở và sửa g nếu rẻ hơn" style="display: block; font-family: 'Playpen Sans', cursive" fill="none" stroke="#14162B" stroke-width="1.6" stroke-linecap="round"><rect x="48" y="62" width="128" height="22" rx="4" fill="#FFE58A" stroke="none"></rect><path d="M44 110C16 110 16 38 40 38" stroke="#4A33C9"></path><path d="M34 33l6 5-6 5" stroke="#4A33C9"></path><g fill="#14162B" stroke="none" font-size="13"><text x="50" y="42">1 lấy <tspan fill="#0E7C7B" font-weight="600">g</tspan> nhỏ nhất ra</text><text x="50" y="78" font-weight="600">2 là đích? dừng</text><text x="50" y="114">3 mở, sửa <tspan fill="#0E7C7B" font-weight="600">g</tspan> nếu rẻ hơn</text></g></svg>
+            </div>
+            <div style="display: flex; justify-content: space-between; align-items: center; gap: 8px"><span style="font: 600 13px/1.25 'Playpen Sans', cursive; color: #3F4560">Mỗi lượt UCS làm gì</span><span aria-label="sketch 1 trên 3" style="flex: none; display: inline-flex; gap: 4px; align-items: center"><i style="width: 7px; height: 7px; border-radius: 50%; background: #4A33C9"></i><i style="width: 7px; height: 7px; border-radius: 50%; background: #CDD2DE"></i><i style="width: 7px; height: 7px; border-radius: 50%; background: #CDD2DE"></i><span style="margin-left: 4px; font-size: 12px; font-weight: 700; color: #3F4560">1/3</span></span></div>
+            <b style="font-size: 15px; line-height: 1.3">Tìm kiếm chi phí đều (UCS)</b>
+            <div style="display: flex; justify-content: space-between; align-items: center; font-size: 13px"><span style="display: flex; align-items: center; gap: 6px; color: #3F4560"><i aria-hidden="true" style="width: 26px; height: 20px; border-radius: 3px; border: 1.5px solid #9AA1B5; background: linear-gradient(135deg, #FFFDF6, #EDE6D2); transform: rotate(-6deg)"></i>1 ảnh · thiếu 1 ý</span><a href="#" style="font-weight: 700">So lại</a></div>
+          </li>
+        </ol>
+
+        <ul aria-label="Sketch chưa mở" style="list-style: none; margin: 16px 0 0; padding: 0; display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 12px"><li style="padding: 12px 14px; border-radius: 16px; border: 2px dashed #9AA1B5; background: repeating-linear-gradient(-45deg, #EEF0F7 0 6px, #F6F7FB 6px 12px); display: flex; flex-direction: column; gap: 4px"><span style="display: flex; justify-content: space-between; align-items: center"><b style="font-size: 14px">Ga 7</b><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#7A8095" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="5" y="11" width="14" height="10" rx="2"></rect><path d="M8 11V8a4 4 0 0 1 8 0v3"></path></svg></span><span style="font-size: 13px; color: #3F4560">2 sketch · mở khi qua ga</span></li><li style="padding: 12px 14px; border-radius: 16px; border: 2px dashed #9AA1B5; background: repeating-linear-gradient(-45deg, #EEF0F7 0 6px, #F6F7FB 6px 12px); display: flex; flex-direction: column; gap: 4px"><span style="display: flex; justify-content: space-between; align-items: center"><b style="font-size: 14px">Ga 8</b><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#7A8095" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="5" y="11" width="14" height="10" rx="2"></rect><path d="M8 11V8a4 4 0 0 1 8 0v3"></path></svg></span><span style="font-size: 13px; color: #3F4560">3 sketch · mở khi qua ga</span></li><li style="padding: 12px 14px; border-radius: 16px; border: 2px dashed #9AA1B5; background: repeating-linear-gradient(-45deg, #EEF0F7 0 6px, #F6F7FB 6px 12px); display: flex; flex-direction: column; gap: 4px"><span style="display: flex; justify-content: space-between; align-items: center"><b style="font-size: 14px">Ga 9</b><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#7A8095" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="5" y="11" width="14" height="10" rx="2"></rect><path d="M8 11V8a4 4 0 0 1 8 0v3"></path></svg></span><span style="font-size: 13px; color: #3F4560">2 sketch · mở khi qua ga</span></li><li style="padding: 12px 14px; border-radius: 16px; border: 2px dashed #14162B; background: #FFF4D6; display: flex; flex-direction: column; gap: 4px"><span style="display: flex; justify-content: space-between; align-items: center"><b style="font-size: 14px">Cả mục tiêu</b><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#7A8095" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="5" y="11" width="14" height="10" rx="2"></rect><path d="M8 11V8a4 4 0 0 1 8 0v3"></path></svg></span><span style="font-size: 13px; color: #3F4560">2 sketch · mở khi tới đích</span></li></ul>
+      </section>
+
+      <aside style="flex: 1 1 280px; min-width: 260px; display: flex; flex-direction: column; gap: 16px">
+        <section aria-labelledby="redo" style="background: #FFF4D6; border: 2px solid #14162B; border-radius: 22px; box-shadow: 0 5px 0 #14162B; padding: 18px">
+          <h2 id="redo" style="margin: 0; font-family: 'Bricolage Grotesque', system-ui, sans-serif; font-weight: 800; font-size: 22px; line-height: 1.15; letter-spacing: -0.01em">Hôm nay nên vẽ lại</h2>
+          <p style="margin: 8px 0 0; font-size: 15px"><b>Ga 4 · Tránh lặp với explored</b>, nhớ 80%. Úp sổ tay xuống, vẽ lại trên giấy trong 3 phút, rồi chụp ảnh để so.</p>
+          <button type="button" style="margin-top: 14px; width: 100%; height: 52px; border-radius: 16px; border: 2px solid #14162B; background: #4A33C9; color: #FFFFFF; box-shadow: 0 5px 0 #14162B; font: 700 17px 'Onest', system-ui, sans-serif; cursor: pointer">Bắt đầu vẽ lại</button>
+          <p style="margin: 10px 0 0; font-size: 13px; color: #3F4560">Tự vẽ lại giúp nhớ lâu hơn là nhìn sketch đọc lại.</p>
+        </section>
+
+        <section aria-labelledby="ph" style="background: #FFFFFF; border-radius: 20px; padding: 16px 18px">
+          <h2 id="ph" style="margin: 0; font-size: 16px; font-weight: 700">Ảnh trang giấy gần đây</h2>
+          <ul style="list-style: none; margin: 12px 0 0; padding: 0; display: flex; flex-direction: column; gap: 12px; font-size: 14px">
+            <li style="display: flex; gap: 12px; align-items: center"><i aria-hidden="true" style="flex: none; width: 52px; height: 40px; border-radius: 4px; border: 2px solid #9AA1B5; background: linear-gradient(135deg, #FFFDF6, #EDE6D2); transform: rotate(-3deg)"></i><span><b>Ga 6 · UCS</b><br><span style="color: #3F4560">Hôm nay · </span><span style="color: #8A3A00">thiếu: dừng khi lấy ra</span></span></li>
+            <li style="display: flex; gap: 12px; align-items: center"><i aria-hidden="true" style="flex: none; width: 52px; height: 40px; border-radius: 4px; border: 2px solid #9AA1B5; background: linear-gradient(135deg, #FFFDF6, #EDE6D2); transform: rotate(2deg)"></i><span><b>Ga 4 · Explored</b><br><span style="color: #3F4560">09/10 · đủ ý</span></span></li>
+            <li style="display: flex; gap: 12px; align-items: center"><i aria-hidden="true" style="flex: none; width: 52px; height: 40px; border-radius: 4px; border: 2px solid #9AA1B5; background: linear-gradient(135deg, #FFFDF6, #EDE6D2); transform: rotate(-2deg)"></i><span><b>Sketch cả tuyến, ga 1 đến 3</b><br><span style="color: #3F4560">06/10 · đủ ý</span></span></li>
+          </ul>
+        </section>
+      </aside>
+    </div>
+  </main>
+</div>
+</body>
+</html>

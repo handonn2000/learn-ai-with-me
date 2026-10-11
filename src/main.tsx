@@ -3,7 +3,6 @@ import { createRoot } from 'react-dom/client'
 import { createHashRouter, RouterProvider } from 'react-router'
 import { MotionConfig } from 'motion/react'
 import './styles.css'
-import { applyTheme } from '@/ui/theme'
 import { Layout } from '@/app/Layout'
 import { HomePage } from '@/app/HomePage'
 import { GoalPage } from '@/app/GoalPage'
@@ -12,10 +11,9 @@ import { ReviewPage } from '@/app/ReviewPage'
 import { PlacementPage } from '@/app/PlacementPage'
 import { NotFound } from '@/app/NotFound'
 
-applyTheme()
-
 // React Flow + elk khá nặng: chỉ tải khi mở bản đồ
 const MapPage = lazy(() => import('@/app/MapPage'))
+const DevUi = lazy(() => import('@/app/DevUi'))
 
 // Hash router: GitHub Pages không cần trang 404 giả để giữ route.
 const router = createHashRouter([
@@ -35,6 +33,14 @@ const router = createHashRouter([
       { path: 'review', element: <ReviewPage /> },
       { path: '*', element: <NotFound /> },
     ],
+  },
+  {
+    path: 'dev/ui',
+    element: (
+      <Suspense fallback={null}>
+        <DevUi />
+      </Suspense>
+    ),
   },
   // Màn học và kiểm tra: không có thanh điều hướng, chỉ một tiêu điểm.
   { path: 'learn/:lessonId', element: <LessonPage /> },

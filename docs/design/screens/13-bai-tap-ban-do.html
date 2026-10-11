@@ -1,0 +1,85 @@
+<!doctype html>
+<html lang="vi">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>4 · Bài tập trên bản đồ</title>
+<!-- Thiết kế mẫu B · màn "4 · Bài tập trên bản đồ" · khung 1280×1000 · dữ liệu trong màn là dữ liệu mẫu -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,700;12..96,800&amp;family=Onest:wght@400;500;600;700&amp;family=JetBrains+Mono:wght@500;700&amp;display=swap" rel="stylesheet">
+<style>
+body{margin:0;background:#EEF0F7}
+a{color:#4A33C9}a:hover{color:#14162B}
+</style>
+</head>
+<body>
+<div style="min-height: 100vh; display: flex; flex-direction: column; background: #EEF0F7; color: #14162B; font-family: 'Onest', system-ui, sans-serif; font-size: 17px; line-height: 1.5">
+  <header style="max-width: 920px; width: 100%; box-sizing: border-box; margin: 0 auto; padding: 22px 28px 8px; display: flex; align-items: center; gap: 18px">
+    <button type="button" aria-label="Thoát buổi học" style="width: 44px; height: 44px; border: 0; border-radius: 12px; background: transparent; color: #3F4560; display: grid; place-items: center; cursor: pointer"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"></path></svg></button>
+    <div role="progressbar" aria-label="Tiến độ buổi học" aria-valuenow="4" aria-valuemin="0" aria-valuemax="8" style="flex: 1; height: 16px; border-radius: 8px; background: #DADDEA; overflow: hidden"><div style="width: 50%; height: 16px; border-radius: 8px; background: #4A33C9"></div></div>
+    <span style="font-weight: 700; white-space: nowrap">4 / 8</span>
+  </header>
+
+  <main style="flex: 1; max-width: 920px; width: 100%; box-sizing: border-box; margin: 0 auto; padding: 18px 28px 32px">
+    <section aria-labelledby="t" style="background: #FFFFFF; border: 2px solid #14162B; border-radius: 24px; box-shadow: 0 6px 0 #14162B; padding: 26px 32px 26px">
+      <div style="display: flex; align-items: center; gap: 12px; flex-wrap: wrap">
+        <span style="display: inline-flex; align-items: center; padding: 5px 13px; border-radius: 999px; background: #FFFFFF; border: 2px solid #14162B; font-weight: 700; font-size: 15px">Bài tập 1 / 3</span>
+        <span style="font-size: 15px; color: #3F4560">Chạy tay UCS</span>
+      </div>
+      <h1 id="t" style="margin: 14px 0 0; font-family: 'Bricolage Grotesque', system-ui, sans-serif; font-weight: 700; font-size: 30px; line-height: 1.15; letter-spacing: -0.02em">UCS vừa mở A và thấy C, E. Điền <span style="color: #0E7C7B">g</span> cho hai nút mới.</h1>
+
+      <figure style="margin: 20px 0 0; display: grid; grid-template-columns: minmax(0, 1fr) 236px; gap: 18px; align-items: start">
+        <div style="position: relative; padding: 14px; border-radius: 16px; background: #F6F7FB">
+          <svg viewBox="0 0 648 336" width="100%" role="img" aria-label="UCS vừa mở A, thấy C và E. Frontier: B g=3, F g=3, C, E" style="display: block; max-width: none; height: auto; margin: 0 auto"><line x1="194" y1="194" x2="298" y2="90" stroke="#CDD2DE" stroke-width="3" stroke-linecap="round"/><line x1="194" y1="194" x2="298" y2="298" stroke="#CDD2DE" stroke-width="3" stroke-linecap="round"/><line x1="194" y1="194" x2="90" y2="142" stroke="#CDD2DE" stroke-width="3" stroke-linecap="round"/><line x1="90" y1="142" x2="38" y2="38" stroke="#CDD2DE" stroke-width="3" stroke-linecap="round"/><line x1="298" y1="90" x2="402" y2="142" stroke="#CDD2DE" stroke-width="3" stroke-linecap="round"/><line x1="298" y1="90" x2="506" y2="90" stroke="#CDD2DE" stroke-width="3" stroke-linecap="round"/><line x1="298" y1="298" x2="402" y2="142" stroke="#CDD2DE" stroke-width="3" stroke-linecap="round"/><line x1="298" y1="298" x2="454" y2="272" stroke="#CDD2DE" stroke-width="3" stroke-linecap="round"/><line x1="402" y1="142" x2="506" y2="90" stroke="#CDD2DE" stroke-width="3" stroke-linecap="round"/><line x1="402" y1="142" x2="610" y2="194" stroke="#CDD2DE" stroke-width="3" stroke-linecap="round"/><line x1="454" y1="272" x2="610" y2="194" stroke="#CDD2DE" stroke-width="3" stroke-linecap="round"/><line x1="506" y1="90" x2="610" y2="194" stroke="#CDD2DE" stroke-width="3" stroke-linecap="round"/><rect x="236" y="133" width="20" height="18" rx="4" fill="#FFFFFF" stroke="#CDD2DE"/><text x="246" y="146.5" text-anchor="middle" font-size="12" fill="#555B72" font-family="JetBrains Mono, ui-monospace, monospace">3</text><rect x="236" y="237" width="20" height="18" rx="4" fill="#FFFFFF" stroke="#CDD2DE"/><text x="246" y="250.5" text-anchor="middle" font-size="12" fill="#555B72" font-family="JetBrains Mono, ui-monospace, monospace">3</text><rect x="132" y="159" width="20" height="18" rx="4" fill="#FFFFFF" stroke="#CDD2DE"/><text x="142" y="172.5" text-anchor="middle" font-size="12" fill="#555B72" font-family="JetBrains Mono, ui-monospace, monospace">3</text><rect x="54" y="81" width="20" height="18" rx="4" fill="#FFFFFF" stroke="#CDD2DE"/><text x="64" y="94.5" text-anchor="middle" font-size="12" fill="#555B72" font-family="JetBrains Mono, ui-monospace, monospace">3</text><rect x="340" y="107" width="20" height="18" rx="4" fill="#FFFFFF" stroke="#CDD2DE"/><text x="350" y="120.5" text-anchor="middle" font-size="12" fill="#555B72" font-family="JetBrains Mono, ui-monospace, monospace">3</text><rect x="392" y="81" width="20" height="18" rx="4" fill="#FFFFFF" stroke="#CDD2DE"/><text x="402" y="94.5" text-anchor="middle" font-size="12" fill="#555B72" font-family="JetBrains Mono, ui-monospace, monospace">7</text><rect x="340" y="211" width="20" height="18" rx="4" fill="#FFFFFF" stroke="#CDD2DE"/><text x="350" y="224.5" text-anchor="middle" font-size="12" fill="#555B72" font-family="JetBrains Mono, ui-monospace, monospace">4</text><rect x="366" y="276" width="20" height="18" rx="4" fill="#FFFFFF" stroke="#CDD2DE"/><text x="376" y="289.5" text-anchor="middle" font-size="12" fill="#555B72" font-family="JetBrains Mono, ui-monospace, monospace">4</text><rect x="444" y="107" width="20" height="18" rx="4" fill="#FFFFFF" stroke="#CDD2DE"/><text x="454" y="120.5" text-anchor="middle" font-size="12" fill="#555B72" font-family="JetBrains Mono, ui-monospace, monospace">3</text><rect x="496" y="159" width="20" height="18" rx="4" fill="#FFFFFF" stroke="#CDD2DE"/><text x="506" y="172.5" text-anchor="middle" font-size="12" fill="#555B72" font-family="JetBrains Mono, ui-monospace, monospace">7</text><rect x="522" y="224" width="20" height="18" rx="4" fill="#FFFFFF" stroke="#CDD2DE"/><text x="532" y="237.5" text-anchor="middle" font-size="12" fill="#555B72" font-family="JetBrains Mono, ui-monospace, monospace">7</text><rect x="548" y="133" width="20" height="18" rx="4" fill="#FFFFFF" stroke="#CDD2DE"/><text x="558" y="146.5" text-anchor="middle" font-size="12" fill="#555B72" font-family="JetBrains Mono, ui-monospace, monospace">3</text><circle cx="194" cy="194" r="19" fill="#E3E6EE" stroke="#9AA1B5" stroke-width="2.5"/><text x="194" y="199.76" text-anchor="middle" font-size="16" font-weight="700" fill="#555B72" font-family="Onest, system-ui, sans-serif">S</text><text x="194" y="229" text-anchor="middle" font-size="12" fill="#555B72" font-family="Onest, system-ui, sans-serif">Nhà</text><circle cx="298" cy="90" r="19" fill="#14162B" stroke="#14162B" stroke-width="3"/><text x="298" y="95.76" text-anchor="middle" font-size="16" font-weight="700" fill="#FFFFFF" font-family="Onest, system-ui, sans-serif">A</text><circle cx="298" cy="298" r="19" fill="#EEEAFF" stroke="#4A33C9" stroke-width="3"/><text x="298" y="303.76" text-anchor="middle" font-size="16" font-weight="700" fill="#14162B" font-family="Onest, system-ui, sans-serif">B</text><text x="276" y="281" text-anchor="end" font-size="12.5" fill="#0E7C7B" font-family="JetBrains Mono, ui-monospace, monospace" font-weight="500">g=3</text><circle cx="402" cy="142" r="19" fill="#EEEAFF" stroke="#4A33C9" stroke-width="3"/><text x="402" y="147.76" text-anchor="middle" font-size="16" font-weight="700" fill="#14162B" font-family="Onest, system-ui, sans-serif">C</text><circle cx="454" cy="272" r="19" fill="#FFFFFF" stroke="#14162B" stroke-width="2.5"/><text x="454" y="277.76" text-anchor="middle" font-size="16" font-weight="700" fill="#14162B" font-family="Onest, system-ui, sans-serif">D</text><circle cx="506" cy="90" r="19" fill="#EEEAFF" stroke="#4A33C9" stroke-width="3"/><text x="506" y="95.76" text-anchor="middle" font-size="16" font-weight="700" fill="#14162B" font-family="Onest, system-ui, sans-serif">E</text><circle cx="90" cy="142" r="19" fill="#EEEAFF" stroke="#4A33C9" stroke-width="3"/><text x="90" y="147.76" text-anchor="middle" font-size="16" font-weight="700" fill="#14162B" font-family="Onest, system-ui, sans-serif">F</text><text x="68" y="125" text-anchor="end" font-size="12.5" fill="#0E7C7B" font-family="JetBrains Mono, ui-monospace, monospace" font-weight="500">g=3</text><circle cx="610" cy="194" r="19" fill="#FFFFFF" stroke="#14162B" stroke-width="2.5"/><text x="610" y="199.76" text-anchor="middle" font-size="16" font-weight="700" fill="#14162B" font-family="Onest, system-ui, sans-serif">G</text><text x="610" y="229" text-anchor="middle" font-size="12" fill="#555B72" font-family="Onest, system-ui, sans-serif">Trường</text><circle cx="38" cy="38" r="19" fill="#FFFFFF" stroke="#14162B" stroke-width="2.5"/><text x="38" y="43.76" text-anchor="middle" font-size="16" font-weight="700" fill="#14162B" font-family="Onest, system-ui, sans-serif">H</text></svg>
+          <div style="position: absolute; inset: 14px; pointer-events: none">
+            <label style="pointer-events: auto; position: absolute; left: 67.9%; top: 58.9%; transform: translate(-50%, -50%); display: inline-flex; align-items: center; gap: 2px; padding: 2px 6px 2px 8px; border-radius: 10px; border: 2px solid #1D63D6; background: #E3EDFF; font-family: 'JetBrains Mono', monospace">
+              <span style="font-size: 13px; font-weight: 700; color: #0E7C7B">g=</span>
+              <input aria-label="g của C" inputmode="numeric" value="6" readonly style="width: 30px; height: 28px; border: 0; background: transparent; padding: 0; text-align: center; font: 700 17px 'JetBrains Mono', monospace; color: #14162B">
+            </label>
+            <label style="pointer-events: auto; position: absolute; left: 78.1%; top: 11.9%; transform: translate(-50%, -50%); display: inline-flex; align-items: center; gap: 2px; padding: 2px 6px 2px 8px; border-radius: 10px; border: 2px solid #1D63D6; background: #E3EDFF; font-family: 'JetBrains Mono', monospace">
+              <span style="font-size: 13px; font-weight: 700; color: #0E7C7B">g=</span>
+              <input aria-label="g của E" inputmode="numeric" value="10" readonly style="width: 30px; height: 28px; border: 0; background: transparent; padding: 0; text-align: center; font: 700 17px 'JetBrains Mono', monospace; color: #14162B">
+            </label>
+          </div>
+        </div>
+        <figcaption style="display: flex; flex-direction: column; gap: 10px">
+          <div style="font-size: 14px; font-weight: 700; color: #3F4560">Frontier, xếp theo <span style="color: #0E7C7B">g</span></div>
+          <ol style="list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 6px; font-family: 'JetBrains Mono', monospace; font-size: 15px">
+            <li style="display: grid; grid-template-columns: 28px 1fr auto; align-items: center; padding: 9px 12px; border-radius: 12px; background: #ECE8FF"><b>B</b><span style="color: #0E7C7B">3</span><span></span></li>
+            <li style="display: grid; grid-template-columns: 28px 1fr auto; align-items: center; padding: 9px 12px; border-radius: 12px; background: #ECE8FF"><b>F</b><span style="color: #0E7C7B">3</span><span></span></li>
+            <li style="display: grid; grid-template-columns: 28px 1fr auto; align-items: center; padding: 7px 10px; border-radius: 12px; background: #ECE8FF; border: 2px solid #1D63D6"><b>C</b><span style="color: #0E7C7B">6</span><span style="font-family: 'Onest', sans-serif; font-size: 12px; font-weight: 700; color: #1D63D6">mới</span></li>
+            <li style="display: grid; grid-template-columns: 28px 1fr auto; align-items: center; padding: 7px 10px; border-radius: 12px; background: #ECE8FF; border: 2px solid #1D63D6"><b>E</b><span style="color: #0E7C7B">10</span><span style="font-family: 'Onest', sans-serif; font-size: 12px; font-weight: 700; color: #1D63D6">mới</span></li>
+          </ol>
+          <div style="margin-top: 4px; font-size: 14px; font-weight: 700; color: #3F4560">Đã mở</div>
+          <div style="display: flex; gap: 6px; font-family: 'JetBrains Mono', monospace; font-size: 14px">
+            <span style="padding: 4px 9px; border-radius: 8px; background: #E3E6EE; color: #555B72">S</span><span style="padding: 4px 9px; border-radius: 8px; background: #14162B; color: #FFFFFF">A</span>
+          </div>
+        </figcaption>
+      </figure>
+
+      <div style="margin-top: 18px; display: flex; align-items: center; gap: 14px; padding: 12px 14px; border-radius: 14px; background: #F6F7FB; font-size: 15px">
+        <span style="flex: none; display: inline-flex; gap: 6px" aria-hidden="true">
+          <span style="padding: 4px 10px; border-radius: 999px; border: 2px dashed #9AA1B5; color: #9AA1B5; font-weight: 700; font-size: 13px">Gợi ý</span>
+          <span style="padding: 4px 10px; border-radius: 999px; border: 2px dashed #9AA1B5; color: #9AA1B5; font-weight: 700; font-size: 13px">Lời giải</span>
+        </span>
+        <span style="flex: 1">Không mở gợi ý nên bài này được tính là <b>nhớ tốt</b>. Dùng gợi ý thì lịch ôn sẽ gần hơn.</span>
+      </div>
+    </section>
+  </main>
+
+  <footer role="status" style="background: #E3EDFF; border-top: 2px solid #1D63D6">
+    <div style="max-width: 920px; box-sizing: border-box; margin: 0 auto; padding: 18px 28px 22px; display: flex; justify-content: space-between; align-items: center; gap: 20px">
+      <div style="display: flex; gap: 14px; align-items: flex-start">
+        <span style="flex: none; width: 40px; height: 40px; border-radius: 50%; background: #1D63D6; display: grid; place-items: center"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#FFFFFF" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12l5 5L20 7"></path></svg></span>
+        <div>
+          <h2 style="margin: 0; font-family: 'Bricolage Grotesque', system-ui, sans-serif; font-weight: 800; font-size: 22px; color: #123F8C">Đúng rồi</h2>
+          <p style="margin: 2px 0 0; font-size: 16px"><span style="font-family: 'JetBrains Mono', monospace"><span style="color: #0E7C7B">g</span>(C) = 3 + 3 = 6</span>, <span style="font-family: 'JetBrains Mono', monospace"><span style="color: #0E7C7B">g</span>(E) = 3 + 7 = 10</span>. Lấy <span style="color: #0E7C7B">g</span> của nút vừa mở, cộng thêm độ dài cạnh.</p>
+        </div>
+      </div>
+      <button type="button" style="flex: none; min-width: 200px; height: 56px; padding: 0 28px; border-radius: 16px; border: 2px solid #14162B; background: #1D63D6; color: #FFFFFF; box-shadow: 0 5px 0 #14162B; font: 700 18px 'Onest', system-ui, sans-serif; cursor: pointer">Tiếp</button>
+    </div>
+  </footer>
+</div>
+</body>
+</html>
