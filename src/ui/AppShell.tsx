@@ -23,10 +23,13 @@ function Badge({ n }: { n: number }) {
 /** Khung chung: thanh trên (máy tính) và tab đáy (dưới 720px). Màn học và kiểm tra không dùng khung này. */
 export function AppShell() {
   const due = useDue().length
-  const onToday = useLocation().pathname === '/'
+  const path = useLocation().pathname
+  const onToday = path === '/'
+  // Màn mục tiêu có thanh riêng trên điện thoại, nên bỏ thanh trên của khung chung ở đó.
+  const ownHeader = path.startsWith('/goal/')
   return (
     <div className="min-h-dvh">
-      <header className="mx-auto flex max-w-[1236px] items-center justify-between gap-4 px-4 py-4 min-[720px]:px-7 min-[720px]:py-5">
+      <header className={`mx-auto flex max-w-[1236px] items-center justify-between gap-4 px-4 py-4 min-[720px]:px-7 min-[720px]:py-5 ${ownHeader ? 'max-[719px]:hidden' : ''}`}>
         <Link to="/" className="font-display text-[21px] font-extrabold tracking-[-0.02em] text-ink no-underline min-[720px]:text-2xl">
           học AI cùng tôi
         </Link>

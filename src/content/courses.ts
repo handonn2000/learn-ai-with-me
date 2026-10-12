@@ -10,6 +10,8 @@ export interface CourseGoal {
   title: string
   /** Tên ngắn hơn cho nhãn trên bản đồ. */
   short?: string
+  /** Tên dùng khi nhắc tới mục tiêu này như ga phụ trên bản đồ mục tiêu khác. */
+  sideName?: string
   blurb: string
   trail: string
   /** Mục tiêu có dữ liệu thật trong `skills.ts`. */
@@ -74,7 +76,7 @@ export const courses: Course[] = [
     goals: [
       g('peas', 'PEAS', 'Mô tả một tác tử thông minh', 'Viết PEAS cho một tác tử và xếp loại môi trường của nó.', 'start', 4, 8, { gaDone: 4, sketchesOpen: 8, short: 'Mô tả tác tử', layout: { x: 390, y: 905, label: { x: 430, y: 890, w: 170 } } }),
       g('astar', 'A*', 'Hiểu A*', 'Chạy tay A* và giải thích khi nào nó chắc chắn ra đường rẻ nhất.', 'search', 9, 23, { goalId: 'astar', sketchesOpen: 11, layout: { x: 215, y: 790, d: 66, fs: 22, label: { x: 170, y: 762, w: 160, align: 'right' } } }),
-      g('algo-choice', 'BFS', 'Chọn đúng thuật toán tìm kiếm', 'So BFS, DFS, IDS và UCS về độ đầy đủ, tính tối ưu, thời gian và bộ nhớ.', 'search', 8, 19, { gaDone: 5, sketchesOpen: 9, sharedFrom: 'Hiểu A*', layout: { x: 110, y: 660, label: { x: 150, y: 640, w: 150 } } }),
+      g('algo-choice', 'BFS', 'Chọn đúng thuật toán tìm kiếm', 'So BFS, DFS, IDS và UCS về độ đầy đủ, tính tối ưu, thời gian và bộ nhớ.', 'search', 8, 19, { gaDone: 5, sketchesOpen: 9, sideName: 'Chọn đúng thuật toán', sharedFrom: 'Hiểu A*', layout: { x: 110, y: 660, label: { x: 150, y: 640, w: 150 } } }),
       g('csp', 'CSP', 'Giải bài toán ràng buộc', 'Đưa bài tô màu bản đồ về dạng CSP và giải bằng quay lui có kiểm tra trước.', 'search', 7, 16, { layout: { x: 215, y: 530, label: { x: 170, y: 512, w: 150, align: 'right' } } }),
       g('alphabeta', 'α–β', 'Chọn nước đi trong trò chơi', 'Chạy tay minimax và cắt tỉa α–β trên một cây trò chơi.', 'search', 6, 14, { layout: { x: 110, y: 405, label: { x: 150, y: 385, w: 140 } } }),
       g('local', 'Leo<br>đồi', 'Tối ưu bằng tìm kiếm cục bộ', 'Leo đồi, ủ mô phỏng và giải thuật di truyền cho bài N-hậu.', 'search', 6, 13, { layout: { x: 215, y: 285, fs: 13, label: { x: 170, y: 266, w: 150, align: 'right' } } }),

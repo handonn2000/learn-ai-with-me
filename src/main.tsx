@@ -1,6 +1,6 @@
 import { StrictMode, lazy, Suspense } from 'react'
 import { createRoot } from 'react-dom/client'
-import { createHashRouter, RouterProvider } from 'react-router'
+import { createHashRouter, Navigate, RouterProvider } from 'react-router'
 import { MotionConfig } from 'motion/react'
 import './styles.css'
 import { AppShell } from '@/ui/AppShell'
@@ -15,8 +15,7 @@ import { ReviewPage } from '@/app/ReviewPage'
 import { PlacementPage } from '@/app/PlacementPage'
 import { NotFound } from '@/app/NotFound'
 
-// React Flow + elk khá nặng: chỉ tải khi mở bản đồ
-const MapPage = lazy(() => import('@/app/MapPage'))
+// Trang xem thành phần: chỉ tải khi mở /dev/ui
 const DevUi = lazy(() => import('@/app/DevUi'))
 
 // Hash router: GitHub Pages không cần trang 404 giả để giữ route.
@@ -26,14 +25,7 @@ const router = createHashRouter([
     children: [
       { index: true, element: <HomePage /> },
       { path: 'goal/:goalId', element: <GoalPage /> },
-      {
-        path: 'map',
-        element: (
-          <Suspense fallback={<p className="pt-10 text-muted">Đang vẽ bản đồ…</p>}>
-            <MapPage />
-          </Suspense>
-        ),
-      },
+      { path: 'map', element: <Navigate to="/goal/astar" replace /> },
       { path: 'review', element: <ReviewPage /> },
       { path: 'courses', element: <CoursesPage /> },
       { path: 'courses/:courseId', element: <CoursePage /> },

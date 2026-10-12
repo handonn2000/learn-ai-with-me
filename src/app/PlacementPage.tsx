@@ -1,11 +1,11 @@
 import { useState } from 'react'
 import { useNavigate, useParams } from 'react-router'
-import { X } from 'lucide-react'
 import { goalIndex, skillIndex } from '@/content/skills'
-import { nextPlacementQuestion, placementKnown } from '@/learning/graph'
+import { learningPath, nextPlacementQuestion, placementKnown } from '@/learning/graph'
 import { useProgress } from '@/learning/progress'
 import { ExerciseView } from '@/exercises/ExerciseView'
 import { Button } from '@/ui/Button'
+import { CloseIcon } from '@/ui/icons'
 import { StepFrame } from '@/ui/StepFrame'
 import { NotFound } from './NotFound'
 
@@ -33,10 +33,10 @@ export function PlacementPage() {
 
   const close = (
     <header className="mx-auto flex max-w-3xl items-center gap-3 px-4 pt-3 sm:px-6">
-      <button onClick={() => navigate(`/goal/${goalId}`)} className="grid size-9 place-items-center rounded-full text-muted hover:bg-surface hover:text-ink" aria-label="Thoát">
-        <X size={20} />
+      <button onClick={() => navigate(`/goal/${goalId}`)} className="grid size-11 place-items-center rounded-full text-ink" aria-label="Thoát">
+        <CloseIcon width={22} height={22} />
       </button>
-      <span className="text-[14px] text-muted">Kiểm tra nhanh · {goal.title}</span>
+      <span className="font-bold">Kiểm tra nhanh · {goal.title}</span>
     </header>
   )
 
@@ -110,9 +110,32 @@ export function PlacementPage() {
   }
 
   const sk = skillIndex[asking]
+  const path = learningPath(skillIndex, goal.target)
+  const noOf = (id: string) => path.indexOf(id) + 1
+  const lastWrong = [...path].reverse().find((id) => answers[id] === false)
   return (
     <div className="min-h-dvh">
       {close}
+      <section aria-label="Hỏi ngược từ ga cuối" className="mx-auto mt-3 w-[calc(100%-2rem)] max-w-3xl rounded-[20px] bg-surface p-4 sm:w-full">
+        <h2 className="m-0 text-[15px] font-bold">Hỏi ngược từ ga cuối</h2>
+        <ol className="m-0 mt-2.5 grid list-none gap-1 p-0" style={{ gridTemplateColumns: `repeat(${path.length}, minmax(0, 1fr))` }}>
+          {path.map((id) => {
+            const state = id === asking ? 'ask' : answers[id] === false ? 'wrong' : known.has(id) ? 'known' : 'todo'
+            const cls = { ask: 'border-2 border-ink bg-sun text-ink', wrong: 'border-2 border-wrong bg-surface text-wrong-ink', known: 'bg-violet-soft text-violet', todo: 'bg-track text-muted' }[state]
+            const word = { ask: 'đang hỏi', wrong: 'chưa đúng', known: 'coi như đã biết', todo: 'chưa hỏi' }[state]
+            return (
+              <li key={id} aria-label={`Ga ${noOf(id)}, ${word}`} className={`grid h-9 place-items-center rounded-lg font-mono text-[13px] font-bold ${cls}`}>
+                {noOf(id)}
+              </li>
+            )
+          })}
+        </ol>
+        <p className="mt-2.5 mb-0 text-[15px] text-muted">
+          {lastWrong
+            ? `Ga ${noOf(lastWrong)} chưa đúng, nên hỏi lùi về ga ${noOf(asking)}. Trả lời đúng ga nào thì bỏ qua mọi ga trước nó.`
+            : `Bắt đầu từ ga cuối (ga ${noOf(asking)}). Trả lời đúng ga nào thì bỏ qua mọi ga trước nó.`}
+        </p>
+      </section>
       <ExerciseView
         key={asking}
         mode="test"
