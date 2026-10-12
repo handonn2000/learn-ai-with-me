@@ -4,8 +4,9 @@ import { MAX_REVIEW } from '@/learning/session'
 import { ButtonLink, SessionHeader } from '@/ui'
 import { LessonPlayer } from './LessonPage'
 import { ReviewRun } from './ReviewPage'
-import { GuessStep } from './session/GuessStep'
-import { PaperStep } from './session/PaperStep'
+import { guessMock, paperMock } from '@/content/mock/session'
+import { GuessStep } from './lesson/GuessStep'
+import { PaperStep } from './lesson/PaperStep'
 import { useTodayPlan } from './useTodayPlan'
 
 /** Chiều cao thanh buổi học (nút 44px + đệm 8px hai đầu). Thanh của bài học dính ngay dưới nó. */
@@ -44,8 +45,8 @@ export function SessionPage() {
       {total > 0 && !seg && <Finish title="Xong buổi học." text={`Bạn đã đi hết ${total} bước. Kỹ năng nào cần ôn lại sẽ quay lại đúng hạn.`} />}
       {seg?.kind === 'review' && <ReviewRun key={i} queue={plan.due.slice(0, MAX_REVIEW)} onFinish={next} />}
       {seg?.kind === 'lesson' && plan.lesson && <LessonPlayer key={i} lesson={plan.lesson} embedded={{ onExit: exit, onComplete: next, stickyTop: HEADER_H }} />}
-      {seg?.kind === 'guess' && <GuessStep key={i} onDone={next} />}
-      {seg?.kind === 'paper' && <PaperStep key={i} onDone={next} />}
+      {seg?.kind === 'guess' && <GuessStep key={i} data={guessMock} onDone={next} />}
+      {seg?.kind === 'paper' && <PaperStep key={i} data={paperMock} onDone={next} />}
     </div>
   )
 }

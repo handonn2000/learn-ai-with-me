@@ -1,17 +1,25 @@
 import { Suspense, useEffect, useRef, useState } from 'react'
-import { Link, useNavigate, useParams } from 'react-router'
+import { useNavigate, useParams } from 'react-router'
 import { AnimatePresence, motion } from 'motion/react'
-import { X, Check, AlertCircle } from 'lucide-react'
 import { lessons } from '@/content/lessons'
-import { goals, skillIndex } from '@/content/skills'
-import { useGoalRoute } from '@/learning/hooks'
-import { dueLabel, statusOf, useProgress, worstOutcome, type Outcome } from '@/learning/progress'
+import { sketchTitles } from '@/content/mock/sketches'
+import { goals } from '@/content/skills'
+import { useProgress, worstOutcome, type Outcome } from '@/learning/progress'
 import type { Lesson } from '@/learning/types'
 import { ExerciseView } from '@/exercises/ExerciseView'
-import { Button, ButtonLink } from '@/ui/Button'
-import { RouteBar } from '@/ui/RouteBar'
+import { Button } from '@/ui/Button'
+import { Chip } from '@/ui/Chip'
+import { SessionHeader } from '@/ui/SessionHeader'
+import { StepDots } from '@/ui/StepDots'
 import { StepFrame } from '@/ui/StepFrame'
 import { NotFound } from './NotFound'
+import { useGoalModel } from './goal/useGoalModel'
+import { GuessStep } from './lesson/GuessStep'
+import { LessonIntro } from './lesson/LessonIntro'
+import { PaperStep } from './lesson/PaperStep'
+import { Reorganize } from './lesson/Reorganize'
+import { SketchUnlock } from './lesson/SketchUnlock'
+import { StationPass } from './lesson/StationPass'
 
 export function LessonPage() {
   const { lessonId = '' } = useParams()
@@ -25,11 +33,12 @@ export function LessonPage() {
   return <LessonPlayer key={lesson.id} lesson={lesson} />
 }
 
-type Screen = { at: 'intro' } | { at: 'step'; i: number } | { at: 'finish' }
+type Screen = { at: 'intro' } | { at: 'step'; i: number } | { at: 'pass' } | { at: 'reorganize' } | { at: 'sketch' }
 
 /**
  * Có `embedded` thì đang nằm trong buổi học: nút đóng gọi `embedded.onExit`, thanh trên dính dưới
- * thanh buổi học (`stickyTop`), và màn "Qua ga" kết thúc bằng nút "Tiếp tục" gọi `embedded.onComplete`.
+ * thanh buổi học (`stickyTop`), các bước đoán trước / giấy / hệ thống lại do buổi học đảm nhiệm nên bị bỏ qua,
+ * và màn "Qua ga" kết thúc bằng nút "Tiếp tục" gọi `embedded.onComplete`.
  */
 export interface LessonEmbed {
   onExit: () => void
@@ -41,221 +50,127 @@ export function LessonPlayer({ lesson, embedded }: { lesson: Lesson; embedded?: 
   const saved = useProgress((s) => s.lessonStep[lesson.id] ?? 0)
   const setLessonStep = useProgress((s) => s.setLessonStep)
   const record = useProgress((s) => s.record)
-  const [screen, setScreen] = useState<Screen>(() => (saved > 0 && saved < lesson.steps.length ? { at: 'step', i: saved } : { at: 'intro' }))
   const outcomes = useRef<Outcome[]>([])
   const navigate = useNavigate()
-  const goalId = goals[0].id
+  const model = useGoalModel(goals[0].id)
+  const [wide, setWide] = useState(false)
+
+  const steps = lesson.steps
+  const allowed = (i: number) => !embedded || steps[i].kind === 'explain' || steps[i].kind === 'exercise'
+  const firstAllowed = (from: number) => {
+    let i = from
+    while (i < steps.length && !allowed(i)) i++
+    return i
+  }
+  const [screen, setScreen] = useState<Screen>(() => (saved > 0 && saved < steps.length ? { at: 'step', i: firstAllowed(saved) } : { at: 'intro' }))
 
   // Lưu vị trí để quay lại học tiếp
   useEffect(() => {
     if (screen.at === 'step') setLessonStep(lesson.id, screen.i)
   }, [screen, lesson.id, setLessonStep])
 
-  // Đầu mỗi bước, cuộn lên đầu trang
+  // Đầu mỗi màn, cuộn lên đầu trang
   useEffect(() => {
     window.scrollTo({ top: 0 })
   }, [screen])
 
-  const go = (i: number) => {
-    if (i >= lesson.steps.length) {
-      const o = worstOutcome(outcomes.current)
-      record(lesson.skill, o, 'lesson')
+  const exit = () => (embedded ? embedded.onExit() : navigate('/'))
+  const go = (from: number) => {
+    const i = firstAllowed(from)
+    if (i >= steps.length) {
+      record(lesson.skill, worstOutcome(outcomes.current), 'lesson')
       setLessonStep(lesson.id, 0)
-      setScreen({ at: 'finish' })
+      setScreen({ at: 'pass' })
     } else setScreen({ at: 'step', i })
   }
 
-  const current = screen.at === 'step' ? screen.i : screen.at === 'finish' ? lesson.steps.length : -1
-  const stations = lesson.steps.map((s, i) => ({
-    kind: s.kind,
-    state: (i < current ? 'done' : i === current ? 'current' : 'todo') as 'done' | 'current' | 'todo',
-    label: s.kind === 'explain' ? s.title : `Bài tập ${i + 1}`,
-  }))
+  const countable = steps.map((_, i) => i).filter(allowed)
+  const total = countable.length + (!embedded && lesson.reorganize ? 1 : 0)
+  const pos = screen.at === 'step' ? countable.indexOf(screen.i) + 1 : screen.at === 'reorganize' ? total : 0
+  const done = screen.at === 'intro' ? 0 : screen.at === 'step' ? pos : screen.at === 'pass' ? countable.length : total
+  const exerciseNo = (i: number) => steps.slice(0, i + 1).filter((s) => s.kind === 'exercise').length
+  const exerciseTotal = steps.filter((s) => s.kind === 'exercise').length
+
+  const nextStation = () => {
+    if (!embedded && lesson.reorganize) setScreen({ at: 'reorganize' })
+    else if (!embedded && sketchTitles[lesson.skill]) setScreen({ at: 'sketch' })
+    else if (embedded) embedded.onComplete()
+    else navigate(`/goal/${goals[0].id}`)
+  }
+  const afterReorganize = () => (sketchTitles[lesson.skill] ? setScreen({ at: 'sketch' }) : navigate(`/goal/${goals[0].id}`))
+
+  const key = screen.at === 'step' ? screen.i : screen.at
+  const passPrimary = embedded ? 'Tiếp tục' : lesson.reorganize ? `Hệ thống lại · ${lesson.reorganize.minutes} phút` : sketchTitles[lesson.skill] ? `Mở khóa ${sketchTitles[lesson.skill].length} sketch` : 'Xem bản đồ'
 
   return (
     <div className="min-h-dvh">
-      <header className="sticky z-30 border-b border-line bg-paper/95 backdrop-blur" style={{ top: embedded?.stickyTop ?? 0 }}>
-        <div className="mx-auto flex max-w-3xl items-center gap-4 px-4 py-3 sm:px-6">
-          <button
-            onClick={() => (embedded ? embedded.onExit() : navigate(`/goal/${goalId}`))}
-            className="grid size-9 shrink-0 place-items-center rounded-full text-muted hover:bg-surface hover:text-ink"
-            aria-label="Thoát bài học"
-          >
-            <X size={20} />
-          </button>
-          <div className="min-w-0 flex-1">
-            <RouteBar stations={stations} />
-          </div>
+      <header className="sticky z-30 bg-bg/95 backdrop-blur" style={{ top: embedded?.stickyTop ?? 0 }}>
+        <div className={`mx-auto px-4 py-2.5 ${wide ? 'max-w-[1184px]' : 'max-w-[864px]'}`}>
+          <SessionHeader current={pos} total={total} done={done} onClose={exit} showCount={!embedded && screen.at !== 'intro' && screen.at !== 'pass' && screen.at !== 'sketch'} />
         </div>
       </header>
 
       <AnimatePresence mode="wait" initial={false}>
         <motion.div
-          key={screen.at === 'step' ? screen.i : screen.at}
+          key={key}
           // chỉ đổi độ mờ: transform trên phần tử cha làm thanh `fixed` ở đáy bị neo sai chỗ
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           exit={{ opacity: 0 }}
           transition={{ duration: 0.15 }}
         >
-          {screen.at === 'intro' && <Intro lesson={lesson} onStart={() => go(0)} />}
-          {screen.at === 'step' &&
-            (() => {
-              const step = lesson.steps[screen.i]
-              if (step.kind === 'explain') {
-                const Body = step.Body
-                return (
-                  <StepFrame
-                    footer={
-                      <>
-                        {screen.i > 0 && lesson.steps[screen.i - 1].kind === 'explain' ? (
-                          <Button variant="ghost" onClick={() => go(screen.i - 1)}>
-                            Quay lại
-                          </Button>
-                        ) : (
-                          <span />
-                        )}
-                        <Button onClick={() => go(screen.i + 1)}>
-                          Tiếp tục
-                        </Button>
-                      </>
-                    }
-                  >
-                    <h1 className="mb-5 text-[28px] leading-tight font-bold tracking-tight">{step.title}</h1>
-                    <div className="prose-lesson">
-                      <Suspense fallback={<p className="text-muted">Đang tải…</p>}>
-                        <Body />
-                      </Suspense>
-                    </div>
-                  </StepFrame>
-                )
-              }
-              const isLast = screen.i === lesson.steps.length - 1
-              return (
-                <ExerciseView
-                  exercise={step.exercise}
-                  doneLabel={isLast ? 'Hoàn thành' : 'Tiếp tục'}
-                  onDone={(o) => {
-                    outcomes.current.push(o)
-                    go(screen.i + 1)
-                  }}
-                />
-              )
-            })()}
-          {screen.at === 'finish' && <Finish lesson={lesson} outcomes={outcomes.current} goalId={goalId} onNext={embedded?.onComplete} />}
+          {screen.at === 'intro' && <LessonIntro lesson={lesson} onStart={() => go(firstAllowed(0))} />}
+          {screen.at === 'step' && <StepScreen lesson={lesson} i={screen.i} go={go} exerciseNo={exerciseNo(screen.i)} exerciseTotal={exerciseTotal} outcomes={outcomes.current} />}
+          {screen.at === 'pass' && <StationPass lesson={lesson} outcomes={outcomes.current} primary={passPrimary} onPrimary={nextStation} onLater={exit} />}
+          {screen.at === 'reorganize' && lesson.reorganize && <Reorganize lesson={lesson} data={lesson.reorganize} onDone={afterReorganize} onLater={() => navigate('/')} onStage={setWide} />}
+          {screen.at === 'sketch' && <SketchUnlock lesson={lesson} no={model.noOf[lesson.skill] ?? 0} opened={model.sketchOpen} total={model.sketchTotal} />}
         </motion.div>
       </AnimatePresence>
     </div>
   )
 }
 
-function Intro({ lesson, onStart }: { lesson: Lesson; onStart: () => void }) {
-  const skill = skillIndex[lesson.skill]
-  const records = useProgress((s) => s.skills)
-  const exercises = lesson.steps.filter((s) => s.kind === 'exercise').length
+function StepScreen({ lesson, i, go, exerciseNo, exerciseTotal, outcomes }: { lesson: Lesson; i: number; go: (i: number) => void; exerciseNo: number; exerciseTotal: number; outcomes: Outcome[] }) {
+  const step = lesson.steps[i]
+  const explains = lesson.steps.flatMap((s, k) => (s.kind === 'explain' ? [k] : []))
+  if (step.kind === 'guess') return <GuessStep data={step.data} lesson onDone={() => go(i + 1)} />
+  if (step.kind === 'paper') return <PaperStep data={step.data} onDone={() => go(i + 1)} />
+  if (step.kind === 'exercise') {
+    const isLast = lesson.steps.slice(i + 1).every((s) => s.kind !== 'exercise' && s.kind !== 'explain')
+    return (
+      <ExerciseView
+        exercise={step.exercise}
+        eyebrow={`Bài tập ${exerciseNo} / ${exerciseTotal}`}
+        caption={step.label}
+        doneLabel={isLast ? 'Xong bài' : 'Tiếp'}
+        onDone={(o) => {
+          outcomes.push(o)
+          go(i + 1)
+        }}
+      />
+    )
+  }
+  const Body = step.Body
+  const prevExplain = i > 0 && lesson.steps[i - 1].kind === 'explain'
   return (
     <StepFrame
       footer={
         <>
-          <span className="text-[14px] text-muted">
-            khoảng {lesson.minutes} phút · {exercises} bài tập
-          </span>
-          <Button onClick={onStart}>
-            Bắt đầu
-          </Button>
+          {prevExplain ? <Button variant="link" onClick={() => go(i - 1)}>Quay lại</Button> : <span />}
+          <Button onClick={() => go(i + 1)} className="min-w-40">Tiếp</Button>
         </>
       }
     >
-      <h1 className="text-[34px] leading-tight font-bold tracking-tight sm:text-[40px]">{skill.title}</h1>
-      <div className="mt-8 rounded-2xl border-2 border-route bg-surface p-5">
-        <p className="text-[14px] font-semibold text-route">Học xong bạn làm được</p>
-        <p className="mt-1 text-lg leading-snug">{skill.can}</p>
-      </div>
-      {skill.prereqs.length > 0 && (
-        <div className="mt-8">
-          <p className="text-[15px] font-semibold">Cần biết trước</p>
-          <ul className="mt-3 space-y-2">
-            {skill.prereqs.map((p) => {
-              const ps = skillIndex[p]
-              const ok = statusOf(records[p]) !== 'new'
-              return (
-                <li key={p} className="flex items-start gap-3">
-                  {ok ? <Check size={18} className="mt-1 shrink-0 text-route" /> : <AlertCircle size={18} className="mt-1 shrink-0 text-signal" />}
-                  <span className="text-[15px] leading-snug">
-                    <span className="font-medium">{ps.title}</span>
-                    <span className="text-muted"> — {ps.can}</span>
-                    {!ok && ps.lesson && (
-                      <>
-                        {' '}
-                        <Link to={`/learn/${ps.lesson}`} className="font-medium whitespace-nowrap text-route underline-offset-4 hover:underline">
-                          Học ga này trước
-                        </Link>
-                      </>
-                    )}
-                  </span>
-                </li>
-              )
-            })}
-          </ul>
-        </div>
-      )}
-      {skill.prereqs.length === 0 && <p className="mt-8 text-[15px] text-muted">Không cần biết gì trước. Bắt đầu từ đây được.</p>}
-    </StepFrame>
-  )
-}
-
-const resultText: Record<Outcome, string> = {
-  clean: 'Bạn tự làm đúng hết.',
-  hinted: 'Có lúc bạn cần gợi ý, nên kỹ năng này sẽ quay lại sớm hơn để củng cố.',
-  revealed: 'Có bài bạn phải xem lời giải, nên kỹ năng này sẽ quay lại sớm để bạn làm lại.',
-}
-
-function Finish({ lesson, outcomes, goalId, onNext }: { lesson: Lesson; outcomes: Outcome[]; goalId: string; onNext?: () => void }) {
-  const skill = skillIndex[lesson.skill]
-  const rec = useProgress((s) => s.skills[lesson.skill])
-  const { nextId } = useGoalRoute(goalId)
-  const next = nextId ? skillIndex[nextId] : null
-  const o = worstOutcome(outcomes)
-  const clean = outcomes.filter((x) => x === 'clean').length
-  return (
-    <StepFrame
-      footer={
-        onNext ? (
-          <>
-            <span />
-            <Button onClick={onNext}>Tiếp tục</Button>
-          </>
-        ) : (
-        <>
-          <ButtonLink to={`/goal/${goalId}`} variant="ghost">
-            Về tuyến
-          </ButtonLink>
-          {next?.lesson ? (
-            <ButtonLink to={`/learn/${next.lesson}`}>Ga tiếp: {next.title}</ButtonLink>
-          ) : (
-            <ButtonLink to="/">Xong</ButtonLink>
-          )}
-        </>
-        )
-      }
-    >
-      <motion.div
-        initial={{ scale: 0.6, opacity: 0 }}
-        animate={{ scale: 1, opacity: 1 }}
-        transition={{ type: 'spring', stiffness: 300, damping: 18 }}
-        className="grid size-14 place-items-center rounded-full bg-route text-surface"
-      >
-        <Check size={28} strokeWidth={3} />
-      </motion.div>
-      <h1 className="mt-6 text-[34px] leading-tight font-bold tracking-tight">Qua ga {skill.title}</h1>
-      <div className="mt-8 rounded-2xl border border-line bg-surface p-5">
-        <p className="text-[14px] font-semibold text-route">Giờ bạn làm được</p>
-        <p className="mt-1 text-lg leading-snug">{skill.can}</p>
-      </div>
-      <p className="mt-6 max-w-[60ch] text-[15px] leading-relaxed text-muted">
-        {clean}/{outcomes.length} bài tập tự làm đúng không cần trợ giúp. {resultText[o]}
-        {rec && ` Lần ôn tiếp theo: ${dueLabel(rec)}.`}
+      <p className="m-0 flex items-center justify-between gap-3">
+        <Chip tone="violet">Giải thích</Chip>
+        {explains.length > 1 && <StepDots total={explains.length} current={explains.indexOf(i) + 1} />}
       </p>
+      <h1 className="mt-3 mb-4 text-[28px] leading-[1.1] font-extrabold tracking-[-0.02em] min-[720px]:text-[34px]">{step.title}</h1>
+      <div className="prose-lesson text-lg">
+        <Suspense fallback={<p className="text-muted">Đang tải…</p>}>
+          <Body />
+        </Suspense>
+      </div>
     </StepFrame>
   )
 }

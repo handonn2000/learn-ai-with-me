@@ -1,4 +1,4 @@
-import { Check, X } from 'lucide-react'
+import { CheckIcon, CrossIcon } from '@/ui/icons'
 import { GraphView, type NodeState } from '@/widgets/GraphView'
 import { Rich } from '@/ui/Rich'
 import type { Answer } from './grade'
@@ -67,7 +67,7 @@ export function ChoiceInput({ ex, value, onChange, locked }: P<ChoiceEx, 'choice
             key={i}
             className={[
               'flex cursor-pointer items-start gap-3 rounded-xl border-2 bg-surface px-4 py-3 transition-colors',
-              showRight ? 'border-route' : on ? 'border-ink' : 'border-line hover:border-muted',
+              showRight ? 'border-correct bg-correct-soft' : on ? 'border-ink' : 'border-line hover:border-muted',
               locked && 'cursor-default',
             ]
               .filter(Boolean)
@@ -199,7 +199,7 @@ export function ClassifyInput({ ex, value, onChange, locked }: P<ClassifyEx, 'cl
         return (
           <li key={i} className="rounded-xl border border-line bg-surface p-3">
             <div className="mb-2 flex items-start gap-2">
-              {right !== null && (right ? <Check size={18} className="mt-1 text-route" /> : <X size={18} className="mt-1 text-stop" />)}
+              {right !== null && (right ? <CheckIcon width={18} height={18} className="mt-1 text-correct" /> : <CrossIcon width={18} height={18} className="mt-1 text-wrong" />)}
               <Rich html={it.text} className="font-medium" />
             </div>
             <div className="flex flex-wrap gap-1.5" role="radiogroup" aria-label={`Nhóm cho: ${it.text.replace(/<[^>]+>/g, '')}`}>

@@ -24,18 +24,18 @@ interface Props {
 
 const fill: Record<NodeState, string> = {
   idle: 'var(--surface)',
-  frontier: 'var(--signal-soft)',
-  current: 'var(--signal)',
-  explored: 'var(--route-soft)',
+  frontier: 'var(--route-soft)',
+  current: 'var(--ink)',
+  explored: 'var(--color-track)',
   path: 'var(--route)',
   selected: 'var(--ink)',
   wrong: 'var(--stop-soft)',
 }
 const stroke: Record<NodeState, string> = {
   idle: 'var(--ink)',
-  frontier: 'var(--signal)',
-  current: 'var(--signal)',
-  explored: 'var(--route)',
+  frontier: 'var(--route)',
+  current: 'var(--ink)',
+  explored: 'var(--color-disabled-line)',
   path: 'var(--route)',
   selected: 'var(--ink)',
   wrong: 'var(--stop)',
@@ -43,7 +43,7 @@ const stroke: Record<NodeState, string> = {
 const text: Record<NodeState, string> = {
   idle: 'var(--ink)',
   frontier: 'var(--ink)',
-  current: '#1b1500',
+  current: 'var(--surface)',
   explored: 'var(--ink)',
   path: 'var(--surface)',
   selected: 'var(--surface)',

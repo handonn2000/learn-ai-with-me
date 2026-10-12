@@ -6,6 +6,7 @@ import { FrontierList } from '@/widgets/FrontierList'
 import { statesAt } from '@/widgets/SearchPlayer'
 import { Button } from '@/ui/Button'
 import { Feedback, StepFrame } from '@/ui/StepFrame'
+import { ExerciseEyebrow, HintNote } from './ExerciseView'
 import { Rich } from '@/ui/Rich'
 import type { Outcome } from '@/learning/progress'
 import type { TraceEx } from './types'
@@ -13,7 +14,7 @@ import type { TraceEx } from './types'
 const algoName = { bfs: 'BFS', ucs: 'UCS', gbfs: 'GBFS', astar: 'A*' } as const
 
 /** Đóng vai thuật toán: mỗi lần bấm là đoán nút được mở rộng tiếp theo. */
-export function TraceExercise({ exercise: ex, onDone, doneLabel }: { exercise: TraceEx; onDone: (o: Outcome) => void; doneLabel: string }) {
+export function TraceExercise({ exercise: ex, onDone, doneLabel, eyebrow, caption }: { exercise: TraceEx; onDone: (o: Outcome) => void; doneLabel: string; eyebrow?: string; caption?: string }) {
   const trace = useMemo(() => runSearch(ex.problem, ex.algo), [ex])
   const from = ex.from ?? 0
   // trace[k] = trạng thái sau k lần mở rộng
@@ -97,9 +98,9 @@ export function TraceExercise({ exercise: ex, onDone, doneLabel }: { exercise: T
         </>
       }
     >
-      <p className="mb-1 text-[14px] font-medium text-muted">Bài tập · bạn là {algoName[ex.algo]}</p>
-      <Rich as="p" html={ex.prompt} className="mb-5 max-w-[64ch] text-lg leading-snug font-medium" />
-      <div className="rounded-2xl border border-line bg-surface p-3 sm:p-4">
+      <ExerciseEyebrow eyebrow={eyebrow ?? 'Bài tập'} caption={caption ?? `bạn là ${algoName[ex.algo]}`} />
+      <Rich as="p" html={ex.prompt} className="mb-5 max-w-[64ch] text-[22px] leading-[1.25] font-extrabold tracking-[-0.01em]" />
+      <div className="rounded-2xl bg-subtle p-3 sm:p-4">
         <GraphView
           problem={ex.problem}
           showCosts={ex.showCosts}
@@ -114,6 +115,7 @@ export function TraceExercise({ exercise: ex, onDone, doneLabel }: { exercise: T
           <Legend />
         </div>
       </div>
+      {!done && <HintNote used={hintShown || mistakes > 0} />}
     </StepFrame>
   )
 }

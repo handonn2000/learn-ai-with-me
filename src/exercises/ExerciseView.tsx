@@ -20,15 +20,36 @@ export function ExerciseView({
   doneLabel = 'Tiếp tục',
   mode = 'learn',
   eyebrow,
+  caption,
 }: {
   exercise: Exercise
   onDone: (o: Outcome) => void
   doneLabel?: string
   mode?: 'learn' | 'test'
   eyebrow?: string
+  caption?: string
 }) {
-  if (exercise.kind === 'trace') return <TraceExercise key={exercise.id} exercise={exercise} onDone={onDone} doneLabel={doneLabel} />
-  return <StandardExercise key={exercise.id} exercise={exercise} onDone={onDone} doneLabel={doneLabel} mode={mode} eyebrow={eyebrow} />
+  if (exercise.kind === 'trace') return <TraceExercise key={exercise.id} exercise={exercise} onDone={onDone} doneLabel={doneLabel} eyebrow={eyebrow} caption={caption} />
+  return <StandardExercise key={exercise.id} exercise={exercise} onDone={onDone} doneLabel={doneLabel} mode={mode} eyebrow={eyebrow} caption={caption} />
+}
+
+/** Nhãn "Bài tập 1 / 3" dạng viên thuốc + tên ngắn của bài. */
+export function ExerciseEyebrow({ eyebrow, caption }: { eyebrow: string; caption?: string }) {
+  return (
+    <p className="m-0 mb-3 flex flex-wrap items-center gap-2.5">
+      <span className="rounded-full border-2 border-ink px-3 py-[3px] text-sm font-bold">{eyebrow}</span>
+      {caption && <span className="text-[15px] text-muted">{caption}</span>}
+    </p>
+  )
+}
+
+/** Dòng nhắc cách tính: dùng gợi ý thì lịch ôn gần hơn. */
+export function HintNote({ used }: { used: boolean }) {
+  return (
+    <p className="m-0 mt-5 rounded-xl bg-subtle px-4 py-2.5 text-sm text-muted">
+      {used ? 'Bạn đã dùng gợi ý nên lịch ôn của kỹ năng này sẽ gần hơn.' : <>Không mở gợi ý nên bài này được tính là <b className="text-ink">nhớ tốt</b>. Dùng gợi ý thì lịch ôn sẽ gần hơn.</>}
+    </p>
+  )
 }
 
 function StandardExercise({
@@ -37,12 +58,14 @@ function StandardExercise({
   doneLabel,
   mode,
   eyebrow = 'Bài tập',
+  caption,
 }: {
   exercise: Exclude<Exercise, { kind: 'trace' }>
   onDone: (o: Outcome) => void
   doneLabel: string
   mode: 'learn' | 'test'
   eyebrow?: string
+  caption?: string
 }) {
   const [answer, setAnswer] = useState<Answer>(() => emptyAnswer(exercise))
   const [phase, setPhase] = useState<Phase>('answering')
@@ -122,9 +145,10 @@ function StandardExercise({
         </>
       }
     >
-      <p className="mb-1 text-[14px] font-medium text-muted">{eyebrow}</p>
-      <Rich as="p" html={exercise.prompt} className="mb-6 max-w-[64ch] text-lg leading-snug font-medium" />
+      <ExerciseEyebrow eyebrow={eyebrow} caption={caption} />
+      <Rich as="p" html={exercise.prompt} className="mb-6 max-w-[64ch] text-[22px] leading-[1.25] font-extrabold tracking-[-0.01em]" />
       {input}
+      {mode === 'learn' && !locked && <HintNote used={hintShown || wrongCount > 0} />}
     </StepFrame>
   )
 }
