@@ -2,12 +2,17 @@ import { Link, useParams } from 'react-router'
 import { goalIndex, skillIndex } from '@/content/skills'
 import { lessons } from '@/content/lessons'
 import { useGoalRoute } from '@/learning/hooks'
+import { courses } from '@/content/courses'
+import { ComingSoon } from './ComingSoon'
 import { RouteLine } from '@/ui/RouteLine'
 import { NotFound } from './NotFound'
 
 export function GoalPage() {
   const { goalId = '' } = useParams()
-  if (!goalIndex[goalId]) return <NotFound />
+  if (!goalIndex[goalId]) {
+    const mock = courses.flatMap((c) => c.goals).find((g) => g.id === goalId)
+    return mock ? <ComingSoon title={mock.title} /> : <NotFound />
+  }
   return <Goal goalId={goalId} />
 }
 

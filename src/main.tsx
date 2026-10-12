@@ -4,6 +4,8 @@ import { createHashRouter, RouterProvider } from 'react-router'
 import { MotionConfig } from 'motion/react'
 import './styles.css'
 import { AppShell } from '@/ui/AppShell'
+import { CoursesPage } from '@/app/CoursesPage'
+import { CoursePage } from '@/app/CoursePage'
 import { ComingSoon } from '@/app/ComingSoon'
 import { HomePage } from '@/app/HomePage'
 import { GoalPage } from '@/app/GoalPage'
@@ -33,7 +35,8 @@ const router = createHashRouter([
         ),
       },
       { path: 'review', element: <ReviewPage /> },
-      { path: 'courses', element: <ComingSoon title="Khóa học" /> },
+      { path: 'courses', element: <CoursesPage /> },
+      { path: 'courses/:courseId', element: <CoursePage /> },
       { path: 'notebook', element: <ComingSoon title="Sổ tay" /> },
       { path: '*', element: <NotFound /> },
     ],
