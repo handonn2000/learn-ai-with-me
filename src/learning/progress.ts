@@ -38,6 +38,8 @@ interface State {
   setLessonStep: (lessonId: string, step: number) => void
   /** Ghi kết quả học/ôn một kỹ năng. */
   record: (id: SkillId, outcome: Outcome, via: SkillRecord['via'], now?: Date) => void
+  /** Ghi một điểm FSRS do người học tự chấm (câu nhớ lại: Quên / Khó / Được / Dễ). */
+  recordRating: (id: SkillId, rating: Grade, now?: Date) => void
   /** Xếp lớp: đánh dấu đã nắm (FSRS: Easy). */
   markKnown: (ids: SkillId[], now?: Date) => void
   reset: () => void
@@ -66,6 +68,14 @@ export const useProgress = create<State>()(
           return {
             skills: { ...s.skills, [id]: { card: next, via: prev?.via === 'lesson' ? 'lesson' : via, lastOutcome: outcome } },
           }
+        }),
+      recordRating: (id, rating, now = new Date()) =>
+        set((s) => {
+          const prev = s.skills[id]
+          const card = prev ? revive(prev.card) : createEmptyCard(now)
+          const next = scheduler.next(card, now, rating).card
+          const lastOutcome: Outcome = rating === Rating.Again ? 'revealed' : rating === Rating.Hard ? 'hinted' : 'clean'
+          return { skills: { ...s.skills, [id]: { card: next, via: prev?.via ?? 'lesson', lastOutcome } } }
         }),
       markKnown: (ids, now = new Date()) =>
         set((s) => {
@@ -106,4 +116,10 @@ export function dueLabel(rec: SkillRecord, now = new Date()): string {
 /** Xác suất nhớ (0..1) của một kỹ năng tại thời điểm `now`, ước tính từ thẻ FSRS. */
 export function retrievability(rec: SkillRecord, now = new Date()): number {
   return scheduler.get_retrievability(revive(rec.card), now, false)
+}
+
+/** Số ngày tới lần ôn sau nếu người học chọn từng mức tự chấm. */
+export function previewDays(rec: SkillRecord | undefined, now = new Date()): Record<'again' | 'hard' | 'good' | 'easy', number> {
+  const r = scheduler.repeat(rec ? revive(rec.card) : createEmptyCard(now), now)
+  return { again: r[Rating.Again].card.scheduled_days, hard: r[Rating.Hard].card.scheduled_days, good: r[Rating.Good].card.scheduled_days, easy: r[Rating.Easy].card.scheduled_days }
 }

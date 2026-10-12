@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest'
-import { dueLabel, dueSkills, outcomeToRating, retrievability, useProgress, worstOutcome } from './progress'
+import { dueLabel, dueSkills, outcomeToRating, previewDays, retrievability, useProgress, worstOutcome } from './progress'
 import { Rating } from 'ts-fsrs'
 
 describe('tiến độ', () => {
@@ -42,5 +42,17 @@ describe('tiến độ', () => {
     expect(soon).toBeLessThanOrEqual(1)
     expect(later).toBeLessThan(soon)
     expect(later).toBeGreaterThanOrEqual(0)
+  })
+
+  it('tự chấm: Dễ cách xa hơn Được, Quên gần nhất; kết quả được ghi theo mức chọn', () => {
+    const now = new Date('2026-10-10T08:00:00')
+    const d = previewDays(undefined, now)
+    expect(d.again).toBeLessThanOrEqual(d.hard)
+    expect(d.hard).toBeLessThanOrEqual(d.good)
+    expect(d.good).toBeLessThan(d.easy)
+    useProgress.getState().recordRating('rating-test', Rating.Hard, now)
+    expect(useProgress.getState().skills['rating-test'].lastOutcome).toBe('hinted')
+    useProgress.getState().recordRating('rating-test', Rating.Easy, now)
+    expect(useProgress.getState().skills['rating-test'].lastOutcome).toBe('clean')
   })
 })

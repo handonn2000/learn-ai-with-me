@@ -6,7 +6,7 @@ import './styles.css'
 import { AppShell } from '@/ui/AppShell'
 import { CoursesPage } from '@/app/CoursesPage'
 import { CoursePage } from '@/app/CoursePage'
-import { ComingSoon } from '@/app/ComingSoon'
+import { NotebookPage } from '@/app/NotebookPage'
 import { HomePage } from '@/app/HomePage'
 import { GoalPage } from '@/app/GoalPage'
 import { LessonPage } from '@/app/LessonPage'
@@ -26,10 +26,9 @@ const router = createHashRouter([
       { index: true, element: <HomePage /> },
       { path: 'goal/:goalId', element: <GoalPage /> },
       { path: 'map', element: <Navigate to="/goal/astar" replace /> },
-      { path: 'review', element: <ReviewPage /> },
       { path: 'courses', element: <CoursesPage /> },
       { path: 'courses/:courseId', element: <CoursePage /> },
-      { path: 'notebook', element: <ComingSoon title="Sổ tay" /> },
+      { path: 'notebook', element: <NotebookPage /> },
       { path: '*', element: <NotFound /> },
     ],
   },
@@ -43,6 +42,7 @@ const router = createHashRouter([
   },
   // Màn học và kiểm tra: không có thanh điều hướng, chỉ một tiêu điểm.
   { path: 'session', element: <SessionPage /> },
+  { path: 'review', element: <ReviewPage /> },
   { path: 'learn/:lessonId', element: <LessonPage /> },
   { path: 'check/:goalId', element: <PlacementPage /> },
 ])

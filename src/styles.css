@@ -44,13 +44,6 @@
   --color-disabled-line: #9aa1b5;
   --color-disabled-ink: #555b72;
 
-  /* Tên cũ của v2 trước mẫu B, trỏ sang token mới cho tới khi từng màn được dựng lại */
-  --color-route: var(--color-violet);
-  --color-route-soft: var(--color-violet-soft);
-  --color-signal: var(--color-sun);
-  --color-signal-soft: var(--color-sun-soft);
-  --color-stop: var(--color-wrong);
-  --color-stop-soft: var(--color-wrong-soft);
 
   --font-display: 'Bricolage Grotesque', system-ui, sans-serif;
   --font-sans: 'Onest', system-ui, sans-serif;
@@ -64,7 +57,7 @@
   --radius-sketch: 255px 15px 225px 15px / 15px 225px 15px 255px;
 }
 
-/* Biến CSS thô cho code đã viết var(--route) v.v. */
+/* Biến CSS thô cho code đã viết var(--color-violet) v.v. */
 :root {
   color-scheme: light;
   --paper: var(--color-bg);
@@ -72,12 +65,6 @@
   --ink: var(--color-ink);
   --muted: var(--color-muted);
   --line: var(--color-line);
-  --route: var(--color-violet);
-  --route-soft: var(--color-violet-soft);
-  --signal: var(--color-sun);
-  --signal-soft: var(--color-sun-soft);
-  --stop: var(--color-wrong);
-  --stop-soft: var(--color-wrong-soft);
 }
 
 html {
@@ -119,7 +106,7 @@ h3 {
 }
 .prose-lesson em {
   font-style: normal;
-  background: linear-gradient(transparent 62%, var(--signal-soft) 62%);
+  background: linear-gradient(transparent 62%, var(--color-sun-soft) 62%);
 }
 .prose-lesson ul,
 .prose-lesson ol {

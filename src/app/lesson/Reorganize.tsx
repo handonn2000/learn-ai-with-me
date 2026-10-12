@@ -34,7 +34,7 @@ function Text({ text, boxKey, mask, shown, onShow }: { text: string; boxKey: str
 }
 
 /** Sketch một trang. `mask` che các ô trống để tự kiểm tra. */
-function SketchPage({ data, mask, shown, onShow }: { data: ReorganizeData; mask: boolean; shown: Set<string>; onShow: (k: string) => void }) {
+export function SketchPage({ data, mask, shown, onShow }: { data: ReorganizeData; mask: boolean; shown: Set<string>; onShow: (k: string) => void }) {
   const b = data.sketch.boxes
   const box = (k: keyof typeof b, extra = '') => {
     const x: Box = b[k]
@@ -69,7 +69,7 @@ function SketchPage({ data, mask, shown, onShow }: { data: ReorganizeData; mask:
   )
 }
 
-function useCountdown(seconds: number) {
+export function useCountdown(seconds: number) {
   const [left, setLeft] = useState(seconds)
   const [on, setOn] = useState(false)
   useEffect(() => {

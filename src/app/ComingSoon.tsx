@@ -1,6 +1,6 @@
 import { ButtonLink } from '@/ui/Button'
 
-/** Chỗ giữ cho màn chưa dựng (Khóa học: mốc 3, Sổ tay: mốc 6). */
+/** Trang giữ chỗ cho mục tiêu mẫu chưa có nội dung. */
 export function ComingSoon({ title }: { title: string }) {
   return (
     <div className="pt-10">

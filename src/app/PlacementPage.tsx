@@ -98,7 +98,7 @@ export function PlacementPage() {
             <ul className="mt-6 space-y-1.5">
               {skipped.map((id) => (
                 <li key={id} className="text-[15px]">
-                  <span className="mr-2 text-route">✓</span>
+                  <span className="mr-2 text-violet">✓</span>
                   {skillIndex[id].title}
                 </li>
               ))}

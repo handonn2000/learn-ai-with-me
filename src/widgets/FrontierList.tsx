@@ -43,7 +43,7 @@ export function FrontierList({
               animate={{ opacity: 1, y: 0 }}
               exit={{ opacity: 0, scale: 0.8 }}
               transition={{ duration: 0.2 }}
-              className={`rounded-md border px-2 py-0.5 ${i === 0 && revealOrder ? 'border-signal bg-signal-soft' : 'border-line bg-surface'}`}
+              className={`rounded-md border px-2 py-0.5 ${i === 0 && revealOrder ? 'border-sun bg-sun-soft' : 'border-line bg-surface'}`}
             >
               <span className="font-semibold">{it.state}</span>
               {algo !== 'bfs' && values === 'key' && (

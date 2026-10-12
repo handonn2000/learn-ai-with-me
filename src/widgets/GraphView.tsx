@@ -24,21 +24,21 @@ interface Props {
 
 const fill: Record<NodeState, string> = {
   idle: 'var(--surface)',
-  frontier: 'var(--route-soft)',
+  frontier: 'var(--color-violet-soft)',
   current: 'var(--ink)',
   explored: 'var(--color-track)',
-  path: 'var(--route)',
+  path: 'var(--color-violet)',
   selected: 'var(--ink)',
-  wrong: 'var(--stop-soft)',
+  wrong: 'var(--color-wrong-soft)',
 }
 const stroke: Record<NodeState, string> = {
   idle: 'var(--ink)',
-  frontier: 'var(--route)',
+  frontier: 'var(--color-violet)',
   current: 'var(--ink)',
   explored: 'var(--color-disabled-line)',
-  path: 'var(--route)',
+  path: 'var(--color-violet)',
   selected: 'var(--ink)',
-  wrong: 'var(--stop)',
+  wrong: 'var(--color-wrong)',
 }
 const text: Record<NodeState, string> = {
   idle: 'var(--ink)',
@@ -47,7 +47,7 @@ const text: Record<NodeState, string> = {
   explored: 'var(--ink)',
   path: 'var(--surface)',
   selected: 'var(--surface)',
-  wrong: 'var(--stop)',
+  wrong: 'var(--color-wrong)',
 }
 
 /**
@@ -102,7 +102,7 @@ export function GraphView({ problem, showCosts, showH, states = {}, path = [], n
             x2={b.x}
             y2={b.y}
             initial={false}
-            animate={{ stroke: lit ? 'var(--route)' : 'var(--line)', strokeWidth: (lit ? 7 : 3) * k }}
+            animate={{ stroke: lit ? 'var(--color-violet)' : 'var(--line)', strokeWidth: (lit ? 7 : 3) * k }}
             strokeLinecap="round"
           />
         )
@@ -135,7 +135,7 @@ export function GraphView({ problem, showCosts, showH, states = {}, path = [], n
             tabIndex={click ? 0 : undefined}
             aria-label={click ? `Nút ${n.id}${n.label ? ` (${n.label})` : ''}` : undefined}
             aria-pressed={click && st === 'selected' ? true : undefined}
-            className={click ? 'cursor-pointer focus:outline-none [&:focus-visible>circle:first-of-type]:stroke-[var(--signal)]' : undefined}
+            className={click ? 'cursor-pointer focus:outline-none [&:focus-visible>circle:first-of-type]:stroke-[var(--color-sun)]' : undefined}
             onClick={click ? () => onNodeClick!(n.id) : undefined}
             onKeyDown={
               click
