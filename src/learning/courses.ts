@@ -9,12 +9,20 @@ export interface GoalProgress {
   state: 'done' | 'current' | 'open'
 }
 
+export interface RealProgress {
+  done: number
+  total: number
+  sketches?: number
+  sketchesOpen?: number
+}
+
 /** Tiến độ một mục tiêu. Mục tiêu có dữ liệu thật dùng `real`; còn lại dùng số mẫu trong dữ liệu. */
-export function resolveGoal(goal: CourseGoal, followedId: string | null, real?: { done: number; total: number }): GoalProgress {
-  const ga = goal.goalId && real ? real.total : goal.ga
-  const gaDone = goal.goalId && real ? real.done : goal.gaDone
+export function resolveGoal(goal: CourseGoal, followedId: string | null, real?: RealProgress): GoalProgress {
+  const r = goal.goalId ? real : undefined
+  const ga = r ? r.total : goal.ga
+  const gaDone = r ? r.done : goal.gaDone
   const state = gaDone >= ga ? 'done' : goal.id === followedId ? 'current' : 'open'
-  return { goal, ga, gaDone, sketches: goal.sketches, sketchesOpen: goal.sketchesOpen, state }
+  return { goal, ga, gaDone, sketches: r?.sketches ?? goal.sketches, sketchesOpen: r?.sketchesOpen ?? goal.sketchesOpen, state }
 }
 
 export type Reason = { kind: 'shared'; text: string } | { kind: 'next' } | { kind: 'other-trail' } | { kind: 'start' }

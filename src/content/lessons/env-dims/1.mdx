@@ -1,0 +1,7 @@
+Viết xong PEAS, việc tiếp theo của bạn là xếp loại môi trường. Đây không phải dán nhãn cho vui: môi trường loại nào thì tác tử phải thiết kế theo kiểu đó. Có bảy chiều, mỗi chiều có hai vế. Ga này đi bốn chiều đầu.
+
+**1. Quan sát được đầy đủ hay một phần.** Môi trường **quan sát được đầy đủ** (fully observable) khi cảm biến cho tác tử thấy toàn bộ trạng thái của môi trường ở mỗi thời điểm, ít nhất là phần liên quan tới việc chọn hành động. Khi đó tác tử khỏi phải tự ghi nhớ để theo dõi thế giới. Môi trường **quan sát được một phần** (partially observable) khi cảm biến nhiễu, thiếu chính xác, hoặc không với tới một phần trạng thái. Robot hút bụi chỉ có cảm biến bụi tại chỗ thì không biết ô bên kia bẩn hay sạch. Tác tử không có cảm biến nào thì môi trường là không quan sát được (unobservable).
+
+**2. Một hay nhiều tác tử.** Giải ô chữ là một tác tử, đánh cờ vua là hai. Nhưng khi nào phải coi một thứ là tác tử? Khi hành vi của B được mô tả đúng nhất là B đang tối đa một thước đo phụ thuộc vào hành vi của A. Đối thủ cờ vua đúng là vậy. Còn căn bệnh trong ca chẩn đoán y khoa thì không tính toán gì để qua mặt bác sĩ, nên chẩn đoán y khoa được xếp là một tác tử.
+
+Nhiều tác tử còn chia hai kiểu. **Cạnh tranh**: cờ vua, bên này thắng thì bên kia thua. **Hợp tác**: lái xe trên đường, ai cũng muốn tránh va chạm.

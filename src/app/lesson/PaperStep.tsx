@@ -1,5 +1,7 @@
 import { useState } from 'react'
+import { ChevronRight } from 'lucide-react'
 import { Button, Chip, NumberInput } from '@/ui'
+import { Rich } from '@/ui/Rich'
 import { PenIcon } from '@/ui/icons'
 import { StepFrame } from '@/ui/StepFrame'
 import type { PaperData } from '@/learning/types'
@@ -35,13 +37,32 @@ export function PaperStep({ data, onDone, onSkip }: { data: PaperData; onDone: (
           </li>
         ))}
       </ol>
-      <div className="rounded-2xl bg-subtle p-4">
-        <b className="text-[15px]">Kết quả trên giấy của bạn</b>
-        <label className="mt-2 flex items-center justify-between gap-4">
-          <span>{data.resultLabel} <span className="text-sm text-muted">(không bắt buộc)</span></span>
-          <NumberInput unit={data.unit} value={result} onChange={(e) => setResult(e.target.value)} />
-        </label>
-      </div>
+      {data.resultLabel && (
+        <div className="rounded-2xl bg-subtle p-4">
+          <b className="text-[15px]">Kết quả trên giấy của bạn</b>
+          <label className="mt-2 flex items-center justify-between gap-4">
+            <span>{data.resultLabel} <span className="text-sm text-muted">(không bắt buộc)</span></span>
+            <NumberInput unit={data.unit} value={result} onChange={(e) => setResult(e.target.value)} />
+          </label>
+        </div>
+      )}
+      {data.reference && (
+        <details className="group mt-4 rounded-2xl bg-subtle p-4 [&_summary::-webkit-details-marker]:hidden">
+          <summary className="flex min-h-11 cursor-pointer items-center gap-2 font-bold text-violet">
+            <ChevronRight size={18} className="transition-transform group-open:rotate-90" aria-hidden />
+            Viết xong rồi? Mở đáp án gợi ý để đối chiếu
+          </summary>
+          <p className="mt-2 mb-3 text-[15px] text-muted">Đây là một cách viết, không phải cách duy nhất. Ý của bạn khác mà vẫn đúng định nghĩa thì vẫn được.</p>
+          <ul className="m-0 flex list-none flex-col gap-2.5 p-0">
+            {data.reference.map((r) => (
+              <li key={r} className="flex gap-2.5 leading-snug">
+                <span aria-hidden className="mt-2 size-1.5 shrink-0 rounded-full bg-violet" />
+                <Rich html={r} />
+              </li>
+            ))}
+          </ul>
+        </details>
+      )}
     </StepFrame>
   )
 }

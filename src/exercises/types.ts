@@ -48,11 +48,11 @@ export interface OrderEx extends Base {
   showCosts?: boolean
 }
 
-/** Gán mỗi mục vào một nhóm. */
+/** Gán mỗi mục vào một nhóm. Mục có `groups` riêng thì chọn trong đó (vd. mỗi chiều môi trường có hai vế riêng). */
 export interface ClassifyEx extends Base {
   kind: 'classify'
   groups: string[]
-  items: { text: string; group: number }[]
+  items: { text: string; group: number; groups?: string[] }[]
 }
 
 /** Đóng vai thuật toán: bấm nút sẽ được mở rộng tiếp theo, `steps` lần. */

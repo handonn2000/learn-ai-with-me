@@ -1,5 +1,6 @@
 import { Link } from 'react-router'
 import { courses } from '@/content/courses'
+import { useFollowedGoalId } from '@/learning/hooks'
 import { Chip } from '@/ui/Chip'
 import { CheckIcon } from '@/ui/icons'
 import { ButtonLink } from '@/ui/Button'
@@ -52,14 +53,15 @@ export function GoalList({ model }: { model: GoalModel }) {
   const { goal, today, stations } = model
   const leads = courses.flatMap((c) => c.goals.filter((g) => g.sharedFrom === goal.title).map((g) => ({ id: g.goalId ?? g.id, title: g.title })))
   const course = courses.find((c) => c.goals.some((g) => g.goalId === goal.id))
-  const grid = ['mô hình hóa', 'bản đồ', 'frontier', 'explored', 'hàng đợi', 'UCS', 'h(n)', 'A*', 'đúng?']
+  const grid = stations.map((s) => s.skill.short ?? s.skill.title)
+  const following = useFollowedGoalId() === goal.id
   const doneN = model.done
   return (
     <div className="flex flex-col gap-6 min-[1180px]:flex-row min-[1180px]:items-start">
       <div className="flex min-w-0 flex-1 flex-col gap-6">
         <section aria-labelledby="g-title" className="rounded-3xl border-2 border-ink bg-surface p-5 shadow-block-lg min-[720px]:p-[30px]">
-          <Chip tone="sun">Đang theo</Chip>
-          <h1 id="g-title" className="mt-3 mb-0 text-4xl leading-none font-extrabold tracking-[-0.03em] min-[720px]:text-[46px]">{goal.title}</h1>
+          {following && <Chip tone="sun">Đang theo</Chip>}
+          <h1 id="g-title" className={`${following ? 'mt-3' : 'mt-0'} mb-0 text-4xl leading-none font-extrabold tracking-[-0.03em] min-[720px]:text-[46px]`}>{goal.title}</h1>
           <p className="mt-3 mb-0 max-w-[40em] text-lg text-muted">Tới ga cuối, bạn {goal.outcome.charAt(0).toLowerCase() + goal.outcome.slice(1)}</p>
           <div className="mt-5 flex flex-wrap items-center gap-x-5 gap-y-3">
             {today && today.skill.lesson && <ButtonLink to={`/learn/${today.skill.lesson}`}>Học tiếp ga {today.no}</ButtonLink>}
@@ -79,7 +81,7 @@ export function GoalList({ model }: { model: GoalModel }) {
           <p className="mt-2 mb-3 text-sm text-muted">Ghép từ sketch của từng ga đã qua. Ga chưa học để trống.</p>
           <ul className="m-0 grid list-none grid-cols-3 gap-2 rounded-2xl border-2 border-ink bg-lined p-2.5 font-hand text-xs">
             {grid.map((t, i) => (
-              <li key={t} className={`grid min-h-10 place-items-center rounded-[10px] px-1 text-center ${i < doneN ? 'border-2 border-ink bg-surface' : i === doneN ? 'border-2 border-dashed border-violet text-violet' : 'border-2 border-dashed border-disabled-line text-disabled-ink'}`}>{t}</li>
+              <li key={stations[i].id} className={`grid min-h-10 place-items-center rounded-[10px] px-1 text-center ${i < doneN ? 'border-2 border-ink bg-surface' : i === doneN ? 'border-2 border-dashed border-violet text-violet' : 'border-2 border-dashed border-disabled-line text-disabled-ink'}`}>{t}</li>
             ))}
           </ul>
         </section>

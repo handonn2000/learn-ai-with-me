@@ -21,7 +21,7 @@ describe('bài tập', () => {
       if (ex.kind === 'order') expect([...ex.answer].sort(), ex.id).toEqual([...ex.items].sort())
       if (ex.kind === 'pick-nodes')
         ex.answer.forEach((n) => expect(ex.problem.nodes.some((x) => x.id === n), ex.id).toBe(true))
-      if (ex.kind === 'classify') ex.items.forEach((it) => expect(ex.groups[it.group], ex.id).toBeDefined())
+      if (ex.kind === 'classify') ex.items.forEach((it) => expect((it.groups ?? ex.groups)[it.group], ex.id).toBeDefined())
       if (ex.kind === 'trace') expect(traceAnswer(ex).length, ex.id).toBe(ex.steps)
     }
   })

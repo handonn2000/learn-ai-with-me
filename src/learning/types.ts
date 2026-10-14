@@ -8,6 +8,8 @@ export interface Skill {
   id: SkillId
   /** Tên ngắn, dùng trên bản đồ và tuyến. */
   title: string
+  /** Nhãn rất ngắn (1–2 từ) cho ô trong "Sketch cả tuyến". */
+  short?: string
   /** "Học xong bạn làm được…" — một câu bắt đầu bằng động từ. */
   can: string
   /** Tiên quyết THẬT: không nắm thì không làm được kỹ năng này. */
@@ -45,9 +47,12 @@ export interface GuessData {
 export interface PaperData {
   title: string
   steps: string[]
-  resultLabel: string
-  unit: string
+  /** Bài có kết quả là một con số thì hỏi số đó; bài viết chữ (vd. PEAS) thì bỏ trống. */
+  resultLabel?: string
+  unit?: string
   minutes: number
+  /** Đáp án gợi ý để tự đối chiếu sau khi làm; mỗi phần tử một ý, cho phép `<b>`/`<i>`. */
+  reference?: string[]
 }
 
 /** Hệ thống lại cuối buổi: sketch một trang. `{{ô trống}}` là chỗ che khi tự kiểm tra, `==nhấn==` là chỗ tô vàng. */

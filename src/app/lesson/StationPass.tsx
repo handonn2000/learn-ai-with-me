@@ -1,5 +1,5 @@
 import { Link } from 'react-router'
-import { goals, skillIndex } from '@/content/skills'
+import { goalOf, skillIndex } from '@/content/skills'
 import { useGoalRoute } from '@/learning/hooks'
 import { dueLabel, useProgress, worstOutcome, type Outcome } from '@/learning/progress'
 import type { Lesson } from '@/learning/types'
@@ -17,7 +17,7 @@ const outcomeNote: Record<Outcome, string> = {
 export function StationPass({ lesson, outcomes, primary, onPrimary, onLater }: { lesson: Lesson; outcomes: Outcome[]; primary: string; onPrimary: () => void; onLater: () => void }) {
   const skill = skillIndex[lesson.skill]
   const rec = useProgress((s) => s.skills[lesson.skill])
-  const { goal, stations, nextId } = useGoalRoute(goals[0].id)
+  const { goal, stations, nextId } = useGoalRoute(goalOf(lesson.skill).id)
   const no = stations.findIndex((s) => s.id === lesson.skill) + 1
   const next = nextId ? skillIndex[nextId] : null
   const labels = lesson.steps.flatMap((s) => (s.kind === 'exercise' ? [s.label] : []))
@@ -71,7 +71,7 @@ export function StationPass({ lesson, outcomes, primary, onPrimary, onLater }: {
           </div>
         )}
         {next && (
-          <Link to="/goal/astar" className="flex items-center justify-between gap-3 px-5 py-4 text-ink no-underline">
+          <Link to={`/goal/${goal.id}`} className="flex items-center justify-between gap-3 px-5 py-4 text-ink no-underline">
             <span className="leading-snug">
               <b className="text-[17px]">Đã mở ga {stations.findIndex((s) => s.id === next.id) + 1}</b>
               <br />

@@ -1,8 +1,9 @@
 import { useState } from 'react'
 import { Link } from 'react-router'
+import { goalMaps } from '@/content/goalMaps'
 import { sketchTitles } from '@/content/mock/sketches'
 import { skillIndex } from '@/content/skills'
-import type { Lesson } from '@/learning/types'
+import type { Goal, Lesson } from '@/learning/types'
 import { Button, ButtonLink } from '@/ui/Button'
 import { StepFrame } from '@/ui/StepFrame'
 
@@ -10,7 +11,7 @@ import { StepFrame } from '@/ui/StepFrame'
  * Mở khóa sketch (docs/design/screens/16): mỗi thẻ úp là một câu hỏi, vẽ ra giấy trước rồi mới lật để so.
  * Tên sketch là dữ liệu mẫu và việc lật chưa được lưu: nội dung sketch và sổ tay thuộc mốc 6.
  */
-export function SketchUnlock({ lesson, no, opened, total }: { lesson: Lesson; no: number; opened: number; total: number }) {
+export function SketchUnlock({ lesson, goal, no, opened, total }: { lesson: Lesson; goal: Goal; no: number; opened: number; total: number }) {
   const titles = sketchTitles[lesson.skill] ?? []
   const [flipped, setFlipped] = useState<Set<number>>(() => new Set([0]))
   const flip = (i: number) => setFlipped((s) => new Set(s).add(i))
@@ -21,7 +22,7 @@ export function SketchUnlock({ lesson, no, opened, total }: { lesson: Lesson; no
       footer={
         <>
           <Link to="/" className="font-bold text-violet underline underline-offset-4">Để sau, lật trong sổ tay</Link>
-          <ButtonLink to="/goal/astar">Xem ga {no} trên bản đồ</ButtonLink>
+          <ButtonLink to={`/goal/${goal.id}`}>Xem ga {no} trên {goalMaps[goal.id] ? 'bản đồ' : 'tuyến'}</ButtonLink>
         </>
       }
     >
@@ -63,7 +64,7 @@ export function SketchUnlock({ lesson, no, opened, total }: { lesson: Lesson; no
       <p className="mt-4 mb-0 flex items-center gap-3 rounded-2xl bg-surface px-4 py-3 text-sm">
         <b className="font-mono text-base">{opened}/{total}</b>
         <span aria-hidden className="h-2.5 flex-1 overflow-hidden rounded-md bg-track"><span className="block h-full bg-violet" style={{ width: `${(opened / total) * 100}%` }} /></span>
-        <span className="text-muted">sketch Hiểu A*</span>
+        <span className="text-muted">sketch {goal.title}</span>
       </p>
     </StepFrame>
   )

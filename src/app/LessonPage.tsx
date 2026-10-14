@@ -3,7 +3,7 @@ import { useNavigate, useParams } from 'react-router'
 import { AnimatePresence, motion } from 'motion/react'
 import { lessons } from '@/content/lessons'
 import { sketchTitles } from '@/content/mock/sketches'
-import { goals } from '@/content/skills'
+import { goalOf } from '@/content/skills'
 import { useProgress, worstOutcome, type Outcome } from '@/learning/progress'
 import type { Lesson } from '@/learning/types'
 import { ExerciseView } from '@/exercises/ExerciseView'
@@ -51,8 +51,10 @@ export function LessonPlayer({ lesson, embedded }: { lesson: Lesson; embedded?: 
   const setLessonStep = useProgress((s) => s.setLessonStep)
   const record = useProgress((s) => s.record)
   const outcomes = useRef<Outcome[]>([])
+  const setFollow = useProgress((s) => s.setFollow)
   const navigate = useNavigate()
-  const model = useGoalModel(goals[0].id)
+  const goal = goalOf(lesson.skill)
+  const model = useGoalModel(goal.id)
   const [wide, setWide] = useState(false)
 
   const steps = lesson.steps
@@ -63,6 +65,9 @@ export function LessonPlayer({ lesson, embedded }: { lesson: Lesson; embedded?: 
     return i
   }
   const [screen, setScreen] = useState<Screen>(() => (saved > 0 && saved < steps.length ? { at: 'step', i: firstAllowed(saved) } : { at: 'intro' }))
+
+  // Vào ga nào thì theo mục tiêu của ga đó
+  useEffect(() => setFollow(goal.id), [goal.id, setFollow])
 
   // Lưu vị trí để quay lại học tiếp
   useEffect(() => {
@@ -95,9 +100,9 @@ export function LessonPlayer({ lesson, embedded }: { lesson: Lesson; embedded?: 
     if (!embedded && lesson.reorganize) setScreen({ at: 'reorganize' })
     else if (!embedded && sketchTitles[lesson.skill]) setScreen({ at: 'sketch' })
     else if (embedded) embedded.onComplete()
-    else navigate(`/goal/${goals[0].id}`)
+    else navigate(`/goal/${goal.id}`)
   }
-  const afterReorganize = () => (sketchTitles[lesson.skill] ? setScreen({ at: 'sketch' }) : navigate(`/goal/${goals[0].id}`))
+  const afterReorganize = () => (sketchTitles[lesson.skill] ? setScreen({ at: 'sketch' }) : navigate(`/goal/${goal.id}`))
 
   const key = screen.at === 'step' ? screen.i : screen.at
   const passPrimary = embedded ? 'Tiếp tục' : lesson.reorganize ? `Hệ thống lại · ${lesson.reorganize.minutes} phút` : sketchTitles[lesson.skill] ? `Mở khóa ${sketchTitles[lesson.skill].length} sketch` : 'Xem bản đồ'
@@ -123,7 +128,7 @@ export function LessonPlayer({ lesson, embedded }: { lesson: Lesson; embedded?: 
           {screen.at === 'step' && <StepScreen lesson={lesson} i={screen.i} go={go} exerciseNo={exerciseNo(screen.i)} exerciseTotal={exerciseTotal} outcomes={outcomes.current} />}
           {screen.at === 'pass' && <StationPass lesson={lesson} outcomes={outcomes.current} primary={passPrimary} onPrimary={nextStation} onLater={exit} />}
           {screen.at === 'reorganize' && lesson.reorganize && <Reorganize lesson={lesson} data={lesson.reorganize} onDone={afterReorganize} onLater={() => navigate('/')} onStage={setWide} />}
-          {screen.at === 'sketch' && <SketchUnlock lesson={lesson} no={model.noOf[lesson.skill] ?? 0} opened={model.sketchOpen} total={model.sketchTotal} />}
+          {screen.at === 'sketch' && <SketchUnlock lesson={lesson} goal={goal} no={model.noOf[lesson.skill] ?? 0} opened={model.sketchOpen} total={model.sketchTotal} />}
         </motion.div>
       </AnimatePresence>
     </div>

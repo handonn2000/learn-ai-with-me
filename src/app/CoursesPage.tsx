@@ -2,14 +2,15 @@ import { Link } from 'react-router'
 import { courses, type Course } from '@/content/courses'
 import { skillIndex } from '@/content/skills'
 import { lessons } from '@/content/lessons'
-import { useGoalRoute } from '@/learning/hooks'
+import { useFollowedGoalId, useGoalRoute } from '@/learning/hooks'
+import { useProgress } from '@/learning/progress'
 import { pickNearest, type Reason } from '@/learning/courses'
 import { ButtonLink } from '@/ui/Button'
 import { Chip } from '@/ui/Chip'
 import { ChevronRightIcon } from '@/ui/icons'
 import { MiniMountain } from '@/ui/roughArt'
 import { StationStrip, type StripState } from '@/ui/StationStrip'
-import { useCourseProgress } from './useCourseProgress'
+import { realProgress, useCourseProgress } from './useCourseProgress'
 
 const card = 'rounded-[20px] bg-surface'
 
@@ -33,10 +34,12 @@ export function CoursesPage() {
 }
 
 function Following() {
-  const { goal, stations, done, total } = useGoalRoute('astar')
+  const goalId = useFollowedGoalId()
+  const records = useProgress((s) => s.skills)
+  const { goal, stations, done, total } = useGoalRoute(goalId)
   const strip: StripState[] = stations.map((s) => (s.status !== 'new' ? 'done' : s.next ? 'today' : 'todo'))
   const minutesLeft = stations.filter((s) => s.status === 'new').reduce((n, s) => n + (lessons[skillIndex[s.id].lesson ?? '']?.minutes ?? 0), 0)
-  const sketches = courses[0].goals.find((g) => g.goalId)!
+  const sketches = realProgress(goalId, records)
   return (
     <section aria-labelledby="following" className="flex flex-wrap items-center gap-x-8 gap-y-5 rounded-3xl border-2 border-ink bg-surface p-5 shadow-block-lg min-[720px]:px-7 min-[720px]:py-[26px]">
       <div className="min-w-0 flex-[999_1_300px]">

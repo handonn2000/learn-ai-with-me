@@ -203,7 +203,7 @@ export function ClassifyInput({ ex, value, onChange, locked }: P<ClassifyEx, 'cl
               <Rich html={it.text} className="font-medium" />
             </div>
             <div className="flex flex-wrap gap-1.5" role="radiogroup" aria-label={`Nhóm cho: ${it.text.replace(/<[^>]+>/g, '')}`}>
-              {ex.groups.map((g, gi) => {
+              {(it.groups ?? ex.groups).map((g, gi) => {
                 const on = assigned[i] === gi
                 return (
                   <button

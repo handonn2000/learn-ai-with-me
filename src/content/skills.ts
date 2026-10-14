@@ -1,9 +1,11 @@
-import type { Goal, Skill } from '@/learning/types'
+import type { Goal, Skill, SkillId } from '@/learning/types'
 import { indexSkills } from '@/learning/graph'
+import { goalOfSkill } from '@/learning/goals'
 import { city } from './graphs'
+import { agentSkills } from './skillsAgents'
 
 /**
- * Đồ thị kỹ năng — Phần II CSC14003 (buổi 3–5).
+ * Đồ thị kỹ năng — Phần II CSC14003 (buổi 3–5), cộng tuyến tác tử của buổi 2 (`skillsAgents.ts`).
  * Cạnh = tiên quyết thật. BFS và GBFS nằm trên bản đồ nhưng KHÔNG nằm trên đường tới A*:
  * hiểu A* không đòi hỏi biết BFS hay GBFS.
  */
@@ -11,6 +13,7 @@ export const skills: Skill[] = [
   {
     id: 'formulate',
     title: 'Mô hình hóa bài toán',
+    short: 'mô hình hóa',
     can: 'Viết ra 5 thành phần của một bài toán tìm kiếm: trạng thái đầu, hành động, kết quả của hành động, kiểm tra đích và chi phí đường đi.',
     prereqs: [],
     lesson: 'formulate',
@@ -30,6 +33,7 @@ export const skills: Skill[] = [
   {
     id: 'state-graph',
     title: 'Đọc bản đồ trạng thái',
+    short: 'bản đồ',
     can: 'Đọc một bản đồ trạng thái: liệt kê các trạng thái kế tiếp của một nút và tính chi phí của một đường đi.',
     prereqs: ['formulate'],
     lesson: 'state-graph',
@@ -51,6 +55,7 @@ export const skills: Skill[] = [
   {
     id: 'frontier',
     title: 'Mở rộng nút và frontier',
+    short: 'frontier',
     can: 'Mở rộng một nút, chỉ ra frontier sau mỗi lần mở rộng và lần theo con trỏ cha để đọc ra đường đi.',
     prereqs: ['state-graph'],
     lesson: 'frontier',
@@ -71,6 +76,7 @@ export const skills: Skill[] = [
   {
     id: 'graph-search',
     title: 'Tránh lặp với tập explored',
+    short: 'explored',
     can: 'Dùng tập explored để bỏ những trạng thái đã gặp, và giải thích vì sao thiếu nó thì việc tìm kiếm có thể lặp mãi.',
     prereqs: ['frontier'],
     lesson: 'graph-search',
@@ -92,6 +98,7 @@ export const skills: Skill[] = [
   {
     id: 'priority-queue',
     title: 'Hàng đợi ưu tiên',
+    short: 'hàng đợi',
     can: 'Mô phỏng hàng đợi ưu tiên: biết phần tử nào được lấy ra trước, kể cả khi hai khóa bằng nhau.',
     prereqs: [],
     lesson: 'priority-queue',
@@ -112,6 +119,7 @@ export const skills: Skill[] = [
   {
     id: 'bfs',
     title: 'Tìm kiếm theo chiều rộng (BFS)',
+    short: 'BFS',
     can: 'Chạy tay BFS với hàng đợi vào trước ra trước, và giải thích vì sao BFS ra đường ít chặng nhất chứ chưa chắc rẻ nhất.',
     prereqs: ['graph-search'],
     source: 'Buổi 4',
@@ -130,6 +138,7 @@ export const skills: Skill[] = [
   {
     id: 'ucs',
     title: 'Tìm kiếm chi phí đều (UCS)',
+    short: 'UCS',
     can: 'Chạy tay UCS: luôn lấy ra nút có g(n) nhỏ nhất, chỉ dừng khi lấy đích ra, và cập nhật khi thấy đường rẻ hơn.',
     prereqs: ['graph-search', 'priority-queue'],
     lesson: 'ucs',
@@ -154,6 +163,7 @@ export const skills: Skill[] = [
   {
     id: 'heuristic',
     title: 'Hàm heuristic h(n)',
+    short: 'h(n)',
     can: 'Giải thích h(n) là ước lượng chi phí còn lại từ n tới đích, đọc h trên bản đồ, và biết h(đích) = 0.',
     prereqs: ['state-graph'],
     lesson: 'heuristic',
@@ -178,6 +188,7 @@ export const skills: Skill[] = [
   {
     id: 'gbfs',
     title: 'Tìm kiếm tham lam (GBFS)',
+    short: 'GBFS',
     can: 'Chạy tay GBFS với f(n) = h(n), và chỉ ra một trường hợp nó trả về đường không rẻ nhất.',
     prereqs: ['heuristic', 'graph-search', 'priority-queue'],
     source: 'Buổi 5',
@@ -196,6 +207,7 @@ export const skills: Skill[] = [
   {
     id: 'astar',
     title: 'Chạy tay A*',
+    short: 'A*',
     can: 'Chạy tay A* với f(n) = g(n) + h(n) và chỉ ra nút được mở rộng tiếp theo.',
     prereqs: ['ucs', 'heuristic'],
     lesson: 'astar',
@@ -217,6 +229,7 @@ export const skills: Skill[] = [
   {
     id: 'admissible',
     title: 'Khi nào A* chắc chắn đúng',
+    short: 'đúng?',
     can: 'Kiểm tra một heuristic có admissible (không bao giờ ước lượng quá chi phí thật) không, và giải thích vì sao điều đó giúp A* ra đường rẻ nhất.',
     prereqs: ['astar'],
     lesson: 'admissible',
@@ -233,11 +246,19 @@ export const skills: Skill[] = [
       },
     ],
   },
+  ...agentSkills,
 ]
 
 export const skillIndex = indexSkills(skills)
 
+/** Thứ tự = thứ tự gợi ý khi người học chưa theo mục tiêu nào: tác tử (buổi 2) trước A* (buổi 3–5). */
 export const goals: Goal[] = [
+  {
+    id: 'peas',
+    title: 'Mô tả một tác tử thông minh',
+    outcome: 'Viết PEAS cho một tác tử và xếp loại môi trường của nó theo bảy chiều.',
+    target: 'env-classify',
+  },
   {
     id: 'astar',
     title: 'Hiểu A*',
@@ -247,3 +268,6 @@ export const goals: Goal[] = [
 ]
 
 export const goalIndex = Object.fromEntries(goals.map((g) => [g.id, g]))
+
+/** Mục tiêu chứa kỹ năng này; kỹ năng không thuộc tuyến nào (BFS, GBFS) thì lấy mục tiêu đầu. */
+export const goalOf = (id: SkillId): Goal => goalOfSkill(goals, skillIndex, id) ?? goals[0]

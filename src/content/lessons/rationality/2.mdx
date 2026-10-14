@@ -1,0 +1,16 @@
+import { Deep } from '@/ui/Deep'
+
+**Tác tử duy lý** (rational agent) là tác tử làm điều đúng, và "đúng" được đo bằng thước đo hiệu năng. Nhưng hành động nào là duy lý thì còn tùy vào bốn thứ:
+
+1. **Thước đo hiệu năng**: tiêu chí thành công.
+2. **Tri thức có sẵn** của tác tử về môi trường.
+3. **Các hành động** tác tử làm được.
+4. **Chuỗi tri giác** tới thời điểm đó.
+
+Gộp lại thành định nghĩa: với mỗi chuỗi tri giác có thể có, tác tử duy lý chọn hành động _được kỳ vọng_ đem lại thước đo cao nhất, dựa trên bằng chứng từ chuỗi tri giác và tri thức nó có sẵn.
+
+Giống bạn đi thi: cố lấy nhiều điểm nhất, dựa trên đề đang cầm và những gì đã học. Không ai chấm bạn theo câu hỏi chưa phát.
+
+<Deep title="robot hai ô có duy lý không">
+Robot ba dòng ở ga trước là duy lý, khi đủ bốn điều kiện: mỗi ô sạch được 1 điểm ở mỗi bước; nó biết căn phòng có hai ô và hút thì ô sạch; nó làm được sang trái, sang phải, hút, đứng yên; và nó biết mình đang ở ô nào, ô đó bẩn không. Đổi một trong bốn thứ, ví dụ trừ điểm mỗi lần di chuyển, thì cùng chương trình ấy hết duy lý: sàn sạch rồi mà nó vẫn chạy qua chạy lại.
+</Deep>

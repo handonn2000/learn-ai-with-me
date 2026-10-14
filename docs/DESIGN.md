@@ -85,7 +85,7 @@ mình đã biết tới mục tiêu. Mọi thứ về tiến độ được vẽ
 | Đồ thị bài toán | SVG tự vẽ + Motion (`widgets/GraphView`): cần điều khiển từng nút, màu trạng thái và cỡ chữ trên mobile |
 | Công thức | KaTeX |
 | Nội dung | MDX cho phần giải thích, TypeScript cho bài tập và đồ thị kỹ năng |
-| Tiến độ | Zustand (persist localStorage, key `learn-ai-v2`) + ts-fsrs, tắt bước học ngắn hạn: thẻ mới Again → 1 ngày, Hard → 2, Good → 3, Easy → 8 |
+| Tiến độ | Zustand (persist localStorage, key `learn-ai-v2`: `skills`, `lessonStep`, `follow`) + ts-fsrs, tắt bước học ngắn hạn: thẻ mới Again → 1 ngày, Hard → 2, Good → 3, Easy → 8 |
 | Định tuyến | React Router, hash router — GitHub Pages không cần trang 404 giả |
 | Kiểm thử | Vitest — engine thuật toán, đồ thị kỹ năng, chấm bài |
 
@@ -118,5 +118,25 @@ src/
    ≤ 1 trắc nghiệm, đáp án hợp lệ, không có `{ }` trần trong MDX.
 5. Bài tập dùng bản đồ: đáp án trace được engine tính, không gõ tay. Ví dụ mới thì viết test cho kết quả
    mong đợi trong `algorithms/search.test.ts`.
+6. MDX không bật GFM: bảng markdown không hiện. Bảng dùng `widgets/DataTable`. Khối mã giả (```) đã có style.
 
 `content/` không import UI ngoài các widget được nhúng vào MDX. Engine thuật toán thuần, có test.
+
+### Thêm một mục tiêu
+
+Hiện có hai mục tiêu thật: `peas` (Mô tả một tác tử thông minh, buổi 2, kỹ năng ở `content/skillsAgents.ts`)
+và `astar` (Hiểu A*, buổi 3–5).
+
+1. Thêm `Goal` vào `goals` trong `content/skills.ts`. Thứ tự trong mảng là thứ tự gợi ý cho người chưa học gì.
+2. Đặt `goalId` cho mục tiêu tương ứng trong `content/courses.ts`: số ga và số sketch khi đó lấy từ tuyến thật.
+3. Mỗi ga nên có `short` (nhãn ô "Sketch cả tuyến") và tên sketch trong `content/mock/sketches.ts`.
+4. Bản đồ mục tiêu (`content/goalMaps.ts`) là tùy chọn; thiếu thì trang mục tiêu chỉ có Danh sách.
+   `GoalMap` hiện còn gắn với A* (ga phụ GBFS), muốn vẽ bản đồ cho mục tiêu khác phải tổng quát nó trước.
+
+Mục tiêu đang theo (`pickFollowed` trong `learning/goals.ts`): mục tiêu của ga người học vào gần nhất
+(`follow` trong store, ghi khi mở một lesson) nếu chưa xong; không có thì mục tiêu chưa xong đầu tiên đã có
+tiến độ, rồi mục tiêu chưa xong đầu tiên. Ôn tập không đổi mục tiêu đang theo. Màn Hôm nay, Khóa học, Sổ tay
+và buổi học đều dùng mục tiêu này; màn của một lesson dùng mục tiêu chứa ga đó (`goalOf`).
+
+Buổi học hôm nay lấy bước đoán trước từ lesson của ga sau và bước giấy từ lesson của ga hôm nay. Ga thiếu thì
+bỏ bước đó; riêng tuyến A* còn dùng dữ liệu mẫu ga UCS (`content/mock/session.ts`).

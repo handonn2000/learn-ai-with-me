@@ -1,0 +1,15 @@
+import { PeasCards } from '@/widgets/PeasCards'
+import { peasExamples } from '@/content/agents'
+
+Cùng một khuôn bốn chữ, áp lên năm tác tử rất khác nhau:
+
+<PeasCards rows={peasExamples} />
+
+Môi trường không nhất thiết là thế giới thật. Trò chơi điện tử, chương trình mô phỏng bay hay Internet đều là môi trường nhân tạo mà vẫn rất phức tạp. Tác tử sống trong đó, từ đầu tới cuối là phần mềm, được gọi là **softbot**.
+
+Có bốn chỗ tôi thấy người viết PEAS hay đặt nhầm ô nhất:
+
+1. **P là kết quả, không phải hành động.** "Phanh gấp khi có người qua đường" là chuyện của A. Cái P cần là "không va chạm".
+2. **Màn hình là bộ chấp hành.** Hệ chẩn đoán y khoa "làm ra" câu hỏi và chẩn đoán bằng cách hiện chúng lên màn hình.
+3. **Bàn phím là cảm biến** của tác tử phần mềm: triệu chứng và câu trả lời đi vào qua đó.
+4. **E không chứa bộ phận của tác tử.** Camera của taxi nằm ở S, không nằm ở E.

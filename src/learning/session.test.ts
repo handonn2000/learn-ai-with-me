@@ -16,6 +16,10 @@ describe('kế hoạch buổi học hôm nay', () => {
     expect(buildPlan({ ...base, hasAfter: false }).map((s) => s.kind)).toEqual(['review', 'lesson', 'paper'])
   })
 
+  it('bỏ bước giấy khi ga hôm nay không có', () => {
+    expect(buildPlan({ ...base, hasPaper: false }).map((s) => s.kind)).toEqual(['review', 'lesson', 'guess'])
+  })
+
   it('không có ga mới thì chỉ còn ôn, và hết việc thì kế hoạch rỗng', () => {
     expect(buildPlan({ ...base, newStation: null }).map((s) => s.kind)).toEqual(['review'])
     expect(buildPlan({ ...base, newStation: null, dueCount: 0 })).toEqual([])

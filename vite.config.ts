@@ -13,5 +13,7 @@ export default defineConfig({
     tailwindcss(),
   ],
   resolve: { alias: { '@': fileURLToPath(new URL('./src', import.meta.url)) } },
+  // Preview pane gán cổng qua PORT; không có thì Vite dùng 5173 như cũ
+  server: process.env.PORT ? { port: Number(process.env.PORT), strictPort: true } : {},
   test: { environment: 'node', include: ['src/**/*.test.ts'] },
 })

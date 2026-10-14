@@ -1,6 +1,8 @@
 import { useState } from 'react'
 import { lessons } from '@/content/lessons'
-import { skillIndex } from '@/content/skills'
+import { courses } from '@/content/courses'
+import { goals, skillIndex } from '@/content/skills'
+import { useFollowedGoalId } from '@/learning/hooks'
 import { useProgress } from '@/learning/progress'
 import { Button } from '@/ui/Button'
 import { Chip } from '@/ui/Chip'
@@ -19,9 +21,10 @@ const sameDay = (a: Date, b: Date) => a.toDateString() === b.toDateString()
  * Nội dung sketch từng ga chưa có (mới có tên, là dữ liệu mẫu) và ảnh trang giấy chưa chụp được: hai phần này còn thiếu.
  */
 export function NotebookPage() {
-  const model = useGoalModel('astar')
+  const followed = useFollowedGoalId()
+  const [course, setCourse] = useState<string>(followed)
+  const model = useGoalModel(course === 'de' ? followed : course)
   const records = useProgress((s) => s.skills)
-  const [course, setCourse] = useState<'astar' | 'de'>('astar')
   const [redraw, setRedraw] = useState<StationVM | null>(null)
   const done = model.stations.filter((s) => s.state === 'done')
   const locked = model.stations.filter((s) => s.state !== 'done')
@@ -34,12 +37,12 @@ export function NotebookPage() {
         <div className="min-w-0 max-w-[40em]">
           <h1 className="m-0 text-[40px] leading-none font-extrabold tracking-[-0.035em] min-[720px]:text-[52px]">Sổ tay</h1>
           <p className="mt-3 mb-0 text-base text-muted">
-            Mỗi ga có vài sketch, mở khi bạn qua ga. Cả mục tiêu cũng có sketch riêng, mở khi tới đích. <b className="text-ink">Hiểu A*: {model.sketchOpen}/{model.sketchTotal} sketch.</b>
+            Mỗi ga có vài sketch, mở khi bạn qua ga. Cả mục tiêu cũng có sketch riêng, mở khi tới đích. {course !== 'de' && <b className="text-ink">{model.goal.title}: {model.sketchOpen}/{model.sketchTotal} sketch.</b>}
           </p>
         </div>
-        <div role="group" aria-label="Chọn mục tiêu" className="inline-flex overflow-hidden rounded-[14px] border-2 border-ink bg-surface text-[15px]">
-          {([['astar', 'Hiểu A*'], ['de', 'Data Engineering']] as const).map(([id, t], i) => (
-            <button key={id} type="button" aria-pressed={course === id} onClick={() => setCourse(id)} className={`min-h-11 px-4 font-semibold ${i > 0 ? 'border-l-2 border-ink' : ''} ${course === id ? 'bg-ink text-white' : ''}`}>{t}</button>
+        <div role="group" aria-label="Chọn mục tiêu" className="grid w-full grid-cols-3 overflow-hidden rounded-[14px] border-2 border-ink bg-surface text-[15px] min-[620px]:inline-flex min-[620px]:w-auto">
+          {[...goals.map((g) => [g.id, courses.flatMap((c) => c.goals).find((c) => c.goalId === g.id)?.short ?? g.title]), ['de', 'Data Engineering']].map(([id, t], i) => (
+            <button key={id} type="button" aria-pressed={course === id} onClick={() => setCourse(id)} className={`min-h-11 px-2 leading-tight font-semibold min-[620px]:px-4 ${i > 0 ? 'border-l-2 border-ink' : ''} ${course === id ? 'bg-ink text-white' : ''}`}>{t}</button>
           ))}
         </div>
       </div>

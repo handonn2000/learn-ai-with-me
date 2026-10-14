@@ -1,6 +1,7 @@
 import { useMemo } from 'react'
 import { Link, useParams } from 'react-router'
 import { courseIndex, type Course } from '@/content/courses'
+import { goalMaps } from '@/content/goalMaps'
 import { ButtonLink } from '@/ui/Button'
 import { Chip } from '@/ui/Chip'
 import { ChevronRightIcon } from '@/ui/icons'
@@ -274,7 +275,7 @@ function CourseAside({ course, progress }: { course: Course; progress: GoalProgr
               <b>{plan.next.title}</b>
             </li>
           </ol>
-          <ButtonLink to={`/goal/${followed.goal.goalId}`} className="mt-3.5 h-[52px] w-full text-[17px]">Mở bản đồ {followed.goal.title}</ButtonLink>
+          <ButtonLink to={`/goal/${followed.goal.goalId}`} className="mt-3.5 h-[52px] w-full text-[17px]">{goalMaps[followed.goal.goalId ?? ''] ? 'Mở bản đồ' : 'Mở tuyến'} {followed.goal.title}</ButtonLink>
         </section>
       )}
       <section aria-labelledby="dst" className="rounded-[18px] bg-surface p-4">

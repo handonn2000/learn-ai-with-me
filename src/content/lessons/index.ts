@@ -8,7 +8,12 @@ import { lesson as ucs } from './ucs'
 import { lesson as heuristic } from './heuristic'
 import { lesson as astar } from './astar'
 import { lesson as admissible } from './admissible'
+import { lesson as agent } from './agent'
+import { lesson as rationality } from './rationality'
+import { lesson as peas } from './peas'
+import { lesson as envDims } from './env-dims'
+import { lesson as envClassify } from './env-classify'
 
 export const lessons: Record<string, Lesson> = Object.fromEntries(
-  [formulate, stateGraph, frontier, graphSearch, priorityQueue, ucs, heuristic, astar, admissible].map((l) => [l.id, l]),
+  [formulate, stateGraph, frontier, graphSearch, priorityQueue, ucs, heuristic, astar, admissible, agent, rationality, peas, envDims, envClassify].map((l) => [l.id, l]),
 )

@@ -36,6 +36,9 @@ interface State {
   /** Bước đang làm dở trong mỗi lesson. */
   lessonStep: Record<string, number>
   setLessonStep: (lessonId: string, step: number) => void
+  /** Mục tiêu đang theo: ghi khi người học vào một ga. Thiếu (dữ liệu cũ) thì suy ra từ tiến độ, xem `pickFollowed`. */
+  follow: string | null
+  setFollow: (goalId: string) => void
   /** Ghi kết quả học/ôn một kỹ năng. */
   record: (id: SkillId, outcome: Outcome, via: SkillRecord['via'], now?: Date) => void
   /** Ghi một điểm FSRS do người học tự chấm (câu nhớ lại: Quên / Khó / Được / Dễ). */
@@ -60,6 +63,8 @@ export const useProgress = create<State>()(
       skills: {},
       lessonStep: {},
       setLessonStep: (lessonId, step) => set((s) => ({ lessonStep: { ...s.lessonStep, [lessonId]: step } })),
+      follow: null,
+      setFollow: (goalId) => set((s) => (s.follow === goalId ? s : { follow: goalId })),
       record: (id, outcome, via, now = new Date()) =>
         set((s) => {
           const prev = s.skills[id]
@@ -87,7 +92,7 @@ export const useProgress = create<State>()(
           }
           return { skills }
         }),
-      reset: () => set({ skills: {}, lessonStep: {} }),
+      reset: () => set({ skills: {}, lessonStep: {}, follow: null }),
     }),
     { name: 'learn-ai-v2', version: 1 },
   ),

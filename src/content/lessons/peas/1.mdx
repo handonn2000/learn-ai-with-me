@@ -1,0 +1,15 @@
+import { PeasCards } from '@/widgets/PeasCards'
+import { peasTaxi } from '@/content/agents'
+
+Trước khi viết dòng code đầu tiên cho một chiếc taxi tự lái, bạn phải trả lời được bốn câu: chạy thế nào thì gọi là tốt, chạy ở đâu, điều khiển được gì, và nhìn thấy gì. Bốn câu đó là **môi trường tác vụ** (task environment), viết tắt là **PEAS**:
+
+- **P**erformance measure: thước đo hiệu năng.
+- **E**nvironment: môi trường.
+- **A**ctuators: bộ chấp hành.
+- **S**ensors: cảm biến.
+
+Nếu tác tử duy lý là lời giải thì môi trường tác vụ là đề bài. Viết PEAS luôn là bước đầu tiên khi thiết kế một tác tử, và nên viết càng đủ càng tốt.
+
+<PeasCards rows={[peasTaxi]} />
+
+Chữ P khó viết nhất, vì các tiêu chí giằng co nhau: tới đúng chỗ, tốn ít xăng, đi nhanh hoặc rẻ, ít vi phạm luật giao thông, an toàn và êm cho khách. Muốn nhanh thì khó tiết kiệm xăng. Muốn an toàn tuyệt đối thì cứ đậu xe trong gara. Viết P nghĩa là quyết định cân các thứ đó với nhau ra sao.

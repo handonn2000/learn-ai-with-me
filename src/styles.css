@@ -132,6 +132,23 @@ h3 {
   padding: 0.05em 0.35em;
   border-radius: 5px;
 }
+/* khối mã giả: một khung, không tô từng dòng như mã inline */
+.prose-lesson pre {
+  font-family: var(--font-mono);
+  font-size: 0.85em;
+  line-height: 1.6;
+  background: var(--color-subtle);
+  border: 2px solid var(--color-ink);
+  border-radius: 16px;
+  padding: 0.75em 1em;
+  overflow-x: auto;
+}
+.prose-lesson pre code {
+  font-size: inherit;
+  background: none;
+  border: 0;
+  padding: 0;
+}
 
 /* chuỗi HTML inline trong đề bài */
 .rich b {

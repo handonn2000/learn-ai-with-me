@@ -9,7 +9,7 @@ export const todayMock = {
   calibration: { sure: 10, right: 7, wrong: 3, weakSpot: 'UCS dừng khi nào' },
   /** "Sổ tay": sketch gần nhất và ảnh trang giấy. */
   notebook: { sketchTitle: 'Frontier và explored', photoLabel: 'Ảnh trang giấy của bạn · 10/10' },
-  /** "Mục tiêu gợi ý tiếp theo": chưa có đồ thị mục tiêu thứ hai. */
+  /** "Mục tiêu gợi ý tiếp theo": chưa có logic chọn mục tiêu kế tiếp (đã có hai mục tiêu thật: peas, astar). */
   nextGoal: { title: 'Chọn đúng thuật toán tìm kiếm' },
   /** Hai bước mới của buổi học chưa dựng (đoán trước, làm trên giấy). */
   guessMinutes: 2,

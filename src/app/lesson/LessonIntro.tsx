@@ -1,5 +1,5 @@
 import { Link } from 'react-router'
-import { goals, skillIndex } from '@/content/skills'
+import { goalOf, skillIndex } from '@/content/skills'
 import { useGoalRoute } from '@/learning/hooks'
 import { retrievability, statusOf, useProgress } from '@/learning/progress'
 import type { Lesson } from '@/learning/types'
@@ -11,7 +11,7 @@ import { StepFrame } from '@/ui/StepFrame'
 export function LessonIntro({ lesson, onStart }: { lesson: Lesson; onStart: () => void }) {
   const skill = skillIndex[lesson.skill]
   const records = useProgress((s) => s.skills)
-  const { goal, stations } = useGoalRoute(goals[0].id)
+  const { goal, stations } = useGoalRoute(goalOf(lesson.skill).id)
   const no = stations.findIndex((s) => s.id === lesson.skill) + 1
   const exercises = lesson.steps.filter((s) => s.kind === 'exercise').length
   return (
