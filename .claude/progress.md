@@ -15,7 +15,11 @@
 - Phát hiện lỗi nội dung (chưa sửa): `admissible-e3` nói chỉ sửa h(A) = 1 là heuristic admissible, nhưng
   `overestimate` có h(S) = 7 > h*(S) = 2 (`overestimateFixed` sửa cả S: 2).
 - 2026-10-16: theo yêu cầu user, bỏ `.claude/` khỏi `.gitignore` (repo public; đã rà: không có secret, chỉ lộ ID
-  routine `trig_…` và vài đường dẫn máy). Vẫn ignore `.claude/settings.local.json` và `CLAUDE.md`. Chưa commit.
+  routine `trig_…` và vài đường dẫn máy). Bỏ ignore luôn `CLAUDE.md` và viết lại nó cho v2 (stack, store,
+  cấu trúc, luật lesson, bảng giữ tài liệu khớp code, danh sách di sản v1 trong `.claude/`). Vẫn ignore
+  `.claude/settings.local.json`, `__pycache__/`. `npm test` 46/46, build qua. Commit `f1f933e`, đẩy lên `origin/v2`.
+- Còn lệch trong `docs/DESIGN.md` (chưa sửa): §2 bảng token và font là bản trước mẫu B (token thật ở
+  `src/styles.css` / HANDOFF §1); §3 ghi React Flow + dagre cho bản đồ kỹ năng nhưng `package.json` không có.
 - Quyết định của user: skill phủ cả dựng bài lẫn quyết định sản phẩm; KHÔNG sửa skill v1 (`gamification`,
   `new-lesson`) vì v2 sẽ thay hẳn.
 - Còn dở: câu nhớ lại cho ~12 kỹ năng (luật 4); đề xuất M9 xen kẽ, M13 câu hỏi người học, M14 độ chắc chắn.
