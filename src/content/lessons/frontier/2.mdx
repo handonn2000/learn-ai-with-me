@@ -4,7 +4,7 @@ import { city } from '@/content/graphs'
 Tìm được đích rồi thì làm sao biết đã đi đường nào? Mỗi nút ghi nhớ ba thứ:
 
 - **trạng thái** của nó, ví dụ C;
-- **nút cha**: nút đã sinh ra nó khi được mở rộng;
+- **nút cha** (parent): nút đã sinh ra nó khi được mở rộng;
 - **g(n)**: chi phí đường đi từ S tới nút đó theo các nút cha.
 
 Khi nút cha sinh ra nút con, g của con bằng g của cha cộng chi phí cạnh nối hai nút. Ví dụ g(A) = 3, mở rộng A ra C qua cạnh dài 3 thì g(C) = 6.
@@ -13,4 +13,4 @@ Khi lấy được G ra, bạn đi ngược theo nút cha: cha của G là E, ch
 
 <GraphView problem={city} showCosts path={['S', 'A', 'C', 'E', 'G']} notes={{ A: 'cha: S', C: 'cha: A', E: 'cha: C', G: 'cha: E' }} label="Đường đi đọc ngược từ G theo nút cha" />
 
-Các nút nối với nhau bằng quan hệ cha–con tạo thành một cái cây, gọi là **cây tìm kiếm**. Gốc của cây là S. Một trạng thái có thể xuất hiện nhiều lần trong cây: mở rộng A sẽ sinh ra S một lần nữa, vì A nối với S. Bài sau sẽ xử lý chỗ này.
+Các nút nối với nhau bằng quan hệ cha–con tạo thành một cái cây, gọi là **cây tìm kiếm** (search tree). Gốc của cây là S. Một trạng thái có thể xuất hiện nhiều lần trong cây: mở rộng A sẽ sinh ra S một lần nữa, vì A nối với S. Bài sau sẽ xử lý chỗ này.

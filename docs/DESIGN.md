@@ -43,6 +43,22 @@ Kết thúc: đối chiếu lại mục tiêu và cho biết kết quả vào l�
 3. Câu ngắn. Không rào đón; chi tiết nâng cao để trong khối "Đào sâu" (thu gọn sẵn).
 4. Xưng tôi/bạn, ví von khi nó giúp hiểu cơ chế — gia vị, không phải món chính.
 5. Không giả định đã học buổi trước: cần gì thì nút tiên quyết lo, lesson chỉ nhắc một dòng.
+6. Thuật ngữ AI: từ phổ biến giữ nguyên tiếng Anh ("agent", không "tác tử"); từ đã dịch thì kèm tiếng Anh
+   trong ngoặc, `trạng thái (state)`, ít nhất ở lần đầu xuất hiện trong mỗi lesson. Bảng dưới đây là nguồn
+   duy nhất; skill `lesson-voice` trỏ về đây.
+
+### Thuật ngữ
+
+"Lần đầu" tính trong chữ đoán trước, giải thích, đề và lời giải bài tập của lesson đó, theo thứ tự hiện ra.
+Nhãn ngắn (tiêu đề kỹ năng/bước, tên nhóm và cột, "Học xong bạn làm được", câu ôn) dùng đúng chữ trong bảng
+nhưng không bắt kèm ngoặc. Thuật ngữ mới chưa có ở đây thì thêm vào bảng trước, rồi mới dùng.
+
+| Cách dùng | Thuật ngữ |
+|---|---|
+| **Giữ tiếng Anh**, không dịch | agent (agent khác, nhiều agent, agent duy lý), percept, chuỗi percept (percept sequence), PEAS, softbot, frontier, explored, graph search / tree search, heuristic, admissible, tên thuật toán (BFS, UCS, GBFS, A\*, Dijkstra) |
+| **Dịch + kèm tiếng Anh** lần đầu mỗi lesson | môi trường (environment), cảm biến (sensor), bộ chấp hành (actuator), hàm agent (agent function), chương trình agent (agent program), kiến trúc (architecture), thước đo hiệu năng (performance measure), agent duy lý (rational agent), toàn tri (omniscient), tự chủ (autonomy), môi trường tác vụ (task environment); bảy chiều môi trường: quan sát được đầy đủ / một phần (fully / partially observable), một / nhiều agent (single-agent / multi-agent), cạnh tranh / hợp tác (competitive / cooperative), tất định / ngẫu nhiên (deterministic / stochastic), từng hồi / tuần tự (episodic / sequential), tĩnh / nửa động / động (static / semidynamic / dynamic), rời rạc / liên tục (discrete / continuous), biết luật / chưa biết luật (known / unknown) |
+| | trạng thái (state), trạng thái đầu (initial state), hành động (action), kết quả của hành động (transition model), kiểm tra đích (goal test), đích (goal), chi phí đường đi (path cost), không gian trạng thái (state space), trạng thái kế tiếp (successor), lời giải tối ưu (optimal solution), mở rộng (expand), nút cha (parent), cây tìm kiếm (search tree), chiến lược tìm kiếm (search strategy), hàng đợi (queue), hàng đợi ưu tiên (priority queue), khóa (key), tìm kiếm chi phí đều (uniform-cost search), tìm kiếm tham lam (greedy best-first search), đoán quá (overestimate), nhất quán (consistent) |
+| **Từ thường**: kèm tiếng Anh ở lesson định nghĩa nó, sau đó thôi | nút (node), cạnh (edge), đường đi (path), trừu tượng hóa (abstraction) |
 
 ### Thang trợ giúp và mức thành thạo
 
@@ -136,7 +152,7 @@ src/
 
 ### Thêm một mục tiêu
 
-Hiện có hai mục tiêu thật: `peas` (Mô tả một tác tử thông minh, buổi 2, kỹ năng ở `content/skillsAgents.ts`)
+Hiện có hai mục tiêu thật: `peas` (Mô tả một agent thông minh, buổi 2, kỹ năng ở `content/skillsAgents.ts`)
 và `astar` (Hiểu A*, buổi 3–5).
 
 1. Thêm `Goal` vào `goals` trong `content/skills.ts`. Thứ tự trong mảng là thứ tự gợi ý cho người chưa học gì.

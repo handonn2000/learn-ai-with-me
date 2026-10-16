@@ -13,9 +13,9 @@ export const recalls: Record<string, Recall> = {
     prompt: 'Một hành động có duy lý hay không tùy vào bốn thứ nào?',
     points: [
       '<b>Thước đo hiệu năng</b>: tiêu chí thành công, chấm chuỗi trạng thái của môi trường.',
-      '<b>Tri thức có sẵn</b> của tác tử về môi trường.',
-      '<b>Các hành động</b> tác tử làm được.',
-      '<b>Chuỗi tri giác</b> tới thời điểm đó.',
+      '<b>Tri thức có sẵn</b> của agent về môi trường.',
+      '<b>Các hành động</b> agent làm được.',
+      '<b>Chuỗi percept</b> tới thời điểm đó.',
     ],
   },
   peas: {
@@ -31,7 +31,7 @@ export const recalls: Record<string, Recall> = {
     prompt: 'Kể đủ bảy chiều xếp loại môi trường, mỗi chiều với các vế của nó.',
     points: [
       'Quan sát được <b>đầy đủ</b> hay <b>một phần</b>.',
-      '<b>Một</b> hay <b>nhiều</b> tác tử (cạnh tranh hoặc hợp tác).',
+      '<b>Một</b> hay <b>nhiều</b> agent (cạnh tranh hoặc hợp tác).',
       '<b>Tất định</b> hay <b>ngẫu nhiên</b>.',
       '<b>Từng hồi</b> hay <b>tuần tự</b>.',
       '<b>Tĩnh</b>, <b>nửa động</b> hay <b>động</b>.',

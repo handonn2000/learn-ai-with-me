@@ -146,6 +146,14 @@ Review the actual learning experience, with findings tied to a location and evid
   check the method cards used for their listed pitfalls. A step that departs from the matrix
   is a finding only when no reason is recorded. Missing deep-processing exercise, missing
   free-recall item for a new lesson, or a hint that gives away the answer are required fixes.
+- **Terminology (v2 Vietnamese text):** check every learner-visible string of the lesson
+  (guess step, explanations, exercise prompts/hints/explanations, paper reference) against the
+  table in `docs/DESIGN.md` § Thuật ngữ. A term the table keeps in English must not be
+  translated ("tác tử" for agent is a finding); a translated term must carry its English in
+  parentheses at its first appearance in that lesson, e.g. "trạng thái (state)". Short labels
+  (step titles, group/column names, "Học xong bạn làm được", review checks) are exempt from the
+  parentheses but still use the table's wording. An AI term missing from the table is a finding:
+  propose a row.
 - **Purpose and visual variety:** what mechanism becomes easier to understand?
   Evaluate timeline, flow, spatial/isometric, 2D/3D, media or static alternatives on
   fitness for the concept. Repetition is a defect when it obscures distinct mechanisms,

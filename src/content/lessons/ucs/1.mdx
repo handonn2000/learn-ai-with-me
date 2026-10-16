@@ -1,10 +1,10 @@
 Ở bài đọc bản đồ, bạn đã thấy đi thêm một chặng có khi lại rẻ hơn. Vậy muốn ra đường rẻ nhất, thuật toán phải ưu tiên theo _chi phí_ chứ không theo số chặng.
 
-**Tìm kiếm chi phí đều** (uniform-cost search, UCS) làm đúng việc đó: mỗi lần, nó lấy ra nút có **g(n) nhỏ nhất**, tức nút đang có đường rẻ nhất tính từ S. Frontier của UCS là một hàng đợi ưu tiên với khóa là g.
+**Tìm kiếm chi phí đều** (uniform-cost search, UCS) làm đúng việc đó: mỗi lần, nó lấy ra nút có **g(n) nhỏ nhất**, tức nút đang có đường rẻ nhất tính từ S. Frontier của UCS là một hàng đợi ưu tiên (priority queue) với khóa (key) là g.
 
 Phần còn lại là vòng lặp graph search bạn đã biết, cộng thêm hai chi tiết. Đây là hai chỗ người ta hay sai nhất:
 
 1. **Chỉ dừng khi lấy đích ra khỏi frontier.** Lúc G vừa được sinh ra và đưa vào frontier, có thể vẫn còn một đường tới G rẻ hơn mà thuật toán chưa thấy. Phải đợi tới lượt G có g nhỏ nhất thì mới chắc chắn.
-2. **Gặp đường rẻ hơn thì thay.** Mở rộng sinh ra một trạng thái đang nằm trong frontier, mà g mới nhỏ hơn g đang có, thì thay g và nút cha. Đây là ngoại lệ đã hẹn ở bài trước. Trạng thái đã ở explored thì vẫn bỏ.
+2. **Gặp đường rẻ hơn thì thay.** Mở rộng (expand) sinh ra một trạng thái (state) đang nằm trong frontier, mà g mới nhỏ hơn g đang có, thì thay g và nút cha. Đây là ngoại lệ đã hẹn ở bài trước. Trạng thái đã ở explored thì vẫn bỏ.
 
 Thuật toán này chính là thuật toán Dijkstra mà bạn có thể đã gặp ở môn cấu trúc dữ liệu.

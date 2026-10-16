@@ -1,7 +1,7 @@
 import { ArrowDown, ArrowUp } from 'lucide-react'
 
 /**
- * Vòng tác tử ↔ môi trường: tri giác đi vào qua cảm biến, hành động đi ra qua bộ chấp hành.
+ * Vòng agent ↔ môi trường: percept đi vào qua cảm biến, hành động đi ra qua bộ chấp hành.
  * Dựng bằng HTML (không phải SVG) để chữ giữ cỡ đọc được trên điện thoại. Hình tĩnh.
  */
 export function AgentLoop({ env, sensors, actuators }: { env: string; sensors: string; actuators: string }) {
@@ -15,7 +15,7 @@ export function AgentLoop({ env, sensors, actuators }: { env: string; sensors: s
         <div className="flex items-center gap-2">
           <ArrowDown aria-hidden className="size-7 shrink-0 text-violet" strokeWidth={2.5} />
           <span>
-            <b className="text-violet">tri giác</b> vào qua <b>cảm biến</b>
+            <b className="text-violet">percept</b> vào qua <b>cảm biến</b>
             <span className="block text-muted">{sensors}</span>
           </span>
         </div>
@@ -28,7 +28,7 @@ export function AgentLoop({ env, sensors, actuators }: { env: string; sensors: s
         </div>
       </div>
       <div className="rounded-xl border-2 border-ink bg-violet-soft px-4 py-3">
-        <b className="block text-base">Tác tử</b>
+        <b className="block text-base">Agent</b>
         <span className="text-muted">chọn hành động từ những gì đã cảm nhận</span>
       </div>
     </figure>

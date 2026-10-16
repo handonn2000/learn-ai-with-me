@@ -9,7 +9,7 @@ export const lesson: Lesson = {
   minutes: 8,
   steps: [
     { kind: 'explain', title: 'Nhìn vào, làm ra', Body: S1 },
-    { kind: 'explain', title: 'Từ tri giác ra hành động', Body: S2 },
+    { kind: 'explain', title: 'Từ percept ra hành động', Body: S2 },
     {
       kind: 'exercise',
       exercise: {
@@ -38,32 +38,32 @@ export const lesson: Lesson = {
         prompt: 'Một chatbot trả lời khách trên trang bán hàng. Đâu là bộ chấp hành của nó?',
         options: ['Câu khách gõ vào khung chat', 'Tin nhắn nó gửi lại cho khách', 'Lịch sử các câu đã chat', 'Kho dữ liệu sản phẩm'],
         answer: [1],
-        hint: 'Tác tử phần mềm cũng "làm ra" một thứ gì đó trong môi trường của nó. Với chatbot, đó là gì?',
+        hint: 'Agent phần mềm cũng "làm ra" một thứ gì đó trong môi trường của nó. Với chatbot, đó là gì?',
         explain: 'Tin nhắn gửi đi là thứ chatbot <b>làm ra</b>. Câu khách gõ là thứ nó <b>nhận vào</b> qua cảm biến. Lịch sử chat và kho dữ liệu là thứ nó đọc hoặc nhớ, không phải thứ nó làm ra.',
       },
-      label: 'Tìm bộ chấp hành của tác tử phần mềm',
+      label: 'Tìm bộ chấp hành của agent phần mềm',
     },
     {
       kind: 'exercise',
       exercise: {
         id: 'agent-e3',
         kind: 'number',
-        prompt: 'Trong thế giới hai ô, bảng hàm tác tử cần bao nhiêu dòng cho mọi chuỗi tri giác dài đúng 3?',
+        prompt: 'Trong thế giới hai ô, bảng hàm agent cần bao nhiêu dòng cho mọi chuỗi percept dài đúng 3?',
         answer: 64,
         unit: 'dòng',
-        hint: 'Mỗi vị trí trong chuỗi có 4 tri giác có thể. Dài 2 là 4 × 4.',
+        hint: 'Mỗi vị trí trong chuỗi có 4 percept có thể. Dài 2 là 4 × 4.',
         explain: '4 × 4 × 4 = <b>64</b> dòng. Thêm một bước, bảng lại nhân 4.',
       },
-      label: 'Đếm số dòng của bảng hàm tác tử',
+      label: 'Đếm số dòng của bảng hàm agent',
     },
     {
       kind: 'paper',
       data: {
-        title: 'Vẽ vòng tác tử – môi trường cho một ứng dụng bạn dùng hằng ngày.',
+        title: 'Vẽ vòng agent – môi trường cho một ứng dụng bạn dùng hằng ngày.',
         minutes: 3,
         steps: [
           'Chọn một ứng dụng chỉ đường trên điện thoại (hoặc bất kỳ ứng dụng nào bạn hay dùng).',
-          'Vẽ hai khối "Tác tử" và "Môi trường", nối bằng hai mũi tên như trong bài.',
+          'Vẽ hai khối "Agent" và "Môi trường", nối bằng hai mũi tên như trong bài.',
           'Ghi ít nhất hai cảm biến trên mũi tên đi vào và hai bộ chấp hành trên mũi tên đi ra.',
         ],
         reference: [

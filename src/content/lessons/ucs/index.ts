@@ -14,7 +14,7 @@ export const lesson: Lesson = {
       data: {
         prompt: 'G vừa vào frontier với g = 13. UCS dừng lại chưa?',
         options: [
-          { title: 'Dừng', note: 'G là đích, trả về đường vừa tìm được' },
+          { title: 'Dừng', note: 'G là đích (goal), trả về đường vừa tìm được' },
           { title: 'Chưa dừng', note: 'Còn nút rẻ hơn G phải xét trước' },
         ],
         answer: 1,

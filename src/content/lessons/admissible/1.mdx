@@ -1,10 +1,10 @@
 import { SearchPlayer } from '@/widgets/SearchPlayer'
 import { overestimate } from '@/content/graphs'
 
-A\* chỉ tốt khi phỏng đoán h của nó đáng tin. Xem điều gì xảy ra khi h đoán quá tay.
+A\* chỉ tốt khi phỏng đoán h của nó đáng tin. Xem điều gì xảy ra khi h đoán quá tay (overestimate).
 
 Bản đồ nhỏ dưới đây có đường S → A → G chỉ tốn 2. Nhưng h(A) = 6, trong khi từ A tới G thật ra chỉ tốn 1. Chạy thử:
 
 <SearchPlayer problem={overestimate} algo="astar" showH />
 
-Mở rộng S xong, frontier có A với f = 1 + 6 = 7 và G với f = 3 + 0 = 3. G có f nhỏ hơn nên được lấy ra trước, và A\* trả về S → G tốn 3. Đường rẻ hơn qua A bị bỏ qua, chỉ vì h(A) dọa rằng A còn xa.
+Mở rộng (expand) S xong, frontier có A với f = 1 + 6 = 7 và G với f = 3 + 0 = 3. G có f nhỏ hơn nên được lấy ra trước, và A\* trả về S → G tốn 3. Đường rẻ hơn qua A bị bỏ qua, chỉ vì h(A) dọa rằng A còn xa.

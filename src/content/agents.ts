@@ -1,5 +1,5 @@
 /**
- * Dữ liệu cho tuyến "Mô tả một tác tử thông minh" (Buổi 2, Lecture02-IntelligentAgents.pdf).
+ * Dữ liệu cho tuyến "Mô tả một agent thông minh" (Buổi 2, Lecture02-IntelligentAgents.pdf).
  * Bảng PEAS lấy từ trang 29 và 31, bảng môi trường từ trang 40. Chỉ dịch nghĩa, không đổi phân loại.
  */
 
@@ -59,7 +59,7 @@ export const peasExamples: PeasRow[] = [
   },
 ]
 
-/** Bảng hàm tác tử của thế giới hút bụi hai ô (trang 9). */
+/** Bảng hàm agent của thế giới hút bụi hai ô (trang 9). */
 export const vacuumRows: string[][] = [
   ['[A, Sạch]', 'Sang phải'],
   ['[A, Bẩn]', 'Hút'],
@@ -78,10 +78,10 @@ export type DimId = 'obs' | 'agents' | 'det' | 'ep' | 'static' | 'disc' | 'known
  */
 export const dims: Record<DimId, { name: string; head: string; values: string[] }> = {
   obs: { name: 'Quan sát được', head: 'Quan sát', values: ['Đầy đủ', 'Một phần'] },
-  agents: { name: 'Số tác tử', head: 'Tác tử', values: ['Một', 'Nhiều'] },
+  agents: { name: 'Số agent', head: 'Agent', values: ['Một', 'Nhiều'] },
   det: { name: 'Kết quả hành động', head: 'Kết quả', values: ['Tất định', 'Ngẫu nhiên'] },
   ep: { name: 'Các quyết định', head: 'Quyết định', values: ['Từng hồi', 'Tuần tự'] },
-  static: { name: 'Trong lúc tác tử nghĩ', head: 'Thời gian', values: ['Tĩnh', 'Nửa động', 'Động'] },
+  static: { name: 'Trong lúc agent nghĩ', head: 'Thời gian', values: ['Tĩnh', 'Nửa động', 'Động'] },
   disc: { name: 'Trạng thái, thời gian, hành động', head: 'Giá trị', values: ['Rời rạc', 'Liên tục'] },
   known: { name: 'Luật của môi trường', head: 'Luật', values: ['Biết luật', 'Chưa biết luật'] },
 }

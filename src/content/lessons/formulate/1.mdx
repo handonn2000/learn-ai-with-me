@@ -3,11 +3,11 @@ import { city } from '@/content/graphs'
 
 Bạn muốn đi từ nhà tới trường. Trước khi đạp xe, bạn nhìn bản đồ và thử vài lối đi trong đầu. Máy tính cũng làm được việc đó, nhưng nó không "nhìn" bản đồ như bạn. Bạn phải mô tả bài toán cho nó bằng đúng năm thứ:
 
-1. **Trạng thái đầu**: bạn bắt đầu ở đâu. Ở đây là nhà, nút S.
-2. **Hành động**: đứng ở một chỗ thì làm được gì. Đứng ở S, bạn có thể đi tới A, B hoặc F.
-3. **Kết quả của hành động**: làm hành động đó thì sang chỗ nào. Từ S, "đi tới A" đưa bạn tới A.
-4. **Kiểm tra đích**: làm sao biết đã tới nơi. Câu hỏi là "mình đang ở G chưa?".
-5. **Chi phí đường đi**: mỗi bước tốn bao nhiêu, cộng lại cả đường. Ở đây là số phút đi xe, ghi trên mỗi cạnh.
+1. **Trạng thái đầu** (initial state): bạn bắt đầu ở đâu. Ở đây là nhà, nút S.
+2. **Hành động** (action): đứng ở một chỗ thì làm được gì. Đứng ở S, bạn có thể đi tới A, B hoặc F.
+3. **Kết quả của hành động** (transition model): làm hành động đó thì sang chỗ nào. Từ S, "đi tới A" đưa bạn tới A.
+4. **Kiểm tra đích** (goal test): làm sao biết đã tới nơi. Câu hỏi là "mình đang ở G chưa?".
+5. **Chi phí đường đi** (path cost): mỗi bước tốn bao nhiêu, cộng lại cả đường. Ở đây là số phút đi xe, ghi trên mỗi cạnh.
 
 <GraphView problem={city} showCosts label="Bản đồ từ nhà (S) tới trường (G)" />
 

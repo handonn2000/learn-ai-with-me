@@ -1,16 +1,16 @@
 import { GraphView } from '@/widgets/GraphView'
 import { city } from '@/content/graphs'
 
-Gom mọi trạng thái đi tới được từ trạng thái đầu lại, bạn có **không gian trạng thái** (state space). Ta vẽ nó thành một đồ thị:
+Gom mọi trạng thái (state) đi tới được từ trạng thái đầu lại, bạn có **không gian trạng thái** (state space). Ta vẽ nó thành một đồ thị:
 
-- mỗi **nút** là một trạng thái,
-- mỗi **cạnh** là một hành động nối hai trạng thái,
+- mỗi **nút** (node) là một trạng thái,
+- mỗi **cạnh** (edge) là một hành động (action) nối hai trạng thái,
 - số trên cạnh là chi phí của hành động đó.
 
 <GraphView problem={city} showCosts states={{ S: 'current', A: 'frontier', B: 'frontier', F: 'frontier' }} label="Ba trạng thái kế tiếp của S được tô vàng" />
 
 Các nút đi tới được từ một nút bằng đúng một hành động gọi là **trạng thái kế tiếp** (successor) của nó. Trên hình, kế tiếp của S là A, B và F. Trên bản đồ này mọi cạnh đi được cả hai chiều, nên S cũng là kế tiếp của A.
 
-Một **đường đi** là một dãy nút nối nhau bằng cạnh, ví dụ S → A → C. **Chi phí của đường đi** là tổng số trên các cạnh của nó: 3 + 3 = 6 phút.
+Một **đường đi** (path) là một dãy nút nối nhau bằng cạnh, ví dụ S → A → C. **Chi phí của đường đi** (path cost) là tổng số trên các cạnh của nó: 3 + 3 = 6 phút.
 
-Trong mọi đường từ S tới G, đường có chi phí nhỏ nhất gọi là **lời giải tối ưu**. Các bài sau đều xoay quanh câu hỏi: làm sao tìm ra nó mà không phải thử hết mọi đường.
+Trong mọi đường từ S tới G, đường có chi phí nhỏ nhất gọi là **lời giải tối ưu** (optimal solution). Các bài sau đều xoay quanh câu hỏi: làm sao tìm ra nó mà không phải thử hết mọi đường.

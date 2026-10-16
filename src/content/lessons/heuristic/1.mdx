@@ -4,7 +4,7 @@ import { city } from '@/content/graphs'
 
 UCS loang ra đều mọi phía quanh nhà, kể cả về phía F và H, ngược hướng với trường. Lý do: nó chỉ biết mình _đã_ đi bao xa, không biết mình _còn_ bao xa.
 
-Một **heuristic**, ký hiệu **h(n)**, là một phỏng đoán chi phí còn lại từ n tới đích. Nó không phải con số thật, vì con số thật chỉ biết được sau khi tìm xong. Nó là một ước lượng rẻ, tính ngay được.
+Một **heuristic**, ký hiệu **h(n)**, là một phỏng đoán chi phí còn lại từ n tới đích (goal). Nó không phải con số thật, vì con số thật chỉ biết được sau khi tìm xong. Nó là một ước lượng rẻ, tính ngay được.
 
 Với bài đi học, một heuristic tự nhiên là khoảng cách đường chim bay tới trường. Trên bản đồ dưới đây, số h cạnh mỗi nút chính là ước lượng đó, đã đổi ra phút.
 
@@ -13,7 +13,7 @@ Với bài đi học, một heuristic tự nhiên là khoảng cách đường c
 Ba điều cần nhớ:
 
 - **h(đích) = 0.** Đứng ở trường rồi thì không còn gì phải đi.
-- **h chỉ phụ thuộc vào trạng thái.** h(C) = 4 dù bạn tới C bằng đường nào. Còn g(C) thì thay đổi theo đường đã đi.
+- **h chỉ phụ thuộc vào trạng thái** (state). h(C) = 4 dù bạn tới C bằng đường nào. Còn g(C) thì thay đổi theo đường đã đi.
 - Chi phí _thật_ rẻ nhất từ n tới đích có ký hiệu riêng: **h\*(n)**. Ví dụ h\*(C) = 6 (đi C → E → G). Ở đây h(C) = 4, đoán hụt một chút.
 
 Tóm lại: g(n) nhìn về phía sau, h(n) đoán về phía trước.

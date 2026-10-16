@@ -7,7 +7,7 @@ const letters: { key: keyof Omit<PeasRow, 'agent'>; letter: string; name: string
   { key: 's', letter: 'S', name: 'Cảm biến' },
 ]
 
-/** Mô tả PEAS dạng thẻ: mỗi tác tử một thẻ, bốn dòng P/E/A/S. Màn hẹp: nhãn trên, nội dung dưới; rộng: hai cột. */
+/** Mô tả PEAS dạng thẻ: mỗi agent một thẻ, bốn dòng P/E/A/S. Màn hẹp: nhãn trên, nội dung dưới; rộng: hai cột. */
 export function PeasCards({ rows }: { rows: PeasRow[] }) {
   return (
     // div + role thay cho ul/li: luật .prose-lesson (ngoài @layer) thắng utility của Tailwind và sẽ thêm chấm đầu dòng

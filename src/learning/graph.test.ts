@@ -21,7 +21,7 @@ describe('đồ thị kỹ năng', () => {
       for (const p of skillIndex[id].prereqs) expect(path.indexOf(p)).toBeLessThan(path.indexOf(id))
   })
 
-  it('tuyến tác tử (buổi 2): 5 ga theo thứ tự, ga nào cũng có lesson', () => {
+  it('tuyến agent (buổi 2): 5 ga theo thứ tự, ga nào cũng có lesson', () => {
     const path = learningPath(skillIndex, 'env-classify')
     expect(path).toEqual(['agent', 'rationality', 'peas', 'env-dims', 'env-classify'])
     for (const id of path) expect(skillIndex[id].lesson).toBeDefined()

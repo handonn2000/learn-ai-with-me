@@ -2,14 +2,14 @@ import { AgentLoop } from '@/widgets/AgentLoop'
 
 Con robot hút bụi nhà bạn chạy vòng vòng. Đụng chân ghế thì quay đầu, gặp chỗ bẩn thì hút lâu hơn. Nó chẳng hiểu "nhà" là gì. Nhưng nó làm đúng hai việc mà mọi thứ thông minh trong môn này đều làm: **nhìn vào** và **làm ra**.
 
-Môn này gọi những thứ như vậy là **tác tử** (agent): thứ cảm nhận môi trường qua **cảm biến** (sensor) và tác động lên môi trường qua **bộ chấp hành** (actuator). **Môi trường** là phần thế giới bên ngoài tác tử mà bạn quan tâm khi thiết kế nó.
+Môn này gọi những thứ như vậy là **agent**: thứ cảm nhận môi trường qua **cảm biến** (sensor) và tác động lên môi trường qua **bộ chấp hành** (actuator). **Môi trường** (environment) là phần thế giới bên ngoài agent mà bạn quan tâm khi thiết kế nó.
 
 <AgentLoop env="sàn nhà, bụi, chân bàn ghế" sensors="cảm biến bụi, cảm biến va chạm" actuators="bánh xe, chổi, quạt hút" />
 
-Định nghĩa này rộng có chủ ý. Ba kiểu tác tử bạn sẽ gặp:
+Định nghĩa này rộng có chủ ý. Ba kiểu agent bạn sẽ gặp:
 
 - **Con người**: cảm biến là mắt, tai và các giác quan khác; bộ chấp hành là tay, chân, giọng nói.
 - **Robot**: cảm biến là camera, cảm biến hồng ngoại đo khoảng cách; bộ chấp hành là các động cơ.
 - **Phần mềm**: cảm biến là phím người dùng gõ, nội dung file, gói tin mạng; bộ chấp hành là màn hình, file ghi ra đĩa, gói tin gửi đi.
 
-Tác tử phần mềm không có tay chân, nhưng nó vẫn "làm ra" được: hiện một dòng chữ lên màn hình cũng là một hành động.
+Agent phần mềm không có tay chân, nhưng nó vẫn "làm ra" được: hiện một dòng chữ lên màn hình cũng là một hành động.

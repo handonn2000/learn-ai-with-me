@@ -2,15 +2,15 @@ import { DataTable } from '@/widgets/DataTable'
 import { Deep } from '@/ui/Deep'
 import { vacuumRows } from '@/content/agents'
 
-Giờ thu căn nhà lại còn đúng hai ô, A và B. Mỗi lúc, robot chỉ biết hai điều: nó đang ở ô nào, và ô đó bẩn hay sạch. Gói thông tin ấy, ví dụ `[A, Bẩn]`, là một **tri giác** (percept). Mọi tri giác từ lúc bật máy tới giờ gộp lại là **chuỗi tri giác** (percept sequence).
+Giờ thu căn nhà lại còn đúng hai ô, A và B. Mỗi lúc, robot chỉ biết hai điều: nó đang ở ô nào, và ô đó bẩn hay sạch. Gói thông tin ấy, ví dụ `[A, Bẩn]`, là một **percept**. Mọi percept từ lúc bật máy tới giờ gộp lại là **chuỗi percept** (percept sequence).
 
-Robot làm được bốn việc: sang trái, sang phải, hút, đứng yên. Muốn mô tả nó cư xử ra sao, bạn ghi một bảng: mỗi chuỗi tri giác ứng với một hành động.
+Robot làm được bốn việc: sang trái, sang phải, hút, đứng yên. Muốn mô tả nó cư xử ra sao, bạn ghi một bảng: mỗi chuỗi percept ứng với một **hành động** (action).
 
-<DataTable head={['Chuỗi tri giác', 'Hành động']} rows={vacuumRows} mono label="Một phần bảng hàm tác tử của robot hút bụi hai ô" />
+<DataTable head={['Chuỗi percept', 'Hành động']} rows={vacuumRows} mono label="Một phần bảng hàm agent của robot hút bụi hai ô" />
 
-Bảng này là **hàm tác tử** (agent function): ánh xạ từ chuỗi tri giác ra hành động. Để ý chữ _chuỗi_: cùng thấy `[A, Sạch]` nhưng lịch sử trước đó khác thì hành động được phép khác.
+Bảng này là **hàm agent** (agent function): ánh xạ từ chuỗi percept ra hành động. Để ý chữ _chuỗi_: cùng thấy `[A, Sạch]` nhưng lịch sử trước đó khác thì hành động được phép khác.
 
-Hàm là chuyện toán học. Thứ thật sự chạy trên máy là **chương trình tác tử** (agent program). Robot này chỉ cần ba dòng:
+Hàm là chuyện toán học. Thứ thật sự chạy trên máy là **chương trình agent** (agent program). Robot này chỉ cần ba dòng:
 
 ```
 nếu ô đang đứng bẩn thì hút
@@ -18,9 +18,9 @@ ngược lại, nếu đang ở A thì sang phải
 ngược lại, nếu đang ở B thì sang trái
 ```
 
-Tác tử = kiến trúc (máy, cảm biến, bộ chấp hành) + chương trình.
+Agent = **kiến trúc** (architecture: máy, cảm biến, bộ chấp hành) + chương trình.
 
-Bảng thì phình rất nhanh. Thế giới này có 4 tri giác khác nhau, nên chuỗi dài 1 có 4 dòng, chuỗi dài 2 có 4 × 4 = 16 dòng. Mỗi bước thêm, số dòng lại nhân 4.
+Bảng thì phình rất nhanh. Thế giới này có 4 percept khác nhau, nên chuỗi dài 1 có 4 dòng, chuỗi dài 2 có 4 × 4 = 16 dòng. Mỗi bước thêm, số dòng lại nhân 4.
 
 <Deep title="bảng phình tới đâu">
 Robot mới chạy 10 bước, bảng đã cần 4 + 4² + … + 4¹⁰ = 1.398.100 dòng, còn chương trình vẫn ba dòng. Viết được chương trình ngắn mà cư xử đúng, thay cho một cái bảng khổng lồ, chính là thách thức chung của cả ngành AI.

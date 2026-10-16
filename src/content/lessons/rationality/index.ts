@@ -32,7 +32,7 @@ export const lesson: Lesson = {
         id: 'rationality-e1',
         kind: 'classify',
         prompt: 'Taxi tự lái. Mỗi thông tin dưới đây thuộc thứ nào trong bốn thứ quyết định một hành động có duy lý không?',
-        groups: ['Thước đo', 'Tri thức có sẵn', 'Hành động làm được', 'Chuỗi tri giác'],
+        groups: ['Thước đo', 'Tri thức có sẵn', 'Hành động làm được', 'Chuỗi percept'],
         items: [
           { text: 'Khách tới đúng chỗ, nhanh, an toàn', group: 0 },
           { text: 'Bản đồ thành phố cài sẵn từ trước', group: 1 },
@@ -40,7 +40,7 @@ export const lesson: Lesson = {
           { text: 'Camera vừa thấy đèn chuyển đỏ', group: 3 },
         ],
         hint: 'Một thứ là tiêu chí chấm, một thứ biết từ trước khi chạy, một thứ là việc làm được, một thứ là điều thấy được trong lúc chạy.',
-        explain: 'Đủ bốn thứ thì mới xét được hành động có duy lý không. Thiếu thước đo thì không biết "tốt" là gì; thiếu chuỗi tri giác thì không biết taxi đang đứng trước tình huống nào.',
+        explain: 'Đủ bốn thứ thì mới xét được hành động có duy lý không. Thiếu thước đo thì không biết "tốt" là gì; thiếu chuỗi percept thì không biết taxi đang đứng trước tình huống nào.',
       },
       label: 'Tách bốn thứ quyết định duy lý',
     },
@@ -49,8 +49,8 @@ export const lesson: Lesson = {
       exercise: {
         id: 'rationality-e2',
         kind: 'classify',
-        prompt: 'Mỗi thước đo dưới đây chấm thứ bạn muốn có trong môi trường, hay chấm việc bạn nghĩ tác tử nên làm?',
-        groups: ['Thứ muốn có trong môi trường', 'Việc nghĩ tác tử nên làm'],
+        prompt: 'Mỗi thước đo dưới đây chấm thứ bạn muốn có trong môi trường, hay chấm việc bạn nghĩ agent nên làm?',
+        groups: ['Thứ muốn có trong môi trường', 'Việc nghĩ agent nên làm'],
         items: [
           { text: 'Robot hút bụi: số ô sạch ở mỗi bước', group: 0 },
           { text: 'Robot hút bụi: lượng rác hút được', group: 1 },
@@ -58,7 +58,7 @@ export const lesson: Lesson = {
           { text: 'Gia sư tiếng Anh: số bài tập đã giao', group: 1 },
           { text: 'Robot gắp linh kiện: tỉ lệ linh kiện vào đúng thùng', group: 0 },
         ],
-        hint: 'Hỏi: tác tử có thể đạt điểm cao ở thước đo này mà thứ bạn thật sự muốn vẫn không xảy ra không?',
+        hint: 'Hỏi: agent có thể đạt điểm cao ở thước đo này mà thứ bạn thật sự muốn vẫn không xảy ra không?',
         explain: 'Lượng rác hút được và số bài tập đã giao đều tăng được mà nhà không sạch hơn, học viên không giỏi hơn. Ba thước đo còn lại chấm thẳng vào kết quả bạn muốn.',
       },
       label: 'Đặt thước đo theo thứ muốn có',
@@ -72,11 +72,11 @@ export const lesson: Lesson = {
         options: [
           'Không, vì kết quả xấu',
           'Có, vì nó chọn hành động tốt nhất theo những gì nó biết và thấy được tới lúc đó',
-          'Không, vì tác tử duy lý phải biết trước vụ va quẹt',
+          'Không, vì agent duy lý phải biết trước vụ va quẹt',
           'Chưa nói được, vì không biết robot có cảm biến gì',
         ],
         answer: [1],
-        hint: 'Duy lý là cao nhất <i>theo kỳ vọng</i>, dựa trên chuỗi tri giác tới thời điểm chọn.',
+        hint: 'Duy lý là cao nhất <i>theo kỳ vọng</i>, dựa trên chuỗi percept tới thời điểm chọn.',
         explain: 'Biết trước vụ va quẹt là <b>toàn tri</b>, không ai làm được. Robot đã chọn tốt nhất với những gì nó có, nên nó vẫn duy lý dù kết quả không như ý.',
       },
       label: 'Phân biệt duy lý với toàn tri',
@@ -87,9 +87,9 @@ export const lesson: Lesson = {
         title: 'Đặt thước đo cho một ứng dụng gợi ý video.',
         minutes: 3,
         steps: [
-          'Viết một thước đo chấm cách tác tử làm, rồi chỉ ra cách nó có thể đạt điểm cao mà người xem không vui hơn.',
+          'Viết một thước đo chấm cách agent làm, rồi chỉ ra cách nó có thể đạt điểm cao mà người xem không vui hơn.',
           'Viết lại thước đo đó sao cho nó chấm thứ bạn thật sự muốn có trong môi trường.',
-          'Gạch chân chỗ trong thước đo mới mà tác tử khó lách nhất.',
+          'Gạch chân chỗ trong thước đo mới mà agent khó lách nhất.',
         ],
         reference: [
           'Thước đo chấm cách làm: <b>số video được bấm vào</b>. Cách lách: gợi ý tiêu đề giật gân, người xem bấm vào rồi thoát ngay.',

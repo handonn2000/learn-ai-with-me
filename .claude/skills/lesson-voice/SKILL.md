@@ -25,6 +25,14 @@ qua một cảnh cụ thể trước, rút ra nguyên lý sau. Đối thoại (h
 
 **Đừng tán gẫu ở nhãn chức năng.** Nhãn trạng thái trong lab (`FRONTIER — hàng đợi ưu tiên theo f = g + h`), tooltip, nhãn nút, tiêu đề cột bảng: giữ ngắn và chính xác. Chúng nhấp nháy đổi liên tục khi người dùng bấm Tiến/Lùi — dài dòng ở đó là hại, đọc không kịp.
 
+**Thuật ngữ AI: giữ tiếng Anh, hoặc dịch thì kèm tiếng Anh.** Người học sẽ đọc tài liệu, hỏi
+chatbot, đọc code bằng tiếng Anh; "tác tử" không giúp họ tra được gì. Nên từ phổ biến giữ nguyên
+("agent", "percept", "frontier", "heuristic"), còn từ đã dịch thì kèm ngoặc ít nhất ở lần đầu trong
+mỗi lesson: "trạng thái (state)", "cảm biến (sensor)". Viết tiếng Việt quanh từ tiếng Anh như một
+danh từ bình thường: "một agent", "các agent khác", "chuỗi percept". Từ nào giữ, từ nào dịch và dịch
+thế nào: **bảng ở `docs/DESIGN.md` § Thuật ngữ** (nguồn duy nhất). Gặp từ chưa có trong bảng thì thêm
+vào bảng trước rồi mới dùng.
+
 ## Bảy khuôn viết
 
 Đây là thứ làm nên chất của bài 1 và bài 3. Dùng chúng như bộ đồ nghề, không phải checklist — một đoạn hay thường chỉ cần một, hai khuôn.
@@ -141,6 +149,8 @@ Liều lượng đã hiệu chỉnh: **5–8 icon cho cả một bài học**. B
 - Icon còn trong khoảng 5–8 cho cả bài chứ?
 - Mục nào mở được bằng một cảnh có thật mà tôi lại mở bằng định nghĩa không?
 - Đếm số cụm câu hỏi trong bài: quá 3 chưa? Cụm nào không nhắm vào một ngộ nhận cụ thể thì bỏ.
+- Thuật ngữ AI có theo bảng ở `docs/DESIGN.md` § Thuật ngữ không: từ giữ tiếng Anh không bị dịch, từ
+  dịch có kèm tiếng Anh ở lần đầu trong lesson?
 - Con số / định nghĩa có còn đúng y như bản gốc không? Đây là câu quan trọng nhất.
 
 Mật độ tham chiếu ở hai bài đã có: khoảng 10 lần "tôi" và 24–27 lần "bạn" mỗi bài. Không phải chỉ tiêu phải đạt, chỉ là mốc để biết mình đang ở đâu.

@@ -13,14 +13,14 @@ export const lesson: Lesson = {
     {
       kind: 'guess',
       data: {
-        prompt: 'Cờ vua có bấm giờ: bàn cờ không tự đổi trong lúc bạn nghĩ, nhưng đồng hồ vẫn chạy. Môi trường này tĩnh, động, hay ở giữa?',
+        prompt: 'Cờ vua có bấm giờ: bàn cờ không tự đổi trong lúc bạn nghĩ, nhưng đồng hồ vẫn chạy. Môi trường (environment) này tĩnh (static), động (dynamic), hay ở giữa?',
         options: [
           { title: 'Tĩnh', note: 'bàn cờ đứng yên' },
           { title: 'Nửa động', note: 'bàn cờ đứng yên, điểm thì không' },
           { title: 'Động', note: 'đồng hồ đang chạy' },
         ],
         answer: 1,
-        right: 'Bàn cờ đứng yên chờ bạn, nhưng thời gian bị trừ thì làm điểm của bạn đổi theo. Môi trường không đổi mà điểm thì đổi: đó là nửa động.',
+        right: 'Bàn cờ đứng yên chờ bạn, nhưng thời gian bị trừ thì làm điểm của bạn đổi theo. Môi trường không đổi mà điểm thì đổi: đó là nửa động (semidynamic).',
         wrong: 'Bàn cờ không tự đổi khi bạn nghĩ, nên chưa phải động. Nhưng đồng hồ trừ thời gian làm điểm của bạn đổi theo, nên cũng không hoàn toàn tĩnh. Vế ở giữa đó là nửa động.',
         wrongSure: 'Vế "nửa động" là vế hay bị quên nhất, nên ý này sẽ quay lại sớm hơn.',
       },
@@ -33,7 +33,7 @@ export const lesson: Lesson = {
       exercise: {
         id: 'env-classify-e1',
         kind: 'classify',
-        prompt: 'Xếp loại môi trường của một tác tử chơi cờ tướng có bấm giờ theo sáu chiều.',
+        prompt: 'Xếp loại môi trường của một agent chơi cờ tướng có bấm giờ theo sáu chiều.',
         groups: [],
         items: dimItems({ obs: 0, agents: 1, det: 0, ep: 1, static: 1, disc: 0 }),
         hint: 'Cờ tướng giống cờ vua ở mọi chiều. Chiều thời gian: bàn cờ có tự đổi không, điểm thì sao?',
@@ -46,15 +46,15 @@ export const lesson: Lesson = {
       exercise: {
         id: 'env-classify-e2',
         kind: 'classify',
-        prompt: 'Môi trường của mỗi tác tử dưới đây là tĩnh, nửa động hay động?',
+        prompt: 'Môi trường của mỗi agent dưới đây là tĩnh, nửa động hay động?',
         groups: ['Tĩnh', 'Nửa động', 'Động'],
         items: [
           { text: 'Giải Sudoku in trên báo', group: 0 },
           { text: 'Làm bài thi trắc nghiệm có giờ: đề không đổi, nhưng hết giờ thì mất điểm câu chưa làm', group: 1 },
           { text: 'Robot hút bụi trong nhà có con mèo chạy lung tung', group: 2 },
-          { text: 'Tác tử chơi game đua xe', group: 2 },
+          { text: 'Agent chơi game đua xe', group: 2 },
         ],
-        hint: 'Hai câu hỏi: trong lúc tác tử nghĩ, môi trường có tự đổi không? Nếu không, điểm có bị trừ theo thời gian không?',
+        hint: 'Hai câu hỏi: trong lúc agent nghĩ, môi trường có tự đổi không? Nếu không, điểm có bị trừ theo thời gian không?',
         explain: 'Sudoku đứng yên chờ bạn: <b>tĩnh</b>. Đề thi đứng yên nhưng thời gian trừ vào điểm: <b>nửa động</b>. Con mèo và xe đối thủ không chờ ai: <b>động</b>.',
       },
       label: 'Phân biệt tĩnh, nửa động, động',
@@ -85,7 +85,7 @@ export const lesson: Lesson = {
         reference: [
           '<b>P</b>: chạm được vào một bạn, càng nhanh càng tốt; không va vào vật cản, không ngã.',
           '<b>E</b>: sân chơi, vật cản, các bạn đang né và la hét. <b>A</b>: chân để đi, tay để quờ và chạm. <b>S</b>: tai, và xúc giác ở tay. Không có mắt: đó là chỗ khác trò trốn tìm.',
-          '<b>Quan sát một phần</b>: mắt bị bịt, tiếng la hét còn cố tình làm "cảm biến" tai bị nhiễu. <b>Nhiều tác tử</b> cạnh tranh: các bạn muốn không bị chạm.',
+          '<b>Quan sát một phần</b>: mắt bị bịt, tiếng la hét còn cố tình làm "cảm biến" tai bị nhiễu. <b>Nhiều agent</b> cạnh tranh: các bạn muốn không bị chạm.',
           '<b>Ngẫu nhiên</b>: tình huống thật, bước đi trên sân không chắc chắn. <b>Tuần tự</b>: đi về hướng nào bây giờ quyết định chỗ sẽ quờ tiếp.',
           '<b>Động</b>: các bạn vẫn chạy trong lúc cậu bé đứng nghĩ. <b>Liên tục</b>: vị trí và bước chân thay đổi liên tục. <b>Biết luật</b>: cậu bé biết luật chơi và biết đi, chạm sẽ ra sao.',
         ],

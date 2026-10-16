@@ -15,8 +15,8 @@ export const lesson: Lesson = {
       data: {
         prompt: 'Hệ chẩn đoán y khoa hiện câu hỏi và kết quả chẩn đoán lên màn hình. Trong PEAS, màn hình nằm ở chữ nào?',
         options: [
-          { title: 'S · cảm biến', note: 'đó là chỗ hệ thống và người dùng gặp nhau' },
-          { title: 'A · bộ chấp hành', note: 'hệ thống dùng nó để tác động ra ngoài' },
+          { title: 'S · cảm biến (sensor)', note: 'đó là chỗ hệ thống và người dùng gặp nhau' },
+          { title: 'A · bộ chấp hành (actuator)', note: 'hệ thống dùng nó để tác động ra ngoài' },
         ],
         answer: 1,
         right: 'Màn hình là thứ hệ thống dùng để "làm ra": hiện câu hỏi, xét nghiệm, chẩn đoán. Thứ nó nhận vào là bàn phím.',
@@ -25,7 +25,7 @@ export const lesson: Lesson = {
       },
     },
     { kind: 'explain', title: 'Bốn chữ cái trước dòng code đầu tiên', Body: S1 },
-    { kind: 'explain', title: 'Cùng khuôn, năm tác tử khác', Body: S2 },
+    { kind: 'explain', title: 'Cùng khuôn, năm agent khác', Body: S2 },
     {
       kind: 'exercise',
       exercise: {
@@ -42,7 +42,7 @@ export const lesson: Lesson = {
         hint: 'P chấm kết quả, E là thứ ở ngoài drone, A là thứ drone dùng để tác động, S là thứ drone dùng để nhận biết.',
         explain: 'Mỗi chữ một mục. Để ý <b>gió</b> nằm ở E: drone không điều khiển được gió, nhưng phải tính tới nó.',
       },
-      label: 'Viết PEAS cho một tác tử mới',
+      label: 'Viết PEAS cho một agent mới',
     },
     {
       kind: 'exercise',
@@ -58,7 +58,7 @@ export const lesson: Lesson = {
           { text: 'Ghi ở A: "Khách tới đúng chỗ"', group: 0 },
           { text: 'Ghi ở S: "Người đi bộ"', group: 1 },
         ],
-        hint: 'Soát bốn chỗ hay nhầm: kết quả hay hành động, bộ phận của tác tử hay thứ bên ngoài, đưa vào hay đưa ra.',
+        hint: 'Soát bốn chỗ hay nhầm: kết quả hay hành động, bộ phận của agent hay thứ bên ngoài, đưa vào hay đưa ra.',
         explain: 'Phanh và màn hình là thứ taxi làm ra (<b>A</b>). Camera là thứ nó nhìn qua (<b>S</b>). Khách tới đúng chỗ là kết quả cần chấm (<b>P</b>). Người đi bộ ở ngoài xe, thuộc <b>E</b>.',
       },
       label: 'Sửa mục đặt nhầm ô',
@@ -76,7 +76,7 @@ export const lesson: Lesson = {
           'Không sai, vì lau zíc zắc thì sàn sẽ sạch',
         ],
         answer: [0],
-        hint: 'Nhớ lại luật đặt thước đo ở ga tác tử duy lý.',
+        hint: 'Nhớ lại luật đặt thước đo ở ga agent duy lý.',
         explain: 'Lau zíc zắc là đoán hộ cách làm. Robot có thể lau zíc zắc rất đẹp mà sàn vẫn bẩn. P nên là <b>sàn sạch</b>, có thể thêm tốn ít nước, ít điện.',
       },
       label: 'Viết P bằng kết quả',

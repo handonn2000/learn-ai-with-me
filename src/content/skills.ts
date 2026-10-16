@@ -5,7 +5,7 @@ import { city } from './graphs'
 import { agentSkills } from './skillsAgents'
 
 /**
- * Đồ thị kỹ năng — Phần II CSC14003 (buổi 3–5), cộng tuyến tác tử của buổi 2 (`skillsAgents.ts`).
+ * Đồ thị kỹ năng — Phần II CSC14003 (buổi 3–5), cộng tuyến agent của buổi 2 (`skillsAgents.ts`).
  * Cạnh = tiên quyết thật. BFS và GBFS nằm trên bản đồ nhưng KHÔNG nằm trên đường tới A*:
  * hiểu A* không đòi hỏi biết BFS hay GBFS.
  */
@@ -251,12 +251,12 @@ export const skills: Skill[] = [
 
 export const skillIndex = indexSkills(skills)
 
-/** Thứ tự = thứ tự gợi ý khi người học chưa theo mục tiêu nào: tác tử (buổi 2) trước A* (buổi 3–5). */
+/** Thứ tự = thứ tự gợi ý khi người học chưa theo mục tiêu nào: agent (buổi 2) trước A* (buổi 3–5). */
 export const goals: Goal[] = [
   {
     id: 'peas',
-    title: 'Mô tả một tác tử thông minh',
-    outcome: 'Viết PEAS cho một tác tử và xếp loại môi trường của nó theo bảy chiều.',
+    title: 'Mô tả một agent thông minh',
+    outcome: 'Viết PEAS cho một agent và xếp loại môi trường của nó theo bảy chiều.',
     target: 'env-classify',
   },
   {

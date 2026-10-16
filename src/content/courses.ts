@@ -1,5 +1,5 @@
 /**
- * Khóa học → mục tiêu → đường mòn. "Mô tả một tác tử thông minh" (`goalId: 'peas'`) và "Hiểu A*" (`goalId: 'astar'`)
+ * Khóa học → mục tiêu → đường mòn. "Mô tả một agent thông minh" (`goalId: 'peas'`) và "Hiểu A*" (`goalId: 'astar'`)
  * có dữ liệu học thật: số ga, số sketch lấy từ tuyến (`useCourseProgress`). Các mục tiêu còn lại là dữ liệu mẫu.
  * Toạ độ `layout` lấy từ docs/design/sketch-maps/coursemap.js (khung 780×1000).
  */
@@ -74,7 +74,7 @@ export const courses: Course[] = [
       { id: 'ml', title: 'Học máy', color: '#5E7699', at: { x: 660, y: 276, rotate: -5 } },
     ],
     goals: [
-      g('peas', 'PEAS', 'Mô tả một tác tử thông minh', 'Viết PEAS cho một tác tử và xếp loại môi trường của nó.', 'start', 5, 12, { goalId: 'peas', short: 'Mô tả tác tử', layout: { x: 390, y: 905, label: { x: 430, y: 890, w: 170 } } }),
+      g('peas', 'PEAS', 'Mô tả một agent thông minh', 'Viết PEAS cho một agent và xếp loại môi trường của nó.', 'start', 5, 12, { goalId: 'peas', short: 'Mô tả agent', layout: { x: 390, y: 905, label: { x: 430, y: 890, w: 170 } } }),
       g('astar', 'A*', 'Hiểu A*', 'Chạy tay A* và giải thích khi nào nó chắc chắn ra đường rẻ nhất.', 'search', 9, 23, { goalId: 'astar', sketchesOpen: 11, layout: { x: 215, y: 790, d: 66, fs: 22, label: { x: 170, y: 762, w: 160, align: 'right' } } }),
       g('algo-choice', 'BFS', 'Chọn đúng thuật toán tìm kiếm', 'So BFS, DFS, IDS và UCS về độ đầy đủ, tính tối ưu, thời gian và bộ nhớ.', 'search', 8, 19, { gaDone: 5, sketchesOpen: 9, sideName: 'Chọn đúng thuật toán', sharedFrom: 'Hiểu A*', layout: { x: 110, y: 660, label: { x: 150, y: 640, w: 150 } } }),
       g('csp', 'CSP', 'Giải bài toán ràng buộc', 'Đưa bài tô màu bản đồ về dạng CSP và giải bằng quay lui có kiểm tra trước.', 'search', 7, 16, { layout: { x: 215, y: 530, label: { x: 170, y: 512, w: 150, align: 'right' } } }),

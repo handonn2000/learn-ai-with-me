@@ -1,5 +1,20 @@
 # Tiến độ dự án
 
+## 2026-10-16 — Quy ước thuật ngữ: giữ tiếng Anh hoặc dịch kèm tiếng Anh
+
+- User review: không dịch "agent" thành "tác tử"; từ nào dịch thì kèm tiếng Anh. Quy ước ở `docs/DESIGN.md`
+  §1 "Cách viết" mục 6 + bảng § Thuật ngữ (nguồn duy nhất); skill `lesson-voice` (luật nền + tự kiểm) trỏ về
+  đó; `lesson-quality-judge` có mục "Terminology"; dàn ý `peas-outline.md` dùng từ mới.
+- Bảng chọn theo đề xuất (user bỏ qua câu hỏi, bảo làm tiếp): giữ EN agent, percept, PEAS, frontier, explored,
+  heuristic, admissible, tên thuật toán; dịch + kèm EN lần đầu mỗi lesson: môi trường, cảm biến, bộ chấp hành,
+  thước đo hiệu năng, duy lý, bảy chiều môi trường, trạng thái, hành động, đích, chi phí đường đi, hàng đợi ưu
+  tiên…; từ thường (nút, cạnh, đường đi) chỉ kèm ở lesson định nghĩa. Nhãn ngắn và câu ôn khỏi kèm ngoặc.
+  User muốn đổi từ nào thì sửa bảng rồi rà lại lesson.
+- Đã sửa: 14 lesson, `skills.ts`, `skillsAgents.ts`, `agents.ts`, `recall.ts`, `courses.ts`, `mock/sketches.ts`,
+  `AgentLoop`, `PeasCards`. Không đổi định nghĩa/số/đáp án. Chưa chạy lại `lesson-quality-judge` (chỉ đổi
+  thuật ngữ) và chưa chạy evals cho `lesson-voice` (sửa hẹp, `run.py` tốn phí thật). Màn thiết kế
+  `docs/design/screens/` + `sketch-maps/` và các review cũ vẫn ghi "tác tử" (không hiển thị cho người học).
+
 ## 2026-10-16 — Gộp thanh tiến độ của buổi học hôm nay
 
 - Trước đó `/session` vẽ hai thanh chồng nhau (thanh buổi "1 / 3" còn trống + thanh của lesson nhúng, khác bề
