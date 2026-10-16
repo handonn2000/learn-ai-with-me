@@ -57,27 +57,26 @@ Kết thúc: đối chiếu lại mục tiêu và cho biết kết quả vào l�
 **Ý tưởng chủ đạo: tuyến đường.** Khóa học dạy tìm đường đi; người học cũng đang đi một con đường từ thứ
 mình đã biết tới mục tiêu. Mọi thứ về tiến độ được vẽ bằng một ngôn ngữ duy nhất: **đường tuyến + các ga**.
 
-- Thanh tiến độ trong lesson = một đoạn tuyến, mỗi bước là một ga.
-- Trang mục tiêu = sơ đồ tuyến dọc từ ga đầu tới ga đích; muốn xem toàn mạng thì bật "Bản đồ đầy đủ".
+- Trang mục tiêu = bản đồ ga vẽ tay hoặc danh sách ga (`ViewToggle` **Bản đồ | Danh sách**); khóa học cũng có
+  hai cách xem như vậy.
+- Màn học và kiểm tra không có thanh điều hướng; đầu màn là `SessionHeader` (nút đóng + thanh tiến độ + "n / N").
 - Mỗi màn hình **một tiêu điểm**: một bước giải thích hoặc một bài tập. Nút chính luôn ở cùng một chỗ.
 
-### Token
+### Token và chữ
 
-| Tên | Sáng | Tối | Dùng cho |
-|---|---|---|---|
-| `paper` | `#EEF1F4` | `#11161D` | nền |
-| `surface` | `#FFFFFF` | `#18202A` | khối nội dung |
-| `ink` | `#18212C` | `#E4E9EF` | chữ |
-| `muted` | `#5B6776` | `#93A0AF` | chữ phụ |
-| `route` | `#0F7B6C` | `#3CC3A8` | tuyến đã đi, hành động chính, đúng |
-| `signal` | `#E0A400` | `#F2C230` | ga hiện tại, điểm nhấn, frontier |
-| `stop` | `#C8432B` | `#F06A52` | sai, cảnh báo |
+Giao diện theo **mẫu B** (`docs/design/HANDOFF.md`, màn tĩnh trong `docs/design/screens/` là spec chính xác).
+Token khai trong `@theme` của `src/styles.css`; bảng giá trị và vai trò ở HANDOFF §1. Tóm tắt:
 
-- Chữ: **Be Vietnam Pro** (thiết kế cho tiếng Việt) cho mọi chữ; **IBM Plex Mono** chỉ cho cấu trúc dữ liệu
-  thật (hàng đợi, frontier, giá trị g/h/f).
-- Cỡ chữ: 17px thân bài, dòng ≤ 68 ký tự; thang 14 / 17 / 21 / 28 / 40.
-- Chuyển động: chỉ khi trả lời hành động của người học (chuyển bước, mở rộng nút, đúng/sai) và trong
-  minh họa thuật toán. Tôn trọng `prefers-reduced-motion`.
+- Chỉ có **nền sáng**: `bg` nền trang, `surface` thẻ, `ink` chữ và viền 2px, `muted` chữ phụ, `paper` nền bản đồ
+  và sổ tay.
+- `violet` hành động chính, tiến độ, ga đã qua, frontier; `sun` hôm nay, đoán trước, ý chính.
+- **Đúng = `correct` (xanh dương), sai = `wrong` (cam)** — an toàn cho mù màu; không dùng đỏ/xanh lá.
+- `g` và `h` có màu riêng cho g(n), h(n) trong minh họa thuật toán.
+- Chữ: **Bricolage Grotesque** cho tiêu đề, **Onest** cho thân bài, **JetBrains Mono** cho số và cấu trúc dữ liệu
+  thật (hàng đợi, frontier, g/h/f), **Playpen Sans** cho chữ viết tay trên sketch và bản đồ. Thân bài 17px.
+- Chuyển động: chỉ khi trả lời hành động của người học (chuyển bước, mở rộng nút, đúng/sai) và trong minh họa
+  thuật toán; opacity và dịch chuyển ngắn ≤ 200ms. Tôn trọng `prefers-reduced-motion`
+  (`MotionConfig reducedMotion="user"`).
 
 ## 3. Kỹ thuật
 
@@ -86,7 +85,7 @@ mình đã biết tới mục tiêu. Mọi thứ về tiến độ được vẽ
 | Nền | Vite + React 19 + TypeScript, deploy GitHub Pages |
 | Giao diện | Tailwind CSS v4 + Radix primitives |
 | Animation | Motion |
-| Bản đồ kỹ năng | React Flow (@xyflow/react) + dagre (xếp tầng). elkjs bị loại: 1,3 MB cho một đồ thị vài chục nút là quá nặng |
+| Bản đồ mục tiêu, bản đồ khóa | SVG tự vẽ + rough.js cho nét vẽ tay (`ui/SketchMap`, `ui/roughArt`); toạ độ đặt tay trong `content/goalMaps.ts` và `content/courses.ts`. |
 | Đồ thị bài toán | SVG tự vẽ + Motion (`widgets/GraphView`): cần điều khiển từng nút, màu trạng thái và cỡ chữ trên mobile |
 | Công thức | KaTeX |
 | Nội dung | MDX cho phần giải thích, TypeScript cho bài tập và đồ thị kỹ năng |
@@ -100,17 +99,22 @@ Thêm khi có bài cần: D3 (biểu đồ), React Three Fiber (3D), Shiki (code
 
 ```
 src/
-  app/            router, layout, các trang (Home, Goal, Lesson, Review, Map)
-  ui/             component dùng chung (Button, RouteBar, Station…)
-  learning/       đồ thị kỹ năng, backward chaining, lộ trình, store tiến độ, FSRS
+  app/            router (main.tsx), các trang (Home, Courses, Course, Goal, Lesson, Session, Review,
+                  Placement, Notebook); app/lesson/ các bước buổi học; app/goal/ bản đồ + danh sách ga
+  ui/             component dùng chung theo mẫu B (Button, SessionHeader, AnswerTile, FeedbackBar,
+                  HintLadder, SketchMap…), xem /#/dev/ui
+  learning/       đồ thị kỹ năng, backward chaining, mục tiêu, tuyến, store tiến độ + FSRS, kế hoạch buổi học
   exercises/      các dạng bài tập + bộ chấm
   algorithms/     engine tìm kiếm sinh trace (BFS, UCS, GBFS, A*)
-  widgets/        minh họa tương tác (GraphView, SearchPlayer…)
+  widgets/        minh họa nhúng được vào MDX (GraphView, SearchPlayer, DataTable, PeasCards, AgentLoop…)
   content/
-    graphs/       bài toán mẫu (đồ thị, chi phí, heuristic)
-    skills.ts     các nút kỹ năng + cạnh tiên quyết + câu kiểm tra
-    goals.ts      mục tiêu
+    graphs.ts     bài toán mẫu (đồ thị, chi phí, heuristic)
+    skills.ts     các nút kỹ năng + cạnh tiên quyết + câu kiểm tra, và `goals`; skillsAgents.ts cho tuyến PEAS
+    courses.ts    khóa học, mục tiêu trong khóa, toạ độ bản đồ khóa
+    goalMaps.ts   toạ độ bản đồ mục tiêu
+    recall.ts     câu nhớ lại cho ôn tập
     lessons/<id>/ index.ts (meta + bài tập) và các bước giải thích *.mdx (tải lười)
+    mock/         dữ liệu mẫu cho phần chưa có nội dung thật
 ```
 
 ## 4. Thêm một kỹ năng / lesson
