@@ -20,7 +20,8 @@
   `.claude/settings.local.json`, `__pycache__/`. `npm test` 46/46, build qua. Commit `f1f933e`, đẩy lên `origin/v2`.
 - Sửa `docs/DESIGN.md` cho khớp code: §2 token/font theo mẫu B (trỏ HANDOFF §1 + `@theme`), bỏ bảng sáng/tối cũ;
   §3 bản đồ = SVG + rough.js (bỏ React Flow/dagre); khối Cấu trúc liệt kê đúng file hiện có.
-  Còn: `lucide-react` có trong `package.json` nhưng `src/` không import.
+  Gỡ `radix-ui` (có trong `package.json` nhưng `src/` không import); `lucide-react` vẫn dùng (icon ở `Deep`,
+  `PaperStep`, `SearchPlayer`, `AgentLoop`) — ghi chú trước nói nhầm là nó thừa.
 - Quyết định của user: skill phủ cả dựng bài lẫn quyết định sản phẩm; KHÔNG sửa skill v1 (`gamification`,
   `new-lesson`) vì v2 sẽ thay hẳn.
 - Còn dở: câu nhớ lại cho ~12 kỹ năng (luật 4); đề xuất M9 xen kẽ, M13 câu hỏi người học, M14 độ chắc chắn.

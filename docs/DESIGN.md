@@ -83,7 +83,7 @@ Token khai trong `@theme` của `src/styles.css`; bảng giá trị và vai trò
 | Việc | Chọn |
 |---|---|
 | Nền | Vite + React 19 + TypeScript, deploy GitHub Pages |
-| Giao diện | Tailwind CSS v4 + Radix primitives |
+| Giao diện | Tailwind CSS v4, icon lucide-react |
 | Animation | Motion |
 | Bản đồ mục tiêu, bản đồ khóa | SVG tự vẽ + rough.js cho nét vẽ tay (`ui/SketchMap`, `ui/roughArt`); toạ độ đặt tay trong `content/goalMaps.ts` và `content/courses.ts`. |
 | Đồ thị bài toán | SVG tự vẽ + Motion (`widgets/GraphView`): cần điều khiển từng nút, màu trạng thái và cỡ chữ trên mobile |
