@@ -14,6 +14,7 @@ import { SessionPage } from '@/app/SessionPage'
 import { ReviewPage } from '@/app/ReviewPage'
 import { PlacementPage } from '@/app/PlacementPage'
 import { NotFound } from '@/app/NotFound'
+import { RouteError, reloadForNewVersion } from '@/app/RouteError'
 import { initAccount } from '@/learning/account'
 
 // Trang xem thành phần: chỉ tải khi mở /dev/ui
@@ -22,31 +23,42 @@ const DevUi = lazy(() => import('@/app/DevUi'))
 // Hash router: GitHub Pages không cần trang 404 giả để giữ route.
 const router = createHashRouter([
   {
-    element: <AppShell />,
+    // Lỗi ở bất kỳ màn nào (vd. chunk cũ sau deploy) hiện RouteError thay vì màn lỗi mặc định.
+    errorElement: <RouteError />,
     children: [
-      { index: true, element: <HomePage /> },
-      { path: 'goal/:goalId', element: <GoalPage /> },
-      { path: 'map', element: <Navigate to="/goal/astar" replace /> },
-      { path: 'courses', element: <CoursesPage /> },
-      { path: 'courses/:courseId', element: <CoursePage /> },
-      { path: 'notebook', element: <NotebookPage /> },
-      { path: '*', element: <NotFound /> },
+      {
+        element: <AppShell />,
+        children: [
+          { index: true, element: <HomePage /> },
+          { path: 'goal/:goalId', element: <GoalPage /> },
+          { path: 'map', element: <Navigate to="/goal/astar" replace /> },
+          { path: 'courses', element: <CoursesPage /> },
+          { path: 'courses/:courseId', element: <CoursePage /> },
+          { path: 'notebook', element: <NotebookPage /> },
+          { path: '*', element: <NotFound /> },
+        ],
+      },
+      {
+        path: 'dev/ui',
+        element: (
+          <Suspense fallback={null}>
+            <DevUi />
+          </Suspense>
+        ),
+      },
+      // Màn học và kiểm tra: không có thanh điều hướng, chỉ một tiêu điểm.
+      { path: 'session', element: <SessionPage /> },
+      { path: 'review', element: <ReviewPage /> },
+      { path: 'learn/:lessonId', element: <LessonPage /> },
+      { path: 'check/:goalId', element: <PlacementPage /> },
     ],
   },
-  {
-    path: 'dev/ui',
-    element: (
-      <Suspense fallback={null}>
-        <DevUi />
-      </Suspense>
-    ),
-  },
-  // Màn học và kiểm tra: không có thanh điều hướng, chỉ một tiêu điểm.
-  { path: 'session', element: <SessionPage /> },
-  { path: 'review', element: <ReviewPage /> },
-  { path: 'learn/:lessonId', element: <LessonPage /> },
-  { path: 'check/:goalId', element: <PlacementPage /> },
 ])
+
+// Vite báo khi không tải được chunk preload: tải lại trang để lấy index.html mới.
+window.addEventListener('vite:preloadError', (event) => {
+  if (reloadForNewVersion()) event.preventDefault()
+})
 
 // Máy đã từng đăng nhập thì tải Firebase để khôi phục phiên và đồng bộ tiến độ.
 initAccount()

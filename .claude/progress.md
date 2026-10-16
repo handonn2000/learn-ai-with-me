@@ -1,5 +1,15 @@
 # Tiến độ dự án
 
+## 2026-10-16 — Sửa lỗi "Failed to fetch dynamically imported module" sau deploy
+
+- Nguyên nhân: tab mở trước lần deploy mới giữ `index.html` cũ, trỏ tới chunk lesson đã bị xóa (404). Header
+  `no-cache` chỉ khớp `/index.html`, còn `/` được Firebase trả `max-age=3600`.
+- `firebase.json`: `no-cache` áp cho cả `/` và `/index.html`. `app/RouteError.tsx` làm `errorElement` cho mọi
+  route: gặp lỗi chunk thì tự tải lại trang một lần (chặn lặp 10 giây qua `sessionStorage`), lần sau hiện màn
+  "App vừa có bản mới." + nút tải lại; lỗi khác hiện màn lỗi gọn. `main.tsx` nghe `vite:preloadError`.
+- Đã kiểm bằng `vite preview` sau khi xóa chunk `1-*.js`: bấm "Vào ga" → trang tự tải lại một lần; bấm lại →
+  màn "App vừa có bản mới.", không lặp. Chưa deploy: header mới chỉ có hiệu lực sau `npm run deploy:firebase`.
+
 ## 2026-10-16 — Đăng nhập GitHub + đồng bộ tiến độ Firestore (ADR-0020)
 
 - Thêm `firebase`; `learning/sync.ts` (gộp máy ↔ mây, đọc document an toàn; 7 test), `learning/cloud.ts`
