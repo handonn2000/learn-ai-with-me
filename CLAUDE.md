@@ -17,7 +17,8 @@ từng kỹ năng. Nhánh `v2` viết lại từ đầu và sẽ thay hẳn v1 (
 - `npm run dev` — dev server (`http://localhost:5173/learn-ai-with-me/`; preview pane gán cổng qua `PORT`)
 - `npm test` — Vitest: engine thuật toán, đồ thị kỹ năng, luật nội dung lesson
 - `npm run build` — `tsc -b` + vite build (base `/learn-ai-with-me/` cho GitHub Pages)
-- `npm run deploy:firebase` — test + build `--base=/` + `firebase deploy --only hosting` lên
+- `npm run emulators` + `npm run dev:cloud` — thử đăng nhập/đồng bộ với emulator Auth + Firestore (cần Java)
+- `npm run deploy:firebase` — test + build `--base=/` + `firebase deploy --only hosting,firestore:rules` lên
   `https://learn-ai-with-me.web.app` (project `learn-ai-with-me` trong `.firebaserc`). Chỉ chạy khi user bảo deploy.
 - **`npm test` và `npm run build` phải qua trước khi kết thúc phiên.**
 
@@ -69,6 +70,9 @@ src/
   `learning/progress.ts`. Key và shape là hợp đồng với dữ liệu người học: đổi shape thì tăng `version` + viết
   `migrate`. Đọc/ghi qua `useProgress`, không gọi `localStorage` trực tiếp. v1 dùng key khác
   (`csc14003-progress`), hai bản không đụng nhau.
+- **Đồng bộ mây** (không bắt buộc): đăng nhập GitHub qua Firebase Auth; `learning/sync.ts` (thuần, có test) gộp
+  máy ↔ mây, `learning/cloud.ts` (tải lười, chỉ `account.ts` import động) ghi `users/{uid}` trên Firestore.
+  Document mang `version` = version của persist: đổi shape store thì sửa cả `parseCloud`. Luật ở `firestore.rules`.
 - **Lịch ôn**: ts-fsrs một thẻ cho mỗi kỹ năng, tắt bước ngắn hạn, không fuzz. Quy kết quả lesson ra điểm theo
   `outcomeToRating`/`worstOutcome`. Lý do sư phạm: skill `learning-methods`.
 - **Đáp án bài tập trên bản đồ do engine tính**, không gõ tay; ví dụ mới thì thêm test vào

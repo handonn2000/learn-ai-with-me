@@ -14,6 +14,7 @@ import { SessionPage } from '@/app/SessionPage'
 import { ReviewPage } from '@/app/ReviewPage'
 import { PlacementPage } from '@/app/PlacementPage'
 import { NotFound } from '@/app/NotFound'
+import { initAccount } from '@/learning/account'
 
 // Trang xem thành phần: chỉ tải khi mở /dev/ui
 const DevUi = lazy(() => import('@/app/DevUi'))
@@ -46,6 +47,9 @@ const router = createHashRouter([
   { path: 'learn/:lessonId', element: <LessonPage /> },
   { path: 'check/:goalId', element: <PlacementPage /> },
 ])
+
+// Máy đã từng đăng nhập thì tải Firebase để khôi phục phiên và đồng bộ tiến độ.
+initAccount()
 
 createRoot(document.getElementById('root')!).render(
   <StrictMode>

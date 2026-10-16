@@ -91,6 +91,7 @@ Token khai trong `@theme` của `src/styles.css`; bảng giá trị và vai trò
 | Công thức | KaTeX |
 | Nội dung | MDX cho phần giải thích, TypeScript cho bài tập và đồ thị kỹ năng |
 | Tiến độ | Zustand (persist localStorage, key `learn-ai-v2`: `skills`, `lessonStep`, `follow`) + ts-fsrs, tắt bước học ngắn hạn: thẻ mới Again → 1 ngày, Hard → 2, Good → 3, Easy → 8 |
+| Tài khoản, đồng bộ | Firebase Auth (GitHub) + Firestore, document `users/{uid}` = `{ version, progress, updatedAt }`, luật `firestore.rules`. Không bắt buộc đăng nhập: localStorage vẫn là nơi lưu chính; đăng nhập thì gộp máy ↔ mây (`learning/sync.ts`, theo `last_review` từng thẻ) rồi ghi sau 2 giây yên. Đăng xuất xóa tiến độ trong máy. Firebase tải lười (`learning/cloud.ts`). Xem ADR-0020 |
 | Định tuyến | React Router, hash router — host tĩnh không cần trang 404 giả hay rewrite |
 | Kiểm thử | Vitest — engine thuật toán, đồ thị kỹ năng, chấm bài |
 
@@ -104,7 +105,8 @@ src/
                   Placement, Notebook); app/lesson/ các bước buổi học; app/goal/ bản đồ + danh sách ga
   ui/             component dùng chung theo mẫu B (Button, SessionHeader, AnswerTile, FeedbackBar,
                   HintLadder, SketchMap…), xem /#/dev/ui
-  learning/       đồ thị kỹ năng, backward chaining, mục tiêu, tuyến, store tiến độ + FSRS, kế hoạch buổi học
+  learning/       đồ thị kỹ năng, backward chaining, mục tiêu, tuyến, store tiến độ + FSRS, kế hoạch buổi học,
+                  tài khoản + đồng bộ Firestore (account.ts, cloud.ts, sync.ts)
   exercises/      các dạng bài tập + bộ chấm
   algorithms/     engine tìm kiếm sinh trace (BFS, UCS, GBFS, A*)
   widgets/        minh họa nhúng được vào MDX (GraphView, SearchPlayer, DataTable, PeasCards, AgentLoop…)

@@ -10,6 +10,16 @@
       ],
       "port": 5173,
       "autoPort": true
+    },
+    {
+      "name": "learn-ai-with-me (cloud emulators)",
+      "runtimeExecutable": "npm",
+      "runtimeArgs": [
+        "run",
+        "dev:cloud"
+      ],
+      "port": 5173,
+      "autoPort": true
     }
   ]
 }

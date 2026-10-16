@@ -77,6 +77,7 @@ Xem `screens/00-he-thong-thiet-ke.html` cho từng trạng thái.
 | Thành phần | Ghi chú |
 |---|---|
 | `AppShell` | Máy tính: thanh trên với 4 mục **Hôm nay · Khóa học · Ôn tập · Sổ tay** (Ôn tập có badge số thẻ đến hạn). Dưới ~720px: thanh tab đáy 4 mục như `01b`. Màn học và kiểm tra không có thanh điều hướng. |
+| `AccountButton` | Không có trong màn mẫu B; dựng theo token. Góc phải thanh trên (cả máy tính lẫn điện thoại). Chưa đăng nhập: nút viền ink, logo GitHub + "Đăng nhập" (dưới 720px chỉ còn logo, ô 44px). Đã đăng nhập: avatar tròn 40px viền ink, chấm cam khi lưu lỗi; bấm mở hộp: tên, trạng thái lưu, nút Đăng xuất. |
 | `Button` | primary, secondary (nền trắng, viền ink), link, disabled, trạng thái nhấn. |
 | `Chip` | nhãn tròn; biến thể sun (đoán trước, đang theo), violet soft, xám. |
 | `SessionHeader` | nút đóng + thanh tiến độ dày 14–16px + "n / N". |

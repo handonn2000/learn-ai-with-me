@@ -1,5 +1,20 @@
 # Tiến độ dự án
 
+## 2026-10-16 — Đăng nhập GitHub + đồng bộ tiến độ Firestore (ADR-0020)
+
+- Thêm `firebase`; `learning/sync.ts` (gộp máy ↔ mây, đọc document an toàn; 7 test), `learning/cloud.ts`
+  (Auth + Firestore, tải lười, ghi sau 2 giây yên), `learning/account.ts` (store trạng thái, `initAccount` ở
+  `main.tsx`), `ui/AccountButton.tsx` ở thanh trên. `firestore.rules`, cấu hình emulator trong `firebase.json`,
+  script `emulators`, `dev:cloud`; `deploy:firebase` deploy cả luật. Đăng ký web app Firebase.
+- Đã kiểm trên emulator: khách học → đăng nhập → tiến độ lên mây; thay đổi ghi sau 2 giây; đăng xuất xóa máy;
+  học thêm khi chưa đăng nhập rồi đăng nhập lại → gộp đủ 3 kỹ năng; luật chặn đọc người khác, chặn trường lạ,
+  chặn chưa đăng nhập. Không có màn hình 375px cuộn ngang. Giới hạn: pane trình duyệt không mở popup nên luồng
+  popup GitHub chưa thử bằng tay; đăng nhập thử bằng credential Google giả của emulator (logic đồng bộ như nhau).
+- User tạo Firestore `(default)` ở **asia-east1** và bật provider GitHub (OAuth App, callback
+  `https://learn-ai-with-me.web.app/__/auth/handler` — đã kiểm `redirect_uri` qua `createAuthUri`). Đã
+  `npm run deploy:firebase` (hosting + luật). Trên web.app: nút đăng nhập hiện, khách không tải chunk `cloud-`,
+  Firestore trả 403 khi chưa đăng nhập. Chưa thử: bấm đăng nhập GitHub thật (pane không mở popup) — user thử.
+
 ## 2026-10-16 — Deploy v2 lên Firebase Hosting
 
 - Thêm `firebase.json` (public `dist`, bỏ `materials/**`, cache assets immutable, `index.html` no-cache),
