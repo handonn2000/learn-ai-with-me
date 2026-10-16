@@ -1,0 +1,7 @@
+{
+  "unit": "b3",
+  "verdict": "ĐẠT",
+  "summary": "Chấm lần đầu sau khi tách Buổi 3 gộp thành Buổi 3 · 4 · 5 (ADR-0018). Lượt 1 ĐẠT với một mục DỊCH CỨNG: hai khối VIẾT MỚI (hero.lead, quiz.s3) là hai khối duy nhất trong file không rút gọn lần nào, nghe lệch giọng biên bản so với ch1–ch3 vốn rút gọn thoải mái; kèm một dấu phẩy nối câu chuyển thẳng từ tiếng Việt. Đã sửa cả ba, chấm lại ĐẠT. Giám khảo xác nhận sửa không đụng số liệu, thẻ hay anchor (1.8×10¹⁴, 2,057, 11 orders of magnitude, 9!/2 = 181,440 giữ đúng vai). Hoãn có chủ đích, nằm trong chữ CŨ đã qua giám khảo lần trước nên không tính vào phán quyết: ch1.s14 xóa ví von «nhắm mắt đi cũng tới» thay vì thay nó, ch2.s14 mất lời cảnh báo «chỗ này dễ nhầm». Gom vào lần sau đụng đúng khối đó.",
+  "pairs_hash": "e869b6d143746681",
+  "at": "2026-09-21"
+}

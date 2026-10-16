@@ -1,0 +1,7 @@
+{
+  "unit": "b5",
+  "verdict": "ĐẠT",
+  "summary": "Chấm lần đầu sau khi tách Buổi 3 gộp (ADR-0018). Lượt 1 CẦN SỬA với một lỗi SAI NGHĨA: hw.s10 vế (c) biến câu hỏi hai vế của bản VI («Manhattan có đi xuyên tường được không — vậy nó còn admissible không?») thành khẳng định, phát luôn tiền đề và lấy mất đúng cái vế người học phải tự bắc cầu bài-nới-lỏng → cận dưới → admissible. Kèm ba mục giọng: «we cure» (we nghĩa tác giả), ch5.s14 rơi trạng từ «hoàn toàn» và cả «bạn … thế thôi» nên tụt xuống giọng hướng dẫn sử dụng, ch5.s31 lấy việc suy luận khỏi tay người đọc trả về cho người kể. Giám khảo còn bắt một lỗi do chính việc tách gây ra: ch5.s31 trỏ «câu 3 của bài tập» trong khi sau khi chia lại, «đường nào có thể được trả về» đã thành QUESTION 2 — sai ở CẢ HAI bản, đã sửa cả hai. Lượt 2 ĐẠT, kèm một gợi ý đã áp: bỏ số đếm «one condition» cho khớp bản VI vốn không đếm.",
+  "pairs_hash": "65366d3df04293dd",
+  "at": "2026-09-21"
+}

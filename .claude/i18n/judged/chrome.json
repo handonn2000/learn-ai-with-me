@@ -1,0 +1,13 @@
+{
+  "unit": "chrome",
+  "verdict": "ĐẠT",
+  "summary": "Chấm lại 2026-09-21 sau đợt tách Buổi 3 thành ba buổi và đánh số lại cả khóa (ADR-0018). Thay đổi lớn nhất trong bốn unit: viết lại TOÀN BỘ khối `parts` và `sessions` của index.ts/index.en.ts (13 buổi thay 11; ba buổi tìm kiếm mới có title/topics/math viết mới cả hai bản; part range thành Tuần 1–2 · 3–8 · 9–11 · 12–13), cộng một chuỗi ui «← Lộ trình 13 tuần». ĐẠT ngay lượt đầu: giám khảo xác nhận 13 buổi và 4 phần đều khớp vai trò, bảng soi gương `en` KHÔNG lật hụt chỗ nào (cả 13 buổi mang thuật ngữ tiếng Việt thật), LABELS/CHIPS phủ đủ cả hai nhãn mới «Bài tập 1 / Bài tập 2» của b3. Ghi chú không chặn, CÓ TỪ TRƯỚC đợt tách nên để lại: tên tiếng Anh của b6/b7/b12/b13 lệch giữa `VI.en` và `EN.title` (b12 đáng ngó nhất vì hai tên quảng cáo phạm vi khác nhau — Naïve Bayes vs Decision Trees).",
+  "pairs_hash": "97f741326ac285c8",
+  "at": "2026-09-21",
+  "supersedes": {
+    "verdict": "ĐẠT",
+    "pairs_hash": "b6e330125c72c939",
+    "at": "2026-09-06",
+    "summary": "Không có mục SAI NGHĨA, DỊCH CỨNG hay MẤT GIỌNG nào. Giám khảo xác nhận riêng ba nhóm thay đổi sau lượt trước (dấu lược typographic, chính tả Anh–Mỹ, khối mathPrimer mới) và nêu bốn chỗ dịch tốt đáng giữ làm mẫu — trong đó có việc xoay cả câu tiêu đề để chữ được tô màu vẫn là chữ mang nghĩa."
+  }
+}

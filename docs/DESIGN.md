@@ -5,6 +5,11 @@ giả định người học đã biết trước và nhồi quá nhiều thứ 
 
 ## 1. Cách học
 
+Mục này giữ **khung và giới hạn** (đồ thị kỹ năng, độ dài lesson, thang trợ giúp, điểm FSRS). Còn
+**chọn phương pháp nào cho kỹ năng nào và vì sao** (đoán trước, ví dụ mẫu, cặp đối lập, tìm lỗi,
+nhớ lại tự do, xen kẽ…) nằm ở skill `.claude/skills/learning-methods/`. Lên dàn ý một ga mới
+hoặc thêm cơ chế học/ôn thì đọc skill đó trước.
+
 ### Đồ thị kỹ năng (backward chaining)
 
 - **Nút = một kỹ năng làm được**, viết bằng động từ: "Chạy tay UCS và chỉ ra nút được lấy ra tiếp theo",

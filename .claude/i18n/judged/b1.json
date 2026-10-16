@@ -1,0 +1,13 @@
+{
+  "unit": "b1",
+  "verdict": "ĐẠT",
+  "summary": "Chấm lại 2026-09-21 sau ADR-0018, HAI vòng. Vòng đầu (ba sửa đổi trong lesson01.text.en.ts: Session 5→7 đối kháng, Sessions 7 and 8→9 and 10 logic, 11→13 sessions) ĐẠT, giám khảo rà mọi lần nhắc buổi và khớp một-đối-một với bảng dời; khen riêng `ch4.s6` «tám buổi giữa từ tìm kiếm tới logic» vẫn đúng sau khi tách (b3–b8 tìm kiếm + b9–b10 logic = 8) — con số dễ thành sai âm thầm mà không ai kiểm. Vòng hai vì `intro-ai{,.en}.js` là pairs[1] của unit này và vừa bị sửa: «Buổi 3 bạn sẽ tự tay cài cả bảy cách» sai sau khi tách (Buổi 3 không còn thuật toán nào; bảy thuật toán ở Buổi 4 và 5) → đổi thành «Buổi 4 và 5» / «in Sessions 4 and 5», và ba nhãn TOPICS đổi thành Buổi 3–8 / 9–11 / 12–13. ĐẠT.",
+  "pairs_hash": "ea543b461fbd8e9d",
+  "at": "2026-09-21",
+  "supersedes": {
+    "verdict": "ĐẠT",
+    "pairs_hash": "232ce22d7cc343a9",
+    "at": "2026-09-07",
+    "summary": "Lượt sau cùng — chấm LẠI phạm vi hẹp sau khi sửa lối viết hoa tên buổi ở vị trí nhãn. Hai chuỗi đổi, cả hai chỉ đổi một chữ cái: nav.hw «11 On to session 2» → «On to Session 2», và hw.lead «start from session 2 material» → «Session 2 material» (nằm cùng câu với «section 10 of Session 2», nên viết thường ở đó là lệch chứ không phải văn xuôi bình thường). Giám khảo soát toàn bộ vị trí nhãn/tiêu đề của bundle EN: mọi nhãn nav nay cùng một lối viết, mọi lần nhắc buổi ở vị trí nhãn đều theo lối tên riêng. Phán quyết trước đó (ĐẠT, không phát hiện) vẫn phủ phần nghĩa và giọng của cả unit — bốn cặp còn lại không đổi byte nào."
+  }
+}

@@ -7,6 +7,6 @@ dist
 # slide/homework gốc của trường — không đẩy lên repo public
 public/materials/
 
-# quy trình làm việc nội bộ — giữ ở máy, không đẩy lên repo public
-.claude/
-CLAUDE.md
+# .claude/ và CLAUDE.md theo repo; chỉ giữ ở máy phần cấu hình cá nhân
+.claude/settings.local.json
+__pycache__/

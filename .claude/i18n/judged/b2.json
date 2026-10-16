@@ -1,0 +1,13 @@
+{
+  "unit": "b2",
+  "verdict": "ĐẠT",
+  "summary": "Chấm lại 2026-09-21 sau ADR-0018. Lượt 1 CẦN SỬA một lỗi SAI NGHĨA mà tôi đã sót ở lượt soát đầu: `ch6.s17` «buổi 5 gọi tên nó thành “tìm kiếm đối kháng”» — đối kháng nay là Buổi 7, Buổi 5 là Tìm kiếm có thông tin. Nặng ở chỗ tít của chính khối đó (`ch6.s14`) ĐÃ được sửa thành «CHO BUỔI 7», nên đoạn văn tự mâu thuẫn với cái tít ngay trên nó trong cùng một màn hình. Sai ở cả hai bản vì bản EN dịch trung thành. Đã sửa, cộng một mục tùy chọn: `hw.s6` đổi tên buổi 3 thành «Phát biểu bài toán tìm kiếm» / «Problem Solving by Searching» cho khớp index.ts sau khi tách — tên buổi 3 giờ chỉ còn một phiên bản trong toàn khóa. Lượt 2 ĐẠT: khối `ch8.s31` (mục lục năm nấc, chỗ dày số nhất) mọi số gắn đúng mệnh đề ở cả hai bản — nấc 3→buổi 3–8, nấc 4→buổi 7 và 11, nấc 5→buổi 12 và 13, nấc 2→buổi 9 và 10.",
+  "pairs_hash": "f28c9612b6b91b8f",
+  "at": "2026-09-21",
+  "supersedes": {
+    "verdict": "ĐẠT",
+    "pairs_hash": "f566ff15e335a8b4",
+    "at": "2026-09-06",
+    "summary": "Lượt 3. Không còn SAI NGHĨA / DỊCH CỨNG / MẤT GIỌNG. Giám khảo xác nhận cả bốn nhóm sửa (phép xoay 'but' trong math-primers b2, rút gọn cho khớp khối b1/b3, chính tả Anh–Mỹ, và ARCH_LEVELS lật đúng chiều soi gương), đồng thời đối chiếu lại chuỗi số dày nhất của unit (4 loại tri giác · 1.398.100 · 8 loại · 1.227.133.512 · gần 900 lần) — không con số nào nhảy vai."
+  }
+}

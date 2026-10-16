@@ -1,0 +1,13 @@
+{
+  "unit": "def-b7",
+  "verdict": "ĐẠT",
+  "summary": "Chấm lại 2026-09-19 sau khi sửa ba phát hiện của lượt CẦN SỬA cùng ngày: world.intro trả lại so sánh nhất số ít + district→station, replicaTitle bỏ sở hữu cách bám nhầm (khớp replicaSteps), next bỏ bị động vô chủ ngữ và gọi 'you' ra. Giám khảo soát lan: không sinh lỗi mới, station/district dùng đúng theo bản VI, 6 lần 'I', không 'we' nghĩa tác giả, số gắn đúng mệnh đề ở practiceGuide/offset/ISR/retention, ba keep_vi_values còn nguyên. Ghi chú không chặn: world.routeHelp dịch 'Tuyến sáng nhất' thành 'The bright route', rơi so sánh nhất — cân nhắc 'the brightest route' lần sau có đụng khối world.*.",
+  "pairs_hash": "69bc58ad69faf120",
+  "at": "2026-09-19",
+  "supersedes": {
+    "verdict": "CẦN SỬA",
+    "pairs_hash": "b2f9bab73b91bc7f",
+    "at": "2026-09-19",
+    "summary": "Một lỗi SAI NGHĨA ở world.intro ('each bright skybridge' thay cho so sánh nhất số ít, mâu thuẫn renderer), hai đề xuất ở replicaTitle và next. Đã sửa cả ba."
+  }
+}

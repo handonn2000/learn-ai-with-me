@@ -1,0 +1,69 @@
+{
+  "_doc": "Đề bài để chấm các skill. Thêm case = thêm một object vào evals[]. Xem README.md.",
+  "evals": [
+    {
+      "id": "b4-full",
+      "skills": [
+        "new-lesson",
+        "lesson-voice",
+        "lesson-interactive"
+      ],
+      "weight": "nặng",
+      "prompt": "Dựng bài học tương tác cho Buổi 4 — Tìm kiếm cục bộ (Local Search). Nguyên liệu ở public/materials/Lecture/buoi4/Lecture04-LocalSearch.pdf. Làm đầy đủ: viết bài, nối route, chạy build sạch. Tôi không có mặt để duyệt dàn ý — cứ tự quyết rồi ghi lại trong phần bàn giao những chỗ bạn đã tự quyết.",
+      "lesson_id": "b4",
+      "expect": "Bài học ~9-10 mục ở src/features/lessons/b4/, route trong App.tsx, lessonPath trong data khóa, ít nhất 2 phần tương tác, giọng tôi/bạn, build sạch."
+    },
+    {
+      "id": "b2-outline",
+      "skills": [
+        "new-lesson",
+        "lesson-voice"
+      ],
+      "weight": "nhẹ",
+      "prompt": "Tôi muốn dựng bài học cho Buổi 2 — Tác tử thông minh. Đưa tôi dàn ý trước khi bạn viết code. Đừng sửa file nào cả, chỉ trả lời trong chat.",
+      "lesson_id": null,
+      "expect": "Dàn ý 8-10 mục, mỗi mục nêu rõ chỗ vướng nó gỡ, đánh dấu 2-3 mục tương tác kèm hình thức đã chọn, 3-5 con số có cú chốt. KHÔNG sửa file nào."
+    },
+    {
+      "id": "voice-rewrite",
+      "skills": [
+        "lesson-voice"
+      ],
+      "weight": "nhẹ",
+      "prompt": "Viết lại đoạn này cho hợp giọng của app, giữ nguyên mọi số liệu và kết luận:\n\n\"Thuật toán simulated annealing là một phương pháp tìm kiếm cục bộ ngẫu nhiên. Tại mỗi bước, thuật toán chọn một trạng thái lân cận ngẫu nhiên. Nếu trạng thái đó tốt hơn, thuật toán luôn chuyển sang. Nếu tệ hơn, thuật toán vẫn có thể chuyển sang với xác suất exp(-ΔE/T), trong đó T là tham số nhiệt độ giảm dần theo thời gian. Khi lịch làm nguội đủ chậm, thuật toán hội tụ về cực trị toàn cục với xác suất tiến tới 1.\"\n\nChỉ trả lời trong chat, đừng sửa file nào.",
+      "lesson_id": null,
+      "expect": "Có tôi/bạn, có ví von đời thường, giữ nguyên exp(-ΔE/T) và kết luận hội tụ, không bịa thêm số. KHÔNG sửa file nào."
+    },
+    {
+      "id": "i18n-en-section",
+      "skills": [
+        "lesson-voice"
+      ],
+      "weight": "nhẹ",
+      "prompt": "Dịch sang tiếng Anh đoạn dẫn của mục 05 (Duy lý) trong src/features/lessons/b1/Lesson01Intro.tsx, theo giọng tiếng Anh của app. Trả lời thẳng trong chat, ĐỪNG sửa file nào.",
+      "lesson_id": null,
+      "expect": "I/you, không 'we' nghĩa tác giả, không mở bài nằm trong danh sách cấm của english.md, ví von gắn văn hóa được THAY chứ không dịch, mọi số liệu và định nghĩa giữ nguyên."
+    },
+    {
+      "id": "i18n-chrome",
+      "skills": [
+        "lesson-voice"
+      ],
+      "weight": "nhẹ",
+      "i18n_unit": "chrome",
+      "prompt": "Unit song ngữ `chrome` đang đỏ ở cổng i18n. Chạy `python3 .claude/scripts/i18n_loop.py chrome`, đọc lỗi, sửa cho tới khi cổng i18n xanh. Đọc .claude/commands/i18n-unit.md trước.",
+      "lesson_id": null,
+      "expect": "check_i18n.py chrome không còn FAIL; không thêm dependency; không tạo route /en."
+    },
+    {
+      "id": "methods-admissible-outline",
+      "skills": [
+        "learning-methods"
+      ],
+      "weight": "nhẹ",
+      "prompt": "Tôi muốn dựng ga cho kỹ năng `admissible` (Khi nào A* chắc chắn đúng) ở v2. Đưa tôi dàn ý các bước của lesson trước, mỗi bước nói dùng cách dạy gì và vì sao. Đừng sửa file nào, chỉ trả lời trong chat.",
+      "lesson_id": null,
+      "expect": "Xếp kỹ năng là K (khái niệm, có phần kiểm tra theo điều kiện), có thể kèm T. Dàn ý theo ma trận: guess nhắm ngộ nhận (vd. h càng lớn càng tốt / h nhỏ hơn thì không đúng), giải thích có cặp đối lập (heuristic admissible vs nói quá, kết quả A* khác nhau), ít nhất một bài xử lý sâu (so sánh hoặc tìm lỗi hoặc tự giải thích), ≤ 1 trắc nghiệm, 2–4 bài tập, có câu nhớ lại tự do cho recalls, câu ôn dùng bối cảnh khác. Mỗi bước ghi mã phương pháp hoặc lý do. KHÔNG sửa file nào."
+    }
+  ]
+}

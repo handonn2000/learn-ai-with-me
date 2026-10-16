@@ -1,0 +1,18 @@
+{
+  "units": {
+    "b9": {
+      "closed": true,
+      "unjudged": false,
+      "gates": {
+        "deps": true,
+        "build": true,
+        "i18n": true,
+        "lesson": true,
+        "judged": true
+      }
+    }
+  },
+  "closed": [
+    "b9"
+  ]
+}

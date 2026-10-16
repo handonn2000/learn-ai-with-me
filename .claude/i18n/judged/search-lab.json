@@ -1,0 +1,7 @@
+{
+  "unit": "search-lab",
+  "verdict": "ĐẠT",
+  "summary": "Chấm lần đầu — unit MỚI, tách ra khi Buổi 3 gộp chia ba (ADR-0018) vì chữ của Manim Lab và Code Lab dùng chung cho Buổi 4 lẫn Buổi 5; gắn vào một trong hai buổi thì buổi kia không đóng độc lập được. Lượt 1 ĐẠT: việc tách không làm vỡ tham chiếu chéo nào, code Python/pseudo trong lab-searching.en.js y nguyên từng ký tự (chỉ comment được dịch), narrate.en.ts đủ 42 câu với thứ tự tham số đúng vai trò ở mọi câu nhiều ${…}. Hai đề xuất đã áp: ALGOS[3].vn của IDS render ra «Iterative deepening search · Iterative deepening (with DLS)» tức nhãn lặp lại chính nó trong khi sáu thẻ kia đều mô tả cơ chế — đổi thành «Depth-limited runs with ℓ rising (uses DLS)»; và codelab.s3 mất răng cảnh báo («THAT CHANGE THE OUTPUT» nghe như ba quy ước CÓ TÁC DỤNG đổi output, thay vì «sai là lệch») — trả lại câu điều kiện. Chấm lại ĐẠT.",
+  "pairs_hash": "b2ae62a972719b08",
+  "at": "2026-09-21"
+}

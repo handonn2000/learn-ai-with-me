@@ -1,0 +1,13 @@
+{
+  "unit": "tests",
+  "verdict": "ĐẠT",
+  "summary": "Chấm lại 2026-09-21 sau ADR-0018. Lượt 1 CẦN SỬA với bốn lỗi SAI NGHĨA, tất cả cùng một loại và đều là loại `check_i18n.py` KHÔNG thể thấy — số buổi cũ còn sót ở bản VI rồi bản EN dịch trung thành theo, nên multiset chữ số hai bên vẫn bằng nhau: tiêu đề Phần II «(Buổi 3–6)» trong khi phần đó có câu tag b7/b8, Phần III «(Buổi 7–9)» trong khi câu tag b9/b10/b11, Phần IV «(Buổi 10–11)» trong khi câu tag b12/b13, và câu định lý Bayes trỏ Naïve Bayes về «Buổi 10» (nay là Logic bậc nhất). Hậu quả thật: người học sai câu rồi mở «Buổi 7» ra ôn thì gặp minimax chứ không gặp FOL. Đã sửa cả bốn ở CẢ HAI bản, cộng một mục tùy chọn: `[1].desc` thêm «phát biểu bài toán» cho khớp index.ts và khớp việc phần này đã có 2 câu tag b3. Lượt 2 ĐẠT — giám khảo kiểm khép kín: khoảng buổi trên tiêu đề nay bao trọn tập topicId của chính phần đó, 36/36 topicId khớp thứ tự giữa hai bản, số câu thật 8·8·10·10 khớp testDesc. Ba lỗi đầu giờ có `scripts/check-session-numbering.mjs` canh.",
+  "pairs_hash": "8efba8f62bfea08a",
+  "at": "2026-09-21",
+  "supersedes": {
+    "verdict": "ĐẠT",
+    "pairs_hash": "8816e14017d3d28d",
+    "at": "2026-09-06",
+    "summary": "36 câu, không có SAI NGHĨA / DỊCH CỨNG / MẤT GIỌNG. Giám khảo soi riêng đợt đổi dấu nháy hàng loạt: 15 cặp “ ” cân mở-đóng, span khớp bản VI 15/15, không lây sang opts hay tex, 18 dấu lược ’ không còn ASCII nào. Cũng xác nhận mọi phương án SAI vẫn sai vì đúng lý do cũ sau khi sửa chữ."
+  }
+}

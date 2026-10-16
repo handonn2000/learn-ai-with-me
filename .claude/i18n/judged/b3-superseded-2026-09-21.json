@@ -1,0 +1,11 @@
+{
+  "_superseded": "Bài Buổi 3 gộp đã tách thành Buổi 3 · 4 · 5 + unit search-lab ngày 2026-09-21. Phán quyết dưới đây chấm bản gộp nên KHÔNG còn hiệu lực cho bất kỳ unit nào hiện tại; bốn unit mới phải qua i18n-fidelity-judge lại.",
+  "superseded_verdict": {
+    "unit": "b3",
+    "verdict": "ĐẠT",
+    "summary": "Lượt 3 — chấm LẠI riêng cặp lời kể. Phán quyết lượt 2 (2026-09-06) hết hiệu lực vì narrate.vi.ts / narrate.en.ts / search-engine.js bị sửa SAU khi chấm (mtime 2026-09-07 12:20:35, không do phiên nào trong nhật ký này ghi — hai câu n41/n42 và phần engine gọi chúng). Bốn cặp còn lại không đổi một byte kể từ lượt 2 nên không chấm lại. Giám khảo đọc đủ 42 khóa cạnh nhau + đối chiếu từng lời gọi MSG.nX trong engine để xác minh vai trò tham số: 0 SAI NGHĨA, 0 SAI THAM SỐ, 0 DỊCH CỨNG. Xác nhận riêng n13 (chiều đánh đổi IDS), n32/n33 (lý lẽ tối ưu UCS/A*), đối lập sinh-ra ↔ lấy-ra ở n24/n38 vs n34/n35, và n41/n42 mới thêm.",
+    "pairs_hash": "b77b59c13089a53a",
+    "at": "2026-09-07",
+    "_doc_hash": "Băm CHỮ NGHĨA (chuỗi + text node JSX), tôn trọng scope_key — xem pairs_hash trong i18n_loop.py."
+  }
+}

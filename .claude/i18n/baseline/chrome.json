@@ -1,0 +1,17 @@
+{
+  "src/App.tsx": [],
+  "src/components/AppHeader.tsx": [],
+  "src/components/LessonNav.tsx": [],
+  "src/components/LessonDeck.tsx": [],
+  "src/components/CheckList.tsx": [],
+  "src/components/MathPrimer.tsx": [],
+  "src/components/SessionQuiz.tsx": [],
+  "src/components/SectionHead.tsx": [],
+  "src/pages/HomePage.tsx": [],
+  "src/pages/CoursesPage.tsx": [],
+  "src/pages/BlogPage.tsx": [],
+  "src/pages/NotFoundPage.tsx": [],
+  "src/features/roadmap/RoadmapPage.tsx": [],
+  "src/features/tests/PartTestPage.tsx": [],
+  "src/lib/spaced-repetition.ts": []
+}

@@ -1,0 +1,876 @@
+{
+  "_doc": "Hợp đồng song ngữ VI/EN. Mỗi unit là MỘT vòng lặp riêng, đóng được độc lập.",
+  "_doc2": "check_i18n.py và i18n_loop.py đọc file này. Thêm bài học mới = thêm một unit.",
+  "locales": [
+    "vi",
+    "en"
+  ],
+  "deps_allowlist": [
+    "katex",
+    "react",
+    "react-dom",
+    "react-router-dom",
+    "three"
+  ],
+  "_doc_vi_free": "File phải SẠCH dấu tiếng Việt sau khi tách chuỗi — bằng chứng việc tách xong thật, không phải xong 80%.",
+  "_doc_exempt": "LangToggle.tsx cố ý song ngữ: nhãn viết bằng ngôn ngữ ĐÍCH để người không đọc được tiếng Việt vẫn thấy lối về.",
+  "vi_free_exempt": [
+    "src/components/LangToggle.tsx"
+  ],
+  "units": [
+    {
+      "id": "chrome",
+      "title": "Khung app + hạ tầng locale",
+      "pairs": [
+        {
+          "vi": "src/content/ui/vi.ts",
+          "en": "src/content/ui/en.ts",
+          "kind": "ts-bundle"
+        },
+        {
+          "vi": "src/content/courses/csc14003/index.ts",
+          "en": "src/content/courses/csc14003/index.en.ts",
+          "kind": "ts-derived",
+          "keep_vi_keys": [
+            "en"
+          ]
+        }
+      ],
+      "vi_free": [
+        "src/App.tsx",
+        "src/components/AppHeader.tsx",
+        "src/components/LessonNav.tsx",
+        "src/components/LessonDeck.tsx",
+        "src/components/CheckList.tsx",
+        "src/components/MathPrimer.tsx",
+        "src/components/SessionQuiz.tsx",
+        "src/components/SectionHead.tsx",
+        "src/pages/HomePage.tsx",
+        "src/pages/CoursesPage.tsx",
+        "src/pages/BlogPage.tsx",
+        "src/pages/NotFoundPage.tsx",
+        "src/features/roadmap/RoadmapPage.tsx",
+        "src/features/tests/PartTestPage.tsx",
+        "src/lib/spaced-repetition.ts"
+      ],
+      "routes": [
+        "/",
+        "/courses",
+        "/courses/csc14003",
+        "/courses/csc14003/tests",
+        "/blog"
+      ],
+      "gates": [
+        "deps",
+        "build",
+        "i18n",
+        "extraction",
+        "judged"
+      ],
+      "extract_from": [
+        "src/App.tsx",
+        "src/components/AppHeader.tsx",
+        "src/components/LessonNav.tsx",
+        "src/components/LessonDeck.tsx",
+        "src/components/CheckList.tsx",
+        "src/components/MathPrimer.tsx",
+        "src/components/SessionQuiz.tsx",
+        "src/components/SectionHead.tsx",
+        "src/pages/HomePage.tsx",
+        "src/pages/CoursesPage.tsx",
+        "src/pages/BlogPage.tsx",
+        "src/pages/NotFoundPage.tsx",
+        "src/features/roadmap/RoadmapPage.tsx",
+        "src/features/tests/PartTestPage.tsx",
+        "src/lib/spaced-repetition.ts"
+      ],
+      "extract_into": [
+        "src/content/ui/vi.ts"
+      ]
+    },
+    {
+      "id": "tests",
+      "title": "Kiểm tra tổng hợp — 36 câu",
+      "pairs": [
+        {
+          "vi": "src/content/courses/csc14003/part-tests.ts",
+          "en": "src/content/courses/csc14003/part-tests.en.ts",
+          "kind": "ts-quiz"
+        }
+      ],
+      "vi_free": [],
+      "routes": [
+        "/courses/csc14003/tests"
+      ],
+      "gates": [
+        "deps",
+        "build",
+        "i18n",
+        "judged"
+      ]
+    },
+    {
+      "id": "b1",
+      "title": "Buổi 1 — Nhập môn AI",
+      "lesson_id": "b1",
+      "page": "src/features/lessons/b1/Lesson01Intro.tsx",
+      "pairs": [
+        {
+          "vi": "src/features/lessons/b1/lesson01.text.vi.ts",
+          "en": "src/features/lessons/b1/lesson01.text.en.ts",
+          "kind": "ts-bundle"
+        },
+        {
+          "vi": "src/content/courses/csc14003/intro-ai.js",
+          "en": "src/content/courses/csc14003/intro-ai.en.js",
+          "kind": "js-data",
+          "keep_vi_values": [
+            "Triết học",
+            "Toán học",
+            "Kinh tế học",
+            "Thần kinh học",
+            "Tâm lý · Khoa học tri nhận",
+            "Kỹ thuật máy tính",
+            "Lý thuyết điều khiển",
+            "Ngôn ngữ học"
+          ]
+        },
+        {
+          "vi": "src/content/courses/csc14003/math-primers.js",
+          "en": "src/content/courses/csc14003/math-primers.en.js",
+          "kind": "js-data",
+          "keep_vi_keys": [
+            "vn"
+          ],
+          "scope_key": "b1"
+        },
+        {
+          "vi": "src/content/courses/csc14003/session-quizzes.js",
+          "en": "src/content/courses/csc14003/session-quizzes.en.js",
+          "kind": "js-quiz",
+          "scope_key": "b1"
+        }
+      ],
+      "vi_free": [
+        "src/features/lessons/b1/Lesson01Intro.tsx",
+        "src/features/lessons/b1/lesson01.scenes.ts"
+      ],
+      "extract_from": [
+        "src/features/lessons/b1/Lesson01Intro.tsx",
+        "src/features/lessons/b1/lesson01.scenes.ts"
+      ],
+      "extract_into": [
+        "src/features/lessons/b1/lesson01.text.vi.ts"
+      ],
+      "routes": [
+        "/courses/csc14003/lessons/b1"
+      ],
+      "gates": [
+        "deps",
+        "build",
+        "i18n",
+        "lesson",
+        "extraction",
+        "judged"
+      ]
+    },
+    {
+      "id": "b2",
+      "title": "Buổi 2 — Tác tử thông minh",
+      "lesson_id": "b2",
+      "page": "src/features/lessons/b2/Lesson02Agents.tsx",
+      "pairs": [
+        {
+          "vi": "src/features/lessons/b2/lesson02.text.vi.ts",
+          "en": "src/features/lessons/b2/lesson02.text.en.ts",
+          "kind": "ts-bundle"
+        },
+        {
+          "vi": "src/content/courses/csc14003/math-primers.js",
+          "en": "src/content/courses/csc14003/math-primers.en.js",
+          "kind": "js-data",
+          "keep_vi_keys": [
+            "vn"
+          ],
+          "scope_key": "b2"
+        },
+        {
+          "vi": "src/content/courses/csc14003/agents-data.js",
+          "en": "src/content/courses/csc14003/agents-data.en.js",
+          "kind": "js-data",
+          "keep_vi_keys": [
+            "en",
+            "leftEn",
+            "rightEn",
+            "midEn"
+          ]
+        },
+        {
+          "vi": "src/content/courses/csc14003/vacuum-world.js",
+          "en": "src/content/courses/csc14003/vacuum-world.en.js",
+          "kind": "js-data",
+          "only_exports": [
+            "STEPS",
+            "WORLDS",
+            "PRESETS",
+            "PROGRAMS",
+            "MEASURES"
+          ],
+          "keep_vi_keys": [
+            "en"
+          ]
+        },
+        {
+          "vi": "src/content/courses/csc14003/session-quizzes.js",
+          "en": "src/content/courses/csc14003/session-quizzes.en.js",
+          "kind": "js-quiz",
+          "scope_key": "b2"
+        }
+      ],
+      "vi_free": [
+        "src/features/lessons/b2/Lesson02Agents.tsx",
+        "src/features/lessons/b2/AgentArchDiagram.tsx",
+        "src/features/lessons/b2/VacuumLab.tsx",
+        "src/features/lessons/b2/VacuumRoom.tsx",
+        "src/features/lessons/b2/EnvExplorer.tsx"
+      ],
+      "extract_from": [
+        "src/features/lessons/b2/Lesson02Agents.tsx",
+        "src/features/lessons/b2/AgentArchDiagram.tsx",
+        "src/features/lessons/b2/VacuumLab.tsx",
+        "src/features/lessons/b2/VacuumRoom.tsx",
+        "src/features/lessons/b2/EnvExplorer.tsx"
+      ],
+      "extract_into": [
+        "src/features/lessons/b2/lesson02.text.vi.ts"
+      ],
+      "routes": [
+        "/courses/csc14003/lessons/b2"
+      ],
+      "gates": [
+        "deps",
+        "build",
+        "i18n",
+        "lesson",
+        "extraction",
+        "judged"
+      ]
+    },
+    {
+      "id": "b3",
+      "title": "Buổi 3 — Phát biểu bài toán tìm kiếm",
+      "lesson_id": "b3",
+      "page": "src/features/lessons/b3/Lesson03Problem.tsx",
+      "pairs": [
+        {
+          "vi": "src/features/lessons/b3/lesson03.text.vi.ts",
+          "en": "src/features/lessons/b3/lesson03.text.en.ts",
+          "kind": "ts-bundle"
+        },
+        {
+          "vi": "src/content/courses/csc14003/math-primers.js",
+          "en": "src/content/courses/csc14003/math-primers.en.js",
+          "kind": "js-data",
+          "keep_vi_keys": [
+            "vn"
+          ],
+          "scope_key": "b3"
+        },
+        {
+          "vi": "src/content/courses/csc14003/session-quizzes.js",
+          "en": "src/content/courses/csc14003/session-quizzes.en.js",
+          "kind": "js-quiz",
+          "scope_key": "b3"
+        }
+      ],
+      "vi_free": [
+        "src/features/lessons/b3/Lesson03Problem.tsx"
+      ],
+      "extract_from": [
+        "src/features/lessons/b3/lesson03.text.vi.ts"
+      ],
+      "extract_into": [
+        "src/features/lessons/b3/lesson03.text.vi.ts"
+      ],
+      "routes": [
+        "/courses/csc14003/lessons/b3"
+      ],
+      "gates": [
+        "deps",
+        "build",
+        "i18n",
+        "lesson",
+        "extraction",
+        "judged"
+      ],
+      "_extraction_note": "Cắt ra từ bundle Buổi 3 cũ khi buổi đó tách thành Buổi 3 · 4 · 5; hero, dẫn quiz và khối bài tập thì viết mới. Mốc extraction là đường cơ sở sau khi tách, không phải một lần rút từ JSX."
+    },
+    {
+      "id": "b4",
+      "title": "Buổi 4 — Tìm kiếm mù",
+      "lesson_id": "b4",
+      "page": "src/features/lessons/b4/Lesson04Uninformed.tsx",
+      "pairs": [
+        {
+          "vi": "src/features/lessons/b4/lesson04.text.vi.ts",
+          "en": "src/features/lessons/b4/lesson04.text.en.ts",
+          "kind": "ts-bundle"
+        },
+        {
+          "vi": "src/content/courses/csc14003/math-primers.js",
+          "en": "src/content/courses/csc14003/math-primers.en.js",
+          "kind": "js-data",
+          "keep_vi_keys": [
+            "vn"
+          ],
+          "scope_key": "b4"
+        },
+        {
+          "vi": "src/content/courses/csc14003/session-quizzes.js",
+          "en": "src/content/courses/csc14003/session-quizzes.en.js",
+          "kind": "js-quiz",
+          "scope_key": "b4"
+        }
+      ],
+      "vi_free": [
+        "src/features/lessons/b4/Lesson04Uninformed.tsx"
+      ],
+      "extract_from": [
+        "src/features/lessons/b4/lesson04.text.vi.ts"
+      ],
+      "extract_into": [
+        "src/features/lessons/b4/lesson04.text.vi.ts"
+      ],
+      "routes": [
+        "/courses/csc14003/lessons/b4"
+      ],
+      "gates": [
+        "deps",
+        "build",
+        "i18n",
+        "lesson",
+        "extraction",
+        "judged"
+      ],
+      "_extraction_note": "Cắt ra từ bundle Buổi 3 cũ khi buổi đó tách thành Buổi 3 · 4 · 5; hero, dẫn quiz và khối bài tập thì viết mới. Mốc extraction là đường cơ sở sau khi tách, không phải một lần rút từ JSX."
+    },
+    {
+      "id": "b5",
+      "title": "Buổi 5 — Tìm kiếm có thông tin",
+      "lesson_id": "b5",
+      "page": "src/features/lessons/b5/Lesson05Informed.tsx",
+      "pairs": [
+        {
+          "vi": "src/features/lessons/b5/lesson05.text.vi.ts",
+          "en": "src/features/lessons/b5/lesson05.text.en.ts",
+          "kind": "ts-bundle"
+        },
+        {
+          "vi": "src/content/courses/csc14003/math-primers.js",
+          "en": "src/content/courses/csc14003/math-primers.en.js",
+          "kind": "js-data",
+          "keep_vi_keys": [
+            "vn"
+          ],
+          "scope_key": "b5"
+        },
+        {
+          "vi": "src/content/courses/csc14003/session-quizzes.js",
+          "en": "src/content/courses/csc14003/session-quizzes.en.js",
+          "kind": "js-quiz",
+          "scope_key": "b5"
+        }
+      ],
+      "vi_free": [
+        "src/features/lessons/b5/Lesson05Informed.tsx"
+      ],
+      "extract_from": [
+        "src/features/lessons/b5/lesson05.text.vi.ts"
+      ],
+      "extract_into": [
+        "src/features/lessons/b5/lesson05.text.vi.ts"
+      ],
+      "routes": [
+        "/courses/csc14003/lessons/b5"
+      ],
+      "gates": [
+        "deps",
+        "build",
+        "i18n",
+        "lesson",
+        "extraction",
+        "judged"
+      ],
+      "_extraction_note": "Cắt ra từ bundle Buổi 3 cũ khi buổi đó tách thành Buổi 3 · 4 · 5; hero, dẫn quiz và khối bài tập thì viết mới. Mốc extraction là đường cơ sở sau khi tách, không phải một lần rút từ JSX."
+    },
+    {
+      "id": "search-lab",
+      "title": "Manim Lab + Code Lab — dùng chung Buổi 4 và Buổi 5",
+      "pairs": [
+        {
+          "vi": "src/features/search-lab/lab.text.vi.ts",
+          "en": "src/features/search-lab/lab.text.en.ts",
+          "kind": "ts-bundle"
+        },
+        {
+          "vi": "src/content/courses/csc14003/lab-searching.js",
+          "en": "src/content/courses/csc14003/lab-searching.en.js",
+          "kind": "js-code"
+        },
+        {
+          "vi": "src/features/search-lab/narrate.vi.ts",
+          "en": "src/features/search-lab/narrate.en.ts",
+          "kind": "ts-bundle"
+        }
+      ],
+      "vi_free": [
+        "src/features/search-lab/SearchLab.tsx",
+        "src/features/search-lab/CodeLab.tsx",
+        "src/features/search-lab/AlgoCard.tsx",
+        "src/features/search-lab/scenes.ts",
+        "src/features/search-lab/search-engine.js"
+      ],
+      "engine": {
+        "file": "src/features/search-lab/search-engine.js",
+        "narrate": "src/features/search-lab/narrate.ts"
+      },
+      "extract_from": [
+        "src/features/search-lab/lab.text.vi.ts"
+      ],
+      "extract_into": [
+        "src/features/search-lab/lab.text.vi.ts"
+      ],
+      "routes": [
+        "/courses/csc14003/lessons/b4",
+        "/courses/csc14003/lessons/b5"
+      ],
+      "gates": [
+        "deps",
+        "build",
+        "i18n",
+        "extraction",
+        "engine",
+        "judged"
+      ],
+      "_extraction_note": "Cắt ra từ bundle Buổi 3 cũ khi buổi đó tách thành Buổi 3 · 4 · 5. Chữ ở đây phục vụ hai component dùng chung nên không thuộc buổi nào; mốc extraction là đường cơ sở sau khi tách, không phải một lần rút từ JSX."
+    },
+    {
+      "id": "b6",
+      "title": "Buổi 6 — Tìm kiếm cục bộ",
+      "lesson_id": "b6",
+      "page": "src/features/lessons/b6/Lesson06LocalSearch.tsx",
+      "pairs": [
+        {
+          "vi": "src/features/lessons/b6/lesson06.text.vi.ts",
+          "en": "src/features/lessons/b6/lesson06.text.en.ts",
+          "kind": "ts-bundle"
+        },
+        {
+          "vi": "src/content/courses/csc14003/math-primers.js",
+          "en": "src/content/courses/csc14003/math-primers.en.js",
+          "kind": "js-data",
+          "keep_vi_keys": [
+            "vn"
+          ],
+          "scope_key": "b6"
+        },
+        {
+          "vi": "src/content/courses/csc14003/session-quizzes.js",
+          "en": "src/content/courses/csc14003/session-quizzes.en.js",
+          "kind": "js-quiz",
+          "scope_key": "b6"
+        }
+      ],
+      "vi_free": [
+        "src/features/lessons/b6/Lesson06LocalSearch.tsx",
+        "src/features/lessons/b6/LocalSearchVisuals.tsx",
+        "src/features/lessons/b6/QueensLab.tsx",
+        "src/features/lessons/b6/GeneticLab.tsx",
+        "src/features/lessons/b6/local-search-engine.ts",
+        "src/features/lessons/b6/lesson06.code.ts"
+      ],
+      "extract_from": [
+        "src/features/lessons/b6/lesson06.text.vi.ts"
+      ],
+      "extract_into": [
+        "src/features/lessons/b6/lesson06.text.vi.ts"
+      ],
+      "routes": [
+        "/courses/csc14003/lessons/b6"
+      ],
+      "gates": [
+        "deps",
+        "build",
+        "i18n",
+        "lesson",
+        "extraction",
+        "judged"
+      ],
+      "_extraction_note": "New lesson authored directly in the VI bundle, then translated. The snapshot is an authoring baseline, not a legacy JSX extraction."
+    },
+    {
+      "id": "def",
+      "title": "Data Engineering Foundation — baseline and roadmap",
+      "pairs": [
+        {
+          "vi": "src/content/courses/data-engineering-foundation/curriculum.vi.ts",
+          "en": "src/content/courses/data-engineering-foundation/curriculum.en.ts",
+          "kind": "ts-bundle",
+          "keep_vi_keys": [
+            "en"
+          ]
+        },
+        {
+          "vi": "src/content/courses/data-engineering-foundation/index.ts",
+          "en": "src/content/courses/data-engineering-foundation/index.en.ts",
+          "kind": "ts-derived"
+        }
+      ],
+      "vi_free": [
+        "src/content/courses/data-engineering-foundation/curriculum.ts",
+        "src/content/courses/data-engineering-foundation/structure.ts",
+        "src/features/roadmap/CourseBaseline.tsx"
+      ],
+      "routes": [
+        "/courses/data-engineering-foundation"
+      ],
+      "gates": [
+        "deps",
+        "build",
+        "i18n"
+      ]
+    },
+    {
+      "id": "def-b7",
+      "title": "DEF Week 7 — Ingestion",
+      "pairs": [
+        {
+          "vi": "src/features/lessons/def/b7/lesson07.text.vi.ts",
+          "en": "src/features/lessons/def/b7/lesson07.text.en.ts",
+          "kind": "ts-bundle",
+          "keep_vi_values": [
+            "Record / Bản ghi",
+            "Key / Khóa",
+            "Throughput / Thông lượng · latency / Độ trễ"
+          ]
+        }
+      ],
+      "vi_free": [
+        "src/features/lessons/def/b7/Lesson07Ingestion.tsx",
+        "src/features/lessons/def/b7/IngestionLabs.tsx",
+        "src/features/lessons/def/b7/IngestionVisuals.tsx",
+        "src/features/lessons/def/b7/LessonAnimation.tsx",
+        "src/features/lessons/def/b7/SyntaxCode.tsx",
+        "src/features/lessons/def/b7/ingestion-engine.ts",
+        "src/features/lessons/def/b7/DataWorld.tsx",
+        "src/features/lessons/def/b7/data-world.scene.ts",
+        "src/features/lessons/def/b7/data-world-timeline.ts"
+      ],
+      "extract_from": [
+        "src/features/lessons/def/b7/lesson07.text.vi.ts"
+      ],
+      "extract_into": [
+        "src/features/lessons/def/b7/lesson07.text.vi.ts"
+      ],
+      "routes": [
+        "/courses/data-engineering-foundation/lessons/b7"
+      ],
+      "gates": [
+        "deps",
+        "build",
+        "i18n",
+        "extraction",
+        "judged"
+      ],
+      "_extraction_note": "New lesson authored directly into the VI bundle, not migrated from existing JSX. Snapshot is an authoring-content baseline for later edits; it is not evidence of a legacy extraction. Course-aware wiring/engine checks live in scripts/check-def-b7.mjs."
+    },
+    {
+      "id": "def-b8",
+      "title": "DEF Week 8 — Storage Layer",
+      "pairs": [
+        {
+          "vi": "src/features/lessons/def/b8/lesson08.text.vi.ts",
+          "en": "src/features/lessons/def/b8/lesson08.text.en.ts",
+          "kind": "ts-bundle"
+        },
+        {
+          "vi": "src/features/lessons/def/b8/storage-labs.text.vi.ts",
+          "en": "src/features/lessons/def/b8/storage-labs.text.en.ts",
+          "kind": "ts-bundle"
+        }
+      ],
+      "vi_free": [
+        "src/features/lessons/def/b8/Lesson08Storage.tsx",
+        "src/features/lessons/def/b8/StorageLabs.tsx",
+        "src/features/lessons/def/b8/storage-engine.ts"
+      ],
+      "extract_from": [
+        "src/features/lessons/def/b8/lesson08.text.vi.ts",
+        "src/features/lessons/def/b8/storage-labs.text.vi.ts"
+      ],
+      "extract_into": [
+        "src/features/lessons/def/b8/lesson08.text.vi.ts",
+        "src/features/lessons/def/b8/storage-labs.text.vi.ts"
+      ],
+      "routes": [
+        "/courses/data-engineering-foundation/lessons/b8"
+      ],
+      "gates": [
+        "deps",
+        "build",
+        "i18n",
+        "extraction",
+        "judged"
+      ],
+      "_extraction_note": "New VI bundles authored directly; snapshot records authoring baseline, not a legacy JSX extraction. Course-aware checks in scripts/check-def-b8.mjs and scripts/check-def-b8-engine.mjs."
+    },
+    {
+      "id": "def-b12",
+      "title": "DEF Week 12 — Orchestration and data quality",
+      "pairs": [
+        {
+          "vi": "src/features/lessons/def/b12/lesson12.text.vi.ts",
+          "en": "src/features/lessons/def/b12/lesson12.text.en.ts",
+          "kind": "ts-bundle"
+        }
+      ],
+      "vi_free": [
+        "src/features/lessons/def/b12/Lesson12Orchestration.tsx",
+        "src/features/lessons/def/b12/OrchestrationLabs.tsx",
+        "src/features/lessons/def/b12/orchestration-engine.js",
+        "src/features/lessons/def/b12/lesson12.code.ts"
+      ],
+      "extract_from": [
+        "src/features/lessons/def/b12/lesson12.text.vi.ts"
+      ],
+      "extract_into": [
+        "src/features/lessons/def/b12/lesson12.text.vi.ts"
+      ],
+      "routes": [
+        "/courses/data-engineering-foundation/lessons/b12"
+      ],
+      "gates": [
+        "deps",
+        "build",
+        "i18n",
+        "extraction",
+        "judged"
+      ],
+      "_extraction_note": "New lesson authored directly in VI bundle, then translated. Snapshot is an authoring baseline, not legacy extraction. Course-aware engine/wiring checks: scripts/check-def-b12.mjs."
+    },
+    {
+      "id": "def-b9",
+      "title": "DEF Session 9",
+      "pairs": [
+        {
+          "vi": "src/features/lessons/def/b9/lesson09.text.vi.ts",
+          "en": "src/features/lessons/def/b9/lesson09.text.en.ts",
+          "kind": "ts-bundle"
+        }
+      ],
+      "vi_free": [
+        "src/features/lessons/def/b9/Lesson09.tsx",
+        "src/features/lessons/def/b9/lesson09.code.ts",
+        "src/features/lessons/def/shared/DataLesson.tsx"
+      ],
+      "extract_from": [
+        "src/features/lessons/def/b9/lesson09.text.vi.ts"
+      ],
+      "extract_into": [
+        "src/features/lessons/def/b9/lesson09.text.vi.ts"
+      ],
+      "routes": [
+        "/courses/data-engineering-foundation/lessons/b9"
+      ],
+      "gates": [
+        "deps",
+        "build",
+        "i18n",
+        "extraction",
+        "judged"
+      ],
+      "_extraction_note": "New VI bundle authored directly before EN translation. Snapshot is the VI authoring baseline; course-aware wiring and engine checks are in scripts/check-def-b9-b11.mjs."
+    },
+    {
+      "id": "def-b10",
+      "title": "DEF Session 10",
+      "pairs": [
+        {
+          "vi": "src/features/lessons/def/b10/lesson10.text.vi.ts",
+          "en": "src/features/lessons/def/b10/lesson10.text.en.ts",
+          "kind": "ts-bundle"
+        }
+      ],
+      "vi_free": [
+        "src/features/lessons/def/b10/Lesson10.tsx",
+        "src/features/lessons/def/b10/lesson10.code.ts",
+        "src/features/lessons/def/shared/DataLesson.tsx"
+      ],
+      "extract_from": [
+        "src/features/lessons/def/b10/lesson10.text.vi.ts"
+      ],
+      "extract_into": [
+        "src/features/lessons/def/b10/lesson10.text.vi.ts"
+      ],
+      "routes": [
+        "/courses/data-engineering-foundation/lessons/b10"
+      ],
+      "gates": [
+        "deps",
+        "build",
+        "i18n",
+        "extraction",
+        "judged"
+      ],
+      "_extraction_note": "New VI bundle authored directly before EN translation. Snapshot is the VI authoring baseline; course-aware wiring and engine checks are in scripts/check-def-b9-b11.mjs."
+    },
+    {
+      "id": "def-b11",
+      "title": "DEF Session 11",
+      "pairs": [
+        {
+          "vi": "src/features/lessons/def/b11/lesson11.text.vi.ts",
+          "en": "src/features/lessons/def/b11/lesson11.text.en.ts",
+          "kind": "ts-bundle"
+        }
+      ],
+      "vi_free": [
+        "src/features/lessons/def/b11/Lesson11.tsx",
+        "src/features/lessons/def/b11/lesson11.code.ts",
+        "src/features/lessons/def/shared/DataLesson.tsx"
+      ],
+      "extract_from": [
+        "src/features/lessons/def/b11/lesson11.text.vi.ts"
+      ],
+      "extract_into": [
+        "src/features/lessons/def/b11/lesson11.text.vi.ts"
+      ],
+      "routes": [
+        "/courses/data-engineering-foundation/lessons/b11"
+      ],
+      "gates": [
+        "deps",
+        "build",
+        "i18n",
+        "extraction",
+        "judged"
+      ],
+      "_extraction_note": "New VI bundle authored directly before EN translation. Snapshot is the VI authoring baseline; course-aware wiring and engine checks are in scripts/check-def-b9-b11.mjs."
+    },
+    {
+      "id": "b7",
+      "title": "Buổi 7 — Tìm kiếm đối kháng",
+      "lesson_id": "b7",
+      "page": "src/features/lessons/b7/Lesson07Adversarial.tsx",
+      "pairs": [
+        {
+          "vi": "src/features/lessons/b7/lesson07.text.vi.ts",
+          "en": "src/features/lessons/b7/lesson07.text.en.ts",
+          "kind": "ts-bundle"
+        },
+        {
+          "vi": "src/content/courses/csc14003/math-primers.js",
+          "en": "src/content/courses/csc14003/math-primers.en.js",
+          "kind": "js-data",
+          "keep_vi_keys": [
+            "vn"
+          ],
+          "scope_key": "b7"
+        },
+        {
+          "vi": "src/content/courses/csc14003/session-quizzes.js",
+          "en": "src/content/courses/csc14003/session-quizzes.en.js",
+          "kind": "js-quiz",
+          "scope_key": "b7"
+        }
+      ],
+      "vi_free": [
+        "src/features/lessons/b7/Lesson07Adversarial.tsx",
+        "src/features/lessons/b7/GameVisuals.tsx",
+        "src/features/lessons/b7/game-engine.js",
+        "src/features/lessons/b7/lesson07.code.ts"
+      ],
+      "extract_from": [
+        "src/features/lessons/b7/lesson07.text.vi.ts"
+      ],
+      "extract_into": [
+        "src/features/lessons/b7/lesson07.text.vi.ts"
+      ],
+      "routes": [
+        "/courses/csc14003/lessons/b7"
+      ],
+      "gates": [
+        "deps",
+        "build",
+        "i18n",
+        "lesson",
+        "extraction",
+        "judged"
+      ],
+      "_extraction_note": "New lesson authored directly in the VI bundle, then translated. The snapshot is an authoring baseline, not a legacy JSX extraction."
+    },
+    {
+      "id": "b9",
+      "title": "Buổi 9 — Tác tử logic · Logic mệnh đề",
+      "lesson_id": "b9",
+      "page": "src/features/lessons/b9/Lesson09Logic.tsx",
+      "pairs": [
+        {
+          "vi": "src/features/lessons/b9/lesson09.text.vi.ts",
+          "en": "src/features/lessons/b9/lesson09.text.en.ts",
+          "kind": "ts-bundle"
+        },
+        {
+          "vi": "src/content/courses/csc14003/math-primers.js",
+          "en": "src/content/courses/csc14003/math-primers.en.js",
+          "kind": "js-data",
+          "keep_vi_keys": [
+            "vn"
+          ],
+          "scope_key": "b9"
+        },
+        {
+          "vi": "src/content/courses/csc14003/session-quizzes.js",
+          "en": "src/content/courses/csc14003/session-quizzes.en.js",
+          "kind": "js-quiz",
+          "scope_key": "b9"
+        }
+      ],
+      "vi_free": [
+        "src/features/lessons/b9/Lesson09Logic.tsx",
+        "src/features/lessons/b9/LogicVisuals.tsx",
+        "src/features/lessons/b9/LogicLab.tsx",
+        "src/features/lessons/b9/logic-view.tsx",
+        "src/features/lessons/b9/logic-engine.js",
+        "src/features/lessons/b9/lesson09.code.ts"
+      ],
+      "extract_from": [
+        "src/features/lessons/b9/lesson09.text.vi.ts"
+      ],
+      "extract_into": [
+        "src/features/lessons/b9/lesson09.text.vi.ts"
+      ],
+      "routes": [
+        "/courses/csc14003/lessons/b9"
+      ],
+      "gates": [
+        "deps",
+        "build",
+        "i18n",
+        "lesson",
+        "extraction",
+        "judged"
+      ],
+      "_extraction_note": "New lesson authored directly in the VI bundle, then translated. The snapshot is an authoring baseline, not a legacy JSX extraction."
+    }
+  ],
+  "_doc_gates": "deps=dependency đúng allowlist · build=npm run build · i18n=check_i18n.py (gồm kiểm cặp, vi_free, đối chiếu tách chuỗi, engine) · lesson=check_lesson.py · judged=i18n-fidelity-judge ĐẠT và pairs_hash còn khớp",
+  "_doc_undeclared_ok": "File có tiếng Việt mà KHÔNG cần cặp EN — phải ghi lý do, đừng thêm vào đây chỉ để tắt kiểm.",
+  "undeclared_ok": {
+    "src/components/LangToggle.tsx": "Nhãn cố ý viết bằng ngôn ngữ ĐÍCH, nên luôn song ngữ.",
+    "src/content/courses/csc14003/topics.ts": "TOPIC_LABELS chứa CẢ HAI locale trong một file — đó là hình dạng đúng của nó.",
+    "src/lib/storage.ts": "LEGACY_TOPICS lấy chuỗi Việt cũ làm KHÓA tra cứu di trú; bắt buộc phải là tiếng Việt."
+  },
+  "_doc_keep_vi": "keep_vi_keys = khóa được phép giữ tiếng Việt trong file .en (cặp song ngữ cố ý). keep_vi_values = giá trị cụ thể được phép, cho dữ liệu dạng mảng theo vị trí.",
+  "_doc_only_exports": "only_exports = file trộn data với engine; bản EN chỉ có phần data vì engine dùng chung. Chỉ so đúng các export liệt kê."
+}

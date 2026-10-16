@@ -1,0 +1,13 @@
+{
+  "unit": "def-b8",
+  "verdict": "ĐẠT",
+  "summary": "Chấm lại 2026-09-19 sau khi sửa hai đề xuất của lượt ĐẠT đầu tiên cùng ngày, cộng một sửa nội dung: (1) discovery.open viết lại thành 'There's no X for Y to Z', hết cú pháp Việt mặc áo Anh; (2) rút gọn phủ định ở trường văn xuôi (storage.note, hdfs.help/note, modeling.note, governance.help, cả năm governance.effects, medallion.boundary/idempotency), cố ý giữ dạng đủ ở nhãn ngắn và hdfs.routes vì đó là caption đổi theo frame — giám khảo đã mở StorageLabs.tsx xác minh và đồng ý ranh giới này; (3) quy tắc amount đổi từ 'nguyên dương' sang 'hữu hạn không âm' ở cả VI và EN cho khớp storage-engine.ts:29, theo quyết định của user là sửa lời giảng chứ không sửa engine. Giám khảo grep cả bốn file, không còn dấu vết quy tắc cũ; số học fixture (2 silver / 2 quarantine / 1 duplicate / gold 200000) vẫn nhất quán ở invariant, chapters[9], quiz, checks[6] và practiceGuide. Ghi chú không chặn: chapters[7].body[3] dịch 'sai số tiền' thành 'the wrong price' trong khi bài chỉ có trường amount.",
+  "pairs_hash": "75e7a538ebf85770",
+  "at": "2026-09-19",
+  "supersedes": {
+    "verdict": "ĐẠT",
+    "pairs_hash": "63b80c478ad1cabf",
+    "at": "2026-09-19",
+    "summary": "Lượt chấm đầu: không có SAI NGHĨA, kèm hai đề xuất (discovery.open dịch cứng, storage-labs thiếu contraction). Cả hai đã sửa."
+  }
+}

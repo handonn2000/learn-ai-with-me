@@ -1,0 +1,7 @@
+{
+  "unit": "b4",
+  "verdict": "ĐẠT",
+  "summary": "Chấm lần đầu sau khi tách Buổi 3 gộp (ADR-0018). Lượt 1 CẦN SỬA với một lỗi SAI NGHĨA thật: hw.s7 (c) dịch «tính “xác định”» thành «how “determined” DFS really is» — với DFS làm chủ ngữ, câu đọc ra «DFS quyết tâm tới mức nào», sai hẳn khái niệm tất định, mà đây lại là từ trong ngoặc kép tức chính thứ đề bài bắt gọi tên. Kèm ba mục dịch cứng: «we'll see» (we nghĩa tác giả) đứng ngay sau «I'll» trong cùng câu; «Practise» Anh-Anh lạc giữa bộ Anh-Mỹ; và nhãn LẤY RA bị tách làm hai (REMOVED ở chữ cũ, POPPED ở chữ mới) khiến người đọc EN phải tự bắc cầu. Đã sửa cả bốn — chọn REMOVED để neo vào chữ cũ thay vì sửa chữ cũ theo chữ mới, giám khảo ghi nhận đây là tiền lệ đúng vì không lật phán quyết cũ. Chấm lại ĐẠT, grep xác nhận 0 chỗ còn we/our/the reader/the student và 0 chỗ còn POPPED. Hoãn: ch4.s68 kết câu bằng danh-từ-hóa vô chủ ngữ («the behavior becomes obvious») — chữ cũ.",
+  "pairs_hash": "dee343747bf955a6",
+  "at": "2026-09-21"
+}
