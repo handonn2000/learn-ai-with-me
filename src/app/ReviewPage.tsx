@@ -1,4 +1,4 @@
-import { useMemo, useState } from 'react'
+import { useEffect, useMemo, useState } from 'react'
 import { useNavigate } from 'react-router'
 import { Rating, type Grade } from 'ts-fsrs'
 import { lessons } from '@/content/lessons'
@@ -48,9 +48,9 @@ export function ReviewPage() {
 
 /**
  * Chạy một loạt câu ôn (docs/design/screens/20). Có `onFinish` thì đang nhúng trong buổi học:
- * không có thanh đầu trang và thanh bên, và màn kết thúc là nút "Tiếp tục".
+ * không có thanh đầu trang và thanh bên (tiến độ 0–1 báo qua `onProgress`), và màn kết thúc là nút "Tiếp tục".
  */
-export function ReviewRun({ queue, onFinish }: { queue: string[]; onFinish?: () => void }) {
+export function ReviewRun({ queue, onFinish, onProgress }: { queue: string[]; onFinish?: () => void; onProgress?: (fraction: number) => void }) {
   const skills = useProgress((s) => s.skills)
   const items = useMemo(() => queue.map((id) => pickItem(id, skills[id]?.card.reps ?? 0)), [queue]) // eslint-disable-line react-hooks/exhaustive-deps
   const [i, setI] = useState(0)
@@ -59,6 +59,7 @@ export function ReviewRun({ queue, onFinish }: { queue: string[]; onFinish?: () 
   const recordRating = useProgress((s) => s.recordRating)
   const navigate = useNavigate()
   const embedded = !!onFinish
+  useEffect(() => onProgress?.(items.length > 0 ? Math.min(1, i / items.length) : 1), [onProgress, i, items.length])
   const close = () => navigate('/')
   const head = !embedded && <div className="mx-auto max-w-[1184px] px-4 py-2.5"><SessionHeader label="Ôn tập" current={Math.min(i + 1, items.length)} total={Math.max(items.length, 1)} done={i} onClose={close} showCount={items.length > 0 && i < items.length} /></div>
 

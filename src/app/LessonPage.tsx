@@ -36,14 +36,14 @@ export function LessonPage() {
 type Screen = { at: 'intro' } | { at: 'step'; i: number } | { at: 'pass' } | { at: 'reorganize' } | { at: 'sketch' }
 
 /**
- * Có `embedded` thì đang nằm trong buổi học: nút đóng gọi `embedded.onExit`, thanh trên dính dưới
- * thanh buổi học (`stickyTop`), các bước đoán trước / giấy / hệ thống lại do buổi học đảm nhiệm nên bị bỏ qua,
+ * Có `embedded` thì đang nằm trong buổi học: không có thanh đầu riêng mà báo tiến độ (0–1) qua
+ * `embedded.onProgress` để thanh buổi học tô đoạn của ga; nút đóng gọi `embedded.onExit`; các bước đoán trước / giấy / hệ thống lại do buổi học đảm nhiệm nên bị bỏ qua,
  * và màn "Qua ga" kết thúc bằng nút "Tiếp tục" gọi `embedded.onComplete`.
  */
 export interface LessonEmbed {
   onExit: () => void
   onComplete: () => void
-  stickyTop: number
+  onProgress: (fraction: number) => void
 }
 
 export function LessonPlayer({ lesson, embedded }: { lesson: Lesson; embedded?: LessonEmbed }) {
@@ -93,6 +93,8 @@ export function LessonPlayer({ lesson, embedded }: { lesson: Lesson; embedded?: 
   const total = countable.length + (!embedded && lesson.reorganize ? 1 : 0)
   const pos = screen.at === 'step' ? countable.indexOf(screen.i) + 1 : screen.at === 'reorganize' ? total : 0
   const done = screen.at === 'intro' ? 0 : screen.at === 'step' ? pos : screen.at === 'pass' ? countable.length : total
+  const report = embedded?.onProgress
+  useEffect(() => report?.(total > 0 ? done / total : 0), [report, done, total])
   const exerciseNo = (i: number) => steps.slice(0, i + 1).filter((s) => s.kind === 'exercise').length
   const exerciseTotal = steps.filter((s) => s.kind === 'exercise').length
 
@@ -109,11 +111,13 @@ export function LessonPlayer({ lesson, embedded }: { lesson: Lesson; embedded?: 
 
   return (
     <div className="min-h-dvh">
-      <header className="sticky z-30 bg-bg/95 backdrop-blur" style={{ top: embedded?.stickyTop ?? 0 }}>
-        <div className={`mx-auto px-4 py-2.5 ${wide ? 'max-w-[1184px]' : 'max-w-[864px]'}`}>
-          <SessionHeader current={pos} total={total} done={done} onClose={exit} showCount={!embedded && screen.at !== 'intro' && screen.at !== 'pass' && screen.at !== 'sketch'} />
-        </div>
-      </header>
+      {!embedded && (
+        <header className="sticky top-0 z-30 bg-bg/95 backdrop-blur">
+          <div className={`mx-auto px-4 py-2.5 ${wide ? 'max-w-[1184px]' : 'max-w-[864px]'}`}>
+            <SessionHeader current={pos} total={total} done={done} onClose={exit} showCount={screen.at !== 'intro' && screen.at !== 'pass' && screen.at !== 'sketch'} />
+          </div>
+        </header>
+      )}
 
       <AnimatePresence mode="wait" initial={false}>
         <motion.div

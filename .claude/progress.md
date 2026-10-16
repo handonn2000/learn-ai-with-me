@@ -1,5 +1,12 @@
 # Tiến độ dự án
 
+## 2026-10-16 — Gộp thanh tiến độ của buổi học hôm nay
+
+- Trước đó `/session` vẽ hai thanh chồng nhau (thanh buổi "1 / 3" còn trống + thanh của lesson nhúng, khác bề
+  rộng, hai nút ✕). Giờ chỉ còn thanh buổi học: `SessionHeader segmented` chia mỗi phần một đoạn, đoạn đang chạy
+  lấp dần theo `onProgress` (0–1) mà `LessonPlayer` (nhúng) và `ReviewRun` (nhúng) báo lên. `LessonEmbed` bỏ
+  `stickyTop`, thêm `onProgress`. Mẫu ở `/dev/ui`. Đã kiểm trên preview (desktop + 375px, không cuộn ngang).
+
 ## 2026-10-16 — Sửa lỗi "Failed to fetch dynamically imported module" sau deploy
 
 - Nguyên nhân: tab mở trước lần deploy mới giữ `index.html` cũ, trỏ tới chunk lesson đã bị xóa (404). Header

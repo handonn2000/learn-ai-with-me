@@ -121,6 +121,7 @@ export default function DevUi() {
         <Card title="Tiến độ và độ nhớ">
           <div className="flex flex-col gap-4.5">
             <div className="flex flex-col gap-1.5"><Cap>Thanh buổi học</Cap><SessionHeader current={4} total={9} onClose={() => {}} /></div>
+            <div className="flex flex-col gap-1.5"><Cap>Thanh buổi học hôm nay (chia đoạn)</Cap><SessionHeader segmented current={2} total={3} done={1.4} onClose={() => {}} /></div>
             <div className="flex flex-col gap-1.5"><Cap>Ga trên tuyến: xong · hôm nay · chưa học</Cap><StationStrip size="lg" label="5 trên 9 ga đã qua" states={['done', 'done', 'done', 'done', 'done', 'today', 'todo', 'todo', 'todo']} /></div>
             <div className="flex flex-col gap-1.5">
               <Cap>Độ nhớ của một kỹ năng (ước tính từ lịch ôn)</Cap>

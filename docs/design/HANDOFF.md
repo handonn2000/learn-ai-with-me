@@ -80,7 +80,7 @@ Xem `screens/00-he-thong-thiet-ke.html` cho từng trạng thái.
 | `AccountButton` | Không có trong màn mẫu B; dựng theo token. Góc phải thanh trên (cả máy tính lẫn điện thoại). Chưa đăng nhập: nút viền ink, logo GitHub + "Đăng nhập" (dưới 720px chỉ còn logo, ô 44px). Đã đăng nhập: avatar tròn 40px viền ink, chấm cam khi lưu lỗi; bấm mở hộp: tên, trạng thái lưu, nút Đăng xuất. |
 | `Button` | primary, secondary (nền trắng, viền ink), link, disabled, trạng thái nhấn. |
 | `Chip` | nhãn tròn; biến thể sun (đoán trước, đang theo), violet soft, xám. |
-| `SessionHeader` | nút đóng + thanh tiến độ dày 14–16px + "n / N". |
+| `SessionHeader` | nút đóng + thanh tiến độ dày 14–16px + "n / N". Buổi học hôm nay dùng biến thể chia đoạn (mỗi phần ôn / ga / đoán / giấy một đoạn, đoạn đang chạy lấp dần); lesson và phần ôn nhúng trong buổi không vẽ thanh riêng. |
 | `StationStrip` | dải 9 ô: đã qua (violet), hôm nay (sun + viền), chưa (fill). |
 | `MemoryBar` | thanh sức nhớ; dưới 90% chuyển cam, kèm chữ %. |
 | `AnswerTile` | ô đáp án: thường, đang chọn, đúng, sai, bị khoá. |

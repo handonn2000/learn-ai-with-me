@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react'
+import { useCallback, useEffect, useState } from 'react'
 import { useNavigate } from 'react-router'
 import { MAX_REVIEW } from '@/learning/session'
 import { ButtonLink, SessionHeader } from '@/ui'
@@ -7,9 +7,6 @@ import { ReviewRun } from './ReviewPage'
 import { GuessStep } from './lesson/GuessStep'
 import { PaperStep } from './lesson/PaperStep'
 import { useTodayPlan } from './useTodayPlan'
-
-/** Chiều cao thanh buổi học (nút 44px + đệm 8px hai đầu). Thanh của bài học dính ngay dưới nó. */
-const HEADER_H = 60
 
 /**
  * Trình chạy buổi học hôm nay: nối ôn → ga mới → đoán trước → giấy.
@@ -23,7 +20,13 @@ export function SessionPage() {
   const total = plan.segments.length
   const seg = plan.segments[i]
   const exit = () => navigate('/')
-  const next = () => setI((n) => n + 1)
+  // Phần đã xong của bước đang chạy (0–1), để đoạn của bước đó trên thanh lấp dần
+  const [part, setPart] = useState(0)
+  const next = () => {
+    setPart(0)
+    setI((n) => n + 1)
+  }
+  const onProgress = useCallback((f: number) => setPart(f), [])
 
   useEffect(() => {
     window.scrollTo({ top: 0 })
@@ -31,9 +34,9 @@ export function SessionPage() {
 
   return (
     <div className="min-h-dvh">
-      <div className="sticky top-0 z-40 bg-bg/95 backdrop-blur" style={{ height: HEADER_H }}>
-        <div className="mx-auto flex h-full max-w-3xl items-center px-4 sm:px-6">
-          <SessionHeader className="w-full" current={Math.min(i + 1, total)} done={i} total={total} onClose={exit} />
+      <div className="sticky top-0 z-40 bg-bg/95 backdrop-blur">
+        <div className="mx-auto max-w-[864px] px-4 py-2.5">
+          <SessionHeader segmented current={Math.min(i + 1, total)} done={seg ? i + part : total} total={total} onClose={exit} />
         </div>
       </div>
       <p className="sr-only" aria-live="polite">
@@ -42,8 +45,8 @@ export function SessionPage() {
 
       {total === 0 && <Finish title="Hôm nay không có gì phải học." text="Không có kỹ năng nào đến hạn và bạn đã tới ga cuối của tuyến." />}
       {total > 0 && !seg && <Finish title="Xong buổi học." text={`Bạn đã đi hết ${total} bước. Kỹ năng nào cần ôn lại sẽ quay lại đúng hạn.`} />}
-      {seg?.kind === 'review' && <ReviewRun key={i} queue={plan.due.slice(0, MAX_REVIEW)} onFinish={next} />}
-      {seg?.kind === 'lesson' && plan.lesson && <LessonPlayer key={i} lesson={plan.lesson} embedded={{ onExit: exit, onComplete: next, stickyTop: HEADER_H }} />}
+      {seg?.kind === 'review' && <ReviewRun key={i} queue={plan.due.slice(0, MAX_REVIEW)} onFinish={next} onProgress={onProgress} />}
+      {seg?.kind === 'lesson' && plan.lesson && <LessonPlayer key={i} lesson={plan.lesson} embedded={{ onExit: exit, onComplete: next, onProgress }} />}
       {seg?.kind === 'guess' && plan.guess && <GuessStep key={i} data={plan.guess} onDone={next} />}
       {seg?.kind === 'paper' && plan.paper && <PaperStep key={i} data={plan.paper} onDone={next} />}
     </div>
