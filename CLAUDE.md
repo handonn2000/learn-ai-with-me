@@ -13,6 +13,7 @@ từng kỹ năng. Nhánh `v2` viết lại từ đầu và sẽ thay hẳn v1 (
 
 ## Lệnh
 
+- `npm ci` — lần đầu trên máy, hoặc sau khi `package-lock.json` đổi
 - `npm run dev` — dev server (`http://localhost:5173/learn-ai-with-me/`; preview pane gán cổng qua `PORT`)
 - `npm test` — Vitest: engine thuật toán, đồ thị kỹ năng, luật nội dung lesson
 - `npm run build` — `tsc -b` + vite build
@@ -75,6 +76,10 @@ src/
 ## Quy ước
 
 - TypeScript strict; alias `@/` → `src/`. Test cạnh file (`*.test.ts`).
+- **Giao diện theo màn thiết kế**: đọc `docs/design/HANDOFF.md` trước khi sửa UI. Màn trong `docs/design/screens/`
+  và code lệch nhau thì theo màn; màn thiết kế và quy tắc học trong `docs/DESIGN.md` §1 lệch nhau thì hỏi user.
+- **Logic học** (`src/learning`, `src/exercises/grade.ts`, `src/algorithms`): không đổi nếu không cần; thêm
+  hoặc đổi thì kèm test.
 - **Style**: Tailwind CSS v4. Token mẫu B khai trong `@theme` của `src/styles.css` (nguồn: HANDOFF §1); màu luôn
   qua token (`bg-surface`, `text-muted`, `text-correct-ink`…), không hex rời trong component. Chỉ có nền sáng
   (variant `dark` giữ để code cũ biên dịch, không có gì bật nó). Đúng = xanh dương, sai = cam; không dùng đỏ/xanh
@@ -113,7 +118,8 @@ không phải nhật ký.
 
 ## Điều cấm
 
-- Không đụng nhánh `main` khi làm v2.
+- Làm trên nhánh `v2` ở checkout chính (không dùng worktree), đẩy lên `origin/v2`. Không đụng nhánh `main`:
+  push lên `main` chạy deploy GitHub Pages.
 - Không đổi/di chuyển `public/materials/` (bị gitignore: slide/bài tập gốc của trường, không đẩy lên repo
   public; link trong nội dung trỏ vào đó). Không chép nguyên văn slide vào repo.
 - Không đổi key `learn-ai-v2` hay shape store mà thiếu migration.

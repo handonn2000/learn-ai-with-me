@@ -22,6 +22,9 @@
   §3 bản đồ = SVG + rough.js (bỏ React Flow/dagre); khối Cấu trúc liệt kê đúng file hiện có.
   Gỡ `radix-ui` (có trong `package.json` nhưng `src/` không import); `lucide-react` vẫn dùng (icon ở `Deep`,
   `PaperStep`, `SearchPlayer`, `AgentLoop`) — ghi chú trước nói nhầm là nó thừa.
+- Bỏ worktree `.worktrees/v2` theo yêu cầu user (đã sạch, không stash; dừng vite PID 65963 chạy từ đó). Chuyển
+  `settings.local.json` của nó sang `.claude/` ở checkout chính (vẫn ignore); gộp 3 luật từ CLAUDE.md riêng của
+  worktree (theo màn thiết kế, logic học kèm test, `npm ci`). Checkout chính giờ ở nhánh `v2` theo dõi `origin/v2`.
 - Quyết định của user: skill phủ cả dựng bài lẫn quyết định sản phẩm; KHÔNG sửa skill v1 (`gamification`,
   `new-lesson`) vì v2 sẽ thay hẳn.
 - Còn dở: câu nhớ lại cho ~12 kỹ năng (luật 4); đề xuất M9 xen kẽ, M13 câu hỏi người học, M14 độ chắc chắn.
