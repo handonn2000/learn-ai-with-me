@@ -82,7 +82,8 @@ Token khai trong `@theme` của `src/styles.css`; bảng giá trị và vai trò
 
 | Việc | Chọn |
 |---|---|
-| Nền | Vite + React 19 + TypeScript, deploy GitHub Pages |
+| Nền | Vite + React 19 + TypeScript |
+| Deploy | Firebase Hosting (`learn-ai-with-me.web.app`, chạy tay `npm run deploy:firebase`, build với `--base=/`, `firebase.json` bỏ `materials/**`); GitHub Pages khi push `main` (base `/learn-ai-with-me/`). Xem ADR-0019 |
 | Giao diện | Tailwind CSS v4, icon lucide-react |
 | Animation | Motion |
 | Bản đồ mục tiêu, bản đồ khóa | SVG tự vẽ + rough.js cho nét vẽ tay (`ui/SketchMap`, `ui/roughArt`); toạ độ đặt tay trong `content/goalMaps.ts` và `content/courses.ts`. |
@@ -90,7 +91,7 @@ Token khai trong `@theme` của `src/styles.css`; bảng giá trị và vai trò
 | Công thức | KaTeX |
 | Nội dung | MDX cho phần giải thích, TypeScript cho bài tập và đồ thị kỹ năng |
 | Tiến độ | Zustand (persist localStorage, key `learn-ai-v2`: `skills`, `lessonStep`, `follow`) + ts-fsrs, tắt bước học ngắn hạn: thẻ mới Again → 1 ngày, Hard → 2, Good → 3, Easy → 8 |
-| Định tuyến | React Router, hash router — GitHub Pages không cần trang 404 giả |
+| Định tuyến | React Router, hash router — host tĩnh không cần trang 404 giả hay rewrite |
 | Kiểm thử | Vitest — engine thuật toán, đồ thị kỹ năng, chấm bài |
 
 Thêm khi có bài cần: D3 (biểu đồ), React Three Fiber (3D), Shiki (code).

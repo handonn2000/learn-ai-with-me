@@ -16,7 +16,9 @@ từng kỹ năng. Nhánh `v2` viết lại từ đầu và sẽ thay hẳn v1 (
 - `npm ci` — lần đầu trên máy, hoặc sau khi `package-lock.json` đổi
 - `npm run dev` — dev server (`http://localhost:5173/learn-ai-with-me/`; preview pane gán cổng qua `PORT`)
 - `npm test` — Vitest: engine thuật toán, đồ thị kỹ năng, luật nội dung lesson
-- `npm run build` — `tsc -b` + vite build
+- `npm run build` — `tsc -b` + vite build (base `/learn-ai-with-me/` cho GitHub Pages)
+- `npm run deploy:firebase` — test + build `--base=/` + `firebase deploy --only hosting` lên
+  `https://learn-ai-with-me.web.app` (project `learn-ai-with-me` trong `.firebaserc`). Chỉ chạy khi user bảo deploy.
 - **`npm test` và `npm run build` phải qua trước khi kết thúc phiên.**
 
 ## Skill và agent cho v2
@@ -72,6 +74,8 @@ src/
 - **Đáp án bài tập trên bản đồ do engine tính**, không gõ tay; ví dụ mới thì thêm test vào
   `algorithms/search.test.ts`.
 - **Định tuyến**: `createHashRouter`, `base: '/learn-ai-with-me/'`, deploy GitHub Pages (`.github/workflows/deploy.yml`).
+  Firebase Hosting build với `--base=/`; `firebase.json` bỏ `materials/**` vì `vite build` chép cả
+  `public/materials/` (gitignore) vào `dist/` — đừng gỡ dòng ignore đó (ADR-0019).
 
 ## Quy ước
 

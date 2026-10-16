@@ -7,7 +7,9 @@
     "dev": "vite",
     "build": "tsc -b && vite build",
     "preview": "vite preview",
-    "test": "vitest run"
+    "test": "vitest run",
+    "build:firebase": "tsc -b && vite build --base=/",
+    "deploy:firebase": "npm test && npm run build:firebase && firebase deploy --only hosting"
   },
   "dependencies": {
     "@fontsource/bricolage-grotesque": "^5.3.0",

@@ -1,5 +1,14 @@
 # Tiến độ dự án
 
+## 2026-10-16 — Deploy v2 lên Firebase Hosting
+
+- Thêm `firebase.json` (public `dist`, bỏ `materials/**`, cache assets immutable, `index.html` no-cache),
+  `.firebaserc` (project `learn-ai-with-me`), script `build:firebase` (`--base=/`) và `deploy:firebase`;
+  ignore `.firebase/`. ADR-0019; cập nhật `docs/DESIGN.md` §3, `CLAUDE.md`.
+- Đã deploy: https://learn-ai-with-me.web.app — trang chạy, không lỗi console; kiểm `materials/…pdf` trả 404.
+- Reset tiến độ học theo yêu cầu user: chưa làm được (dữ liệu ở localStorage Chrome của user, Claude in Chrome
+  không kết nối); đã đưa lệnh console để user tự xóa. App chưa có nút gọi `reset()` của store.
+
 ## 2026-10-14 — Skill `learning-methods`
 
 - Phân tích phương pháp học của Justin Sung (8 video) và đối chiếu với v2; kết luận v2 đã có phần lớn
