@@ -16,7 +16,8 @@ hoặc thêm cơ chế học/ôn thì đọc skill đó trước.
   không phải "UCS". Mỗi nút có 1–3 câu kiểm tra.
 - **Cạnh = tiên quyết thật**: B cần A khi không hiểu A thì *không thể* làm B. Không nối vì "cùng chương".
 - **Mục tiêu** là một nút đích. App lần ngược từ đích qua các cạnh tiên quyết, dừng ở những nút bạn đã nắm,
-  rồi sắp xếp topo để ra lộ trình.
+  rồi sắp xếp topo để ra lộ trình. Lộ trình là **gợi ý, không khóa**: người học mở được bất kỳ ga nào; ga thiếu
+  tiên quyết chỉ hiện "nên qua ga … trước", và mở đầu lesson nhắc "Cần biết trước".
 - **Kiểm tra xếp lớp** cũng chạy ngược: hỏi câu kiểm tra của đích; trả lời đúng thì coi như nắm cả nhánh
   dưới; sai thì hỏi tiếp các nút tiên quyết của nó.
 

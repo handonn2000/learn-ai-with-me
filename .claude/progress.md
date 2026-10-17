@@ -1,5 +1,16 @@
 # Tiến độ dự án
 
+## 2026-10-17 — Mở được mọi ga, không bắt đi theo lộ trình
+
+- User báo không bấm chọn được bài muốn học. Chỗ khóa chỉ ở UI: `goal/StationPanel.tsx` (ga `locked` hiện nút
+  disabled "Cần qua ga … trước") và `goal/GoalList.tsx` (chỉ ga `ready` có link). `LessonPage`, `CoursePage` và
+  `learning/stations.ts` không chặn; logic học không đổi (trạng thái `locked` giờ chỉ là gợi ý).
+- Panel ga thiếu tiên quyết: dòng "Nên qua ga … trước. Vào thẳng cũng được…" + nút phụ "Vẫn vào ga N". Danh
+  sách: mọi hàng có bài là link phủ cả hàng (≥ 44px), ghi chú "nên qua ga … trước". Gợi ý "Hôm nay"/"Học tiếp"
+  và "Cần biết trước" ở mở đầu lesson giữ nguyên. Ghi ở `docs/DESIGN.md` §1 và HANDOFF mục 04.
+- Đã kiểm trên preview: desktop bấm ga 8 → vào `#/learn/astar`; 375px bottom sheet ga 9 → `#/learn/admissible`,
+  danh sách bấm cả hàng, không cuộn ngang. Chưa commit.
+
 ## 2026-10-16 — Quy ước thuật ngữ: giữ tiếng Anh hoặc dịch kèm tiếng Anh
 
 - User review: không dịch "agent" thành "tác tử"; từ nào dịch thì kèm tiếng Anh. Quy ước ở `docs/DESIGN.md`

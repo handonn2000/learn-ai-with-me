@@ -1,7 +1,7 @@
 import type { SkillId } from './types'
 import type { SkillIndex } from './graph'
 
-/** done: đã qua · today: ga nên học bây giờ · ready: đủ tiên quyết, học được ngay · locked: còn thiếu tiên quyết. */
+/** done: đã qua · today: ga nên học bây giờ · ready: đủ tiên quyết, học được ngay · locked: còn thiếu tiên quyết (chỉ để gợi ý, không chặn mở lesson). */
 export type StationState = 'done' | 'today' | 'ready' | 'locked'
 
 export interface StationInfo {

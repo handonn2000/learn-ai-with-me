@@ -128,7 +128,9 @@ Ghi chú từng màn:
   ga 2, ga 8 cần 6 và 7). Trạng thái ga: đã qua / hôm nay / học được ngay (đủ tiên quyết) / cần ga trước.
   BFS, GBFS là "ga phụ" (nét đứt, thuộc mục tiêu khác). Bấm ga mở panel bên phải (máy tính) hoặc bottom sheet
   (điện thoại, `04b`): mục tiêu ga, chuỗi "lần ngược từ đích", tên các sketch sẽ mở, nút Vào ga.
-  Danh sách (`04c`) là tuyến 9 ga dạng hàng.
+  Danh sách (`04c`) là tuyến 9 ga dạng hàng; mỗi hàng có bài là một link phủ cả hàng.
+  **Ga "cần ga trước" vẫn mở được**: trạng thái chỉ là gợi ý. Panel ghi "Nên qua ga … trước" kèm nút phụ
+  "Vẫn vào ga N"; màn mở đầu lesson (`10`) nhắc "Cần biết trước" với link "Học ga này trước".
 - **Buổi học:** thứ tự bước là mở đầu (`10`: "Học xong bạn làm được", cần biết trước kèm % nhớ) → giải thích
   (`11`: tối đa 3 ý, từ chuyên môn có popover giải nghĩa + link xem lại ga cũ, bản đồ có nút đi từng bước) →
   đoán trước (`12`, có ConfidenceControl; sai lúc "Rất chắc" thì hiện `12b`) → bài tập (`13`: điền ngay trên bản đồ,

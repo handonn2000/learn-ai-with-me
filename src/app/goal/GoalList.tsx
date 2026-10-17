@@ -6,16 +6,26 @@ import { CheckIcon } from '@/ui/icons'
 import { ButtonLink } from '@/ui/Button'
 import type { GoalModel, StationVM } from './useGoalModel'
 
-function Row({ s, last }: { s: StationVM; last: boolean }) {
+/** Tiêu đề ga; có bài thì là link phủ cả hàng (hàng `li` phải `relative`). Ga nào cũng vào được, tiên quyết chỉ là lời nhắc. */
+function Title({ s }: { s: StationVM }) {
   const lesson = s.skill.lesson
+  if (!lesson) return <b className="block leading-tight">{s.skill.title}</b>
+  return (
+    <Link to={`/learn/${lesson}`} className="block font-bold leading-tight text-ink no-underline after:absolute after:inset-0 after:rounded-2xl after:content-['']">
+      {s.skill.title}
+    </Link>
+  )
+}
+
+function Row({ s, last }: { s: StationVM; last: boolean }) {
   const badge = 'grid size-11 flex-none place-items-center rounded-[10px] text-lg font-extrabold'
   if (s.state === 'done') {
     const low = s.memory != null && s.memory < 0.9
     return (
-      <li className="flex items-center gap-3.5 rounded-2xl bg-surface px-4 py-3.5">
+      <li className="relative flex items-center gap-3.5 rounded-2xl bg-surface px-4 py-3.5">
         <span aria-hidden className={`${badge} bg-violet text-white`}><CheckIcon width={22} height={22} /></span>
         <span className="min-w-0 flex-1">
-          <b className="block leading-tight">{s.skill.title}</b>
+          <Title s={s} />
           <span className={`text-[13px] ${low ? 'text-wrong-ink' : 'text-muted'}`}>
             {s.memory != null && `nhớ ${Math.round(s.memory * 100)}%`}
             {low && ' · cần ôn'}
@@ -27,21 +37,21 @@ function Row({ s, last }: { s: StationVM; last: boolean }) {
   }
   if (s.state === 'today')
     return (
-      <li className="flex items-center gap-3.5 rounded-2xl border-2 border-ink bg-sun-soft px-4 py-3.5">
+      <li className="relative flex items-center gap-3.5 rounded-2xl border-2 border-ink bg-sun-soft px-4 py-3.5">
         <span aria-hidden className={`${badge} border-2 border-ink bg-sun`}>{s.no}</span>
         <span className="min-w-0 flex-1">
-          <b className="block leading-tight">{s.skill.title}</b>
+          <Title s={s} />
           <span className="text-[13px] text-muted max-[719px]:hidden">{s.skill.can}</span>
         </span>
         <b className="text-sm whitespace-nowrap">Hôm nay{s.minutes != null && ` · ${s.minutes}′`}</b>
       </li>
     )
-  const needNote = s.state === 'locked' ? `cần ga ${s.needs.join(' và ')}` : null
+  const needNote = s.state === 'locked' ? `nên qua ga ${s.needs.join(' và ')} trước` : null
   return (
-    <li className={`flex items-center gap-3.5 px-4 py-3.5 ${last ? 'rounded-2xl border-2 border-dashed border-disabled-line' : 'rounded-2xl bg-surface'}`}>
+    <li className={`relative flex items-center gap-3.5 px-4 py-3.5 ${last ? 'rounded-2xl border-2 border-dashed border-disabled-line' : 'rounded-2xl bg-surface'}`}>
       <span aria-hidden className={`${badge} bg-track text-muted`}>{s.no}</span>
       <span className="min-w-0 flex-1">
-        {s.state === 'ready' && lesson ? <Link to={`/learn/${lesson}`} className="font-bold leading-tight text-ink no-underline">{s.skill.title}</Link> : <b className="block leading-tight">{s.skill.title}</b>}
+        <Title s={s} />
         {(last || needNote) && <span className="block text-[13px] text-muted">{[last && 'Ga cuối', needNote].filter(Boolean).join(' · ')}</span>}
       </span>
       {s.minutes != null && <span className="text-sm text-muted">{s.minutes}′</span>}

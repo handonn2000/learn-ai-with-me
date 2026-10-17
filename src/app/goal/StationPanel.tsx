@@ -72,12 +72,15 @@ export function StationPanel({ model, st, compact = false }: { model: GoalModel;
         </div>
       )}
       <div className="mt-4">
-        {st.state === 'locked' ? (
-          <Button disabled className="w-full">Cần qua ga {st.needs.join(' và ')} trước</Button>
-        ) : !lesson ? (
+        {st.state === 'locked' && (
+          <p className="m-0 mb-2.5 text-sm text-muted">Nên qua ga {st.needs.join(' và ')} trước. Vào thẳng cũng được, đầu bài sẽ nhắc bạn cần biết gì.</p>
+        )}
+        {!lesson ? (
           <Button disabled className="w-full">Ga này chưa có bài</Button>
         ) : open ? (
           <ButtonLink to={`/learn/${lesson}`} variant="secondary" className="w-full">Mở lại bài học</ButtonLink>
+        ) : st.state === 'locked' ? (
+          <ButtonLink to={`/learn/${lesson}`} variant="secondary" className="w-full">Vẫn vào ga {st.no}</ButtonLink>
         ) : (
           <ButtonLink to={`/learn/${lesson}`} className="w-full">Vào ga {st.no}</ButtonLink>
         )}
