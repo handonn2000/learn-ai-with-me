@@ -118,7 +118,7 @@ Thêm khi có bài cần: D3 (biểu đồ), React Three Fiber (3D), Shiki (code
 
 ```
 src/
-  app/            router (main.tsx), các trang (Home, Courses, Course, Goal, Lesson, Session, Review,
+  app/            router (main.tsx), các trang (Home + CourseSection, Course, Goal, Lesson, Session, Review,
                   Placement, Notebook); app/lesson/ các bước buổi học; app/goal/ bản đồ + danh sách ga
   ui/             component dùng chung theo mẫu B (Button, SessionHeader, AnswerTile, FeedbackBar,
                   HintLadder, SketchMap…), xem /#/dev/ui
@@ -164,7 +164,7 @@ và `astar` (Hiểu A*, buổi 3–5).
 
 Mục tiêu đang theo (`pickFollowed` trong `learning/goals.ts`): mục tiêu của ga người học vào gần nhất
 (`follow` trong store, ghi khi mở một lesson) nếu chưa xong; không có thì mục tiêu chưa xong đầu tiên đã có
-tiến độ, rồi mục tiêu chưa xong đầu tiên. Ôn tập không đổi mục tiêu đang theo. Màn Hôm nay, Khóa học, Sổ tay
+tiến độ, rồi mục tiêu chưa xong đầu tiên. Ôn tập không đổi mục tiêu đang theo. Màn Hôm nay (gồm cả phần khóa học), Sổ tay
 và buổi học đều dùng mục tiêu này; màn của một lesson dùng mục tiêu chứa ga đó (`goalOf`).
 
 Buổi học hôm nay lấy bước đoán trước từ lesson của ga sau và bước giấy từ lesson của ga hôm nay. Ga thiếu thì

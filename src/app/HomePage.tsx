@@ -1,10 +1,12 @@
-import { useMemo } from 'react'
-import { Link } from 'react-router'
+import { useEffect, useMemo, useRef } from 'react'
+import { Link, useLocation } from 'react-router'
+import { courses } from '@/content/courses'
 import { skillIndex } from '@/content/skills'
 import { lessons } from '@/content/lessons'
 import { todayMock } from '@/content/mock/today'
 import { retrievability, useProgress } from '@/learning/progress'
 import { useTodayPlan } from './useTodayPlan'
+import { CourseSection, coursesLink, wantsCourses } from './CourseSection'
 import { ButtonLink } from '@/ui/Button'
 import { Chip } from '@/ui/Chip'
 import { MemoryBar } from '@/ui/MemoryBar'
@@ -22,6 +24,12 @@ export function HomePage() {
   const skills = useProgress((s) => s.skills)
   const lessonStep = useProgress((s) => s.lessonStep)
   const now = new Date()
+  const location = useLocation()
+  const coursesRef = useRef<HTMLElement>(null)
+  // /courses cũ và link "mục tiêu gợi ý" chuyển về đây kèm state: cuộn tới phần khóa học.
+  useEffect(() => {
+    if (wantsCourses(location.state)) coursesRef.current?.scrollIntoView({ block: 'start' })
+  }, [location])
 
   const resuming = !!lesson && (lessonStep[lesson.id] ?? 0) > 0
   const minutesLeft = stations
@@ -116,7 +124,7 @@ export function HomePage() {
           </div>
           <div className="hidden min-w-0 flex-[1_1_220px] flex-col gap-2 rounded-[14px] bg-subtle px-4 py-3.5 min-[720px]:flex">
             <span className="text-[13px] text-muted">Mục tiêu gợi ý tiếp theo</span>
-            <Link to="/courses" className="font-bold leading-[1.3] text-ink no-underline">{nextGoal.title}</Link>
+            <Link {...coursesLink} className="font-bold leading-[1.3] text-ink no-underline">{nextGoal.title}</Link>
             <Chip tone="violet" className="self-start text-[13px]">{done} ga đã xong</Chip>
           </div>
         </section>
@@ -186,6 +194,16 @@ export function HomePage() {
           </div>
         </section>
       </aside>
+
+      <section ref={coursesRef} aria-labelledby="courses" className="flex min-w-0 basis-full flex-col gap-7 pt-2 min-[720px]:pt-4">
+        <div>
+          <h2 id="courses" className="m-0 text-[26px] leading-none font-extrabold tracking-[-0.03em] min-[720px]:text-4xl">Bạn muốn làm được gì?</h2>
+          <p className="mt-2.5 mb-0 max-w-[40em] text-[15px] text-muted min-[720px]:text-base">Chọn một mục tiêu. Những gì bạn đã học ở mục tiêu khác sẽ được tính luôn, không phải học lại.</p>
+        </div>
+        {courses.map((c) => (
+          <CourseSection key={c.id} course={c} />
+        ))}
+      </section>
     </div>
   )
 }

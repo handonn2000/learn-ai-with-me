@@ -1,13 +1,15 @@
 import type { ComponentType, SVGProps } from 'react'
-import { Link, NavLink, Outlet, useLocation } from 'react-router'
+import { Link, NavLink, Outlet, ScrollRestoration, useLocation } from 'react-router'
 import { todayMock } from '@/content/mock/today'
 import { useDue } from '@/learning/hooks'
 import { AccountButton } from './AccountButton'
-import { HomeIcon, NotebookIcon, ReviewIcon, TargetIcon } from './icons'
+import { HomeIcon, NotebookIcon, ReviewIcon } from './icons'
+
+// Khóa học và mục tiêu là trang con của Hôm nay (khóa học đã gộp vào màn Hôm nay).
+const homeChild = (path: string) => path.startsWith('/courses/') || path.startsWith('/goal/')
 
 const items: { to: string; label: string; end?: boolean; Icon: ComponentType<SVGProps<SVGSVGElement>>; badge?: boolean }[] = [
   { to: '/', label: 'Hôm nay', end: true, Icon: HomeIcon },
-  { to: '/courses', label: 'Khóa học', Icon: TargetIcon },
   { to: '/review', label: 'Ôn tập', Icon: ReviewIcon, badge: true },
   { to: '/notebook', label: 'Sổ tay', Icon: NotebookIcon },
 ]
@@ -21,7 +23,7 @@ function Badge({ n }: { n: number }) {
   )
 }
 
-/** Khung chung: thanh trên (máy tính) và tab đáy (dưới 720px). Màn học và kiểm tra không dùng khung này. */
+/** Khung chung: thanh trên (máy tính) và tab đáy 3 mục (dưới 720px). Màn học và kiểm tra không dùng khung này. */
 export function AppShell() {
   const due = useDue().length
   const path = useLocation().pathname
@@ -30,6 +32,8 @@ export function AppShell() {
   const ownHeader = path.startsWith('/goal/')
   return (
     <div className="min-h-dvh">
+      {/* Trang Hôm nay dài: mở trang con thì lên đầu, quay lại thì về chỗ cũ. */}
+      <ScrollRestoration />
       <header className={`mx-auto flex max-w-[1236px] items-center justify-between gap-4 px-4 py-4 min-[720px]:px-7 min-[720px]:py-5 ${ownHeader ? 'max-[719px]:hidden' : ''}`}>
         <Link to="/" className="font-display text-[21px] font-extrabold whitespace-nowrap tracking-[-0.02em] text-ink no-underline min-[720px]:text-2xl">
           học AI cùng tôi
@@ -42,7 +46,7 @@ export function AppShell() {
                 to={to}
                 end={end}
                 className={({ isActive }) =>
-                  `flex min-h-11 items-center gap-2 rounded-xl border-2 px-4 py-2 no-underline ${isActive ? 'border-ink bg-surface font-bold text-ink' : 'border-transparent font-semibold text-muted hover:text-ink'}`
+                  `flex min-h-11 items-center gap-2 rounded-xl border-2 px-4 py-2 no-underline ${isActive || (to === '/' && homeChild(path)) ? 'border-ink bg-surface font-bold text-ink' : 'border-transparent font-semibold text-muted hover:text-ink'}`
                 }
               >
                 {label}
@@ -61,14 +65,14 @@ export function AppShell() {
         <Outlet />
       </main>
 
-      <nav aria-label="Chính" className="fixed inset-x-0 bottom-0 z-10 grid grid-cols-4 border-t-2 border-ink bg-surface px-1 pt-1.5 pb-[max(18px,env(safe-area-inset-bottom))] min-[720px]:hidden">
+      <nav aria-label="Chính" className="fixed inset-x-0 bottom-0 z-10 grid grid-cols-3 border-t-2 border-ink bg-surface px-1 pt-1.5 pb-[max(18px,env(safe-area-inset-bottom))] min-[720px]:hidden">
         {items.map(({ to, label, end, Icon, badge }) => (
           <NavLink
             key={to}
             to={to}
             end={end}
             className={({ isActive }) =>
-              `relative flex min-h-11 flex-col items-center gap-0.5 py-1.5 text-xs no-underline ${isActive ? 'font-extrabold text-violet' : 'font-semibold text-muted'}`
+              `relative flex min-h-11 flex-col items-center gap-0.5 py-1.5 text-xs no-underline ${isActive || (to === '/' && homeChild(path)) ? 'font-extrabold text-violet' : 'font-semibold text-muted'}`
             }
           >
             <Icon width={22} height={22} />

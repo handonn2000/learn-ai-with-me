@@ -4,10 +4,10 @@ import { createHashRouter, Navigate, RouterProvider } from 'react-router'
 import { MotionConfig } from 'motion/react'
 import './styles.css'
 import { AppShell } from '@/ui/AppShell'
-import { CoursesPage } from '@/app/CoursesPage'
 import { CoursePage } from '@/app/CoursePage'
 import { NotebookPage } from '@/app/NotebookPage'
 import { HomePage } from '@/app/HomePage'
+import { coursesLink } from '@/app/CourseSection'
 import { GoalPage } from '@/app/GoalPage'
 import { LessonPage } from '@/app/LessonPage'
 import { SessionPage } from '@/app/SessionPage'
@@ -32,7 +32,8 @@ const router = createHashRouter([
           { index: true, element: <HomePage /> },
           { path: 'goal/:goalId', element: <GoalPage /> },
           { path: 'map', element: <Navigate to="/goal/astar" replace /> },
-          { path: 'courses', element: <CoursesPage /> },
+          // Màn Khóa học đã gộp vào Hôm nay; link cũ chuyển về đó và cuộn tới phần khóa học.
+          { path: 'courses', element: <Navigate {...coursesLink} replace /> },
           { path: 'courses/:courseId', element: <CoursePage /> },
           { path: 'notebook', element: <NotebookPage /> },
           { path: '*', element: <NotFound /> },

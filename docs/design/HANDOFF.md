@@ -76,7 +76,7 @@ Xem `screens/00-he-thong-thiet-ke.html` cho từng trạng thái.
 
 | Thành phần | Ghi chú |
 |---|---|
-| `AppShell` | Máy tính: thanh trên với 4 mục **Hôm nay · Khóa học · Ôn tập · Sổ tay** (Ôn tập có badge số thẻ đến hạn). Dưới ~720px: thanh tab đáy 4 mục như `01b`. Màn học và kiểm tra không có thanh điều hướng. |
+| `AppShell` | Máy tính: thanh trên với 3 mục **Hôm nay · Ôn tập · Sổ tay** (Ôn tập có badge số thẻ đến hạn). Dưới ~720px: thanh tab đáy 3 mục (bố cục như `01b`, bỏ ô Khóa học). Trang khóa (`/courses/:id`) và mục tiêu (`/goal/:id`) là trang con của Hôm nay: mục Hôm nay sáng khi đang ở đó. Có `ScrollRestoration` (mở trang con thì lên đầu, quay lại thì về chỗ cũ). Màn học và kiểm tra không có thanh điều hướng. |
 | `AccountButton` | Không có trong màn mẫu B; dựng theo token. Góc phải thanh trên (cả máy tính lẫn điện thoại). Chưa đăng nhập: nút viền ink, logo GitHub + "Đăng nhập" (dưới 720px chỉ còn logo, ô 44px). Đã đăng nhập: avatar tròn 40px viền ink, chấm cam khi lưu lỗi; bấm mở hộp: tên, trạng thái lưu, nút Đăng xuất. |
 | `Button` | primary, secondary (nền trắng, viền ink), link, disabled, trạng thái nhấn. |
 | `Chip` | nhãn tròn; biến thể sun (đoán trước, đang theo), violet soft, xám. |
@@ -103,8 +103,7 @@ Router giữ `createHashRouter`.
 
 | Màn | File thiết kế | Route | Hiện có trong v2 |
 |---|---|---|---|
-| Hôm nay | `01`, `01b` | `/` | `HomePage.tsx` (viết lại) |
-| Khóa học: mỗi khóa 3 mục tiêu + "Xem thêm" | `02` | `/courses` | mới |
+| Hôm nay, gồm cả phần khóa học | `01`, `01b` + `02` | `/` | `HomePage.tsx` + `CourseSection.tsx` |
 | Khóa học: bản đồ / danh sách | `03`, `03b` | `/courses/:courseId?view=map\|list` | mới |
 | Mục tiêu: bản đồ ga / danh sách | `04`, `04b`, `04c` | `/goal/:goalId?view=map\|list` | `GoalPage.tsx` + `MapPage.tsx` (gộp) |
 | Kiểm tra xếp lớp | `05` | `/check/:goalId` | `PlacementPage.tsx` (đổi giao diện) |
@@ -112,15 +111,19 @@ Router giữ `createHashRouter`.
 | Ôn tập | `20` | `/review` | `ReviewPage.tsx` (đổi giao diện) |
 | Sổ tay | `21` | `/notebook` | mới |
 
-`/map` cũ: chuyển hướng sang `/goal/astar`. Có thể bỏ React Flow + dagre nếu không còn dùng.
+`/map` cũ: chuyển hướng sang `/goal/astar`. `/courses` cũ: chuyển về `/` kèm state `section: 'courses'` và cuộn tới
+phần khóa học (`coursesLink` trong `app/CourseSection.tsx`; link "← Hôm nay" ở trang khóa và mục tiêu dùng nó). Có thể bỏ React Flow + dagre nếu không còn dùng.
 
 Ghi chú từng màn:
 
 - **Hôm nay (01):** thẻ "Buổi học hôm nay" gồm 4 bước (ôn kỹ năng đến hạn → ga mới → đoán trước cho ga sau →
   hệ thống lại trên giấy), lấy từ `useDue` và lộ trình. Cột phải: Sức nhớ, "Chắc chắn có đúng không"
   (số lần chọn Rất chắc và đúng/sai), Sổ tay. Hai khối cuối chưa có dữ liệu thì dùng mock.
-- **Khóa học (02):** chỉ hiện "Đang theo" + **3 mục tiêu** mỗi khóa, có nhãn lý do (đã có x/y ga nhờ…,
-  kế tiếp trên đường mòn, mở đầu đường mòn khác) và dải **Xem thêm** dẫn tới `03`.
+- **Khóa học (02) — đã gộp vào Hôm nay** (user thấy hai tab thừa, 2026-10-17): màn `02` không còn là trang
+  riêng. Dưới thẻ "Đang theo" của Hôm nay (khối này thay cho "Đang theo" của `02`), phần "Bạn muốn làm được
+  gì?" trải hết bề ngang (dưới cả cột phải trên máy tính): mỗi khóa **3 mục tiêu** có nhãn lý do (đã có x/y ga
+  nhờ…, kế tiếp trên đường mòn, mở đầu đường mòn khác) và dải **Xem thêm** dẫn tới `03`. Ảnh `02` vẫn là spec
+  cho thẻ mục tiêu và dải Xem thêm; ô Khóa học trên thanh điều hướng trong ảnh `01`–`03` đã bỏ.
 - **Khóa học bản đồ (03):** đỉnh núi = đích của khóa, ba đường mòn hội tụ lên đỉnh. Khối "Vì sao hôm nay học UCS?"
   ở cột phải: Đích ← Mục tiêu ← Ga hôm nay. Chế độ **Danh sách (03b)** dùng chung cột phải.
   Hiện chỉ có dữ liệu thật cho "Hiểu A*"; các mục tiêu khác của Cơ sở AI và Data Engineering để mock.
@@ -167,7 +170,7 @@ so với ảnh trong `screens/`.
 
 1. Token, font, các thành phần ở §2 + trang `/dev/ui`.
 2. `AppShell` + Hôm nay.
-3. Khóa học (3 mục tiêu + Xem thêm) + bản đồ/danh sách khóa.
+3. Khóa học (3 mục tiêu + Xem thêm, nay nằm trong Hôm nay) + bản đồ/danh sách khóa.
 4. Bản đồ/danh sách mục tiêu + panel ga + kiểm tra xếp lớp đổi giao diện.
 5. Các bước buổi học (10–17).
 6. Ôn tập + Sổ tay.

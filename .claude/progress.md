@@ -1,5 +1,18 @@
 # Tiến độ dự án
 
+## 2026-10-17 — Gộp tab Khóa học vào Hôm nay
+
+- User thấy hai tab Hôm nay và Khóa học thừa; chọn phương án "gộp hẳn vào Hôm nay". Thanh điều hướng còn 3 mục
+  (Hôm nay · Ôn tập · Sổ tay); Hôm nay sáng cả khi ở `/courses/:id`, `/goal/:id`.
+- `CoursesPage.tsx` bỏ; phần mỗi khóa 3 mục tiêu + "Xem thêm" chuyển sang `app/CourseSection.tsx`, hiện trên Hôm
+  nay dưới "Đang theo" (trải hết bề ngang, tiêu đề "Bạn muốn làm được gì?"). Khối "Đang theo" của màn 02 trùng
+  với Hôm nay nên bỏ. `/courses` chuyển về `/` kèm state `section: 'courses'` → cuộn tới phần khóa học
+  (`coursesLink`); link "← Hôm nay" ở trang khóa, breadcrumb trang mục tiêu, "Mục tiêu gợi ý tiếp theo" dùng nó.
+- Thêm `ScrollRestoration` trong `AppShell` (Hôm nay dài ra; trước đó mở "Xem thêm" giữ nguyên độ cuộn).
+- Cập nhật HANDOFF (AppShell, bảng màn, ghi chú 02), DESIGN (cây thư mục, mục tiêu đang theo). Đã kiểm trên
+  preview 1280px + 375px: redirect + cuộn, Xem thêm → đầu trang khóa, quay lại → phần khóa học, không cuộn ngang,
+  tab đáy 54px cao. Ảnh `docs/design/screens/01`–`03` vẫn vẽ 4 tab (chưa vẽ lại). Chưa commit.
+
 ## 2026-10-17 — Mở được mọi ga, không bắt đi theo lộ trình
 
 - User báo không bấm chọn được bài muốn học. Chỗ khóa chỉ ở UI: `goal/StationPanel.tsx` (ga `locked` hiện nút

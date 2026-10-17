@@ -1,6 +1,7 @@
 import { useState } from 'react'
 import { Link, useParams, useSearchParams } from 'react-router'
 import { courses } from '@/content/courses'
+import { coursesLink } from './CourseSection'
 import { goalIndex } from '@/content/skills'
 import { goalMaps } from '@/content/goalMaps'
 import { ChevronRightIcon, ListIcon, MapIcon } from '@/ui/icons'
@@ -45,7 +46,7 @@ function Goal({ goalId }: { goalId: string }) {
     <div className={phone && view === 'map' ? 'pb-[280px]' : ''}>
       {/* Điện thoại: thanh riêng thay cho thanh trên của khung chung */}
       <div className="sticky top-0 z-10 -mx-4 flex items-center gap-2 bg-bg px-3 py-2.5 min-[720px]:hidden">
-        <Link to={course ? `/courses/${course.id}` : '/courses'} aria-label="Quay lại khóa học" className="grid size-11 place-items-center text-ink">
+        <Link {...(course ? { to: `/courses/${course.id}` } : coursesLink)} aria-label="Quay lại khóa học" className="grid size-11 place-items-center text-ink">
           <ChevronRightIcon width={22} height={22} className="rotate-180" />
         </Link>
         <div className="min-w-0 flex-1">
@@ -61,7 +62,7 @@ function Goal({ goalId }: { goalId: string }) {
 
       <div className="pt-1 max-[719px]:hidden min-[720px]:pt-3">
         <nav aria-label="Vị trí" className="text-sm text-muted">
-          <Link to="/courses" className="text-muted underline">Khóa học</Link>
+          <Link {...coursesLink} className="text-muted underline">Hôm nay</Link>
           {course && (
             <>
               <span aria-hidden className="mx-2">/</span>

@@ -1,16 +1,11 @@
 import { Link } from 'react-router'
-import { courses, type Course } from '@/content/courses'
-import { skillIndex } from '@/content/skills'
-import { lessons } from '@/content/lessons'
-import { useFollowedGoalId, useGoalRoute } from '@/learning/hooks'
-import { useProgress } from '@/learning/progress'
+import type { Course } from '@/content/courses'
 import { pickNearest, type Reason } from '@/learning/courses'
 import { ButtonLink } from '@/ui/Button'
 import { Chip } from '@/ui/Chip'
 import { ChevronRightIcon } from '@/ui/icons'
 import { MiniMountain } from '@/ui/roughArt'
-import { StationStrip, type StripState } from '@/ui/StationStrip'
-import { realProgress, useCourseProgress } from './useCourseProgress'
+import { useCourseProgress } from './useCourseProgress'
 
 const card = 'rounded-[20px] bg-surface'
 
@@ -18,45 +13,8 @@ function reasonText(r: Reason) {
   return r.kind === 'shared' ? r.text : r.kind === 'next' ? 'kế tiếp trên đường mòn' : r.kind === 'other-trail' ? 'mở đầu đường mòn khác' : null
 }
 
-export function CoursesPage() {
-  return (
-    <div className="flex flex-col gap-7 pt-4 min-[720px]:pt-5">
-      <div>
-        <h1 className="m-0 text-[34px] leading-none font-extrabold tracking-[-0.035em] min-[720px]:text-[52px]">Bạn muốn làm được gì?</h1>
-        <p className="mt-3.5 mb-0 max-w-[40em] text-base text-muted min-[720px]:text-lg">Chọn một mục tiêu. Những gì bạn đã học ở mục tiêu khác sẽ được tính luôn, không phải học lại.</p>
-      </div>
-      <Following />
-      {courses.map((c) => (
-        <CourseSection key={c.id} course={c} />
-      ))}
-    </div>
-  )
-}
-
-function Following() {
-  const goalId = useFollowedGoalId()
-  const records = useProgress((s) => s.skills)
-  const { goal, stations, done, total } = useGoalRoute(goalId)
-  const strip: StripState[] = stations.map((s) => (s.status !== 'new' ? 'done' : s.next ? 'today' : 'todo'))
-  const minutesLeft = stations.filter((s) => s.status === 'new').reduce((n, s) => n + (lessons[skillIndex[s.id].lesson ?? '']?.minutes ?? 0), 0)
-  const sketches = realProgress(goalId, records)
-  return (
-    <section aria-labelledby="following" className="flex flex-wrap items-center gap-x-8 gap-y-5 rounded-3xl border-2 border-ink bg-surface p-5 shadow-block-lg min-[720px]:px-7 min-[720px]:py-[26px]">
-      <div className="min-w-0 flex-[999_1_300px]">
-        <Chip tone="sun">Đang theo</Chip>
-        <h2 id="following" className="mt-3 mb-0 text-[28px] leading-[1.05] font-extrabold tracking-[-0.02em] min-[720px]:text-4xl">{goal.title}</h2>
-        <p className="mt-2 mb-0 text-muted">{goal.outcome}</p>
-        <StationStrip states={strip} size="sm" label={`${done} trên ${total} ga đã qua`} className="mt-4 max-w-[420px]" />
-        <p className="mt-2 mb-0 text-[15px] text-muted">
-          {done} trên {total} ga · {sketches.sketchesOpen}/{sketches.sketches} sketch{minutesLeft > 0 && ` · còn khoảng ${minutesLeft} phút`}
-        </p>
-      </div>
-      <ButtonLink to="/session" className="w-full min-[720px]:w-auto min-[720px]:px-8">Học tiếp</ButtonLink>
-    </section>
-  )
-}
-
-function CourseSection({ course }: { course: Course }) {
+/** Một khóa trên màn Hôm nay: 3 mục tiêu gần người học nhất + "Xem thêm" mở bản đồ/danh sách khóa (màn 02). */
+export function CourseSection({ course }: { course: Course }) {
   const progress = useCourseProgress(course)
   const near = pickNearest(course, progress)
   const hasFollowed = progress.some((p) => p.state === 'current')
@@ -65,7 +23,7 @@ function CourseSection({ course }: { course: Course }) {
   return (
     <section aria-labelledby={`c-${course.id}`}>
       <div className="flex flex-wrap items-baseline justify-between gap-x-4">
-        <h2 id={`c-${course.id}`} className="m-0 text-2xl font-extrabold tracking-[-0.02em] min-[720px]:text-[30px]">{course.title}</h2>
+        <h3 id={`c-${course.id}`} className="m-0 text-xl font-extrabold tracking-[-0.02em] min-[720px]:text-2xl">{course.title}</h3>
         <span className="text-[15px] text-muted">
           {course.caption} · {doneCount}/{course.goals.length} mục tiêu{course.totalSketches > 0 && ` · ${course.openSketches}/${course.totalSketches} sketch`}
         </span>
@@ -106,4 +64,11 @@ function CourseSection({ course }: { course: Course }) {
       </div>
     </section>
   )
+}
+
+/** Link tới phần khóa học trên màn Hôm nay (thay cho màn /courses cũ). */
+export const coursesLink = { to: '/', state: { section: 'courses' } } as const
+
+export function wantsCourses(state: unknown) {
+  return typeof state === 'object' && state !== null && 'section' in state && state.section === 'courses'
 }

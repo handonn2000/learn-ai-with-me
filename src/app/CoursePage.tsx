@@ -12,6 +12,7 @@ import type { GoalProgress } from '@/learning/courses'
 import { useTodayPlan } from './useTodayPlan'
 import { useCourseProgress } from './useCourseProgress'
 import { NotFound } from './NotFound'
+import { coursesLink } from './CourseSection'
 
 export function CoursePage() {
   const { courseId = '' } = useParams()
@@ -47,8 +48,8 @@ function Course({ course }: { course: Course }) {
   const mode = course.hasMap ? view : 'list'
   return (
     <div className="pt-3 min-[720px]:pt-5">
-      <Link to="/courses" className="inline-flex items-center gap-1.5 text-sm font-semibold text-ink underline">
-        <span aria-hidden>←</span> Khóa học
+      <Link {...coursesLink} className="inline-flex min-h-11 items-center gap-1.5 text-sm font-semibold text-ink underline">
+        <span aria-hidden>←</span> Hôm nay
       </Link>
       <div className="mt-1.5 flex flex-wrap items-end justify-between gap-x-6 gap-y-3">
         <h1 className="m-0 text-[30px] leading-[1.05] font-extrabold tracking-[-0.03em] min-[720px]:text-[44px]">
