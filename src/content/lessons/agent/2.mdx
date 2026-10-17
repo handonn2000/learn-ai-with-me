@@ -2,7 +2,7 @@ import { DataTable } from '@/widgets/DataTable'
 import { Deep } from '@/ui/Deep'
 import { vacuumRows } from '@/content/agents'
 
-Giờ thu căn nhà lại còn đúng hai ô, A và B. Mỗi lúc, robot chỉ biết hai điều: nó đang ở ô nào, và ô đó bẩn hay sạch. Gói thông tin ấy, ví dụ `[A, Bẩn]`, là một **percept**. Mọi percept từ lúc bật máy tới giờ gộp lại là **chuỗi percept** (percept sequence).
+Giờ thu căn nhà lại còn đúng hai ô, A và B. Mỗi lúc, robot chỉ biết hai điều: nó đang ở ô nào, và ô đó bẩn hay sạch. Gói thông tin ấy, ví dụ `[A, Bẩn]`, là một **percept**: thứ cảm biến đưa vào ở một lúc. Cảm biến là bộ phận, percept là thứ đi qua nó. Mọi percept từ lúc bật máy tới giờ gộp lại là **chuỗi percept** (percept sequence).
 
 Robot làm được bốn việc: sang trái, sang phải, hút, đứng yên. Muốn mô tả nó cư xử ra sao, bạn ghi một bảng: mỗi chuỗi percept ứng với một **hành động** (action).
 

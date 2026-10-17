@@ -84,6 +84,8 @@ Xem `screens/00-he-thong-thiet-ke.html` cho từng trạng thái.
 | `StationStrip` | dải 9 ô: đã qua (violet), hôm nay (sun + viền), chưa (fill). |
 | `MemoryBar` | thanh sức nhớ; dưới 90% chuyển cam, kèm chữ %. |
 | `AnswerTile` | ô đáp án: thường, đang chọn, đúng, sai, bị khoá. |
+| `ClassifyInput` | Không có màn riêng; dựng theo token. Mỗi mục một thẻ viền `line`, các nhóm là nút tròn cao ≥ 44px (`min-h-11`, chữ 15px), cách nhau 8px; chọn thì nền ink chữ surface. |
+| `EnvTable` | Bảng bảy chiều (ga `env-classify`): vế khó nhất nền `violet-soft`, vế giữa (nửa động) viền đứt `violet`, vế dễ không tô. Chữ luôn ghi rõ vế. |
 | `ConfidenceControl` | 3 mức: Đoán thôi · Khá chắc · Rất chắc. |
 | `NumberInput` | ô số kiểu mono, viền violet khi focus. Có biến thể chip "g=" gắn cạnh nút bản đồ (`13`). |
 | `FeedbackBar` | dải đáy sau khi chấm: đúng (xanh dương), sai (cam), gợi ý (sun), lời giải (xám). Trên điện thoại là bottom sheet. |

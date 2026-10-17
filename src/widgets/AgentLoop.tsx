@@ -20,9 +20,9 @@ export function AgentLoop({ env, sensors, actuators }: { env: string; sensors: s
           </span>
         </div>
         <div className="flex items-center gap-2">
-          <ArrowUp aria-hidden className="size-7 shrink-0 text-g" strokeWidth={2.5} />
+          <ArrowUp aria-hidden className="size-7 shrink-0 text-ink" strokeWidth={2.5} />
           <span>
-            <b className="text-g">hành động</b> ra qua <b>bộ chấp hành</b>
+            <b>hành động</b> ra qua <b>bộ chấp hành</b>
             <span className="block text-muted">{actuators}</span>
           </span>
         </div>

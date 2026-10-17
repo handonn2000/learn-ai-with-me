@@ -82,7 +82,7 @@ export const dims: Record<DimId, { name: string; head: string; values: string[] 
   det: { name: 'Kết quả hành động', head: 'Kết quả', values: ['Tất định', 'Ngẫu nhiên'] },
   ep: { name: 'Các quyết định', head: 'Quyết định', values: ['Từng hồi', 'Tuần tự'] },
   static: { name: 'Trong lúc agent nghĩ', head: 'Thời gian', values: ['Tĩnh', 'Nửa động', 'Động'] },
-  disc: { name: 'Trạng thái, thời gian, hành động', head: 'Giá trị', values: ['Rời rạc', 'Liên tục'] },
+  disc: { name: 'Trạng thái, thời gian, percept, hành động', head: 'Giá trị', values: ['Rời rạc', 'Liên tục'] },
   known: { name: 'Luật của môi trường', head: 'Luật', values: ['Biết luật', 'Chưa biết luật'] },
 }
 

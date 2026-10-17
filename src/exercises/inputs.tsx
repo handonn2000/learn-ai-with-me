@@ -202,7 +202,7 @@ export function ClassifyInput({ ex, value, onChange, locked }: P<ClassifyEx, 'cl
               {right !== null && (right ? <CheckIcon width={18} height={18} className="mt-1 text-correct" /> : <CrossIcon width={18} height={18} className="mt-1 text-wrong" />)}
               <Rich html={it.text} className="font-medium" />
             </div>
-            <div className="flex flex-wrap gap-1.5" role="radiogroup" aria-label={`Nhóm cho: ${it.text.replace(/<[^>]+>/g, '')}`}>
+            <div className="flex flex-wrap gap-2" role="radiogroup" aria-label={`Nhóm cho: ${it.text.replace(/<[^>]+>/g, '')}`}>
               {(it.groups ?? ex.groups).map((g, gi) => {
                 const on = assigned[i] === gi
                 return (
@@ -212,7 +212,7 @@ export function ClassifyInput({ ex, value, onChange, locked }: P<ClassifyEx, 'cl
                     aria-checked={on}
                     disabled={locked}
                     onClick={() => onChange({ kind: 'classify', assigned: assigned.map((x, j) => (j === i ? gi : x)) })}
-                    className={`rounded-full border px-3 py-1 text-[14px] ${on ? 'border-ink bg-ink text-surface' : 'border-line text-muted hover:border-muted hover:text-ink'}`}
+                    className={`min-h-11 rounded-full border px-4 py-1 text-[15px] ${on ? 'border-ink bg-ink text-surface' : 'border-line text-muted hover:border-muted hover:text-ink'}`}
                   >
                     {g}
                   </button>

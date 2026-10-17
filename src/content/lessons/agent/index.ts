@@ -6,7 +6,7 @@ const S2 = lazy(() => import('./2.mdx'))
 export const lesson: Lesson = {
   id: 'agent',
   skill: 'agent',
-  minutes: 8,
+  minutes: 10,
   steps: [
     { kind: 'explain', title: 'Nhìn vào, làm ra', Body: S1 },
     { kind: 'explain', title: 'Từ percept ra hành động', Body: S2 },
@@ -34,14 +34,21 @@ export const lesson: Lesson = {
       kind: 'exercise',
       exercise: {
         id: 'agent-e2',
-        kind: 'choice',
-        prompt: 'Một chatbot trả lời khách trên trang bán hàng. Đâu là bộ chấp hành của nó?',
-        options: ['Câu khách gõ vào khung chat', 'Tin nhắn nó gửi lại cho khách', 'Lịch sử các câu đã chat', 'Kho dữ liệu sản phẩm'],
-        answer: [1],
-        hint: 'Agent phần mềm cũng "làm ra" một thứ gì đó trong môi trường của nó. Với chatbot, đó là gì?',
-        explain: 'Tin nhắn gửi đi là thứ chatbot <b>làm ra</b>. Câu khách gõ là thứ nó <b>nhận vào</b> qua cảm biến. Lịch sử chat và kho dữ liệu là thứ nó đọc hoặc nhớ, không phải thứ nó làm ra.',
+        kind: 'classify',
+        prompt: 'Một chatbot trả lời khách trên trang bán quần áo. Mỗi mục dưới đây là cảm biến, percept, bộ chấp hành hay hành động?',
+        groups: ['Cảm biến', 'Percept', 'Bộ chấp hành', 'Hành động'],
+        items: [
+          { text: 'Ô nhập tin nhắn trên trang', group: 0 },
+          { text: 'Câu khách vừa gõ: "Áo này còn size M không?"', group: 1 },
+          { text: 'Tấm ảnh chiếc áo khách vừa gửi', group: 1 },
+          { text: 'Khung chat hiện tin trả lời', group: 2 },
+          { text: 'Trả lời "Còn ạ, bạn muốn đặt không?"', group: 3 },
+          { text: 'Gửi kèm đường link tới trang sản phẩm', group: 3 },
+        ],
+        hint: 'Hỏi hai câu cho từng mục: nó là một bộ phận có sẵn, hay là thứ đi qua bộ phận đó ở một lúc? Nó đi vào chatbot hay đi ra?',
+        explain: 'Ô nhập tin và khung chat là <b>bộ phận</b>, có sẵn trước khi khách tới: ô nhập là cảm biến, khung chat là bộ chấp hành. Câu khách gõ và tấm ảnh là thứ đi vào qua cảm biến ở một lúc: <b>percept</b>. Câu trả lời và đường link là thứ chatbot làm ra: <b>hành động</b>.',
       },
-      label: 'Tìm bộ chấp hành của agent phần mềm',
+      label: 'Tách percept khỏi cảm biến, hành động khỏi bộ chấp hành',
     },
     {
       kind: 'exercise',
@@ -55,6 +62,19 @@ export const lesson: Lesson = {
         explain: '4 × 4 × 4 = <b>64</b> dòng. Thêm một bước, bảng lại nhân 4.',
       },
       label: 'Đếm số dòng của bảng hàm agent',
+    },
+    {
+      kind: 'exercise',
+      exercise: {
+        id: 'agent-e4',
+        kind: 'choice',
+        prompt: 'Robot hai ô vừa nhận chuỗi percept <code>[A, Sạch], [B, Bẩn]</code>. Dòng này nằm trong phần "…" của bảng hàm agent ứng với chương trình ba dòng. Bảng ghi hành động nào?',
+        options: ['Sang trái', 'Sang phải', 'Hút', 'Đứng yên'],
+        answer: [2],
+        hint: 'Chạy chương trình ba dòng. Nó cần nhìn những gì trong chuỗi percept?',
+        explain: 'Chương trình chỉ nhìn percept mới nhất, <code>[B, Bẩn]</code>: ô đang đứng bẩn thì <b>hút</b>. Chương trình cho cùng hành động với bảng ở mọi dòng, nên ba dòng thay được cả cái bảng.',
+      },
+      label: 'Đọc hàm agent qua chương trình',
     },
     {
       kind: 'paper',

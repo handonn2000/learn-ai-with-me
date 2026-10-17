@@ -19,7 +19,7 @@ export function PeasCards({ rows }: { rows: PeasRow[] }) {
             {letters.map((l) => (
               <div key={l.key} className="flex flex-col gap-0.5 min-[480px]:flex-row min-[480px]:gap-2.5">
                 <dt className="shrink-0 whitespace-nowrap min-[480px]:w-[8rem]">
-                  <span className="mr-1.5 inline-grid size-6 place-items-center rounded-md bg-ink font-mono text-[13px] font-bold text-white">{l.letter}</span>
+                  <span className="mr-1.5 inline-grid size-6 place-items-center rounded-md bg-ink font-mono text-[13px] font-bold text-surface">{l.letter}</span>
                   <span className="text-[13px] text-muted">{l.name}</span>
                 </dt>
                 <dd className="m-0 min-w-0 pl-8 min-[480px]:pl-0">{r[l.key]}</dd>

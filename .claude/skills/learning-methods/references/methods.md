@@ -108,7 +108,7 @@ M14 độ chắc chắn · M15 thẻ ghi nhớ cho dữ kiện rời
   2006; Karpicke & Blunt 2011).
 - **Dùng khi:** mọi kỹ năng có ít nhất một câu (luật 4 trong SKILL.md).
 - **Trong v2:** `recalls` trong `src/content/recall.ts`; người học viết rồi tự đánh dấu ý; app gợi
-  ý mức chấm, người học quyết (`recordRating`). Hiện có 4 kỹ năng; các kỹ năng còn lại là việc
+  ý mức chấm, người học quyết (`recordRating`). Hiện có 7 kỹ năng; các kỹ năng còn lại là việc
   tồn đọng, không phải ngoại lệ.
 - **Làm sai thường gặp:** `points` quá chi tiết đến mức không ai viết đủ (người học tự chấm Quên
   dù đã nắm ý chính); câu hỏi chỉ có một chữ trả lời (đó là thẻ ghi nhớ, không phải nhớ lại).

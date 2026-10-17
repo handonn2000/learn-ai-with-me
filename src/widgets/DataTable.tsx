@@ -34,14 +34,19 @@ export function DataTable({ head, rows, mono, label }: { head: string[]; rows: R
   )
 }
 
-/** Bảng mười môi trường × sáu chiều (trang 40). Vế "khó" tô nền nhạt; chữ trong ô vẫn ghi rõ vế, màu không phải tín hiệu duy nhất. */
+/**
+ * Bảng mười môi trường × sáu chiều (trang 40). Vế khó nhất tô nền nhạt, vế giữa (nửa động) chỉ có viền đứt;
+ * chữ trong ô vẫn ghi rõ vế, màu không phải tín hiệu duy nhất.
+ */
 export function EnvTable() {
   const head = ['Môi trường', ...tableDims.map((d) => dims[d].head)]
   const rows = envRows.map((r) => [
     r.name,
     ...tableDims.map((d) => {
       const i = r.v[d]
-      return <span key={d} className={i > 0 ? 'rounded-md bg-violet-soft px-1.5 py-0.5' : 'px-1.5'}>{dims[d].values[i]}</span>
+      const last = dims[d].values.length - 1
+      const tone = i === 0 ? 'border-transparent' : i === last ? 'border-transparent bg-violet-soft' : 'border-dashed border-violet'
+      return <span key={d} className={`rounded-md border px-1.5 py-0.5 ${tone}`}>{dims[d].values[i]}</span>
     }),
   ])
   return <DataTable head={head} rows={rows} label="Mười môi trường xếp theo sáu chiều" />

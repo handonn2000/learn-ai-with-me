@@ -1,5 +1,35 @@
 # Tiến độ dự án
 
+## 2026-10-17 — Review độc lập + sửa mục tiêu `peas` (5 ga)
+
+- `lesson-quality-judge` review độc lập trên 13d8e71. Report: `docs/courses/csc14003/reviews/peas-quality-independent.md`,
+  thay kết luận của self-review `peas-quality.md`. Kết quả: kiến thức đúng (bảng trang 40 đúng 60/60 ô, mọi đáp án
+  đúng); 5 lỗi major về phương pháp học và mobile, 11 lỗi minor.
+- User bảo sửa theo report. Đã sửa:
+  - **Câu nhớ lại:** thêm cho `agent` và `env-dims`. Viết lại câu của `rationality` (thêm "vì sao vẫn ra kết quả
+    xấu"), `peas` (agent tự chọn) và `env-classify` (môi trường tự chọn).
+  - **Câu kiểm tra:** đổi sang bối cảnh không có trong lesson. Máy lọc không khí, robot cắt cỏ, Tetris, trò trượt
+    8 số; trò trượt 8 số cũng là câu xếp lớp của mục tiêu. Gợi ý không còn lộ đáp án.
+  - **Ga `agent`:** `agent-e2` thành bài classify bốn nhóm (cảm biến / percept / bộ chấp hành / hành động). Thêm
+    `agent-e4`, tra một dòng nằm trong "…" bằng chương trình. 10 phút.
+  - **Bài tập:** `rationality-e1` và `peas-e1` mỗi nhóm hai mục, có mục bẫy.
+  - **Lời bài:** sửa câu "mỗi chiều có hai vế", lý do *ngẫu nhiên* ở bước giấy trốn tìm, thuật ngữ kèm tiếng Anh ở
+    `env-classify`/`env-dims`, câu mở đầu `rationality/1.mdx`. Ví dụ trang 18 đưa ra ngoài khối Đào sâu.
+  - **UI dùng chung:** chip `ClassifyInput` cao ≥ 44px, ảnh hưởng mọi mục tiêu. Summary Đào sâu cao ≥ 44px.
+    EnvTable: nửa động viền đứt. PeasCards và AgentLoop chỉ dùng token.
+  - **Tài liệu:** DESIGN (bảng thuật ngữ), HANDOFF (`ClassifyInput`, `EnvTable`), `peas-outline.md` (dòng phương
+    pháp từng bước), `references/methods.md` (đổi số kỹ năng có câu nhớ lại; không chạy eval vì sửa này không đổi
+    hành vi).
+- Judge re-review (§11 của report): 5 lỗi major đã sửa. Re-review tìm thêm N1–N6, đã sửa hết.
+- Đã kiểm:
+  - `npm test` (59) và `npm run build`;
+  - preview 375px: chip 46,75px, `agent-e2` chấm đúng, EnvTable, summary Đào sâu, không cuộn ngang.
+- Chưa làm:
+  - judge vòng 3 sau khi sửa N1–N6;
+  - đi trọn `/session` và màn Ôn tập với các câu nhớ lại mới;
+  - `relate` cho `rationality`, `reorganize` cho `env-classify` (đề xuất tùy chọn).
+- **Chưa commit.**
+
 ## 2026-10-17 — Bước "đoán quan hệ" + hệ thống lại hiện bản đoán (ga admissible)
 
 - Từ video "Think on Paper" của Justin Sung (Make it wrong / again). Dàn ý + quyết định:
