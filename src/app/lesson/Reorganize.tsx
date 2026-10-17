@@ -5,6 +5,8 @@ import type { Lesson, ReorganizeData } from '@/learning/types'
 import { Button, Chip } from '@/ui'
 import { DocIcon, PenIcon } from '@/ui/icons'
 import { StepFrame } from '@/ui/StepFrame'
+import { useProgress } from '@/learning/progress'
+import { GuessedPairs } from './RelateStep'
 
 type Mode = 'draw' | 'sketch'
 type Box = ReorganizeData['sketch']['boxes'][keyof ReorganizeData['sketch']['boxes']]
@@ -86,6 +88,7 @@ type Stage = 'choose' | 'compare' | 'masked'
 /**
  * Hệ thống lại cuối buổi (docs/design/screens/17, 17b, 17c): tự vẽ trên giấy rồi so với sketch, hoặc dùng sketch che chữ.
  * Chưa ghi gì vào tiến độ; ý còn thiếu chỉ được báo lại cho người học.
+ * Lesson có bước đoán quan hệ và người học đã đoán thì hiện lại bản đoán (chỉ đánh dấu cặp cần sửa) để sửa trên giấy.
  */
 export function Reorganize({ lesson, data, onDone, onLater, onStage }: { lesson: Lesson; data: ReorganizeData; onDone: () => void; onLater: () => void; onStage?: (wide: boolean) => void }) {
   const [stage, setStage] = useState<Stage>('choose')
@@ -95,6 +98,8 @@ export function Reorganize({ lesson, data, onDone, onLater, onStage }: { lesson:
   const [have, setHave] = useState<Set<number>>(new Set())
   const timer = useCountdown(data.minutes * 60)
   const skill = skillIndex[lesson.skill]
+  const relate = lesson.steps.flatMap((s) => (s.kind === 'relate' ? [s.data] : []))[0]
+  const guess = useProgress((s) => s.guesses[lesson.id])
   const total = blanksOf(data)
   const show = (k: string) => setShown((s) => new Set(s).add(k))
   useEffect(() => onStage?.(stage === 'compare'), [stage, onStage])
@@ -178,6 +183,13 @@ export function Reorganize({ lesson, data, onDone, onLater, onStage }: { lesson:
       <p className="mt-0 mb-5 max-w-[56ch] text-muted">
         Hôm nay bạn đi qua ga <b className="text-ink">{skill.title}</b>. Chọn cách bạn muốn gom lại những gì vừa học.
       </p>
+      {relate && guess && (
+        <section aria-labelledby="guessed" className="mb-5 rounded-2xl border-2 border-sun bg-sun-soft p-4 min-[720px]:p-5">
+          <h2 id="guessed" className="m-0 text-[19px] leading-tight font-extrabold">Lúc đầu bạn đã nối thế này</h2>
+          <p className="mt-1 mb-3 text-[15px] text-muted">Trên giấy, nối lại những cặp cần sửa và ghi một dòng vì sao. Đây là phần đáng làm nhất của bước này.</p>
+          <GuessedPairs data={relate} guess={guess} />
+        </section>
+      )}
       <div role="radiogroup" aria-label="Cách hệ thống lại" className="grid gap-3.5 min-[720px]:grid-cols-2">
         {modes.map((m) => (
           <label key={m.id} className={`relative cursor-pointer rounded-2xl border-2 p-4 ${mode === m.id ? 'border-violet bg-violet-soft shadow-[0_4px_0_var(--color-violet)]' : 'border-line bg-surface shadow-[0_4px_0_var(--color-line)]'} has-[:focus-visible]:outline-3 has-[:focus-visible]:outline-offset-2 has-[:focus-visible]:outline-violet`}>

@@ -43,6 +43,25 @@ export interface GuessData {
   figure?: { problem: GraphProblem; notes?: Record<string, string>; frontier?: string[]; current?: string }
 }
 
+/** Mức chắc chắn người học tự chọn khi đoán. */
+export type Confidence = 'guess' | 'fair' | 'sure'
+
+/** Ba quan hệ cố định của bước đoán quan hệ: trái dẫn tới phải, trái là một ví dụ của phải, hoặc không phải. */
+export type Relation = 'leads' | 'example' | 'not'
+
+/**
+ * Bước "đoán quan hệ": nối thử từng cặp ý đã gặp ở ga trước, sai cũng được. Không tính vào kết quả của ga.
+ * Lựa chọn được lưu (`guesses` trong store) để đầu lesson và bước hệ thống lại hiện lại.
+ */
+export interface RelateData {
+  prompt: string
+  /** Một dòng nhắc lại chữ đã học, không dạy gì mới. */
+  legend?: string
+  pairs: { id: string; left: string; right: string; answer: Relation; why: string }[]
+  /** Hiện khi có cặp sai mà đã chọn "Rất chắc". */
+  wrongSure: string
+}
+
 /** Bước "làm trên giấy": chỉ nhập kết quả cuối, không bắt buộc. */
 export interface PaperData {
   title: string
@@ -67,6 +86,7 @@ export type LessonStep =
   | { kind: 'explain'; title: string; Body: ComponentType }
   | { kind: 'exercise'; exercise: Exercise; /** Tên ngắn của kỹ năng bài tập kiểm tra, hiện ở màn "Qua ga". */ label?: string }
   | { kind: 'guess'; data: GuessData }
+  | { kind: 'relate'; data: RelateData }
   | { kind: 'paper'; data: PaperData }
 
 export interface Lesson {

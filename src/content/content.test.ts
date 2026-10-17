@@ -35,6 +35,22 @@ describe('nội dung lesson', () => {
   })
 })
 
+describe('đoán quan hệ', () => {
+  it('3–5 cặp, id không trùng, đáp án không cùng một quan hệ, có lý do; tối đa một bước mỗi lesson', () => {
+    for (const l of Object.values(lessons)) {
+      const steps = l.steps.flatMap((s) => (s.kind === 'relate' ? [s.data] : []))
+      expect(steps.length, l.id).toBeLessThanOrEqual(1)
+      for (const d of steps) {
+        expect(d.pairs.length, l.id).toBeGreaterThanOrEqual(3)
+        expect(d.pairs.length, l.id).toBeLessThanOrEqual(5)
+        expect(new Set(d.pairs.map((p) => p.id)).size, l.id).toBe(d.pairs.length)
+        expect(new Set(d.pairs.map((p) => p.answer)).size, l.id).toBeGreaterThan(1)
+        for (const p of d.pairs) expect(p.why.length, `${l.id}/${p.id}`).toBeGreaterThan(0)
+      }
+    }
+  })
+})
+
 describe('MDX', () => {
   it('không có dấu { } trần trong văn bản (MDX sẽ hiểu là biểu thức JS)', () => {
     for (const id of readdirSync(dir).filter((f) => !f.includes('.')))

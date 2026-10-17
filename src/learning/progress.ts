@@ -1,7 +1,8 @@
 import { create } from 'zustand'
 import { persist } from 'zustand/middleware'
 import { createEmptyCard, fsrs, Rating, type Card, type Grade } from 'ts-fsrs'
-import type { SkillId } from './types'
+import type { Confidence, SkillId } from './types'
+import type { ProgressData } from './sync'
 
 /**
  * Tiến độ người học — lưu ở localStorage, key `learn-ai-v2`.
@@ -31,6 +32,13 @@ export interface SkillRecord {
 
 export type SkillStatus = 'new' | 'learned' | 'due'
 
+/** Một lần đoán trước của người học (bước đoán quan hệ): lựa chọn theo từng cặp, độ chắc chắn, lúc đoán (ISO). */
+export interface GuessRecord {
+  picks: Record<string, string>
+  confidence: Confidence
+  at: string
+}
+
 interface State {
   skills: Record<SkillId, SkillRecord>
   /** Bước đang làm dở trong mỗi lesson. */
@@ -39,6 +47,9 @@ interface State {
   /** Mục tiêu đang theo: ghi khi người học vào một ga. Thiếu (dữ liệu cũ) thì suy ra từ tiến độ, xem `pickFollowed`. */
   follow: string | null
   setFollow: (goalId: string) => void
+  /** Lần đoán đầu tiên ở mỗi lesson. Chỉ giữ lần đầu: đó là bản để quay lại sửa ở bước hệ thống lại. */
+  guesses: Record<string, GuessRecord>
+  saveGuess: (lessonId: string, guess: GuessRecord) => void
   /** Ghi kết quả học/ôn một kỹ năng. */
   record: (id: SkillId, outcome: Outcome, via: SkillRecord['via'], now?: Date) => void
   /** Ghi một điểm FSRS do người học tự chấm (câu nhớ lại: Quên / Khó / Được / Dễ). */
@@ -46,6 +57,26 @@ interface State {
   /** Xếp lớp: đánh dấu đã nắm (FSRS: Easy). */
   markKnown: (ids: SkillId[], now?: Date) => void
   reset: () => void
+}
+
+/** Phiên bản shape của store. 1: skills, lessonStep, follow. 2: thêm guesses. */
+export const PROGRESS_VERSION = 2
+
+type DataV1 = Omit<ProgressData, 'guesses'>
+const isObj = (v: unknown): v is Record<string, unknown> => typeof v === 'object' && v !== null && !Array.isArray(v)
+const hasV1Shape = (v: unknown): v is DataV1 => isObj(v) && isObj(v.skills) && isObj(v.lessonStep)
+const hasGuesses = (v: DataV1): v is ProgressData => 'guesses' in v && isObj(v.guesses)
+
+/**
+ * Nâng dữ liệu đã lưu từ phiên bản cũ lên shape hiện tại; persist chỉ gọi khi phiên bản khác `PROGRESS_VERSION`.
+ * Thiếu trường nào thì điền giá trị trống, không bỏ kỹ năng nào đã học.
+ */
+export function migrateProgress(persisted: unknown, version: number): ProgressData {
+  if (!hasV1Shape(persisted)) return { skills: {}, lessonStep: {}, follow: null, guesses: {} }
+  const { skills, lessonStep, follow } = persisted
+  // `follow` có từ trước khi đánh số phiên bản nên dữ liệu rất cũ có thể thiếu.
+  const base = { skills, lessonStep, follow: typeof follow === 'string' ? follow : null }
+  return { ...base, guesses: version >= 2 && hasGuesses(persisted) ? persisted.guesses : {} }
 }
 
 // Không dùng bước học ngắn hạn (vài phút): lịch tính theo ngày cho từng kỹ năng.
@@ -65,6 +96,8 @@ export const useProgress = create<State>()(
       setLessonStep: (lessonId, step) => set((s) => ({ lessonStep: { ...s.lessonStep, [lessonId]: step } })),
       follow: null,
       setFollow: (goalId) => set((s) => (s.follow === goalId ? s : { follow: goalId })),
+      guesses: {},
+      saveGuess: (lessonId, guess) => set((s) => (s.guesses[lessonId] ? s : { guesses: { ...s.guesses, [lessonId]: guess } })),
       record: (id, outcome, via, now = new Date()) =>
         set((s) => {
           const prev = s.skills[id]
@@ -92,9 +125,14 @@ export const useProgress = create<State>()(
           }
           return { skills }
         }),
-      reset: () => set({ skills: {}, lessonStep: {}, follow: null }),
+      reset: () => set({ skills: {}, lessonStep: {}, follow: null, guesses: {} }),
     }),
-    { name: 'learn-ai-v2', version: 1 },
+    {
+      name: 'learn-ai-v2',
+      version: PROGRESS_VERSION,
+      migrate: migrateProgress,
+      partialize: (s): ProgressData => ({ skills: s.skills, lessonStep: s.lessonStep, follow: s.follow, guesses: s.guesses }),
+    },
   ),
 )
 

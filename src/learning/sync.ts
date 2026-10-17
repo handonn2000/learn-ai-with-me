@@ -1,6 +1,6 @@
 import type { Card } from 'ts-fsrs'
-import type { SkillId } from './types'
-import type { Outcome, SkillRecord } from './progress'
+import type { Confidence, SkillId } from './types'
+import type { GuessRecord, Outcome, SkillRecord } from './progress'
 
 /**
  * Phần thuần của việc đồng bộ tiến độ lên Firestore: dữ liệu gửi đi, đọc về, và gộp hai bản.
@@ -12,13 +12,18 @@ export interface ProgressData {
   skills: Record<SkillId, SkillRecord>
   lessonStep: Record<string, number>
   follow: string | null
+  guesses: Record<string, GuessRecord>
 }
 
-/** Phiên bản dữ liệu trên Firestore; khớp `version` của persist trong `progress.ts`. */
-export const CLOUD_VERSION = 1
+/**
+ * Phiên bản dữ liệu trên Firestore; khớp `PROGRESS_VERSION` trong `progress.ts`.
+ * Đọc được mọi phiên bản trong `READABLE`: bản 1 chỉ thiếu `guesses`, nên vẫn gộp được kỹ năng của nó.
+ */
+export const CLOUD_VERSION = 2
+const READABLE = [1, 2]
 
 export function pickData(s: ProgressData): ProgressData {
-  return { skills: s.skills, lessonStep: s.lessonStep, follow: s.follow }
+  return { skills: s.skills, lessonStep: s.lessonStep, follow: s.follow, guesses: s.guesses }
 }
 
 /** Ngày thành chuỗi ISO, bỏ trường `undefined` — Firestore không nhận `undefined`, và localStorage cũng lưu như vậy. */
@@ -48,6 +53,7 @@ function latest(skills: Record<SkillId, SkillRecord>): number {
  * - Kỹ năng: giữ bản có lần ôn mới hơn (cùng lúc thì bản ôn nhiều lần hơn), không mất kỹ năng nào.
  * - Bước dở trong lesson: lấy bước xa hơn.
  * - Mục tiêu đang theo: lấy của bên vừa học gần nhất; một bên trống thì lấy bên kia.
+ * - Lần đoán: giữ lần đoán sớm hơn, vì đó là bản để quay lại sửa.
  */
 export function mergeProgress(local: ProgressData, remote: ProgressData): ProgressData {
   const skills: Record<SkillId, SkillRecord> = { ...remote.skills }
@@ -64,7 +70,12 @@ export function mergeProgress(local: ProgressData, remote: ProgressData): Progre
         ? local.follow
         : remote.follow
       : (local.follow ?? remote.follow)
-  return { skills, lessonStep, follow }
+  const guesses: Record<string, GuessRecord> = { ...remote.guesses }
+  for (const [id, g] of Object.entries(local.guesses)) {
+    const other = guesses[id]
+    guesses[id] = other && other.at <= g.at ? other : g
+  }
+  return { skills, lessonStep, follow, guesses }
 }
 
 // ---- Đọc dữ liệu từ Firestore: không tin hình dạng, chỉ nhận phần hợp lệ ----
@@ -72,6 +83,15 @@ export function mergeProgress(local: ProgressData, remote: ProgressData): Progre
 const isObj = (v: unknown): v is Record<string, unknown> => typeof v === 'object' && v !== null && !Array.isArray(v)
 const OUTCOMES: readonly Outcome[] = ['clean', 'hinted', 'revealed']
 const isOutcome = (v: unknown): v is Outcome => OUTCOMES.some((o) => o === v)
+const CONFIDENCES: readonly Confidence[] = ['guess', 'fair', 'sure']
+const isConfidence = (v: unknown): v is Confidence => CONFIDENCES.some((c) => c === v)
+
+function parseGuess(v: unknown): GuessRecord | null {
+  if (!isObj(v) || !isObj(v.picks) || !isConfidence(v.confidence) || typeof v.at !== 'string') return null
+  const picks: Record<string, string> = {}
+  for (const [id, pick] of Object.entries(v.picks)) if (typeof pick === 'string') picks[id] = pick
+  return { picks, confidence: v.confidence, at: v.at }
+}
 
 function parseRecord(v: unknown): SkillRecord | null {
   if (!isObj(v) || !isObj(v.card)) return null
@@ -96,8 +116,8 @@ function parseRecord(v: unknown): SkillRecord | null {
 
 /** Dữ liệu document `users/{uid}` → tiến độ; hỏng hoặc khác phiên bản thì coi như trống. */
 export function parseCloud(doc: unknown): ProgressData {
-  const empty: ProgressData = { skills: {}, lessonStep: {}, follow: null }
-  if (!isObj(doc) || !isObj(doc.progress) || doc.version !== CLOUD_VERSION) return empty
+  const empty: ProgressData = { skills: {}, lessonStep: {}, follow: null, guesses: {} }
+  if (!isObj(doc) || !isObj(doc.progress) || !READABLE.some((v) => v === doc.version)) return empty
   const p = doc.progress
   const skills: Record<SkillId, SkillRecord> = {}
   if (isObj(p.skills)) {
@@ -110,5 +130,12 @@ export function parseCloud(doc: unknown): ProgressData {
   if (isObj(p.lessonStep)) {
     for (const [id, step] of Object.entries(p.lessonStep)) if (typeof step === 'number') lessonStep[id] = step
   }
-  return { skills, lessonStep, follow: typeof p.follow === 'string' ? p.follow : null }
+  const guesses: Record<string, GuessRecord> = {}
+  if (isObj(p.guesses)) {
+    for (const [id, raw] of Object.entries(p.guesses)) {
+      const g = parseGuess(raw)
+      if (g) guesses[id] = g
+    }
+  }
+  return { skills, lessonStep, follow: typeof p.follow === 'string' ? p.follow : null, guesses }
 }

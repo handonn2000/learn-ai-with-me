@@ -66,13 +66,14 @@ src/
 
 - **Nội dung là data.** Kỹ năng, lesson, bài tập, câu ôn nằm trong `src/content/`; UI đọc từ đó. Không hardcode
   nội dung khóa trong component. `content/` không import UI ngoài widget nhúng trong MDX.
-- **Tiến độ**: Zustand `persist`, key **`learn-ai-v2`** (`skills`, `lessonStep`, `follow`), `version` trong
-  `learning/progress.ts`. Key và shape là hợp đồng với dữ liệu người học: đổi shape thì tăng `version` + viết
+- **Tiến độ**: Zustand `persist`, key **`learn-ai-v2`** (`skills`, `lessonStep`, `follow`, `guesses`), `version`
+  (`PROGRESS_VERSION`) + `migrateProgress` trong `learning/progress.ts`. Key và shape là hợp đồng với dữ liệu người học: đổi shape thì tăng `version` + viết
   `migrate`. Đọc/ghi qua `useProgress`, không gọi `localStorage` trực tiếp. v1 dùng key khác
   (`csc14003-progress`), hai bản không đụng nhau.
 - **Đồng bộ mây** (không bắt buộc): đăng nhập GitHub qua Firebase Auth; `learning/sync.ts` (thuần, có test) gộp
   máy ↔ mây, `learning/cloud.ts` (tải lười, chỉ `account.ts` import động) ghi `users/{uid}` trên Firestore.
-  Document mang `version` = version của persist: đổi shape store thì sửa cả `parseCloud`. Luật ở `firestore.rules`.
+  Document mang `version` = version của persist: đổi shape store thì sửa cả `parseCloud`, và giữ bản cũ trong
+  `READABLE` để document cũ trên mây không bị coi là trống. Luật ở `firestore.rules`.
 - **Lịch ôn**: ts-fsrs một thẻ cho mỗi kỹ năng, tắt bước ngắn hạn, không fuzz. Quy kết quả lesson ra điểm theo
   `outcomeToRating`/`worstOutcome`. Lý do sư phạm: skill `learning-methods`.
 - **Đáp án bài tập trên bản đồ do engine tính**, không gõ tay; ví dụ mới thì thêm test vào

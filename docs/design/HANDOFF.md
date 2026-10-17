@@ -141,6 +141,11 @@ Ghi chú từng màn:
   qua ga (`15`: đối chiếu mục tiêu đầu ga với bằng chứng từng bài, lịch ôn, ga vừa mở) → mở khóa sketch (`16`) →
   hệ thống lại (`17`, `17b`, `17c`). Bước đoán trước và giấy là kiểu bước mới trong lesson (tuỳ chọn);
   lesson nào chưa có thì bỏ qua bước đó.
+- **Đoán quan hệ (chưa có màn thiết kế, dựng theo `12`):** cùng chip `sun` "Đoán trước" và ConfidenceControl như `12`.
+  Mỗi cặp là một thẻ: ý trên, ba nút phân đoạn (dẫn tới · là ví dụ của · không phải, viền `ink`, chọn thì nền
+  `ink`), ý dưới. Sau khi chốt thì thẻ tô `correct`/`wrong`, nút đáp án nền `correct`, kèm một dòng lý do. Đã đoán
+  rồi thì màn đổi chip thành "Bản đoán lần trước". Trong hệ thống lại (`17`), khối nền `sun-soft` "Lúc đầu bạn đã
+  nối thế này" nằm trên phần chọn cách, mỗi cặp một dòng có nhãn "đúng"/"cần sửa".
 - **Mở khóa sketch (16):** mỗi ga có nhiều sketch, mở hết khi qua ga. Thẻ úp là câu hỏi: khuyến khích vẽ ra giấy
   trước rồi mới lật để so.
 - **Ôn tập (20):** trộn kỹ năng; câu nhớ lại tự do có danh sách ý đáp án để tự đánh dấu, app gợi ý mức chấm

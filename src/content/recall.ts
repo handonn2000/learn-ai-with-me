@@ -47,4 +47,13 @@ export const recalls: Record<string, Recall> = {
       'Mở nút: tính <b>g</b> cho từng hàng xóm, thêm vào frontier hoặc ghi đè nếu rẻ hơn.',
     ],
   },
+  admissible: {
+    prompt: 'Admissible nghĩa là gì? Vì sao nó giúp A* ra đường rẻ nhất, và khi nào chưa đủ?',
+    points: [
+      'h <b>không bao giờ đoán quá</b>: h(n) ≤ h*(n) ở mọi nút, với h*(n) là chi phí thật rẻ nhất từ n tới đích.',
+      'Trên đường rẻ nhất luôn có một nút n trong frontier với f(n) ≤ <b>C*</b>, chi phí của đường rẻ nhất. Nên n được lấy ra trước mọi đích đắt hơn C*.',
+      'Lập luận này đúng khi A* không bỏ trạng thái đã gặp (tree search).',
+      'A* có explored (graph search) thì cần thêm <b>nhất quán</b>: h(n) ≤ c + h(n′) với mọi cạnh, nếu không đường đắt tới một trạng thái có thể bị khóa trong explored.',
+    ],
+  },
 }

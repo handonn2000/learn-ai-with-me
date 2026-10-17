@@ -17,6 +17,7 @@ import { useGoalModel } from './goal/useGoalModel'
 import { GuessStep } from './lesson/GuessStep'
 import { LessonIntro } from './lesson/LessonIntro'
 import { PaperStep } from './lesson/PaperStep'
+import { RelateStep } from './lesson/RelateStep'
 import { Reorganize } from './lesson/Reorganize'
 import { SketchUnlock } from './lesson/SketchUnlock'
 import { StationPass } from './lesson/StationPass'
@@ -143,6 +144,7 @@ function StepScreen({ lesson, i, go, exerciseNo, exerciseTotal, outcomes }: { le
   const step = lesson.steps[i]
   const explains = lesson.steps.flatMap((s, k) => (s.kind === 'explain' ? [k] : []))
   if (step.kind === 'guess') return <GuessStep data={step.data} lesson onDone={() => go(i + 1)} />
+  if (step.kind === 'relate') return <RelateStep lessonId={lesson.id} data={step.data} lesson onDone={() => go(i + 1)} />
   if (step.kind === 'paper') return <PaperStep data={step.data} onDone={() => go(i + 1)} />
   if (step.kind === 'exercise') {
     const isLast = lesson.steps.slice(i + 1).every((s) => s.kind !== 'exercise' && s.kind !== 'explain')

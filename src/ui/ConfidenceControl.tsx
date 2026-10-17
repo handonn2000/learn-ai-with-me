@@ -1,4 +1,6 @@
-export type Confidence = 'guess' | 'fair' | 'sure'
+import type { Confidence } from '@/learning/types'
+
+export type { Confidence }
 
 const options: { value: Confidence; label: string }[] = [
   { value: 'guess', label: 'Đoán thôi' },

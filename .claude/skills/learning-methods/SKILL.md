@@ -51,7 +51,7 @@ giấy M6/M11 · hệ thống lại M11 · nhớ lại M7 · câu ôn M8/M10.
 
 | Bước | T · Thủ tục | K · Khái niệm | P · Phân loại | M · Mô hình hóa |
 |---|---|---|---|---|
-| **Mở đầu** (`guess`) | Đoán bước kế của thuật toán trên bản đồ nhỏ → `GuessStep` + `figure` | Đoán kết luận/hệ quả, nhắm vào ngộ nhận phổ biến → `GuessStep` + `wrongSure` | Đoán ca dễ nhầm nhất (cặp hay đảo) → `GuessStep` | Đoán thành phần nào khó phát biểu nhất → `GuessStep` |
+| **Mở đầu** (`guess`) | Đoán bước kế của thuật toán trên bản đồ nhỏ → `GuessStep` + `figure` | Đoán kết luận/hệ quả, nhắm vào ngộ nhận phổ biến → `GuessStep` + `wrongSure`; *ga có ≥ 4 ý liên quan đã gặp ở ga trước → đoán quan hệ `relate`* | Đoán ca dễ nhầm nhất (cặp hay đảo) → `GuessStep` | Đoán thành phần nào khó phát biểu nhất → `GuessStep` |
 | **Giải thích** (`explain`, ≤ 3) | Ví dụ làm mẫu đầy đủ, từng bước có lý do → `SearchPlayer`/`GraphView` | Ý thường → **cặp ví dụ đối lập** → thuật ngữ | Khuôn + 3–5 ví dụ trải rộng, có ít nhất một ca biên | Một bài làm mẫu đi từ mô tả đời thường tới phát biểu |
 | **Bài tập 1** | Làm tiếp ví dụ đã chạy sẵn một phần → `trace` với `from` > 0 | Chọn/xếp hệ quả → `choice`/`order` (≤ 1 trắc nghiệm) | Gán ca mới vào khuôn → `classify` | Gán từng mảnh mô tả vào thành phần → `classify` |
 | **Bài tập 2** | Tự chạy từ đầu trên bản đồ khác → `trace`/`pick-nodes` | **So sánh/xếp hạng**: hai khái niệm khác nhau ở đâu, khi nào khác biệt đổi kết quả | **Tìm lỗi**: bài làm sai của người khác → `classify` (như `peas-e2`) | Phát biểu trọn một bài toán mới → `paper` |

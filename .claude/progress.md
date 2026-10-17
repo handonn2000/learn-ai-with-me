@@ -1,5 +1,27 @@
 # Tiến độ dự án
 
+## 2026-10-17 — Bước "đoán quan hệ" + hệ thống lại hiện bản đoán (ga admissible)
+
+- Từ video "Think on Paper" của Justin Sung (Make it wrong / again). Dàn ý + quyết định:
+  `docs/courses/csc14003/lesson-design/admissible-relate-outline.md`. User duyệt: hiện lại bản đoán thay vì đoán
+  lại, bỏ `admissible-e3`, phản hồi ngay.
+- Kiểu bước `relate` (`RelateData`, `app/lesson/RelateStep.tsx`); store `learn-ai-v2` lên version 2 thêm
+  `guesses` (`migrateProgress`, `partialize`); `sync.ts` gộp + `parseCloud` đọc cả document bản 1, `CLOUD_VERSION`
+  = 2. `Reorganize` hiện khối "Lúc đầu bạn đã nối thế này". Buổi học: đã đoán thì bỏ bước đoán; ga không có
+  `paper` mà có `reorganize` thì bước giấy là hệ thống lại (trước đây admissible rơi về dữ liệu mẫu UCS).
+- Ga admissible: thêm `relate` 4 cặp, `reorganize`, câu nhớ lại trong `recall.ts`; bỏ e3.
+- Đã kiểm: `npm test` (59), `npm run build`; preview: migration bản 1 → 2 giữ kỹ năng, đoán → lưu, mở lại →
+  "Bản đoán lần trước", qua hết bài → hệ thống lại hiện đúng cặp cần sửa; 375px không cuộn ngang, nút ≥ 44px.
+  **Chưa kiểm trên trình duyệt**: bước đoán cho ga sau trong buổi học (cuối buổi A*), đồng bộ mây với emulator.
+  Skill `learning-methods` sửa (M1, M11, ma trận) nhưng chưa chạy eval. Chưa commit.
+- `lesson-quality-judge` (report `docs/courses/csc14003/reviews/admissible-relate-quality.md`): NEEDS CHANGES.
+  Đã sửa C1 (admissible chỉ đủ cho tree search; A* có explored cần nhất quán: `2.mdx`, recall, sketch), C2, C3,
+  O1 (e2 đổi mục 1 và 5 thành chim bay ÷ 2 và chim bay + 1), T2, T1 (thống nhất "đoán quá" ở tiêu đề bước,
+  `1.mdx`, `2.mdx`, `can`, c1; thêm "đoán hụt (underestimate)" vào bảng thuật ngữ DESIGN).
+  M1: e2 thành bài tìm lỗi (classify 3 nhóm), e3 mới là câu chọn về chứng minh (f(n) ≤ C*). Đã kiểm trên
+  preview: chấm đúng, phản hồi sai/đúng, 375px không cuộn ngang. Chip chọn nhóm của `classify` chỉ cao 32px
+  (< 44px). Lỗi này có sẵn từ component, `peas-e2` cũng bị, chưa sửa.
+
 ## 2026-10-17 — Gộp tab Khóa học vào Hôm nay
 
 - User thấy hai tab Hôm nay và Khóa học thừa; chọn phương án "gộp hẳn vào Hôm nay". Thanh điều hướng còn 3 mục

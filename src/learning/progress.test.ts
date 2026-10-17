@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest'
-import { dueLabel, dueSkills, outcomeToRating, previewDays, retrievability, useProgress, worstOutcome } from './progress'
+import { type GuessRecord, dueLabel, dueSkills, migrateProgress, outcomeToRating, previewDays, retrievability, useProgress, worstOutcome } from './progress'
 import { Rating } from 'ts-fsrs'
 
 describe('tiến độ', () => {
@@ -54,5 +54,31 @@ describe('tiến độ', () => {
     expect(useProgress.getState().skills['rating-test'].lastOutcome).toBe('hinted')
     useProgress.getState().recordRating('rating-test', Rating.Easy, now)
     expect(useProgress.getState().skills['rating-test'].lastOutcome).toBe('clean')
+  })
+
+  it('lần đoán: chỉ giữ lần đầu ở mỗi lesson', () => {
+    useProgress.getState().reset()
+    const first: GuessRecord = { picks: { p1: 'leads' }, confidence: 'guess', at: '2026-10-01T08:00:00.000Z' }
+    useProgress.getState().saveGuess('admissible', first)
+    useProgress.getState().saveGuess('admissible', { ...first, picks: { p1: 'not' } })
+    expect(useProgress.getState().guesses.admissible).toEqual(first)
+  })
+})
+
+describe('nâng phiên bản store learn-ai-v2', () => {
+  const v1 = {
+    skills: { ucs: { card: { due: '2026-10-05T08:00:00.000Z', reps: 1, state: 2 }, via: 'lesson', lastOutcome: 'clean' } },
+    lessonStep: { ucs: 2 },
+    follow: 'astar',
+  }
+
+  it('1 → 2: giữ nguyên kỹ năng, bước dở, mục tiêu; thêm guesses trống', () => {
+    expect(migrateProgress(v1, 1)).toEqual({ ...v1, guesses: {} })
+  })
+
+  it('dữ liệu rất cũ thiếu follow thì điền null; dữ liệu hỏng thì về trống', () => {
+    const { follow: _, ...old } = v1
+    expect(migrateProgress(old, 0)).toEqual({ ...old, follow: null, guesses: {} })
+    expect(migrateProgress('rác', 1)).toEqual({ skills: {}, lessonStep: {}, follow: null, guesses: {} })
   })
 })

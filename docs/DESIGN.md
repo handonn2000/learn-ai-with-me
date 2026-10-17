@@ -58,7 +58,7 @@ nhưng không bắt kèm ngoặc. Thuật ngữ mới chưa có ở đây thì t
 |---|---|
 | **Giữ tiếng Anh**, không dịch | agent (agent khác, nhiều agent, agent duy lý), percept, chuỗi percept (percept sequence), PEAS, softbot, frontier, explored, graph search / tree search, heuristic, admissible, tên thuật toán (BFS, UCS, GBFS, A\*, Dijkstra) |
 | **Dịch + kèm tiếng Anh** lần đầu mỗi lesson | môi trường (environment), cảm biến (sensor), bộ chấp hành (actuator), hàm agent (agent function), chương trình agent (agent program), kiến trúc (architecture), thước đo hiệu năng (performance measure), agent duy lý (rational agent), toàn tri (omniscient), tự chủ (autonomy), môi trường tác vụ (task environment); bảy chiều môi trường: quan sát được đầy đủ / một phần (fully / partially observable), một / nhiều agent (single-agent / multi-agent), cạnh tranh / hợp tác (competitive / cooperative), tất định / ngẫu nhiên (deterministic / stochastic), từng hồi / tuần tự (episodic / sequential), tĩnh / nửa động / động (static / semidynamic / dynamic), rời rạc / liên tục (discrete / continuous), biết luật / chưa biết luật (known / unknown) |
-| | trạng thái (state), trạng thái đầu (initial state), hành động (action), kết quả của hành động (transition model), kiểm tra đích (goal test), đích (goal), chi phí đường đi (path cost), không gian trạng thái (state space), trạng thái kế tiếp (successor), lời giải tối ưu (optimal solution), mở rộng (expand), nút cha (parent), cây tìm kiếm (search tree), chiến lược tìm kiếm (search strategy), hàng đợi (queue), hàng đợi ưu tiên (priority queue), khóa (key), tìm kiếm chi phí đều (uniform-cost search), tìm kiếm tham lam (greedy best-first search), đoán quá (overestimate), nhất quán (consistent) |
+| | trạng thái (state), trạng thái đầu (initial state), hành động (action), kết quả của hành động (transition model), kiểm tra đích (goal test), đích (goal), chi phí đường đi (path cost), không gian trạng thái (state space), trạng thái kế tiếp (successor), lời giải tối ưu (optimal solution), mở rộng (expand), nút cha (parent), cây tìm kiếm (search tree), chiến lược tìm kiếm (search strategy), hàng đợi (queue), hàng đợi ưu tiên (priority queue), khóa (key), tìm kiếm chi phí đều (uniform-cost search), tìm kiếm tham lam (greedy best-first search), đoán quá (overestimate), đoán hụt (underestimate), nhất quán (consistent) |
 | **Từ thường**: kèm tiếng Anh ở lesson định nghĩa nó, sau đó thôi | nút (node), cạnh (edge), đường đi (path), trừu tượng hóa (abstraction) |
 
 ### Thang trợ giúp và mức thành thạo
@@ -107,8 +107,8 @@ Token khai trong `@theme` của `src/styles.css`; bảng giá trị và vai trò
 | Đồ thị bài toán | SVG tự vẽ + Motion (`widgets/GraphView`): cần điều khiển từng nút, màu trạng thái và cỡ chữ trên mobile |
 | Công thức | KaTeX |
 | Nội dung | MDX cho phần giải thích, TypeScript cho bài tập và đồ thị kỹ năng |
-| Tiến độ | Zustand (persist localStorage, key `learn-ai-v2`: `skills`, `lessonStep`, `follow`) + ts-fsrs, tắt bước học ngắn hạn: thẻ mới Again → 1 ngày, Hard → 2, Good → 3, Easy → 8 |
-| Tài khoản, đồng bộ | Firebase Auth (GitHub) + Firestore, document `users/{uid}` = `{ version, progress, updatedAt }`, luật `firestore.rules`. Không bắt buộc đăng nhập: localStorage vẫn là nơi lưu chính; đăng nhập thì gộp máy ↔ mây (`learning/sync.ts`, theo `last_review` từng thẻ) rồi ghi sau 2 giây yên. Đăng xuất xóa tiến độ trong máy. Firebase tải lười (`learning/cloud.ts`). Xem ADR-0020 |
+| Tiến độ | Zustand (persist localStorage, key `learn-ai-v2` version 2: `skills`, `lessonStep`, `follow`, `guesses`; `migrateProgress` nâng từ bản 1) + ts-fsrs, tắt bước học ngắn hạn: thẻ mới Again → 1 ngày, Hard → 2, Good → 3, Easy → 8 |
+| Tài khoản, đồng bộ | Firebase Auth (GitHub) + Firestore, document `users/{uid}` = `{ version, progress, updatedAt }` (`version` = version của persist; `parseCloud` đọc được cả bản 1, chưa có `guesses`), luật `firestore.rules`. Không bắt buộc đăng nhập: localStorage vẫn là nơi lưu chính; đăng nhập thì gộp máy ↔ mây (`learning/sync.ts`, theo `last_review` từng thẻ) rồi ghi sau 2 giây yên. Đăng xuất xóa tiến độ trong máy. Firebase tải lười (`learning/cloud.ts`). Xem ADR-0020 |
 | Định tuyến | React Router, hash router — host tĩnh không cần trang 404 giả hay rewrite |
 | Kiểm thử | Vitest — engine thuật toán, đồ thị kỹ năng, chấm bài |
 
@@ -144,7 +144,7 @@ src/
    Trong MDX, dấu `{ }` trong văn bản phải viết `\{ \}`.
 3. Đăng ký trong `content/lessons/index.ts`, trỏ `lesson` của kỹ năng về id đó.
 4. `npm test` kiểm: đồ thị không chu trình, lesson trên tuyến đủ bài, ≤ 550 từ, 2–4 bài tập,
-   ≤ 1 trắc nghiệm, đáp án hợp lệ, không có `{ }` trần trong MDX.
+   ≤ 1 trắc nghiệm, đáp án hợp lệ, không có `{ }` trần trong MDX, bước đoán quan hệ (nếu có) hợp lệ.
 5. Bài tập dùng bản đồ: đáp án trace được engine tính, không gõ tay. Ví dụ mới thì viết test cho kết quả
    mong đợi trong `algorithms/search.test.ts`.
 6. MDX không bật GFM: bảng markdown không hiện. Bảng dùng `widgets/DataTable`. Khối mã giả (```) đã có style.
@@ -167,5 +167,13 @@ Mục tiêu đang theo (`pickFollowed` trong `learning/goals.ts`): mục tiêu c
 tiến độ, rồi mục tiêu chưa xong đầu tiên. Ôn tập không đổi mục tiêu đang theo. Màn Hôm nay (gồm cả phần khóa học), Sổ tay
 và buổi học đều dùng mục tiêu này; màn của một lesson dùng mục tiêu chứa ga đó (`goalOf`).
 
-Buổi học hôm nay lấy bước đoán trước từ lesson của ga sau và bước giấy từ lesson của ga hôm nay. Ga thiếu thì
-bỏ bước đó; riêng tuyến A* còn dùng dữ liệu mẫu ga UCS (`content/mock/session.ts`).
+Buổi học hôm nay lấy bước đoán trước từ lesson của ga sau và bước giấy từ lesson của ga hôm nay; ga hôm nay
+không có bước `paper` mà có `reorganize` thì bước giấy là hệ thống lại. Ga thiếu thì bỏ bước đó; riêng tuyến A*
+còn dùng dữ liệu mẫu ga UCS (`content/mock/session.ts`).
+
+**Đoán quan hệ** (`kind: 'relate'`, `RelateStep`): biến thể của đoán trước cho ga loại khái niệm. Người học nối
+3–5 cặp ý đã gặp bằng ba quan hệ cố định (dẫn tới · là ví dụ của · không phải), chọn độ chắc chắn, thấy phản hồi
+ngay. Lần chốt đầu tiên được lưu vào `guesses[lessonId]` và không bị ghi đè. Đã có bản đoán thì: đầu lesson hiện
+lại bản đó thay vì hỏi lại, buổi học bỏ bước "đoán trước cho ga sau", và bước hệ thống lại hiện các cặp (chỉ đánh
+dấu cặp cần sửa, không hiện đáp án) để người học nối lại trên giấy. Không tính vào FSRS. Mỗi lesson tối đa một bước
+`relate`; `npm test` kiểm số cặp, id, và đáp án không cùng một quan hệ.

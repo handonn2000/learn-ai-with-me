@@ -6,10 +6,12 @@ import { LessonPlayer } from './LessonPage'
 import { ReviewRun } from './ReviewPage'
 import { GuessStep } from './lesson/GuessStep'
 import { PaperStep } from './lesson/PaperStep'
+import { RelateStep } from './lesson/RelateStep'
+import { Reorganize } from './lesson/Reorganize'
 import { useTodayPlan } from './useTodayPlan'
 
 /**
- * Trình chạy buổi học hôm nay: nối ôn → ga mới → đoán trước → giấy.
+ * Trình chạy buổi học hôm nay: nối ôn → ga mới → đoán trước → giấy (hoặc hệ thống lại nếu ga không có bước giấy).
  * Kế hoạch chốt lúc mở trang, vì ghi kết quả làm tuyến và danh sách đến hạn đổi giữa chừng.
  */
 export function SessionPage() {
@@ -47,8 +49,10 @@ export function SessionPage() {
       {total > 0 && !seg && <Finish title="Xong buổi học." text={`Bạn đã đi hết ${total} bước. Kỹ năng nào cần ôn lại sẽ quay lại đúng hạn.`} />}
       {seg?.kind === 'review' && <ReviewRun key={i} queue={plan.due.slice(0, MAX_REVIEW)} onFinish={next} onProgress={onProgress} />}
       {seg?.kind === 'lesson' && plan.lesson && <LessonPlayer key={i} lesson={plan.lesson} embedded={{ onExit: exit, onComplete: next, onProgress }} />}
-      {seg?.kind === 'guess' && plan.guess && <GuessStep key={i} data={plan.guess} onDone={next} />}
-      {seg?.kind === 'paper' && plan.paper && <PaperStep key={i} data={plan.paper} onDone={next} />}
+      {seg?.kind === 'guess' && plan.guess?.kind === 'guess' && <GuessStep key={i} data={plan.guess.data} onDone={next} />}
+      {seg?.kind === 'guess' && plan.guess?.kind === 'relate' && <RelateStep key={i} lessonId={plan.guess.lessonId} data={plan.guess.data} onDone={next} />}
+      {seg?.kind === 'paper' && plan.paper?.kind === 'paper' && <PaperStep key={i} data={plan.paper.data} onDone={next} />}
+      {seg?.kind === 'paper' && plan.paper?.kind === 'reorganize' && <Reorganize key={i} lesson={plan.paper.lesson} data={plan.paper.data} onDone={next} onLater={exit} />}
     </div>
   )
 }

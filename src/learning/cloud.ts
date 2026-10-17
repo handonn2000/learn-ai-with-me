@@ -85,7 +85,7 @@ async function startSync(uid: string) {
     await write(ref, pickData(useProgress.getState()))
   }
   const unsub = useProgress.subscribe((s, prev) => {
-    if (s.skills === prev.skills && s.lessonStep === prev.lessonStep && s.follow === prev.follow) return
+    if (s.skills === prev.skills && s.lessonStep === prev.lessonStep && s.follow === prev.follow && s.guesses === prev.guesses) return
     dirty = true
     clearTimeout(timer)
     timer = setTimeout(save, WRITE_DELAY)

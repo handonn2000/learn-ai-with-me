@@ -28,6 +28,12 @@ M14 độ chắc chắn · M15 thẻ ghi nhớ cho dữ kiện rời
   50/50 không tạo khung). Không biến thành bài kiểm tra tính điểm.
 - **Trong v2:** `GuessStep` (`kind: 'guess'`), `wrongSure` cho ca sai mà rất chắc. Không ghi vào
   FSRS. Phản hồi phải hiện **ngay** sau khi chốt.
+- **Biến thể đoán quan hệ** (`kind: 'relate'`, `RelateStep`, thử đầu tiên ở ga `admissible`): nối 3–5 cặp
+  bằng ba quan hệ cố định (dẫn tới · là ví dụ của · không phải). Lấy từ "Make it wrong" của Justin Sung, nhưng
+  **chỉ dùng ý người học đã gặp** ở ga trước, cùng lắm thêm một khái niệm mới có một dòng nghĩa thường. Ông
+  nối từ khóa *sau khi* đọc; nối những chữ chưa gặp là đoán bừa. Hợp loại K/M, không hợp T. Cặp nên gồm một
+  cặp đối lập (vd. đoán quá → sai, đoán hụt → chậm) và các đáp án không cùng một quan hệ. Bản đoán được lưu
+  và quay lại ở `reorganize` (M11), nơi người học tự sửa.
 - **Làm sai thường gặp:** đáp án lộ trong `note` của phương án; câu đúng hiển nhiên đến mức không
   ai sai; phản hồi chỉ nói "sai rồi" mà không nói vì sao.
 
@@ -152,7 +158,8 @@ M14 độ chắc chắn · M15 thẻ ghi nhớ cho dữ kiện rời
   (Justin Sung).
 - **Dùng khi:** cuối buổi, mọi loại; vẽ lại trong Sổ tay khi kỹ năng sắp quên.
 - **Trong v2:** `reorganize` (`ReorganizeData`: `frame`, `sketch`, `ideas`), `Reorganize.tsx`;
-  vẽ lại 3 phút trong `NotebookPage`.
+  vẽ lại 3 phút trong `NotebookPage`. Lesson có bước `relate` thì đầu màn hiện bản đoán của người học, chỉ đánh
+  dấu cặp cần sửa ("Make it again": sửa chỗ đoán sai mới là chỗ học), không hiện lại đáp án.
 - **Hướng dẫn cho người học:** "gom theo nhóm *của bạn*, vẽ mũi tên cái nào dẫn tới cái nào", và
   so bằng câu hỏi "trang của bạn có đủ các ý này chưa", không phải "có giống sketch không".
 - **Làm sai thường gặp:** sketch mẫu thành đáp án phải chép đúng bố cục; chỉ che chữ rồi lật (đó
